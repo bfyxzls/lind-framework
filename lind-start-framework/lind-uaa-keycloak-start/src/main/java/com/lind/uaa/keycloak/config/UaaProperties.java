@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Data
 @Configuration
-@ConfigurationProperties("uaa")
+@ConfigurationProperties("keycloak.uaa")
 public class UaaProperties {
 
 	/**

@@ -1,4 +1,4 @@
-package com.lind.uaa.keycloak.config.permit;
+package com.lind.uaa.keycloak.whitelist;
 
 import org.keycloak.adapters.springsecurity.filter.KeycloakAuthenticationProcessingFilter;
 import org.springframework.beans.factory.annotation.Autowired;

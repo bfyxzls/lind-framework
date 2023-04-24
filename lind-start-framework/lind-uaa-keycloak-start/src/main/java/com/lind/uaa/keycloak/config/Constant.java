@@ -4,9 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface Constant {
 
-	/**
-	 * 表示登录的cookie
-	 */
+	// 请求头认证键
+	String AUTHORIZATION="Authorization";
+	String CLIENT_ID="client_id";
+	String CLIENT_SECRET="client_secret";
+	String TOKEN="token";
+	String ACTIVE_STATUS="active";
+	// 表示是否登录的cookie
 	String COOKIE_IS_LOGIN = "isLogin";
 
 	String TOKEN_APPLET = "token/applet";

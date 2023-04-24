@@ -1,4 +1,4 @@
-package com.lind.uaa.keycloak.config.permit;
+package com.lind.uaa.keycloak.whitelist;
 
 import com.google.common.collect.ImmutableList;
 import org.slf4j.Logger;
@@ -36,7 +36,7 @@ public final class PermitAllUrl {
 		Set<String> set = new HashSet<>();
 		set.addAll(ENDPOINTS);
 		Collections.addAll(set, urls);
-		logger.info("permit urls:{}", set);
+		logger.debug("permit urls:{}", set);
 		return set.toArray(new String[set.size()]);
 	}
 

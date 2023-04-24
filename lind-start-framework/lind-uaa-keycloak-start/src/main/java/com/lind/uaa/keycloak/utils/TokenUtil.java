@@ -14,6 +14,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.lind.uaa.keycloak.config.Constant.ACTIVE_STATUS;
+import static com.lind.uaa.keycloak.config.Constant.CLIENT_ID;
+import static com.lind.uaa.keycloak.config.Constant.CLIENT_SECRET;
+import static com.lind.uaa.keycloak.config.Constant.TOKEN;
 import static com.lind.uaa.keycloak.config.Constant.VERIFY_TOKEN;
 
 /**
@@ -25,8 +29,6 @@ public class TokenUtil {
 
 	// 需要刷新token,被写到响应头中
 	public final static String NEED_REFRESH_TOKEN = "Need-Refresh-Token";
-
-	final static Logger logger = LoggerFactory.getLogger(TokenUtil.class);
 
 	private static final Pattern authorizationPattern = Pattern.compile("^Bearer (?<token>[a-zA-Z0-9-:._~+/]+=*)$",
 			Pattern.CASE_INSENSITIVE);
@@ -46,9 +48,9 @@ public class TokenUtil {
 			tokenString = tokenString.substring(7);
 		}
 		Map<String, Object> params = new HashMap<>();
-		params.put("client_id", keycloakSpringBootProperties.getResource());
-		params.put("client_secret", keycloakSpringBootProperties.getClientKeyPassword());
-		params.put("token", tokenString);
+		params.put(CLIENT_ID, keycloakSpringBootProperties.getResource());
+		params.put(CLIENT_SECRET, keycloakSpringBootProperties.getClientKeyPassword());
+		params.put(TOKEN, tokenString);
 		String url = keycloakSpringBootProperties.getAuthServerUrl()
 				.concat(String.format(VERIFY_TOKEN, keycloakSpringBootProperties.getRealm()));
 
@@ -56,7 +58,7 @@ public class TokenUtil {
 		try {
 			JSONObject jsonObj = JSON.parseObject(verifyResult);
 			// 验证在线token，如果已退出，直接401，由业务方自己跳转
-			if (!jsonObj.getBoolean("active")) {
+			if (!jsonObj.getBoolean(ACTIVE_STATUS)) {
 				throw new AuthenticationCredentialsNotFoundException("access_token is not online");
 			}
 		}

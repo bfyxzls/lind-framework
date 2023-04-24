@@ -1,6 +1,7 @@
-package com.lind.uaa.keycloak.config.permit;
+package com.lind.uaa.keycloak.whitelist;
 
 import com.lind.uaa.keycloak.cache.CacheProvider;
+import com.lind.uaa.keycloak.config.Constant;
 import com.lind.uaa.keycloak.config.UaaProperties;
 import com.lind.uaa.keycloak.utils.TokenUtil;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,8 @@ import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.lind.uaa.keycloak.config.Constant.AUTHORIZATION;
+
 /**
  * 白名单过滤器，完成将header中的Authorization删除.
  */
@@ -30,8 +33,6 @@ import java.util.Set;
 public class PermitAuthenticationFilter extends OncePerRequestFilter {
 
 	private final UaaProperties uaaProperties;
-
-	private final KeycloakSpringBootProperties keycloakSpringBootProperties;
 
 	@Autowired
 	CacheProvider cacheProvider;
@@ -56,7 +57,7 @@ public class PermitAuthenticationFilter extends OncePerRequestFilter {
 						Enumeration<String> wrappedHeaderNames = super.getHeaderNames();
 						while (wrappedHeaderNames.hasMoreElements()) {
 							String headerName = wrappedHeaderNames.nextElement();
-							if (!"Authorization".equalsIgnoreCase(headerName)) {
+							if (!AUTHORIZATION.equalsIgnoreCase(headerName)) {
 								headerNameSet.add(headerName);
 							}
 						}
@@ -76,7 +77,7 @@ public class PermitAuthenticationFilter extends OncePerRequestFilter {
 			};
 
 		}
-		String token = request.getHeader("Authorization");
+		String token = request.getHeader(AUTHORIZATION);
 		if (token != null) {
 			String userId = TokenUtil.getSubject(token);
 			String key = TokenUtil.NEED_REFRESH_TOKEN + ":" + userId;
