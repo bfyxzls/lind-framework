@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>lind-framework</artifactId>
+        <groupId>com.lind</groupId>
+        <version>1.0.1</version>
+    </parent>
+    <artifactId>lind-start-framework</artifactId>
+    <name>lind start framework</name>
+    <version>1.0.1</version>
+    <packaging>pom</packaging>
+    <description>basic framework for all project.</description>
+    <properties>
+        <!-- 跳过测试用例 -->
+        <skipTests>true</skipTests>
+        <source>1.8</source> <!-- 源代码使用的JDK版本，避免出现“请使用 -Xlint:unchecked 重新编译的警告” -->
+        <target>1.8</target> <!-- 需要生成的目标class文件的编译版本 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <spring-boot-dependencies.version>2.3.0.RELEASE</spring-boot-dependencies.version>
+        <spring-cloud-alibaba-dependencies.version>2.2.1.RELEASE</spring-cloud-alibaba-dependencies.version>
+        <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
+        <version.infinispan>13.0.0.CR1</version.infinispan>
+    </properties>
+    <modules>
+        <module>lind-redis-start</module>
+        <module>lind-common</module>
+        <module>lind-elasticsearch-start</module>
+        <module>lind-mybatis-start</module>
+        <module>lind-uaa-start</module>
+        <module>lind-verification-code-start</module>
+        <module>lind-activiti</module>
+        <module>lind-uaa-keycloak-start</module>
+        <module>lind-kafka-start</module>
+        <module>lind-uaa-jwt-start</module>
+        <module>lind-schedule</module>
+        <module>lind-spi</module>
+        <module>lind-office-convert</module>
+        <module>lind-feign-start</module>
+        <module>lind-logger-start</module>
+        <module>lind-rbac-start</module>
+        <module>lind-seata-start</module>
+        <module>mini-admin</module>
+        <module>lind-logback-start</module>
+        <module>lind-hbase-start</module>
+        <module>lind-chatgpt-start</module>
+
+    </modules>
+    <dependencyManagement>
+        <dependencies>
+
+            <!--spring boot 版本-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--阿里巴巴组件-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--spring cloud 版本-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- infinispan框架依赖清单 -->
+            <dependency>
+                <groupId>org.infinispan</groupId>
+                <artifactId>infinispan-bom</artifactId>
+                <version>${version.infinispan}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- lind框架依赖清单 -->
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-framework-bom</artifactId>
+                <version>${project.parent.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

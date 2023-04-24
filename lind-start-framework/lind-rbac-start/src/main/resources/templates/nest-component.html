@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Components Basics - from vuejs.org</title>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+<div id="app">
+
+    <!-- This works. I get it. -->
+    <div id="components-demo">
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+    </div>
+
+    <hr>
+
+    <!-- This works too and I get it. -->
+    <div id="blog-post-demo-simple">
+        <blog-post-simple title="My journey with Vue"></blog-post-simple>
+        <blog-post-simple title="Blogging with Vue"></blog-post-simple>
+        <blog-post-simple title="Why Vue is so fun"></blog-post-simple>
+    </div>
+
+    <hr>
+
+    <!-- This is where I'm totally confused -->
+    <!-- How do I structure this to make sure blog-items is binding the 'post'  -->
+    <!-- correctly? What is not clear to me is where the directives should be placed -->
+    <!-- Vue keeps complainig with the following: -->
+    <!-- Property or method "posts" is not defined on the instance but referenced during render -->
+    <blog-items>
+        <blog-item
+                v-for="post in posts"
+                v-bind:key="post.id"
+                v-bind:post="post">
+        </blog-item>
+    </blog-items>
+
+    <hr>
+
+</div>
+
+<script>
+
+    // Define a new component called button-counter. Cool. No problem here.
+    Vue.component('button-counter', {
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+    })
+
+    // This is also clear.
+    Vue.component('blog-post-simple', {
+        template:
+            '<h3>{{title}}</h3>',
+        props: {
+            title: {
+                type: String,
+                required: true
+            }
+        }
+    })
+
+    Vue.component('blog-items', {
+        data() {
+            return {
+                posts: [
+                    {id: 1, title: '1. My journey with Vue'},
+                    {id: 2, title: '2. Blogging with Vue'},
+                    {id: 3, title: '3. Why Vue is so fun'}
+                ]
+            }
+        }
+    })
+
+    Vue.component('blog-item', {
+        template:
+            '<h2>{{post.title}}</h2>',
+        props: ['post']
+    })
+
+    var app = new Vue({
+        el: '#app'
+    })
+
+</script>
+</body>
+</html>

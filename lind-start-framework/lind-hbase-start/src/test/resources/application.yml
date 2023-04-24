@@ -1,0 +1,7 @@
+hbase:
+  nameSpace: default #相关于数据库，下面是表，列族，列等
+  zookeeper:
+    quorum: kafka146
+    znodeParent: /hbase
+    property:
+      clientPort: 2181

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<div layout:fragment="content">
+    <script>
+        function deploy(id) {
+            $.get("/model/deploy/" + id, function (data) {
+                location.href = "/view/deployment/list";
+            })
+        }
+
+        function del(id) {
+            $.get("/model/delete?modelId=" + id, function (data) {
+                location.reload();
+            })
+        }
+
+    </script>
+    <ol class="breadcrumb">
+        <li>工作流</li>
+        <li>模型列表</li>
+    </ol>
+    <p>
+        <a target="_blank" class="btn btn-primary btn-sm" th:href="@{/model/create}">添加模型</a>
+        <a class="btn btn-success btn-sm" th:href="@{/view/deployByFile}">上传模型</a>
+    </p>
+    <!--遍历数组-->
+    <table class="table table-bordered table_number">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>name</th>
+            <th>category</th>
+            <th>lastUpdateTime</th>
+            <th>metaInfo</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item:${result}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.category}"></td>
+            <td th:text="${item.lastUpdateTime}"></td>
+            <td th:text="${item.metaInfo}"></td>
+            <td>
+                <a class="btn btn-primary btn-sm" target="_blank"
+                   th:href="@{/modeler.html?modelId={id}(id=${item.id})}">修改模型</a>
+                <a class="btn btn-danger btn-sm" th:onclick="del([[${item.id}]])">删除模型</a>
+                <a class="btn btn-success btn-sm" th:onclick="deploy([[${item.id}]])">部署为流程</a>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <ul class="pager">
+
+    </ul>
+    <script>
+        var index = 1;
+        if (location.href.split('pageindex')[1] != undefined) {
+            index = parseInt(location.href.split('pageindex')[1].split('=')[1]);
+        }
+        $('.pager').append('<li><a id="Previous" href="?pageindex=' + (index - 1) + '">上一页</a></li>');
+        $('.pager').append('<li><a id="Next" href="?pageindex=' + (index + 1) + '">下一页</a></li>');
+    </script>
+</div>
+</html>

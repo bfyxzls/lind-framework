@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>quartz管理器</title>
+    <!-- 资源文件夹形式引入/META-INF/resources/webjars/  -->
+    <link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.css}" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.js}"></script>
+    <script type="text/ecmascript">
+        function getUrlRelativePath() {
+            var url = document.location.toString();
+            var arrUrl = url.split("//");
+            var start = arrUrl[1].indexOf("/");
+            var relUrl = arrUrl[1].substring(start);//stop省略，截取从start开始到结尾的所有字符
+            if (relUrl.indexOf("?") != -1) {
+                relUrl = relUrl.split("?")[0];
+            }
+            return relUrl;
+        }
+
+        $(function () {
+            //高亮导航
+            var o = $(".nav").find("li").find("a[href$='" + getUrlRelativePath() + "']");
+            o.closest("li").addClass("active").siblings().removeClass("active");
+        });
+
+    </script>
+    <style>
+        .panel-header {
+            background-color: #f5f5f5;
+            border-top: 1px solid #ddd;
+            border-bottom-right-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+<header class="header panel-header">
+    <div class="container-fluid">
+        <ul class="nav nav-pills">
+            <li role="presentation"><a th:href="@{/quartz-view/add}">添加任务</a></li>
+            <li role="presentation"><a th:href="@{/quartz-view/list}">任务列表</a></li>
+        </ul>
+    </div>
+</header>
+
+<div class="container" layout:fragment="content">
+
+</div>
+
+<footer class="panel-footer container-fluid" style="width: 100%; overflow: hidden;">
+    <div class="container">
+        <div class="row footer-top" style="text-align: center;">
+            &copy; bdyh 2020
+        </div>
+    </div>
+</footer>
+</body>
+</html>

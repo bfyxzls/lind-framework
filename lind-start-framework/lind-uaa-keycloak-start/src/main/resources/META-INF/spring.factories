@@ -1,0 +1,12 @@
+# 自动注入的bean
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.lind.uaa.keycloak.config.KeycloackAuthenticationProcessingFilterPostProcessor,\
+  com.lind.uaa.keycloak.config.MyKeycloakAuthenticationProvider,\
+  com.lind.uaa.keycloak.config.UaaProperties,\
+  com.lind.uaa.keycloak.config.SecurityConfig,\
+  com.lind.uaa.keycloak.permission.MyAccessDecisionManager,\
+  com.lind.uaa.keycloak.permission.MyFilterSecurityInterceptor,\
+  com.lind.uaa.keycloak.permission.MySecurityMetadataSource,\
+  com.lind.uaa.keycloak.controller.TokenController,\
+  com.lind.uaa.keycloak.cache.CacheConfig,\
+  com.lind.uaa.keycloak.cache.MemoryCacheProvider

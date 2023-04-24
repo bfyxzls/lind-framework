@@ -1,0 +1,11 @@
+# 自动注入的bean
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.lind.verification.code.ValidateCodeBeanConfig,\
+  com.lind.verification.code.image.ImageCodeProcessor,\
+  com.lind.verification.code.impl.RedisValidateCodeRepository,\
+  com.lind.verification.code.sms.SmsCodeProcessor,\
+  com.lind.verification.code.sms.SmsCodeGenerator,\
+  com.lind.verification.code.email.EmailCodeProcessor,\
+  com.lind.verification.code.email.EmailCodeGenerator,\
+  com.lind.verification.code.ValidateCodeProcessorHolder,\
+  com.lind.verification.code.image.ImageStreamCodeProcessor

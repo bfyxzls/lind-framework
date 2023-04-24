@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+
+<div layout:fragment="content">
+    <script>
+        $(function () {
+            $(".apply").click(function () {
+                var id = $(this).siblings("input[name=id]").val();
+                var taskId = $(this).siblings("input[name=taskId]").val();
+                var params = $(this).siblings("input[name=params]").val();
+                var assignee = $(this).siblings("input[name=assignee]").val();
+                if (params == "") {
+                    $.get("/execution/pass/" + id + "/" + taskId + "?assignee=" + assignee, function (data) {
+                        location.reload();
+                    })
+
+                } else {
+                    $.get("/execution/pass/" + id + "/" + taskId + "?assignee=" + assignee + "&params=" + params, function (data) {
+                        location.reload();
+                    })
+                }
+
+            });
+
+
+            $(".back").click(function () {
+                var id = $(this).closest("span").siblings("input[name=id]").val();
+                var taskId = $(this).closest("span").siblings("input[name=taskId]").val();
+                var destTaskKey = $(this).siblings("input[name=destTaskKey]").val();
+                $.get("/execution/back/" + id + "/" + taskId + "?destTaskKey=" + destTaskKey, function (data) {
+                    location.reload();
+                })
+            });
+
+        });
+    </script>
+    <ol class="breadcrumb">
+        <li>工作流</li>
+        <li>正在运行的流程</li>
+    </ol>
+    <!--遍历数组-->
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>processInstanceId</th>
+            <th>processDefinitionId</th>
+            <th>time</th>
+            <th>isSuspended</th>
+            <th>executionId</th>
+            <th>任务ID</th>
+            <th>任务</th>
+            <th>角色</th>
+            <th>审核人</th>
+            <th>驳回</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item:${result}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.proDefId}"></td>
+            <td th:text="${item.time}"></td>
+            <td th:text="${item.isSuspended}"></td>
+            <td th:text="${item.executionId}"></td>
+            <td th:text="${item.taskId}"></td>
+            <td th:text="${item.taskName}"></td>
+            <td th:text="${item.owner}"></td>
+            <td th:text="${item.assignee}"></td>
+            <td th:text="${item.rejectFlag}"></td>
+            <td>
+                <a class="btn btn-default btn-sm" target="_blank" th:href="@{/process/next-node/{id}(id=${item.id})}"
+                   th:alt="根据下一节点的角色选择它的人员">下一节点</a>
+                <input type="hidden" name="id" th:value="${item.id}">
+                <input type="hidden" name="taskId" th:value="${item.taskId}">
+                审批人：<input type="text" name="assignee" style="width:50px">
+                参数：<input type="text" name="params" style="width:50px">
+                <button class="btn btn-success btn-sm apply" type="button">审批</button>
+                <span th:if="${item.rejectFlag==1}">
+                驳回：<input type="text" name="destTaskKey" style="width:50px">
+                <button class="btn btn-danger btn-sm back" type="button">驳回</button>
+                    </span>
+                <a class="btn btn-success btn-sm" target="_blank"
+                   th:href="@{/view/task/list/{id}(id=${item.id})}">审批历史</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <ul class="pager">
+
+    </ul>
+    <script>
+        var index = 1;
+        if (location.href.split('pageindex')[1] != undefined) {
+            index = parseInt(location.href.split('pageindex')[1].split('=')[1]);
+        }
+        $('.pager').append('<li><a id="Previous" href="?pageindex=' + (index - 1) + '">上一页</a></li>');
+        $('.pager').append('<li><a id="Next" href="?pageindex=' + (index + 1) + '">下一页</a></li>');
+    </script>
+</div>
+
+</html>

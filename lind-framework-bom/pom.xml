@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>lind-framework</artifactId>
+        <groupId>com.lind</groupId>
+        <version>1.0.1</version>
+    </parent>
+    <artifactId>lind-framework-bom</artifactId>
+    <description>lind-framework的依赖pom包</description>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <properties>
+        <lind-framework.version>${project.version}</lind-framework.version>
+
+        <!-- jdk版本 1.8有一些新的语法 -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- 跳过测试用例 -->
+        <skipTests>true</skipTests>
+        <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
+        <spring-boot-dependencies.version>2.3.0.RELEASE</spring-boot-dependencies.version>
+        <spring-cloud-alibaba-dependencies.version>2.2.1.RELEASE</spring-cloud-alibaba-dependencies.version>
+        <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
+        <guava.version>28.2-jre</guava.version>
+        <mysql.drive.version>8.0.17</mysql.drive.version>
+        <HikariCP.version>3.4.2</HikariCP.version>
+        <mybatis-plus-boot-starter.version>3.5.2</mybatis-plus-boot-starter.version>
+        <fastjson.version>1.2.69</fastjson.version>
+        <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+        <httpclient.version>4.5.12</httpclient.version>
+        <feign-httpclient.version>11.0</feign-httpclient.version>
+        <springfox-swagger-ui.version>2.9.2</springfox-swagger-ui.version>
+        <commons-lang3-version>3.10</commons-lang3-version>
+        <!-- 在官方的文档里面，规定了2.2.6的jedis版本就是3.1.0,3.1.0会有连接池问题 -->
+        <jedis-version>2.9.0</jedis-version>
+        <!-- jackson与springboot版本有着密切关系， springboot2.3.0以上的版本jackson需要2.11.2-->
+        <jackson.verson>2.11.2</jackson.verson>
+        <!-- mvn site时跳过包检查，加快构建速度-->
+        <dependency.locations.enabled>false</dependency.locations.enabled>
+        <maven.checkstyle.plugin.version>3.1.1</maven.checkstyle.plugin.version>
+        <maven.sevntu.checkstyle.plugin.version>1.37.1</maven.sevntu.checkstyle.plugin.version>
+        <maven.sevntu-checkstyle-check.checkstyle.version>8.29</maven.sevntu-checkstyle-check.checkstyle.version>
+        <cn.hutool.version>5.5.5</cn.hutool.version>
+        <git.commit.plugin>4.9.9</git.commit.plugin>
+        <spring.checkstyle.plugin>0.0.34</spring.checkstyle.plugin>
+        <spring-boot-admin.version>2.6.7</spring-boot-admin.version>
+        <jasypt.version>2.1.0</jasypt.version>
+        <elasticsearch.high.version>7.6.2</elasticsearch.high.version>
+        <elasticsearch.client.version>7.6.2</elasticsearch.client.version>
+        <commons-pool2.version>2.8.0</commons-pool2.version>
+        <disruptor.version>3.4.2</disruptor.version>
+        <netty-all.version>4.1.63.Final</netty-all.version>
+        <transmittable-thread-local.version>2.14.2</transmittable-thread-local.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
+        <simple-pool.version>0.1.17</simple-pool.version>
+        <commons-net.version>3.1</commons-net.version>
+        <commons-codec.version>1.15</commons-codec.version>
+        <aesh.version>2.4</aesh.version>
+        <hbase-shaded-client.version>1.3.1</hbase-shaded-client.version>
+        <spring-kafka.version>2.4.1.RELEASE</spring-kafka.version>
+        <kafka-clients.version>2.6.0</kafka-clients.version>
+        <kafka-streams.version>2.5.0</kafka-streams.version>
+        <uadetector-resources.version>2014.10</uadetector-resources.version>
+        <okhttp.version>4.9.2</okhttp.version>
+        <java-jwt.version>3.4.0</java-jwt.version>
+    </properties>
+    <!-- maven依赖版本统一，子工程不需要声明包版本 -->
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- 三方包 -->
+            <!-- jwt工具类-->
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-jwt</artifactId>
+                <version>${java-jwt.version}</version>
+            </dependency>
+            <!-- 浏览器版本类-->
+            <dependency>
+                <groupId>net.sf.uadetector</groupId>
+                <artifactId>uadetector-resources</artifactId>
+                <version>${uadetector-resources.version}</version>
+            </dependency>
+            <!-- OkHttp工具 https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
+            <!-- kafka -->
+            <dependency>
+                <groupId>org.springframework.kafka</groupId>
+                <artifactId>spring-kafka</artifactId>
+                <version>${spring-kafka.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka-clients</artifactId>
+                <version>${kafka-clients.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka-streams</artifactId>
+                <version>${kafka-streams.version}</version>
+            </dependency>
+            <!-- hbase客户端-->
+            <dependency>
+                <groupId>org.apache.hbase</groupId>
+                <artifactId>hbase-shaded-client</artifactId>
+                <version>${hbase-shaded-client.version}</version>
+            </dependency>
+            <!-- 命令行交互类-->
+            <dependency>
+                <groupId>org.aesh</groupId>
+                <artifactId>aesh</artifactId>
+                <version>${aesh.version}</version>
+            </dependency>
+            <!-- 编码工具类-->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec.version}</version>
+            </dependency>
+            <!-- 网络编程工具-->
+            <dependency>
+                <groupId>commons-net</groupId>
+                <artifactId>commons-net</artifactId>
+                <version>${commons-net.version}</version>
+            </dependency>
+            <!-- 解决线程线中任务的有序性 https://zhuanlan.zhihu.com/p/152405578-->
+            <dependency>
+                <groupId>com.github.phantomthief</groupId>
+                <artifactId>simple-pool</artifactId>
+                <version>${simple-pool.version}</version>
+            </dependency>
+            <!-- CC4集合增能组件-->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections4.version}</version>
+            </dependency>
+            <!-- 阿里TTL，解决线程间数据传值问题 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${transmittable-thread-local.version}</version>
+            </dependency>
+            <!-- netty -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty-all.version}</version>
+            </dependency>
+            <!-- 并行队列 -->
+            <dependency>
+                <groupId>com.lmax</groupId>
+                <artifactId>disruptor</artifactId>
+                <version>${disruptor.version}</version>
+            </dependency>
+            <!-- Google 编码助手 -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.verson}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.verson}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.verson}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${commons-pool2.version}</version>
+            </dependency>
+            <!-- Mysql 驱动 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.drive.version}</version>
+            </dependency>
+            <!-- HikariCP 连接池 -->
+            <dependency>
+                <groupId>com.zaxxer</groupId>
+                <artifactId>HikariCP</artifactId>
+                <version>${HikariCP.version}</version>
+            </dependency>
+            <!-- MyBatis 增强工具 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-extension</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
+            <!-- Alibaba json解析器 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <!-- 接口文档 -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox-swagger2.version}</version>
+            </dependency>
+            <!-- 接口文档 UI -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${springfox-swagger-ui.version}</version>
+            </dependency>
+            <!-- HTTP 客户端请求 -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+            <!-- Feign 客户端请求 -->
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-httpclient</artifactId>
+                <version>${feign-httpclient.version}</version>
+            </dependency>
+            <!-- Apache Commons-lang3工具包 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3-version}</version>
+            </dependency>
+            <!-- redis客户端 -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis-version}</version>
+            </dependency>
+            <!-- elasticsearch包-->
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${elasticsearch.high.version}</version>
+            </dependency>
+            <!--  elasticsearch对应兼容版本为6.8.7-->
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>${elasticsearch.client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${cn.hutool.version}</version>
+            </dependency>
+            <!-- 以下依赖 全局所有的模块都会引入  -->
+            <!--配置文件处理器-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <optional>true</optional>
+            </dependency>
+            <!--监控-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+            </dependency>
+            <!--监控客户端-->
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-client</artifactId>
+                <version>${spring-boot-admin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-spring-boot-starter</artifactId>
+                <version>${jasypt.version}</version>
+            </dependency>
+
+            <!-- 本项目组件包 -->
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-activiti</artifactId>
+                <version>${lind-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-common</artifactId>
+                <version>${lind-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-elasticsearch-start</artifactId>
+                <version>${lind-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-feign-start</artifactId>
+                <version>${lind-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-hbase-start</artifactId>
+                <version>${lind-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-kafka-start</artifactId>
+                <version>${lind-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-logback-start</artifactId>
+                <version>${lind-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-logger-start</artifactId>
+                <version>${lind-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-mybatis-start</artifactId>
+                <version>${lind-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-nacos-start</artifactId>
+                <version>${lind-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-office-convert</artifactId>
+                <version>${lind-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-rbac-start</artifactId>
+                <version>${lind-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-redis-start</artifactId>
+                <version>${lind-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-schedule</artifactId>
+                <version>${lind-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-seata-start</artifactId>
+                <version>${lind-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-spi</artifactId>
+                <version>${lind-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-uaa-jwt-start</artifactId>
+                <version>${lind-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-uaa-keycloak-start</artifactId>
+                <version>${lind-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-uaa-start</artifactId>
+                <version>${lind-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-verification-code-start</artifactId>
+                <version>${lind-framework.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://192.168.0.203:8081/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://192.168.0.203:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+</project>

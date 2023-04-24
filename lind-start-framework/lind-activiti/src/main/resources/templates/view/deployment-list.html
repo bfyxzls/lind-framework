@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<div layout:fragment="content">
+    <script>
+        function start(id, title) {
+            $.get("/execution/start/" + id + "?title=" + title, function (data) {
+                location.href = "/view/execution/list";
+            })
+        }
+
+        function stop(id) {
+            $.get("/deployment/suspend/" + id, function (data) {
+                location.href = "/view/deployment/list";
+            })
+        }
+
+        function active(id) {
+            $.get("/deployment/active/" + id, function (data) {
+                location.href = "/view/deployment/list";
+            })
+        }
+
+    </script>
+    <ol class="breadcrumb">
+        <li>工作流</li>
+        <li>部署流程列表</li>
+    </ol>
+    <p>
+        <a target="_blank" class="btn btn-primary btn-sm" th:href="@{/view/deployment/list}">全部</a>
+        <a target="_blank" class="btn btn-success btn-sm" th:href="@{/view/deployment/list?status=1}">激活</a>
+        <a target="_blank" class="btn btn-danger btn-sm" th:href="@{/view/deployment/list?status=2}">挂起</a>
+
+    </p>
+    <!--遍历数组-->
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>proDefId</th>
+            <th>key</th>
+            <th>name</th>
+            <th>是否挂起</th>
+            <th>time</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item:${result}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.proDefId}"></td>
+            <td th:text="${item.key}"></td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.isSuspended}"></td>
+
+            <td th:text="${item.time}"></td>
+            <td><a class="btn btn-primary btn-sm"
+                   th:onclick="start([[${item.proDefId}]],[[${item.name}]])">启动</a>
+                <a class="btn btn-success btn-sm"
+                   th:href="@{/view/deployment/node-list/{id}(id=${item.proDefId})}">节点配置</a>
+
+                <a class="btn btn-danger btn-sm" th:if="${!item.isSuspended }" th:onclick="stop([[${item.proDefId}]])">挂起</a>
+                <a class="btn btn-default btn-sm" th:if="${item.isSuspended }"
+                   th:onclick="active([[${item.proDefId}]])">激活</a>
+
+                <a class="btn btn-primary btn-sm" th:href="@{/deployment/export?id={id}(id=${item.proDefId})}" id="export">导出流程</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <ul class="pager">
+
+    </ul>
+    <script>
+        var index = 1;
+        if (location.href.split('pageindex')[1] != undefined) {
+            index = parseInt(location.href.split('pageindex')[1].split('=')[1]);
+        }
+        $('.pager').append('<li><a id="Previous" href="?pageindex=' + (index - 1) + '">上一页</a></li>');
+        $('.pager').append('<li><a id="Next" href="?pageindex=' + (index + 1) + '">下一页</a></li>');
+    </script>
+</div>
+
+</html>

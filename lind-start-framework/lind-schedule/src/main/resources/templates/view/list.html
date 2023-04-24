@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<div layout:fragment="content">
+
+    <!--遍历数组-->
+    <table class="table table-bordered table_number">
+        <thead>
+        <tr>
+            <th>类全名</th>
+            <th>组</th>
+            <th>任务</th>
+            <th>触发组</th>
+            <th>触发名称</th>
+            <th>cron表达式</th>
+            <th>开始时间</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item:${result}">
+            <td th:text="${item.jobClassName}"></td>
+            <td th:text="${item.jobName}"></td>
+            <td th:text="${item.groupName}"></td>
+            <td th:text="${item.triggerName}"></td>
+            <td th:text="${item.triggerGroupName}"></td>
+            <td th:text="${item.cronExpression}"></td>
+            <td th:text="${item.time}"></td>
+            <td th:text="${item.status}"></td>
+            <td>
+                <span th:if="${item.status=='PAUSED' || item.status=='COMPLETE' || item.status=='BLOCKED'}">
+                    <a class="btn btn-success btn-sm"
+                       th:href="@{/quartz-view/start?jobName={jobName}&groupName={groupName}(jobName=${item.jobName},groupName=${item.groupName})}">启动</a>
+                </span>
+                <span th:if="${item.status=='NORMAL'}">
+                    <a class="btn btn-warning btn-sm"
+                       th:href="@{/quartz-view/stop?jobName={jobName}&groupName={groupName}(jobName=${item.jobName},groupName=${item.groupName})}">停止</a>
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</html>

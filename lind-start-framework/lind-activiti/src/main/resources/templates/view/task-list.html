@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<div layout:fragment="content">
+
+    <ol class="breadcrumb">
+        <li>工作流</li>
+        <li>审批历史</li>
+    </ol>
+    <!--遍历数组-->
+    <table class="table table-bordered table_number">
+        <thead>
+        <tr>
+            <th>taskId</th>
+            <th>name</th>
+            <th>processDefinitionId</th>
+            <th>processInstanceId</th>
+            <th>assignee</th>
+            <th>time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item:${result}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.processDefinitionId}"></td>
+            <td th:text="${item.processInstanceId}"></td>
+            <td th:text="${item.assignee}"></td>
+            <td th:text="${item.time}"></td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="6" style="text-align: center"><img th:src="@{/execution/getHighlightImg/{id}(id=${id})}"></td>
+        </tr>
+        </tfoot>
+    </table>
+
+</div>
+</html>

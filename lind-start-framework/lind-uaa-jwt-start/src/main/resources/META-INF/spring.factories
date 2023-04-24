@@ -1,0 +1,9 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+   com.lind.uaa.jwt.config.WebSecurityConfig,\
+   com.lind.uaa.jwt.permission.MyAccessDecisionManager,\
+   com.lind.uaa.jwt.permission.MyFilterSecurityInterceptor,\
+   com.lind.uaa.jwt.permission.MySecurityMetadataSource,\
+   com.lind.uaa.jwt.service.JwtUserService,\
+   com.lind.uaa.jwt.config.JwtConfig,\
+   com.lind.uaa.jwt.config.SecurityUtil,\
+   com.lind.uaa.jwt.config.UaaJwtConfig

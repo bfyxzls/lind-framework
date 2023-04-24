@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+   com.lind.rbac.controller.PermissionController,\
+   com.lind.rbac.controller.UserController,\
+   com.lind.rbac.controller.RoleController

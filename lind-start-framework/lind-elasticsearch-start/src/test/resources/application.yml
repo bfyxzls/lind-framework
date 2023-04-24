@@ -1,0 +1,4 @@
+spring:
+  elasticsearch:
+    rest:
+      uris: localhost:9200 #192.168.10.41:9200

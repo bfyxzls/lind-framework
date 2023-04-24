@@ -1,0 +1,357 @@
+* release-version: 0.0.35
+* checkstyle-version: 9.3
+# Spring Java Format
+# What is This?
+A set of plugins that can be applied to any Java project to provide a consistent "`Spring`" style.
+The set currently consists of:
+
+* A source formatter that applies wrapping and whitespace conventions
+* A checkstyle plugin that enforces consistency across a codebase
+
+Since the aim of this project is to provide consistency, each plugin is not generally configurable.
+You need to change your code to match the required conventions.
+You can't configure the plugin conventions to match your style!
+### Maven
+
+#### Source Formatting
+For source formatting, add the `spring-javaformat-maven-plugin` to your `build` plugins as follows:
+
+[source,xml,indent=0,subs="normal"]
+```
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>io.spring.javaformat</groupId>
+				<artifactId>spring-javaformat-maven-plugin</artifactId>
+				<version>{release-version}</version>
+			</plugin>
+		</plugins>
+	</build>
+```
+
+And the `io.spring.javaformat` plugin group in `~/.m2/settings.xml` as follows:
+
+[source,xml,indent=0,subs="normal"]
+```
+	<pluginGroups>
+		<pluginGroup>io.spring.javaformat</pluginGroup>
+	</pluginGroups>
+```
+
+You can now run `./mvnw spring-javaformat:apply` to reformat code.
+
+If you want to enforce that all code matches the required style, add the following:
+
+[source,xml,indent=0,subs="normal"]
+```
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>io.spring.javaformat</groupId>
+				<artifactId>spring-javaformat-maven-plugin</artifactId>
+				<version>{release-version}</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<inherited>true</inherited>
+						<goals>
+							<goal>validate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+```
+
+NOTE: The source formatter does not fundamentally change your code.
+For example, it will not change the order of import statements.
+It is effectively limited to adding or removing whitespace and line feeds.
+
+
+
+#### Checkstyle
+To enforce checksyle conventions add the checkstyle plugin and include a dependency on `spring-javaformat-checkstyle`:
+
+[source,xml,indent=0,subs="normal"]
+```
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.1.1</version>
+				<dependencies>
+					<dependency>
+						<groupId>com.puppycrawl.tools</groupId>
+						<artifactId>checkstyle</artifactId>
+						<version>{checkstyle-version}</version>
+					</dependency>
+					<dependency>
+						<groupId>io.spring.javaformat</groupId>
+						<artifactId>spring-javaformat-checkstyle</artifactId>
+						<version>{release-version}</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<id>checkstyle-validation</id>
+						<phase>validate</phase>
+						<inherited>true</inherited>
+						<configuration>
+							<configLocation>io/spring/javaformat/checkstyle/checkstyle.xml</configLocation>
+							<includeTestSourceDirectory>true</includeTestSourceDirectory>
+						</configuration>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+```
+
+
+
+### Gradle
+
+
+
+#### Source Formatting
+For source formatting, add the `spring-javaformat-gradle-plugin` to your `build` plugins as follows:
+
+[source,groovy,indent=0,subs="normal"]
+```
+	buildscript {
+		repositories {
+			mavenCentral()
+		}
+		dependencies {
+			classpath("io.spring.javaformat:spring-javaformat-gradle-plugin:{release-version}")
+		}
+	}
+
+	apply plugin: 'io.spring.javaformat'
+```
+
+The plugin adds `format` and `checkFormat` tasks to your project.
+The `checkFormat` task is automatically applied when running the standard Gradle `check` task.
+
+In case you want to exclude a package from being checked, for example if you generate sources, you can do this by adding following configuration:
+
+[source,groovy,indent=0,subs="normal"]
+```
+tasks.withType(io.spring.javaformat.gradle.tasks.CheckFormat) {
+exclude "package/to/exclude"
+}
+```
+
+
+
+#### Checkstyle
+To enforce checksyle conventions add the checkstyle plugin and include a dependency on `spring-javaformat-checkstyle`:
+
+[source,groovy,indent=0,subs="normal"]
+```
+apply plugin: 'checkstyle'
+
+checkstyle {
+toolVersion = "{checkstyle-version}"
+}
+
+dependencies {
+checkstyle("io.spring.javaformat:spring-javaformat-checkstyle:{release-version}")
+}
+```
+
+Your `checkstyle.xml` file should look then like this:
+
+[source,xml,indent=0]
+```
+	<?xml version="1.0"?>
+	<!DOCTYPE module PUBLIC
+			"-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+			"https://checkstyle.org/dtds/configuration_1_3.dtd">
+	<module name="com.puppycrawl.tools.checkstyle.Checker">
+		<module name="io.spring.javaformat.checkstyle.SpringChecks" />
+	</module>
+```
+
+
+
+### Java 8 Support
+By default, the formatter requires Java 11.
+If you are working on an older project, you can use a variation of the formatter based off Eclipse 2021-03 (the latest Eclipse JDT version built with Java 8).
+
+To use the Java 8 version, add a file called `.springjavaformatconfig` to the root of your project with the following content:
+
+[source,properties]
+```
+java-baseline=8
+```
+
+### IntelliJ IDEA
+The IntelliJ IDEA plugin provides custom formatter support for IntelliJ IDEA.
+The plugin is automatically activated whenever the Maven or Gradle plugins are discovered in a project build script.
+A Spring Java Format icon (image:spring-javaformat-intellij-idea/spring-javaformat-intellij-idea-plugin/src/main/resources/spring-javaformat/formatOn.png[title="Icon"]) will also be displayed in the status bar to indicate the formatter is active.
+You can use the standard `code` -> `reformat code` action to format the code.
+
+To install the plugin use the `spring-javaformat-intellij-idea-plugin` jar file.
+You can download the latest version from https://repo1.maven.org/maven2/io/spring/javaformat/spring-javaformat-intellij-idea-plugin/{release-version}[Maven Central].
+
+
+
+#### Enable the Plugin
+The plugin is automatically enabled when one or more of the following conditions match:
+
+* `.springjavaformatconfig` file exists
+* For a Maven-based project, `spring-javaformat-maven-plugin` plugin is defined in `pom.xml`
+* For a Gradle-based project, `io.spring.javaformat` plugin is applied
+
+#### CheckStyle-IDEA plugin
+The https://plugins.jetbrains.com/plugin/1065-checkstyle-idea[CheckStyle-IDEA plugin] provides Checkstyle integration for IntelliJ IDEA.
+
+To configure the plugin, create your own Checkstyle configuration file with the following content:
+
+[source,xml,indent=0]
+```
+	<?xml version="1.0"?>
+	<!DOCTYPE module PUBLIC
+			"-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+			"https://checkstyle.org/dtds/configuration_1_3.dtd">
+	<module name="com.puppycrawl.tools.checkstyle.Checker">
+		<module name="io.spring.javaformat.checkstyle.SpringChecks" />
+	</module>
+```
+
+Once the configuration file is created, configure your IDE to use it:
+
+* Open `Preferences` - `Tools` - `Checkstyle`
+* Add `spring-javaformat-checkstyle-{release-version}.jar` and `spring-javaformat-config-{release-version}.jar` to the `Third-Party Checks`
+* Specify the appropriate `Checkstyle version`
+* Add your Checkstyle configuration file
+
+
+
+### About the Conventions
+Most of the coding conventions and style comes from the Spring Framework and Spring Boot projects.
+Spring Framework manually formats code, where as Spring Boot uses automatic formatting.
+
+
+
+### Indenting With Spaces
+By default tabs are used for indenting formatted code.
+We strongly recommend that this default is not changed, especially for official Spring projects.
+If, however, you feel that you can't live with tabs then switching to spaces is the one configuration option that we do support.
+
+To use spaces rather than tabs, add a file called `.springjavaformatconfig` to the root of your project with the following content:
+
+[source,properties]
+```
+indentation-style=spaces
+```
+
+
+
+### Tips
+Formatting and Checkstyle alone are not enough to produce truly consistent code.
+Here are some tips that we've found useful when developing Spring Boot.
+
+
+
+#### Excluding Specific Checks
+If you want most `SpringChecks` but need to exclude one or two, you can do something like this in your `checkstyle.xml`:
+
+[source,xml,indent=0]
+```
+	<?xml version="1.0"?>
+	<!DOCTYPE module PUBLIC
+			"-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+			"https://checkstyle.org/dtds/configuration_1_3.dtd">
+	<module name="com.puppycrawl.tools.checkstyle.Checker">
+		<module name="io.spring.javaformat.checkstyle.SpringChecks">
+			<property name="excludes" value="io.spring.javaformat.checkstyle.check.SpringAvoidStaticImportCheck" />
+		</module>
+	</module>
+```
+
+
+
+#### Disabling Formatting For Blocks of Code
+Some code isn't particularly amenable to automatic formatting.
+For example, Spring Security configurations often work better when manually formatted.
+
+If you need to disable formatting for a specific block of code you can enclose it in a `@formatter:off` / `@formatter:on` set:
+
+[source,java]
+```
+// @formatter:off
+
+... code not be formatted
+
+// @formatter:on
+```
+
+
+
+#### Wrapping
+The source formatter uses 120 chars for wrapping. This aims to strike a balance between
+making use of available horizontal space in your IDE and avoiding unwanted additional
+wrapping when viewing code on GitHub and the like.
+
+If you're used to longer lines, 120 chars can take some getting used to. Specifically, if
+you have many nesting levels things can start to look quite bad. Generally, if you see
+code bunched up to the right of your screen you should take that as a signal to use the
+"`extract method`" refactor. Extracting small private methods will improve formatting and
+it helps when reading the code and debugging.
+
+
+
+#### Whitespace
+Keeping whitespace lines out of method bodies can help make the code easier to scan.
+If blank lines are only included between methods it becomes easier to see the overall structure of the class.
+If you find you need whitespace inside your method, consider if extracting a private method might give a better result.
+
+
+
+#### Comments
+Try to add javadoc for each public method and constant.
+Private methods shouldn't generally need javadoc, unless it provides a natural place to document unusual behavior.
+
+The checkstyle rules will enforce that all public classes have javadoc.
+They will also ensure that `@author` tags are well formed.
+
+
+
+#### Final
+Private members should be `final` whenever possible.
+Local variable and parameters should generally not be explicitly declared as final since it adds so much noise.
+
+
+
+#### Read-down Methods, Fields and Parameters
+Methods don't need to be organized by scope.
+There's no need to group all `private`, `protected` and `public` methods together.
+Instead try to make your code easy to read when scanning the file from top to bottom.
+In other words, try to have methods only reference method further down in the file.
+Keep private methods as close to the thing that calls them as possible.
+
+It's also recommend that you try to keep consistent ordering with fields and constructor parameters.
+For example:
+
+[source,java,indent=0,subs="normal"]
+```
+class Name {
+
+	private final String first;
+
+	private final String last;
+
+	public Name(String first, String last) {
+		this.first = first;
+		this.last = last;
+	}
+
+}
+```

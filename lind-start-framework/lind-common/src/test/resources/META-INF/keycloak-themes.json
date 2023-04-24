@@ -1,0 +1,29 @@
+{
+  "themes": [
+    {
+      "name": "phone",
+      "types": [
+        "login",
+        "account"
+      ]
+    },
+    {
+      "name": "custom",
+      "types": [
+        "login"
+      ]
+    },
+    {
+      "name": "h5",
+      "types": [
+        "login"
+      ]
+    },
+    {
+      "name": "h5-no-weixin",
+      "types": [
+        "login"
+      ]
+    }
+  ]
+}

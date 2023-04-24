@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<div layout:fragment="content">
+
+    <form class="form-horizontal" action="/quartz-view/add" method="post">
+
+        <div class="form-group">
+            <label>
+                任务组名称：
+            </label>
+            <input type="text" name="groupName" class="form-control">
+         </div>
+
+        <div class="form-group">
+            <label>
+                任务名称：
+            </label>
+            <input type="text" name="jobName" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>
+                任务类完整名称：
+            </label>
+            <input type="text" name="jobClassName" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>
+                触发器组名称：
+            </label>
+            <input type="text" name="triggerGroupName" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>
+                触发器名称：
+            </label>
+            <input type="text" name="triggerName" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>
+                cron表达式：
+            </label>
+            <input type="text" name="cronExpression" class="form-control">
+        </div>
+        <div class="form-group">
+        <button type="submit" class="btn btn-primary ">提交</button>
+        </div>
+    </form>
+</div>
+</html>

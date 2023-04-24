@@ -1,0 +1,14 @@
+totpSeconds: 30 # 30秒
+spring.application.name: lind-start-common
+jasypt:
+  encryptor:
+    password: xboot
+lind:
+  password: ENC(xZK4Tols08HZ5PrQYVusVbuO516ClRYK91c+HsJT0FxNvrRp+iHLAil/YqUAkO6s) #通过JasyptUtil.encyptPwd生成的
+  cfg:
+    appId: zzl
+    type: ORDER #PRODUCT
+
+test:
+  v1:
+    enabled: false

@@ -1,0 +1,51 @@
+management:
+  health:
+    mail:
+      enabled: false
+  server:
+    servlet:
+      base-path: /actuator
+mybatis:
+  mapper-locations: classpath:/mybatis-mapper/*Mapper.xml
+server:
+  port: 7070
+spring:
+  name: law_communique
+  elasticsearch:
+    rest:
+      uris: 192.168.10.170:9200,192.168.10.185:9200,192.168.10.41:9200,192.168.10.117:9200
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      auto-commit: true
+      connection-test-query: SELECT 1
+      connection-timeout: 10000
+      idle-timeout: 30000
+      max-lifetime: 900000
+      maximum-pool-size: 30
+      minimum-idle: 10
+      pool-name: HikariCP
+      validation-timeout: 1000
+
+  freemarker:
+    cache: false
+    charset: UTF-8
+    request-context-attribute: request
+    settings:
+      number_format: 0.##########
+    suffix: .ftl
+    templateLoaderPath: classpath:/templates/
+  mvc:
+    servlet:
+      load-on-startup: 0
+    static-path-pattern: /static/**
+  web:
+    resources:
+      static-locations: classpath:/static/
+  profiles:
+    active: svt
+lind:
+  rate-limit:
+    enabled: true
+    limit: 5

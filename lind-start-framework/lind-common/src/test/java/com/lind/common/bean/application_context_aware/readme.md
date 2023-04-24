@@ -1,0 +1,2 @@
+ApplicationContextAware,主要是在类中可以使用spring ioc里的bean对象，通过重写setApplicationContext()方法，来将当前的ApplicationContext
+赋给你的临时变量。

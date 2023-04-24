@@ -1,0 +1,5 @@
+# ImportBeanDefinitionRegistrar
+ImportBeanDefinitionRegistrar注入FactoryBean到SpringIOC中，而在FactoryBean中定义了类型T的动态代理，通过对InvocationHandler接口
+的实现来添加自定义行为，这里使用jdk默认的代理，只支持接口类型。
+# 使用场景
+当需要为某个接口动态添加一种行为时，不需要建立它的实现类，可以通过动态代理去建立它的实现类，在代理中添加自定义的逻辑。

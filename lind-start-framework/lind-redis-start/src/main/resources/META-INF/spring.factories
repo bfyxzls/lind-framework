@@ -1,0 +1,6 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.lind.redis.config.LettuceRedisAutoConfigure,\
+  com.lind.redis.config.JsonRedisCacheConfiguration,\
+  com.lind.redis.limit.config.LimitConfig,\
+  com.lind.redis.lock.config.RedisLockConfig
