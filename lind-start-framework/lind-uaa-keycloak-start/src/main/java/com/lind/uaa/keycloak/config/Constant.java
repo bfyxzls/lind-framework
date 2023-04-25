@@ -5,11 +5,16 @@ import javax.servlet.http.HttpServletRequest;
 public interface Constant {
 
 	// 请求头认证键
-	String AUTHORIZATION="Authorization";
-	String CLIENT_ID="client_id";
-	String CLIENT_SECRET="client_secret";
-	String TOKEN="token";
-	String ACTIVE_STATUS="active";
+	String AUTHORIZATION = "Authorization";
+
+	String CLIENT_ID = "client_id";
+
+	String CLIENT_SECRET = "client_secret";
+
+	String TOKEN = "token";
+
+	String ACTIVE_STATUS = "active";
+
 	// 表示是否登录的cookie
 	String COOKIE_IS_LOGIN = "isLogin";
 

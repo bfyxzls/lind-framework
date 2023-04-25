@@ -6,7 +6,7 @@
 
     <groupId>com.lind</groupId>
     <artifactId>lind-framework</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -74,16 +74,11 @@
     </dependencies>
 
     <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <name>Nexus Release Repository</name>
-            <url>http://192.168.0.203:8081/repository/maven-releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>Nexus Snapshot Repository</name>
-            <url>http://192.168.0.203:8081/repository/maven-snapshots/</url>
-        </snapshotRepository>
+            <repository>
+                <id>github</id>
+                <name>GitHub OWNER Apache Maven Packages</name>
+                <url>https://maven.pkg.github.com/bfyxzls/maven_repo</url>
+            </repository>
     </distributionManagement>
 
     <build>
