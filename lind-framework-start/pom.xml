@@ -8,8 +8,8 @@
         <groupId>com.lind</groupId>
         <version>1.0.2</version>
     </parent>
-    <artifactId>lind-start-framework</artifactId>
-    <name>lind start framework</name>
+    <artifactId>lind-framework-start</artifactId>
+    <name>lind-framework-start</name>
     <version>1.0.2</version>
     <packaging>pom</packaging>
     <description>basic framework for all project.</description>

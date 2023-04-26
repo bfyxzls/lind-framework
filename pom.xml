@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>lind-start-framework</module>
+        <module>lind-framework-start</module>
         <module>lind-framework-bom</module>
     </modules>
     <properties>
