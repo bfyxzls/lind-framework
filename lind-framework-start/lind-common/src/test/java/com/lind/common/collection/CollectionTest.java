@@ -45,6 +45,12 @@ public class CollectionTest {
 	}
 
 	@Test
+	public void emptyArray() {
+		String[] array = new String[0];
+		System.out.println(array.length);
+	}
+
+	@Test
 	public void test1() {
 		List<Integer> list1 = new ArrayList<>();
 		list1.add(1);

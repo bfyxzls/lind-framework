@@ -1,4 +1,4 @@
-package com.lind.common.classloader;
+package com.lind.common;
 
 public class ClassToLoad {
 

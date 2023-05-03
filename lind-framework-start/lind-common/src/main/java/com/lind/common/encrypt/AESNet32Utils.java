@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 /**
@@ -16,9 +17,8 @@ public class AESNet32Utils {
 	 * 获取32位的key.
 	 * @return
 	 */
-	public static String GetAesKey() {
-		String key = UUID.randomUUID().toString().replaceAll("-", "");
-		return key;
+	public static String getAesKey() {
+		return UUID.randomUUID().toString().replace("-", "");
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class AESNet32Utils {
 	public static String encryptData(String data, String key, String IV) throws Exception {
 		try {
 			Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-			byte[] dataBytes = data.getBytes("UTF-8");
+			byte[] dataBytes = data.getBytes(StandardCharsets.UTF_8);
 			int plaintextLength = dataBytes.length;
 			byte[] plaintext = new byte[plaintextLength];
 			System.arraycopy(dataBytes, 0, plaintext, 0, dataBytes.length);
@@ -96,7 +96,7 @@ public class AESNet32Utils {
 			IvParameterSpec ivspec = new IvParameterSpec(IV.getBytes());
 			cipher.init(Cipher.DECRYPT_MODE, keyspec, ivspec);
 			byte[] original = cipher.doFinal(encrypted1);
-			String originalString = new String(original, "UTF-8");
+			String originalString = new String(original, StandardCharsets.UTF_8);
 			return originalString;
 		}
 		catch (Exception e) {
@@ -132,7 +132,7 @@ public class AESNet32Utils {
 	 */
 	public static byte[] hexStringToBytes(String hexString) {
 		if (StringUtils.isEmpty(hexString)) {
-			return null;
+			return new byte[0];
 		}
 		hexString = hexString.toLowerCase();
 		final byte[] byteArray = new byte[hexString.length() >> 1];

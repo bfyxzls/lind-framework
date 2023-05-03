@@ -7,8 +7,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.annotation.Order;
 
-import java.util.Date;
-
 /**
  * 运行出错后重试拦截器
  */
@@ -28,21 +26,16 @@ public class TryDoAspect {
 	@Around("@annotation(tryDo)")
 	public Object around(ProceedingJoinPoint point, TryDo tryDo) throws Throwable {
 
-		int retry = 0;
+		long retry = 0;
 		while (retry++ < tryDo.limit()) {
 			try {
-				System.out.println("try do " + retry + new Date());
 				return point.proceed();
 			}
 			catch (Exception ex) {
 				if (retry >= tryDo.limit()) {
 					throw ex;
 				}
-				try {
-					Thread.sleep(tryDo.frequency() * retry);
-				}
-				catch (InterruptedException interruptedException) {
-				}
+				Thread.sleep(tryDo.frequency() * retry);
 			}
 
 		}

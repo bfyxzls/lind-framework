@@ -22,6 +22,22 @@ public class JarClassLoader extends ClassLoader {
 
 	final static Logger LOGGER = LoggerFactory.getLogger(JarClassLoader.class);
 
+	public JarFile jarFile;
+
+	public ClassLoader parent;
+
+	public JarClassLoader(JarFile jarFile) {
+		super(Thread.currentThread().getContextClassLoader());
+		this.parent = Thread.currentThread().getContextClassLoader();
+		this.jarFile = jarFile;
+	}
+
+	public JarClassLoader(JarFile jarFile, ClassLoader parent) {
+		super(parent);
+		this.parent = parent;
+		this.jarFile = jarFile;
+	}
+
 	/**
 	 * 获取jar包所在路径URL格式
 	 * @return jar包所在路径
@@ -53,20 +69,30 @@ public class JarClassLoader extends ClassLoader {
 			ClassLoader loader = new URLClassLoader(new URL[] { url }, clazz.getClassLoader()) {
 				@Override
 				public Class<?> loadClass(String name) throws ClassNotFoundException {
+					InputStream inputStream = null;
 					try {
 						String fileName = name.substring(name.lastIndexOf(".") + 1) + ".class";
-						InputStream is = getClass().getResourceAsStream(fileName);
-						if (is == null) {
+						inputStream = getClass().getResourceAsStream(fileName);
+						if (inputStream == null) {
 							return super.loadClass(name);
 						}
-						byte[] b = new byte[is.available()];
-						is.read(b);
+						byte[] b = new byte[inputStream.available()];
+						inputStream.read(b);
 						return defineClass(name, b, 0, b.length);
 
 					}
 					catch (IOException e) {
-						e.printStackTrace();
 						throw new ClassNotFoundException(name);
+					}
+					finally {
+						try {
+							if (inputStream != null) {
+								inputStream.close();
+							}
+						}
+						catch (IOException e) {
+							throw new RuntimeException(e);
+						}
 					}
 				}
 			};
@@ -129,22 +155,6 @@ public class JarClassLoader extends ClassLoader {
 		final InputStream fileResource = jarFile.getClass().getResourceAsStream(resourceName);
 		byte[] bytes = IoUtil.readBytes(fileResource);
 		return bytes;
-	}
-
-	public JarFile jarFile;
-
-	public ClassLoader parent;
-
-	public JarClassLoader(JarFile jarFile) {
-		super(Thread.currentThread().getContextClassLoader());
-		this.parent = Thread.currentThread().getContextClassLoader();
-		this.jarFile = jarFile;
-	}
-
-	public JarClassLoader(JarFile jarFile, ClassLoader parent) {
-		super(parent);
-		this.parent = parent;
-		this.jarFile = jarFile;
 	}
 
 	public String classNameToJarEntry(String name) {

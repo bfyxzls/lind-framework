@@ -21,7 +21,7 @@ public class TestCustomClassLoader {
 	 */
 	@Test
 	public void shoudlLoadClassUsingSystemClassLoader() throws ClassNotFoundException {
-		final Class<?> clazz = customClassLoader.loadClass("com.lind.common.classloader.ClassToLoad");
+		final Class<?> clazz = customClassLoader.loadClass("com.lind.common.ClassToLoad");
 		Assertions.assertNotNull(clazz);
 		Assertions.assertEquals("sun.misc.Launcher$AppClassLoader", clazz.getClassLoader().getClass().getName());
 	}
