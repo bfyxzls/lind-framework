@@ -48,6 +48,7 @@
         <module>lind-logback-start</module>
         <module>lind-hbase-start</module>
         <module>lind-chatgpt-start</module>
+        <module>lind-minio-start</module>
 
     </modules>
     <dependencyManagement>
