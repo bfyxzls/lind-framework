@@ -4,9 +4,11 @@
 > 目前正在开发基于最新的springboot2.7的精简版本lind-fast框架
 
 # 升级
-* 命令行执行 mvn versions:set -DnewVersion=1.0.1 //更新整个项目版本
+* 命令行执行 mvn versions:set -DnewVersion=1.1.0 //更新整个项目版本
 * 提交 mvn versions:commit //提交，删除多余的pom.xml.versionsBackup
 * mvn deploy 根项目
+* 先deploy lind-framework-bom项目，再deploy lind-framework项目
+
 
 # 为什么程序员都喜欢用16进制，因为它简单
 > 千分割符读数技巧:第一个逗号前面是千，第二个是百万，第三个是十亿

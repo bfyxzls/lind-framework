@@ -28,8 +28,6 @@ public class MinioUtilTest {
 		minioUtil.createBucket("lind");
 	}
 
-
-
 	@Test
 	public void readFromFile() throws IOException {
 		InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("test.txt");

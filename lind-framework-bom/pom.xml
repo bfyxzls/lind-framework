@@ -5,7 +5,7 @@
     <parent>
         <artifactId>lind-framework</artifactId>
         <groupId>com.lind</groupId>
-        <version>1.0.2</version>
+        <version>1.1.2</version>
     </parent>
     <artifactId>lind-framework-bom</artifactId>
     <description>lind-framework的依赖pom包</description>

@@ -3,31 +3,30 @@ package com.lind.minio.model;
 import lombok.ToString;
 
 public class FileModel {
-    String filename;
 
-    Boolean directory;
+	String filename;
 
-    public String getFilename() {
-        return filename;
-    }
+	Boolean directory;
 
-    public void setFilename(String filename) {
-        this.filename = filename;
-    }
+	public String getFilename() {
+		return filename;
+	}
 
-    public Boolean getDirectory() {
-        return directory;
-    }
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 
-    public void setDirectory(Boolean directory) {
-        this.directory = directory;
-    }
+	public Boolean getDirectory() {
+		return directory;
+	}
 
-    @Override
-    public String toString() {
-        return "FileModel{" +
-                "filename='" + filename + '\'' +
-                ", directory=" + directory +
-                '}';
-    }
+	public void setDirectory(Boolean directory) {
+		this.directory = directory;
+	}
+
+	@Override
+	public String toString() {
+		return "FileModel{" + "filename='" + filename + '\'' + ", directory=" + directory + '}';
+	}
+
 }
