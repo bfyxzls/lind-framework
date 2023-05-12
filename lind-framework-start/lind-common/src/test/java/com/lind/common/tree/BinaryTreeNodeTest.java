@@ -7,13 +7,13 @@ import org.junit.Test;
  * @date 2023/4/20 9:39
  * @since 1.0.0
  */
-public class TreeNodeTest {
+public class BinaryTreeNodeTest {
 
 	@Test
 	public void iterator() {
-		TreeNode root = new TreeNode(1);
-		TreeNode left = new TreeNode(2);
-		TreeNode right = new TreeNode(3);
+		BinaryTreeNode root = new BinaryTreeNode(1);
+		BinaryTreeNode left = new BinaryTreeNode(2);
+		BinaryTreeNode right = new BinaryTreeNode(3);
 		root.setLeft(left);
 		root.setRight(right);
 		System.out.println("前序遍历");// 前序遍历(DLR)首先访问根结点然后遍历左子树，最后遍历右子树

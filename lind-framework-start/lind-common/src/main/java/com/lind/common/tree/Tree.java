@@ -15,11 +15,16 @@ public interface Tree {
 
 	Integer getType();
 
-	List<List<? extends Tree>> getSons();
+	List<? extends Tree> getSons();
 
 	void setSons(List<? extends Tree> sons);
 
-	default void getTreeRzSons(List<? extends Tree> ones, List<? extends Tree> all) {
+	/**
+	 * 填充一级节点的子节点.
+	 * @param ones 一级节点
+	 * @param all 所有节点
+	 */
+	default void fillTreeRzSons(List<? extends Tree> ones, List<? extends Tree> all) {
 		for (Tree tree : ones) {
 			if (tree != null) {
 				List<Tree> sons = all.stream().filter(
@@ -27,7 +32,7 @@ public interface Tree {
 						.collect(Collectors.toList());
 				if (!CollectionUtils.isEmpty(sons)) {
 					tree.setSons(sons);
-					getTreeRzSons(sons, all);
+					fillTreeRzSons(sons, all);
 				}
 			}
 		}

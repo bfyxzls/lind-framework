@@ -28,6 +28,7 @@ import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 
 /**
+ * https://datatracker.ietf.org/doc/html/rfc4226
  * Generates HMAC-based one-time passwords (HOTP).
  * 生成HMAC算法的一次数密码,服务端与客户端都会有一个计数器，相同计数，生成节点也是一样的 HOTP(K,C) = Truncate(HMAC-SHA-1(K,C)) C:
  * 8-byte 的移动因子，对于客户端，每次生成一次性密码，C 的值加 1；对于服务端，每次认证客服端产生的一次性密码，C 的值加 1，所以客服端和服务端必须同步该数值。 K:

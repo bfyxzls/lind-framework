@@ -7,15 +7,15 @@ package com.lind.common.tree;
  * @date 2023/4/20 9:37
  * @since 1.0.0
  */
-public class TreeNode {
+public class BinaryTreeNode {
 
 	private int val;
 
-	private TreeNode left;
+	private BinaryTreeNode left;
 
-	private TreeNode right;
+	private BinaryTreeNode right;
 
-	public TreeNode(int val) {
+	public BinaryTreeNode(int val) {
 		this.val = val;
 	}
 
@@ -27,24 +27,24 @@ public class TreeNode {
 		this.val = val;
 	}
 
-	public TreeNode getLeft() {
+	public BinaryTreeNode getLeft() {
 		return left;
 	}
 
-	public void setLeft(TreeNode left) {
+	public void setLeft(BinaryTreeNode left) {
 		this.left = left;
 	}
 
-	public TreeNode getRight() {
+	public BinaryTreeNode getRight() {
 		return right;
 	}
 
-	public void setRight(TreeNode right) {
+	public void setRight(BinaryTreeNode right) {
 		this.right = right;
 	}
 
 	// 前序遍历
-	public void preOrder(TreeNode root) {
+	public void preOrder(BinaryTreeNode root) {
 		if (root != null) {
 			System.out.println(root.val);
 			preOrder(root.left);
@@ -53,7 +53,7 @@ public class TreeNode {
 	}
 
 	// 中序遍历
-	public void inOrder(TreeNode root) {
+	public void inOrder(BinaryTreeNode root) {
 		if (root != null) {
 			inOrder(root.left);
 			System.out.println(root.val);
@@ -62,7 +62,7 @@ public class TreeNode {
 	}
 
 	// 后序遍历
-	public void postOrder(TreeNode root) {
+	public void postOrder(BinaryTreeNode root) {
 		if (root != null) {
 			postOrder(root.left);
 			postOrder(root.right);
