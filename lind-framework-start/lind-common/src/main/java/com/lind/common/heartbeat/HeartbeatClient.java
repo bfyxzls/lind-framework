@@ -34,7 +34,7 @@ public class HeartbeatClient {
 		send("localhost", 80);
 	}
 
-	private static void updateConfigFile(){
+	private static void updateConfigFile() {
 		// 更新配置文件的代码，可以根据实际情况自行编写
 		logger.error("心跳失败，更新配置文件");
 	}

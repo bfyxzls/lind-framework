@@ -21,8 +21,6 @@ public class HeartbeatClient2 extends Thread {
 
 	static Logger logger = LoggerFactory.getLogger(HeartbeatClient2.class);
 	static long interval = 5000;
-	static ScheduledThreadPoolExecutor scheduled = new ScheduledThreadPoolExecutor(2,
-			new NamedThreadFactory("lind-framework-heartbeat", true));
 
 	/**
 	 * 程序的入口main方法

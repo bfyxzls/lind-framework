@@ -12,8 +12,8 @@ public class KcErrorCodeTest {
 
 	@Test
 	public void getMessage() {
-		Assert.assertEquals("手机号不存在",KcErrorCode.getMessage(KcErrorCode.PHONE_NOT_FOUND));
-		Assert.assertEquals("U007",KcErrorCode.PHONE_NOT_FOUND.getCode());
+		Assert.assertEquals("手机号不存在", KcErrorCode.getMessage(KcErrorCode.PHONE_NOT_FOUND));
+		Assert.assertEquals("U007", KcErrorCode.PHONE_NOT_FOUND.getCode());
 	}
 
 }

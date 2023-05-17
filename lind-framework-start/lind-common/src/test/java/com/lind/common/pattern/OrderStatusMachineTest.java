@@ -47,9 +47,9 @@ public class OrderStatusMachineTest {
 	public void handleOrder() {
 		Order order = new Order("1");
 		order.handle(OrderEvent.PAYMENT_PENDING);
-        order.handle(OrderEvent.PAYMENT_PROCESSING);
+		order.handle(OrderEvent.PAYMENT_PROCESSING);
 
-        System.out.println(order.getStatus());
+		System.out.println(order.getStatus());
 	}
 
 	public enum OrderStatus {
@@ -79,6 +79,7 @@ public class OrderStatusMachineTest {
 	public class Order {
 
 		private final String orderId;
+
 		private OrderStatus status;
 
 		public Order(String orderId) {

@@ -35,7 +35,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ThreadPoolUtilsTest {
 
 	static ExecutorService executorService = Executors.newFixedThreadPool(4);
-	static KeyAffinityExecutor executor = KeyAffinityExecutor.newSerializingExecutor(8, 200, "MY-POOL");
 	static boolean SYNCHRONIZED = false;
 
 	public static void executeByOldPool(List<Person> personList) {
@@ -50,11 +49,6 @@ public class ThreadPoolUtilsTest {
 		}));
 	}
 
-	public static void executeByAffinitydPool(List<Person> personList) {
-		personList.stream().forEach(p -> executor.executeEx(p.getId(), () -> {
-			System.out.println(JSON.toJSONString(p));
-		}));
-	}
 
 	public static void main(String[] args) throws InterruptedException {
 		StopWatch stopWatch = new StopWatch();
@@ -126,27 +120,7 @@ public class ThreadPoolUtilsTest {
 		Thread.sleep(1000);
 	}
 
-	/**
-	 * Simple pool保存了有序性
-	 * @throws InterruptedException
-	 */
-	@Test
-	public void phantomthiefSimplePool() throws InterruptedException {
-		// 1.创建列表
-		List<Person> personList = new ArrayList<>();
-		personList.add(Person.builder().id(1).data("1s").build());
-		personList.add(Person.builder().id(2).data("2s").build());
-		personList.add(Person.builder().id(1).data("11s").build());
-		personList.add(Person.builder().id(3).data("3s").build());
-		personList.add(Person.builder().id(1).data("111s").build());
-		personList.add(Person.builder().id(2).data("22s").build());
-		personList.add(Person.builder().id(3).data("33s").build());
-		personList.add(Person.builder().id(1).data("1111s").build());
 
-		executeByAffinitydPool(personList);
-
-		Thread.sleep(1000);
-	}
 
 	@Test
 	public void newFixedThreadPool() {

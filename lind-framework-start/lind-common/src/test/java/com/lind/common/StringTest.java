@@ -60,9 +60,9 @@ public class StringTest {
 	@Test
 	public void StringTo16() {
 		String str = "abc";
-		String str16 = BinHexSwitchUtils.bytesToHex(str.getBytes());
+		String str16 = BinHexSwitchUtils.bytesToHexString(str.getBytes());
 		log.info("result={}", str16);
-		log.info("result={}", new String(BinHexSwitchUtils.hexToBytes(str16)));
+		log.info("result={}", new String(BinHexSwitchUtils.hexStringToBytes(str16)));
 	}
 
 	/**
