@@ -14,7 +14,8 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 public class LocalMessageConfig {
 
 	/**
-	 * 系统国际化文件配置
+	 * 系统国际化文件配置. 文件位于resources/i18n/message_{locale}.properties
+	 * 例如：message_zh_CN.properties,message_en_US.properties
 	 * @return MessageSource
 	 */
 	@Bean

@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * redis令牌桶限流. 通过WebMvcConfigurer来注册ReqInterceptor.
  */
@@ -48,8 +50,10 @@ public class LimitRaterInterceptor extends HandlerInterceptorAdapter {
 			Method method = handlerMethod.getMethod();
 			RateLimiter rateLimiter = method.getAnnotation(RateLimiter.class);
 			if (rateLimiter != null) {
-				int limit = rateLimiter.limit();
-				int timeout = rateLimiter.timeout();
+				Integer limit = rateLimiter.limit();
+				Integer timeout = rateLimiter.timeout();
+				requireNonNull(limit);
+				requireNonNull(timeout);
 				String token3 = redisRaterLimiter.acquireToken(method.getName(), limit, timeout);
 				if (StrUtil.isBlank(token3)) {
 					throw new RedisLimitException("当前访问人数太多啦，请稍后再试");

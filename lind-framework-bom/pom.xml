@@ -339,11 +339,6 @@
             </dependency>
             <dependency>
                 <groupId>com.lind</groupId>
-                <artifactId>lind-nacos-start</artifactId>
-                <version>${lind-framework.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.lind</groupId>
                 <artifactId>lind-office-convert</artifactId>
                 <version>${lind-framework.version}</version>
             </dependency>

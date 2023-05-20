@@ -1,6 +1,7 @@
 package com.lind.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lind.common.locale.LocaleMessageUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -30,6 +31,13 @@ public class CommonApplication {
 	@GetMapping("version")
 	public ResponseEntity version() {
 		return ResponseEntity.ok("1.0.0");
+	}
+
+	@GetMapping("get-title")
+	public ResponseEntity title() {
+		return ResponseEntity.ok(
+				LocaleMessageUtils.getMessage("title")
+		);
 	}
 
 }

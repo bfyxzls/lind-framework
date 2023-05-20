@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * lru最近最少使用
+ * lru最近最少使用(Least Recently Used)
  *
  */
 public class RpcLoadBalanceLRUStrategy extends RpcLoadBalance {

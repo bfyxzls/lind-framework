@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * lfu最不常使用
+ * lfu最不常使用(Least Frequently Used)
  *
  */
 public class RpcLoadBalanceLFUStrategy extends RpcLoadBalance {

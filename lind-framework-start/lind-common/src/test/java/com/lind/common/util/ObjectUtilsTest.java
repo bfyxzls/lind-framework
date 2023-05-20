@@ -1,4 +1,4 @@
-package com.lind.common;
+package com.lind.common.util;
 
 import org.junit.Test;
 import org.slf4j.Logger;

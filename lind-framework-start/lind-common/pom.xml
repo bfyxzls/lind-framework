@@ -177,7 +177,10 @@
             <artifactId>hanlp</artifactId>
             <version>portable-1.6.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+        </dependency>
 
     </dependencies>
     <build>
