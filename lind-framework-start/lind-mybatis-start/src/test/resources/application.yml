@@ -17,3 +17,7 @@ mybatis:
   typeAliasesPackage: com.pkulaw.mybatis.entity
   configuration:
     mapUnderscoreToCamelCase: true
+logging:
+  level:
+    root: warn
+    com.baomidou.mybatisplus: debug

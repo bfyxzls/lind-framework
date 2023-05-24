@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
  */
 @Slf4j
 @SuppressWarnings("unchecked")
-public class MybatisPlusMetaObjectHandler implements MetaObjectHandler {
+public class AuditFieldFillMetaObjectHandler implements MetaObjectHandler {
 
 	@Autowired(required = false)
 	AuditorAware auditorAware;

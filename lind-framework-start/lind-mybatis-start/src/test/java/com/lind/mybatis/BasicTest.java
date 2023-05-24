@@ -6,40 +6,43 @@ import com.lind.common.dto.PageDTO;
 import com.lind.common.dto.PageParam;
 import com.lind.mybatis.config.Constant;
 import com.lind.mybatis.config.MybatisPlusConfig;
+import com.lind.mybatis.dao.LogDao;
+import com.lind.mybatis.entity.TLog;
 import com.lind.mybatis.entity.TUser;
-import com.lind.mybatis.service.BaseServiceImpl;
 import com.lind.mybatis.service.UserService;
 import com.lind.mybatis.service.UserServiceImpl;
 import com.lind.mybatis.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
 @ActiveProfiles("integTest")
 @EnableTransactionManagement
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = { DataSourceAutoConfiguration.class, MybatisPlusAutoConfiguration.class, DataSource.class,
-		SqlSessionFactory.class, DataSourceTransactionManagerAutoConfiguration.class, MybatisPlusConfig.class,
-		UserServiceImpl.class, BaseServiceImpl.class, UserAuditAware.class })
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = { UserServiceImpl.class, UserAuditAware.class, MybatisPlusConfig.class,
+		DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class,
+		MybatisPlusAutoConfiguration.class, DbConfig.class })
 @MapperScan("com.lind.mybatis.dao")
 public class BasicTest {
 
 	@Autowired
 	UserService userService;
+
+	@Autowired
+	LogDao logDao;
 
 	@Test
 	public void insert() {
@@ -105,6 +108,13 @@ public class BasicTest {
 		params.put(Constant.ORDER, "desc");
 		params.put("username", "lind");
 		userService.page(params).getList().forEach(o -> log.info("{}", o.getUsername()));
+	}
+
+	@Test(expected = BadSqlGrammarException.class)
+	public void insertLog() {
+		TLog log = new TLog();
+		log.setMessage("测试");
+		logDao.insert(log);
 	}
 
 }
