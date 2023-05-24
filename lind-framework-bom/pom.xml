@@ -65,6 +65,9 @@
         <uadetector-resources.version>2014.10</uadetector-resources.version>
         <okhttp.version>4.9.2</okhttp.version>
         <java-jwt.version>3.4.0</java-jwt.version>
+        <shardingsphere.version>4.1.1</shardingsphere.version>
+        <dynamic-datasource.version>3.3.1</dynamic-datasource.version>
+        <druid-spring-boot-starter.version>1.1.9</druid-spring-boot-starter.version>
     </properties>
     <!-- maven依赖版本统一，子工程不需要声明包版本 -->
     <dependencyManagement>
@@ -290,7 +293,24 @@
                 <artifactId>jasypt-spring-boot-starter</artifactId>
                 <version>${jasypt.version}</version>
             </dependency>
-
+            <!-- 分库分表 -->
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+                <version>${shardingsphere.version}</version>
+            </dependency>
+            <!-- 动态数据源-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${dynamic-datasource.version}</version>
+            </dependency>
+            <!-- 阿里的数据连接池 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid-spring-boot-starter.version}</version>
+            </dependency>
             <!-- 本项目组件包 -->
             <dependency>
                 <groupId>com.lind</groupId>

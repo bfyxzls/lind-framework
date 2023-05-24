@@ -3,6 +3,8 @@ package com.lind.common.util;
 import lombok.SneakyThrows;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Paths;
@@ -10,14 +12,15 @@ import java.nio.file.StandardOpenOption;
 
 public class NioTest {
 
+	static String filePath = "c:\\windows\\system32\\drivers\\etc\\hosts";
+
 	@SneakyThrows
 	@Test
 	public void readWrite() {
 		StringBuilder text = new StringBuilder();
 		// 文件通道通过 FileChannel 的静态方法 open() 来获取，获取时需要指定文件路径和文件打开方式。
 		// 获取文件通道
-		FileChannel channel = FileChannel.open(Paths.get("c:\\windows\\system32\\drivers\\etc\\hosts"),
-				StandardOpenOption.READ);
+		FileChannel channel = FileChannel.open(Paths.get(filePath), StandardOpenOption.READ);
 		// 文件相关的字节缓冲区有两种，一种是基于堆的 HeapByteBuffer，另一种是基于文件映射，放在堆外内存中的 MappedByteBuffer。
 		// 分配字节缓存
 		ByteBuffer buf = ByteBuffer.allocate(10);
@@ -40,6 +43,29 @@ public class NioTest {
 				buf.clear(); // 清空缓存区，将缓冲区置为写模式，下次才能使用
 			}
 		}
+	}
+
+	@Test
+	public void printTextFromFile() throws IOException, InterruptedException {
+		RandomAccessFile aFile = new RandomAccessFile(filePath, "rw");
+		FileChannel inChannel = aFile.getChannel();
+
+		ByteBuffer buf = ByteBuffer.allocate(48);
+
+		int bytesRead = inChannel.read(buf);
+		while (bytesRead != -1) {
+			System.out.println("Read " + bytesRead);
+			buf.flip();// 切换到读模式
+
+			while (buf.hasRemaining()) {
+				System.out.print((char) buf.get());
+			}
+
+			buf.clear();// 读完了所有的数据，就需要清空缓冲区，让它可以再次被写入
+			bytesRead = inChannel.read(buf);
+			Thread.sleep(1000);//有点延时，有点打字机效果
+		}
+		aFile.close();
 	}
 
 }

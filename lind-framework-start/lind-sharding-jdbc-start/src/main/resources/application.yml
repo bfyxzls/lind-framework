@@ -1,0 +1,56 @@
+spring:
+  application.name: sharding-jdbc
+  datasource:
+    dynamic:
+      primary: master0
+      datasource:
+        master0:
+          url: jdbc:mysql://192.168.4.26:3306/sharding0?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.jdbc.Driver
+        master1:
+          url: jdbc:mysql://192.168.4.26:3306/sharding1?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.jdbc.Driver
+
+  shardingsphere:
+    datasource:
+      names: ds0,ds1
+      ds0:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://192.168.4.26:3306/sharding0?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+        username: root
+        password: 123456
+        type: com.zaxxer.hikari.HikariDataSource
+      ds1:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://192.168.4.26:3306/sharding1?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+        username: root
+        password: 123456
+        type: com.zaxxer.hikari.HikariDataSource #必须个type，否则报错
+    sharding:
+      tables:
+        t_order:
+          #key-generator:
+          #  column: id
+          #  type: SNOWFLAKE
+          actual-data-nodes: ds$->{0..1}.t_order_$->{0..1} #需要开发人员手动按规则建立数据表
+          database-strategy:
+            inline:
+              sharding-column: id
+              algorithm‐expression: ds$->{id % 2}
+          table-strategy:
+            inline:
+              sharding-column: id
+              algorithm‐expression: t_order_$->{id % 2}
+    props:
+      sql:
+        show: true   # 日志显示SQL
+
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  typeAliasesPackage: com.lind.shardingjdbc.entity
+  configuration:
+    mapUnderscoreToCamelCase: true
