@@ -27,28 +27,6 @@ import java.sql.SQLException;
 @NoArgsConstructor
 public class LindPaginationInnerInterceptor extends PaginationInnerInterceptor {
 
-	/**
-	 * 数据库类型
-	 * <p>
-	 * 查看 {@link #findIDialect(Executor)} 逻辑
-	 */
-	private DbType dbType;
-
-	/**
-	 * 方言实现类
-	 * <p>
-	 * 查看 {@link #findIDialect(Executor)} 逻辑
-	 */
-	private IDialect dialect;
-
-	public LindPaginationInnerInterceptor(DbType dbType) {
-		this.dbType = dbType;
-	}
-
-	public LindPaginationInnerInterceptor(IDialect dialect) {
-		this.dialect = dialect;
-	}
-
 	@Override
 	public void beforeQuery(Executor executor, MappedStatement ms, Object parameter, RowBounds rowBounds,
 			ResultHandler resultHandler, BoundSql boundSql) throws SQLException {

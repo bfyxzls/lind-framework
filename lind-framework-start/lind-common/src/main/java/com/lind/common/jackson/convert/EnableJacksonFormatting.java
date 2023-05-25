@@ -1,7 +1,7 @@
 package com.lind.common.jackson.convert;
 
+import com.lind.common.config.JacksonConfiguration;
 import com.lind.common.enums.serializer.NameValueEnumSerializer;
-import com.lind.common.jackson.JacksonConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.Documented;

@@ -16,7 +16,6 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <version.infinispan>13.0.0.CR1</version.infinispan>
-        <version.spring.boot>2.3.0.RELEASE</version.spring.boot>
     </properties>
     <dependencies>
         <dependency>

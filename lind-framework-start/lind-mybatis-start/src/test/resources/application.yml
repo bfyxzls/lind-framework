@@ -2,7 +2,7 @@ spring:
   profiles: integTest
   h2:
     console:
-      enabled: true
+      enabled: false
       path: /h2
   datasource:
     url: jdbc:h2:mem:testdb;MODE=MYSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false
@@ -12,12 +12,13 @@ spring:
     initialization-mode: always
     platform: h2
 
-mybatis:
+mybatis-plus:
   mapperLocations: classpath:mapper/*.xml
   typeAliasesPackage: com.pkulaw.mybatis.entity
   configuration:
     mapUnderscoreToCamelCase: true
+
 logging:
   level:
     root: warn
-    com.baomidou.mybatisplus: debug
+    org.springframework.*: warn

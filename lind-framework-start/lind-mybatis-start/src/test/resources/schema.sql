@@ -30,8 +30,8 @@ CREATE TABLE `t_user`
     `master_id`            varchar(64)   DEFAULT NULL COMMENT '主账户id',
     PRIMARY KEY (`id`)
 );
-DROP TABLE IF EXISTS `t_log`;
-CREATE TABLE `t_log`
+DROP TABLE IF EXISTS `t_log_20230525`;
+CREATE TABLE `t_log_20230525`
 (
     `id`          varchar(255) NOT NULL,
     `create_by`   varchar(255) DEFAULT NULL,
@@ -43,3 +43,20 @@ CREATE TABLE `t_log`
     PRIMARY KEY (`id`)
 );
 
+-- SET @table_name = CONCAT('t_log_', year(now()),month(now()),day(now()));
+-- SET @delSql=CONCAT('DROP TABLE IF EXISTS ', @table_name);
+-- PREPARE del FROM @delSql;
+-- EXECUTE del;
+--
+-- SET @sql = CONCAT('CREATE TABLE ', @table_name, ' (
+--     `id`          varchar(255) NOT NULL,
+--     `create_by`   varchar(255) DEFAULT NULL,
+--     `create_time` datetime(0) DEFAULT NULL,
+--     `update_by`   varchar(255) DEFAULT NULL,
+--     `update_time` datetime(0) DEFAULT NULL,
+--     `del_flag`    int(11) DEFAULT NULL,
+--     `message`     varchar(255) default NULL,
+--     PRIMARY KEY (`id`)
+-- )');
+-- PREPARE stmt FROM @sql;
+-- EXECUTE stmt;

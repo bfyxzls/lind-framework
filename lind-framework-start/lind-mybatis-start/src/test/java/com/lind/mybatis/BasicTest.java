@@ -2,6 +2,7 @@ package com.lind.mybatis;
 
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.lind.common.dto.PageDTO;
 import com.lind.common.dto.PageParam;
 import com.lind.mybatis.config.Constant;
@@ -19,7 +20,6 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
-import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -80,9 +80,12 @@ public class BasicTest {
 		}
 		QueryWrapper<TUser> wrapper = new QueryWrapper<>();
 		wrapper.lambda().isNotNull(TUser::getUsername);
-
-		for (TUser item : userService.findAll(1, 10, wrapper).getRecords()) {
-			log.info("user={}", item.toString());
+		for (int curr = 1; curr <= 4; curr++) {
+			IPage<TUser> page = userService.findAll(curr, 3, wrapper);
+			for (TUser item : page.getRecords()) {
+				log.info("user={}", item.getUsername());
+			}
+			log.info("---------------------page------------------");
 		}
 	}
 
@@ -110,7 +113,7 @@ public class BasicTest {
 		userService.page(params).getList().forEach(o -> log.info("{}", o.getUsername()));
 	}
 
-	@Test(expected = BadSqlGrammarException.class)
+	@Test()
 	public void insertLog() {
 		TLog log = new TLog();
 		log.setMessage("测试");
