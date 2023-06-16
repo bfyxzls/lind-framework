@@ -15,15 +15,23 @@
  */
 package com.lind.common.rest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
+import org.springframework.stereotype.Component;
 
-@ControllerAdvice
-public class ApiResBodyAdvice implements ResponseBodyAdvice {
+/**
+ * 重写响应体，统一响应格式.
+ */
+@Component
+public class ResponseBodyAdvice implements org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice {
+
+	@Autowired
+	ObjectMapper objectMapper;
 
 	/** 判断哪些需要拦截 **/
 	@Override
@@ -36,11 +44,16 @@ public class ApiResBodyAdvice implements ResponseBodyAdvice {
 	public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType,
 			Class selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
 
-		// 处理扩展字段
-		if (body == null)
-			return "内容为空";
-		if (body instanceof String)
-			return "{\"msg:\"" + body + "}";
+		// 对非标准响应流的对象进行改装
+		if (!(body instanceof CommonResult)) {
+			try {
+				response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+				return objectMapper.writeValueAsString(CommonResult.ok(body));
+			}
+			catch (JsonProcessingException e) {
+				throw new RuntimeException(e);
+			}
+		}
 		return body;
 	}
 

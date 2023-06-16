@@ -26,22 +26,21 @@ Switch	i-switch
         <meta name="renderer" content="webkit|ie-comp|ie-stand">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta http-equiv="Cache-Control" content="no-siteapp"/>
-        <link rel="stylesheet" href="/css/iview.css">
-        <link rel="stylesheet" href="/css/site.css">
+        <link rel="stylesheet" href="static/css/iview.css">
+        <link rel="stylesheet" href="static/css/site.css">
         <style type="text/css">
             .ivu-form-item-content {
                 margin-left: 0px !important;
             }
         </style>
-        <script charset="UTF-8" src="/js/vue.min.js"></script>
-        <script charset="UTF-8" src="/js/vue-router.js"></script>
-        <script charset="UTF-8" src="/js/vuex.min.js"></script>
-        <script charset="UTF-8" src="/js/jquery.min.js"></script>
-        <script charset="UTF-8" src="/js/axios.min.js"></script>
-        <script charset="UTF-8" src="/js/vuejs-datepicker.js"></script>
-
-        <script charset="UTF-8" src="/js/iview.min.js"></script>
-        <script charset="UTF-8" src="/lib/component.js" type="module"></script>
+        <script charset="UTF-8" src="static/js/vue.min.js"></script>
+        <script charset="UTF-8" src="static/js/vue-router.js"></script>
+        <script charset="UTF-8" src="static/js/vuex.min.js"></script>
+        <script charset="UTF-8" src="static/js/jquery.min.js"></script>
+        <script charset="UTF-8" src="static/js/axios.min.js"></script>
+        <script charset="UTF-8" src="static/js/vuejs-datepicker.js"></script>
+        <script charset="UTF-8" src="static/js/iview.min.js"></script>
+        <script charset="UTF-8" src="static/lib/component.js" type="module"></script>
         <!-- 因为在component.js中引用了其它模块，所以需要添加type=module-->
         <#nested "head-js">
     </head>

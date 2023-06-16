@@ -1,12 +1,18 @@
 package com.lind.common.thread;
 
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -15,7 +21,11 @@ import java.util.function.Supplier;
 /**
  * 异步操作
  */
+@Slf4j
 public class CompletableFutureTest {
+
+	static Integer total = 0;
+	static AtomicInteger atomicTotal = new AtomicInteger(0);
 
 	/**
 	 * 有返回值
@@ -109,8 +119,8 @@ public class CompletableFutureTest {
 	}
 
 	/**
-	 * whenComplete 和 whenCompleteAsync 的区别： whenComplete：是执行当前任务的线程执行继续执行 whenComplete
-	 * 的任务。 whenCompleteAsync：是执行把 whenCompleteAsync 这个任务继续提交给线程池来进行执行。
+	 * whenComplete 和 whenCompleteAsync 的区别： whenComplete：是执行当前任务的线程执行完成后，继续执行
+	 * whenComplete的任务。 whenCompleteAsync：是执行把 whenCompleteAsync 这个任务继续提交给线程池来进行执行。
 	 * @throws Exception
 	 */
 	@Test
@@ -132,7 +142,7 @@ public class CompletableFutureTest {
 			@Override
 			public void accept(Void t, Throwable action) {
 				Thread.sleep(10);// 占用这个线程
-				System.out.println("sync执行完成！" + Thread.currentThread().getId());
+				System.out.println("whenComplete执行完成！" + Thread.currentThread().getId());
 			}
 
 		});
@@ -141,7 +151,7 @@ public class CompletableFutureTest {
 		future.whenCompleteAsync(new BiConsumer<Void, Throwable>() {
 			@Override
 			public void accept(Void t, Throwable action) {
-				System.out.println("async执行完成！" + Thread.currentThread().getId());
+				System.out.println("whenCompleteAsync执行完成！" + Thread.currentThread().getId());
 			}
 
 		});
@@ -334,6 +344,54 @@ public class CompletableFutureTest {
 
 		});
 		System.out.println("thenCompose result : " + f.get());
+	}
+
+	/**
+	 * 多任务并行,2秒执行完这4个任务.
+	 * @throws Exception
+	 */
+	@Test
+	public void multiTask() throws Exception {
+
+		Runnable runnable1 = () -> {
+			try {
+				log.info("Executing in thread {}", Thread.currentThread().getName());
+				total++;
+				atomicTotal.incrementAndGet();
+				Thread.sleep(2000);
+			}
+			catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			log.info("Completed in thread {}", Thread.currentThread().getName());
+
+		};
+		// 创建一个任务列表
+		List<Runnable> tasks = new ArrayList<>();
+
+		// 多任务并行之后，total将出现线程安全问题
+		for (int i = 0; i < 1000; i++) {
+			tasks.add(runnable1);
+		}
+		// 创建线程池
+		ExecutorService executorService = Executors.newFixedThreadPool(tasks.size());
+
+		// 使用 CompletableFuture 来提交任务并获取结果
+		List<CompletableFuture<Void>> futures = new ArrayList<>();
+		for (Runnable task : tasks) {
+			CompletableFuture<Void> future = CompletableFuture.runAsync(task, executorService);
+			futures.add(future);
+		}
+
+		// 等待所有任务完成
+		CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).get();
+
+		// 关闭线程池
+		executorService.shutdown();
+		executorService.awaitTermination(1, TimeUnit.MINUTES);
+		log.info("total={},atomicTotal={}", total, atomicTotal.get());// total<1000,but
+																		// atomicTotal=1000
+		log.info("All tasks completed.");
 	}
 
 }

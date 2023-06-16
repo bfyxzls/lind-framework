@@ -49,7 +49,6 @@ public class ThreadPoolUtilsTest {
 		}));
 	}
 
-
 	public static void main(String[] args) throws InterruptedException {
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start("main");
@@ -119,8 +118,6 @@ public class ThreadPoolUtilsTest {
 
 		Thread.sleep(1000);
 	}
-
-
 
 	@Test
 	public void newFixedThreadPool() {

@@ -77,8 +77,10 @@ public class AbstractRestExceptionHandler {
 	 * @return CommonResult
 	 */
 	@ExceptionHandler(value = LindException.class)
-	@ResponseStatus(HttpStatus.OK)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public CommonResult businessErrorException(LindException lindException) {
+		if (lindException.getCode() != null)
+			return CommonResult.clientFailure(lindException.getMessage(), lindException.getCode());
 		return CommonResult.clientFailure(lindException.getMessage());
 	}
 

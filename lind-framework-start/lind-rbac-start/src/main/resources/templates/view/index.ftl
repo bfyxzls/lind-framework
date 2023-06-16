@@ -4,7 +4,7 @@
         用户列表
     <#elseif section="head-js">
         <script type="module">
-            import {routerConfig} from "/lib/component.js"
+            import {routerConfig} from "/static/lib/component.js"
 
             new Vue({
                 router: new VueRouter({

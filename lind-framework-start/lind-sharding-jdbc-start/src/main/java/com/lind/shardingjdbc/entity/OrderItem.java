@@ -12,9 +12,14 @@ import lombok.Data;
 @Data
 @TableName("t_order_item")
 public class OrderItem {
-    @TableId
-    Long id;
-    Long orderId;
-    Long productId;
-    double amount;
+
+	@TableId
+	Long id;
+
+	Long orderId;
+
+	Long productId;
+
+	double amount;
+
 }

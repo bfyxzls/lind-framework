@@ -36,7 +36,7 @@
             </card>
         </div>
          <script type="module">
-            import {auth} from "/lib/index.js";
+            import {auth} from "/static/lib/index.js";
 
             new Vue({
                 el: '#login',

@@ -14,10 +14,12 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class RetryService {
-    // multiplier表示下次重试时间是上次的2倍
-    @Retryable(maxAttempts = 5, backoff = @Backoff(delay = 1000L, multiplier = 2))
-    public void print() {
-        log.info("print...");
-        throw new IllegalArgumentException("hello world");
-    }
+
+	// multiplier表示下次重试时间是上次的2倍
+	@Retryable(maxAttempts = 5, backoff = @Backoff(delay = 1000L, multiplier = 2))
+	public void print() {
+		log.info("print...");
+		throw new IllegalArgumentException("hello world");
+	}
+
 }

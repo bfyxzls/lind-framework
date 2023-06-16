@@ -1,4 +1,4 @@
-package com.lind.common.forkjointask;
+package com.lind.common.thread.forkjointask;
 
 import cn.hutool.core.collection.ListUtil;
 import com.google.common.collect.Lists;

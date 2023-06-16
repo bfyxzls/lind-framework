@@ -1,6 +1,9 @@
 # docker运行
+
 docker rm -f hbase && docker run -d -h kafka146 -p 2181:2181 -p 18080:8080 -p 18085:8085 -p 19090:9090 -p 9095:9095 -p 16000:16000 -p 16010:16010  -p 16020:16020 -p 16201:16201  --name hbase harisekhon/hbase:1.3
+
 # 建立表插数据
+
 ```
 cd /hbase/bin/
 hbase shell

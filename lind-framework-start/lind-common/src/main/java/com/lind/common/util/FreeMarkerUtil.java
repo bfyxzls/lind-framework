@@ -67,7 +67,7 @@ public class FreeMarkerUtil {
 	}
 
 	private Template getTemplate(String templateName, String theme) throws IOException {
-		Configuration cfg = new Configuration();
+		Configuration cfg = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
 
 		// Assume *.ftl files are html. This lets freemarker know how to
 		// sanitize and prevent XSS attacks.

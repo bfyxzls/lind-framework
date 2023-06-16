@@ -3,14 +3,20 @@ spring:
   application:
     name: rbac
   freemarker:
-    settings.template_update_delay: 0
-    suffix: .ftl                                 # 设置模板后缀名
-    content-type: text/html                      # 设置文档类型
-    charset: UTF-8                               # 设置页面编码格式
-    cache: false                                 # 设置页面缓存
-    template-loader-path: classpath:/templates   # 设置ftl文件路径
+    cache: false
+    charset: UTF-8
+    request-context-attribute: request
+    settings:
+      number_format: 0.##########
+    suffix: .ftl
+    templateLoaderPath: classpath:/templates/
   mvc:
-    static-path-pattern: /**      # 设置静态文件路径，js,css等
+    servlet:
+      load-on-startup: 0
+    static-path-pattern: /static/**
+  web:
+    resources:
+      static-locations: classpath:/static/
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://192.168.4.26:3306/rbac?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false&autoReconnect=true&failOverReadOnly=false

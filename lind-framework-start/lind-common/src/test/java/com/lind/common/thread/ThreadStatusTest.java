@@ -51,8 +51,10 @@ public class ThreadStatusTest {
 		map.put("one", "1");
 		threadPoolExecutor.submit(() -> {
 			print(map);
+			log.info(Thread.currentThread().getName() + " map:" + map);
 		});
-		System.out.println("map:" + map);
+		log.info(Thread.currentThread().getName() + " map:" + map);
+
 	}
 
 	/**

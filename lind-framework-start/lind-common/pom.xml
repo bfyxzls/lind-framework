@@ -5,7 +5,7 @@
     <parent>
         <artifactId>lind-framework-start</artifactId>
         <groupId>com.lind</groupId>
-        <version>1.1.2</version>
+        <version>1.1.3-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>lind-common</artifactId>
@@ -17,6 +17,19 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <version.infinispan>13.0.0.CR1</version.infinispan>
     </properties>
+    <dependencyManagement>
+        <dependencies>
+            <!-- lind框架依赖清单 -->
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-framework-bom</artifactId>
+                <version>${project.parent.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -180,7 +193,10 @@
             <groupId>org.springframework.retry</groupId>
             <artifactId>spring-retry</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.jgroups</groupId>
+            <artifactId>jgroups</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

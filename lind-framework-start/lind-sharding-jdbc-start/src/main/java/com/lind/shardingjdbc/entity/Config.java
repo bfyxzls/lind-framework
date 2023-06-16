@@ -12,6 +12,7 @@ import lombok.Data;
 @Data
 @TableName("t_config")
 public class Config {
+
 	@TableId
 	Long id;
 

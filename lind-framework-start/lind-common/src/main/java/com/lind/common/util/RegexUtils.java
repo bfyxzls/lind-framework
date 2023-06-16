@@ -39,14 +39,14 @@ public class RegexUtils {
 	 */
 	public static String hideOtherText(String myText) {
 		String rtnText = myText;
-		rtnText = StringUtils.replaceAll(rtnText,
+		rtnText = StringUtils.replacePattern(rtnText,
 				"([，。,；;,][\\d一二三四五六七八九零０１２３４５６７８９]+年[\\d一二三四五六七八九零０１２３４５６７８９]+月[\\d一二三四五六七八九零０１２３４５６７８９]+日出?生)([，。,；;,])",
 				"$1▲$2");
-		rtnText = StringUtils.replaceAll(rtnText, "([，。,；;,])(家?住[^房院])", "$1▲$2");
-		rtnText = StringUtils.replaceAll(rtnText, "([，。,；;,])((联系|注册)地)", "$1▲$2");
-		rtnText = StringUtils.replaceAll(rtnText, "([，。,；;,])([男女][，。,；;,])", "$1▲$2");
+		rtnText = StringUtils.replacePattern(rtnText, "([，。,；;,])(家?住[^房院])", "$1▲$2");
+		rtnText = StringUtils.replacePattern(rtnText, "([，。,；;,])((联系|注册)地)", "$1▲$2");
+		rtnText = StringUtils.replacePattern(rtnText, "([，。,；;,])([男女][，。,；;,])", "$1▲$2");
 		String rplText = "";
-		rtnText = StringUtils.replaceAll(rtnText, "([，。,；;,][^，。,；;,▲]*▲[^。]*)", rplText);
+		rtnText = StringUtils.replacePattern(rtnText, "([，。,；;,][^，。,；;,▲]*▲[^。]*)", rplText);
 		rtnText = rtnText.replaceAll("▲", "");
 		return rtnText;
 	}

@@ -1,6 +1,7 @@
 package com.lind.verification.code.sms;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lind.common.rest.CommonResult;
 import com.lind.verification.code.CodeConstants;
 import com.lind.verification.code.RedisKeyUtil;
 import com.lind.verification.code.ValidateCode;
@@ -9,7 +10,6 @@ import com.lind.verification.code.ValidateCodeGenerator;
 import com.lind.verification.code.ValidateCodeRepository;
 import com.lind.verification.code.impl.AbstractValidateCodeProcessor;
 import com.lind.verification.code.properties.ValidateCodeProperties;
-import com.lind.common.rest.CommonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -90,11 +90,11 @@ public class SmsCodeProcessor extends AbstractValidateCodeProcessor<ValidateCode
 		}
 		catch (ValidateCodeException e) {
 			log.error("校验短信数量, e={}", e.getMessage(), e);
-			result = CommonResult.failure(500, e.getMessage());
+			result = CommonResult.serverFailure(e.getMessage());
 		}
 		catch (Exception e) {
 			log.error("校验短信数量, e={}", e.getMessage(), e);
-			result = CommonResult.failure(500, "内部异常");
+			result = CommonResult.serverFailure("内部异常");
 		}
 		String json = objectMapper.writeValueAsString(result);
 		HttpServletResponse response = request.getResponse();

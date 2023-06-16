@@ -32,6 +32,7 @@ public class DataSourceConfiguration {
 
 	// 分表数据源名称
 	private static final String SHARDING_DATA_SOURCE_NAME = "sharding";
+
 	/**
 	 * shardingjdbc有四种数据源，需要根据业务注入不同的数据源
 	 *
@@ -47,6 +48,7 @@ public class DataSourceConfiguration {
 	@Lazy
 	@Resource(name = "shardingDataSource")
 	AbstractDataSourceAdapter shardingDataSource;
+
 	// 动态数据源配置项
 	@Autowired
 	private DynamicDataSourceProperties properties;

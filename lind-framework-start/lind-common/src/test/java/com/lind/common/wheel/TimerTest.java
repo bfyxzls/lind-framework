@@ -1,5 +1,8 @@
 package com.lind.common.wheel;
 
+import io.netty.util.HashedWheelTimer;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.hamcrest.core.Is;
 import org.junit.After;
 import org.junit.Assert;
@@ -7,7 +10,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -15,13 +21,14 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Slf4j
 public class TimerTest {
 
-	HashedWheelTimer timer;
+	LindHashedWheelTimer timer;
 
 	@Before
 	public void before() {
-		timer = new HashedWheelTimer(TimeUnit.MILLISECONDS.toNanos(10), 8, new WaitStrategy.SleepWait());
+		timer = new LindHashedWheelTimer(TimeUnit.MILLISECONDS.toNanos(10), 8, new WaitStrategy.SleepWait());
 	}
 
 	@After
@@ -196,6 +203,38 @@ public class TimerTest {
 		Assert.assertTrue(latch.await(10, TimeUnit.SECONDS));
 		// time difference between the beginning of second tick and the first one
 		Assert.assertTrue(r.get(2) - r.get(1) >= 100);
+	}
+
+	@Test
+	public void nettyTest() throws InterruptedException {
+
+		HashedWheelTimer wheelTimer = new HashedWheelTimer();
+		wheelTimer.newTimeout(timeout -> log.info("1s delay"), 1, TimeUnit.SECONDS);
+		wheelTimer.newTimeout(timeout -> log.info("10s delay"), 10, TimeUnit.SECONDS);
+		wheelTimer.newTimeout(timeout -> log.info("11s delay"), 11, TimeUnit.SECONDS);
+		TimeUnit.SECONDS.sleep(20);
+
+	}
+
+	@SneakyThrows
+	@Test
+	public void jdkTimer() {
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				System.out.println(new Date() + "123");
+			}
+		}, 4000, 2000); // 4000->4秒后执行 2000->间隔2秒
+
+		Timer timer2 = new Timer();
+		timer2.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				System.out.println(new Date() + "456");
+			}
+		}, 2000);// 2000->2秒后执行后就停了
+		Thread.sleep(10000);
 	}
 
 }

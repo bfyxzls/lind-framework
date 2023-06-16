@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.lind.common.dto.PageDTO;
 import com.lind.common.dto.PageParam;
 import com.lind.mybatis.config.Constant;
-import com.lind.mybatis.config.MybatisPlusConfig;
+import com.lind.mybatis.config.MybatisAutoConfiguration;
 import com.lind.mybatis.dao.LogDao;
 import com.lind.mybatis.entity.TLog;
 import com.lind.mybatis.entity.TUser;
@@ -32,7 +32,7 @@ import java.util.Map;
 @ActiveProfiles("integTest")
 @EnableTransactionManagement
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { UserServiceImpl.class, UserAuditAware.class, MybatisPlusConfig.class,
+@ContextConfiguration(classes = { UserServiceImpl.class, UserAuditAware.class, MybatisAutoConfiguration.class,
 		DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class,
 		MybatisPlusAutoConfiguration.class, DbConfig.class })
 @MapperScan("com.lind.mybatis.dao")

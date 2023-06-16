@@ -16,6 +16,7 @@ import java.util.TreeSet;
  */
 public class RpcLoadBalanceConsistentHashStrategy extends RpcLoadBalance {
 
+	// 虚拟节点，避免出现数据倾斜
 	private int VIRTUAL_NODE_NUM = 100;
 
 	/**
@@ -54,9 +55,6 @@ public class RpcLoadBalanceConsistentHashStrategy extends RpcLoadBalance {
 	}
 
 	public String doRoute(String serviceKey, TreeSet<String> addressSet) {
-
-		// ------A1------A2-------A3------
-		// -----------J1------------------
 		TreeMap<Long, String> addressRing = new TreeMap<Long, String>();
 		for (String address : addressSet) {
 			for (int i = 0; i < VIRTUAL_NODE_NUM; i++) {
@@ -66,6 +64,7 @@ public class RpcLoadBalanceConsistentHashStrategy extends RpcLoadBalance {
 		}
 
 		long jobHash = hash(serviceKey);
+		// 得到大于当前hash值的所有map
 		SortedMap<Long, String> lastRing = addressRing.tailMap(jobHash);
 		if (!lastRing.isEmpty()) {
 			return lastRing.get(lastRing.firstKey());

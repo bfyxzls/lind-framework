@@ -63,7 +63,7 @@ public class NioTest {
 
 			buf.clear();// 读完了所有的数据，就需要清空缓冲区，让它可以再次被写入
 			bytesRead = inChannel.read(buf);
-			Thread.sleep(1000);//有点延时，有点打字机效果
+			Thread.sleep(1000);// 有点延时，有点打字机效果
 		}
 		aFile.close();
 	}

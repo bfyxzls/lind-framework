@@ -1,4 +1,4 @@
-import {getStore, setStore} from "/lib/storage.js"
+import {getStore, setStore} from "/static/lib/storage.js"
 // export和export default都是导出，export default只能有一个，在使用import导入时export的需要加{}，而export default的不需要加{}
 
 // get

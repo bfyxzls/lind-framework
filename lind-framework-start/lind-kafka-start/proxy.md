@@ -15,7 +15,7 @@ public interface FactoryBean<T> {
 ```
 
 # BeanFactory
-BeanFactory是Spring容器中的一个基本类也是很重要的一个类是Spring容器中的一个基本类也是很重要的一个类，在BeanFactory中可以创建和管理Spring容器中的Bean，它对于Bean的创建有一个统一的流程。
+BeanFactory是Spring容器中的一个基本类也是很重要的一个类是Spring容器中的一个基本类也是很重要的一个类，在BeanFactory中可以`创建和管理`Spring容器中的Bean，它对于Bean的创建有一个统一的流程。
 
 Spring的本质是一个bean工厂(beanFactory)或者说bean容器，它按照我们的要求，生产我们需要的各种各样的bean，提供给我们使用。
 只是在生产bean的过程中，需要解决bean之间的依赖问题，才引入了依赖注入(DI)这种技术。也就是说依赖注入是beanFactory生产bean时为了解决bean之间的依赖的一种技术而已。
@@ -25,7 +25,7 @@ beanFactory会在bean的生命周期的各个阶段中对bean进行各种管理�
 
 在介绍BeanFactory前，我们先想一个问题。我们都知道BeanFactory主要的内容是帮我们生成Bean信息和管理Bean信息，那么我们在xml文件中<baen>属性的时候。Spring是如何帮我们生成Bean的呢
 
-BeanDefinitionReader
+# BeanDefinitionReader
 
     从xml文件、类路径下使用了@Component系列注解的类、或者从@Configuration注解的配置类，获取BeanDefintiions，然后注册到BeanFactory中。
 

@@ -1,12 +1,15 @@
 package com.lind.common.thread;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.util.LinkedList;
+import java.util.concurrent.TimeUnit;
 
 /**
  * wait和notify要在synchronized里.
  */
+@Slf4j
 public class ThreadWaitNotify {
 
 	@Test
@@ -44,6 +47,16 @@ public class ThreadWaitNotify {
 		p3.start();
 
 		Thread.sleep(1000);
+	}
+
+	@Test
+	public void nanos() throws InterruptedException {
+		long deadline = System.nanoTime() + 1000;
+		long sleepTimeNanos = deadline - System.nanoTime();
+		log.info("启动");
+		TimeUnit.NANOSECONDS.sleep(sleepTimeNanos);
+		log.info("再启动");
+
 	}
 
 	public interface AbstractStorage {

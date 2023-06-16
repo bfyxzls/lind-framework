@@ -16,6 +16,7 @@ import java.util.Locale;
 
 /**
  * WebMvc配置.
+ *
  * @author lind
  * @date 2023/5/24 14:46
  * @since 1.0.0

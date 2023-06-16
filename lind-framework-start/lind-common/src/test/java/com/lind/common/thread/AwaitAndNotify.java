@@ -9,45 +9,54 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class AwaitAndNotify {
-    public static Object object = new Object();
-    public static void main(String[] args) {
-        Thread1 thread1 = new Thread1();
-        Thread2 thread2 = new Thread2();
 
-        thread1.start();
+	public static Object object = new Object();
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+	public static void main(String[] args) {
+		Thread1 thread1 = new Thread1();
+		Thread2 thread2 = new Thread2();
 
-        thread2.start();
-    }
+		thread1.start();
 
-    static class Thread1 extends Thread{
-        @Override
-        public void run() {
-            synchronized (object) {
-                try {
-                    log.info("线程"+Thread.currentThread().getName()+"开始被await了");
+		try {
+			Thread.sleep(2000);
+		}
+		catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
-                    object.wait();
-                } catch (InterruptedException e) {
-                }
-               log.info("线程"+Thread.currentThread().getName()+"获取到了锁");
-            }
-        }
-    }
+		thread2.start();
+	}
 
-    static class Thread2 extends Thread{
-        @Override
-        public void run() {
-            synchronized (object) {
-                object.notify();
-                log.info("线程"+Thread.currentThread().getName()+"调用了object.notify()");
-            }
-            log.info("线程"+Thread.currentThread().getName()+"释放了锁");
-        }
-    }
+	static class Thread1 extends Thread {
+
+		@Override
+		public void run() {
+			synchronized (object) {
+				try {
+					log.info("线程" + Thread.currentThread().getName() + "开始被await了");
+
+					object.wait();
+				}
+				catch (InterruptedException e) {
+				}
+				log.info("线程" + Thread.currentThread().getName() + "获取到了锁");
+			}
+		}
+
+	}
+
+	static class Thread2 extends Thread {
+
+		@Override
+		public void run() {
+			synchronized (object) {
+				object.notify();
+				log.info("线程" + Thread.currentThread().getName() + "调用了object.notify()");
+			}
+			log.info("线程" + Thread.currentThread().getName() + "释放了锁");
+		}
+
+	}
+
 }

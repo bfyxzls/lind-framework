@@ -1,4 +1,4 @@
-package com.lind.common.forkjointask;
+package com.lind.common.thread.forkjointask;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

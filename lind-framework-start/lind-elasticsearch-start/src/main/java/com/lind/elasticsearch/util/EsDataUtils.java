@@ -15,10 +15,10 @@ import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentType;
-import org.springframework.util.Assert;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * ES数据保存操作，主要用于操作DateRecord动态数据，使用json接口.
@@ -27,9 +27,14 @@ public class EsDataUtils {
 
 	private static final String DEFAULT_TYPE = "info";
 
-	private static ObjectMapper objectMapper = new ObjectMapper();
+	private static final ObjectMapper objectMapper = createObjectMapper();
 
-	static {
+	/**
+	 * 初始化objectMapper.
+	 * @return
+	 */
+	private static ObjectMapper createObjectMapper() {
+		ObjectMapper objectMapper = new ObjectMapper();
 		// 常用配置
 		objectMapper.configure(JsonGenerator.Feature.IGNORE_UNKNOWN, true);
 		objectMapper.configure(JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN, true);
@@ -44,6 +49,7 @@ public class EsDataUtils {
 		simpleModule.addDeserializer(Date.class, new DateDeserialize());
 		objectMapper.registerModule(new JavaTimeModule());
 		objectMapper.registerModule(simpleModule);
+		return objectMapper;
 	}
 
 	/**
@@ -55,9 +61,10 @@ public class EsDataUtils {
 	 */
 	public static String saveOrUpdate(RestHighLevelClient client, String indexName, DataRecord dataRecord)
 			throws IOException {
-		Assert.hasText(indexName, "索引名不能为空");
-		Assert.notNull(dataRecord, "数据不能为null");
-		IndexRequest indexRequest = null;
+		Objects.requireNonNull(indexName, "索引名不能为空");
+		Objects.requireNonNull(dataRecord, "数据不能为null");
+
+		IndexRequest indexRequest;
 		String id = dataRecord.getId();
 
 		if (StringUtils.isNotBlank(id)) {

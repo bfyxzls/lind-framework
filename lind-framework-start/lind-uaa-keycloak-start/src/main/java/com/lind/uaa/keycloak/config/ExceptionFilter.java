@@ -1,6 +1,7 @@
 package com.lind.uaa.keycloak.config;
 
 import com.lind.common.exception.AbstractRestExceptionHandler;
+import com.lind.common.exception.HttpCodeEnum;
 import com.lind.common.rest.CommonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ public class ExceptionFilter extends AbstractRestExceptionHandler {
 	public CommonResult<String> accessDeniedException(AccessDeniedException e) {
 		String message = e.getMessage();
 		log.error(message);
-		return CommonResult.failure(403, message);
+		return CommonResult.failure(HttpCodeEnum.FORBIDDEN, message);
 	}
 
 	@ExceptionHandler(AuthenticationCredentialsNotFoundException.class)
@@ -34,7 +35,7 @@ public class ExceptionFilter extends AbstractRestExceptionHandler {
 	public CommonResult<String> accessDeniedException(AuthenticationCredentialsNotFoundException e) {
 		String message = e.getMessage();
 		log.error(message);
-		return CommonResult.failure(401, message);
+		return CommonResult.failure(HttpCodeEnum.UNAUTHORIZED, message);
 	}
 
 }

@@ -13,6 +13,9 @@ import java.util.concurrent.locks.Lock;
 @RequiredArgsConstructor
 public class RedisLockTemplate implements DistributedLockTemplate {
 
+	/**
+	 * 注入这个对象需要注册，锁的默认有期时间是60秒，在这个时间内程序没有执行完，锁会自动释放，如果希望有看门狗需要考虑用redisson组件.
+	 */
 	private final RedisLockRegistry redisLockRegistry;
 
 	private final RedisLockProperty redisLockProperty;
@@ -24,6 +27,7 @@ public class RedisLockTemplate implements DistributedLockTemplate {
 		boolean getLock = false;
 		try {
 			lock = redisLockRegistry.obtain(lockId);
+
 			if (redisLockProperty.getInterrupt()) {
 				getLock = lock.tryLock();// 中断执行,立即返回
 			}

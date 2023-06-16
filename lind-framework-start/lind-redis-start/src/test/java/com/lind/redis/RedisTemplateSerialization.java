@@ -24,6 +24,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 @Slf4j
 @RunWith(SpringRunner.class)
@@ -121,6 +122,7 @@ public class RedisTemplateSerialization {
 		User user = new User();
 		user.setId(1);
 		user.setName("zzl");
+		user.setCreateTime(LocalDateTime.now());
 		template.opsForValue().set(redis_tesqt, user);
 
 	}

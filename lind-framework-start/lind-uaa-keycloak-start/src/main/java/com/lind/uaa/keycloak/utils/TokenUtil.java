@@ -4,8 +4,6 @@ import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.keycloak.adapters.springboot.KeycloakSpringBootProperties;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.util.StringUtils;
 
@@ -30,7 +28,12 @@ public class TokenUtil {
 	// 需要刷新token,被写到响应头中
 	public final static String NEED_REFRESH_TOKEN = "Need-Refresh-Token";
 
-	private static final Pattern authorizationPattern = Pattern.compile("^Bearer (?<token>[a-zA-Z0-9-:._~+/]+=*)$",
+	/**
+	 * 正则说明： ^Bearer：以"Bearer"开头 (?<token>：将匹配到的内容命名为"token"
+	 * [a-zA-Z0-9-:.~+/]+=*：匹配一串由大小写字母、数字以及特定字符(:、.、、~、+、/)组成的字符串，长度可以为0或任意正整数
+	 * 翻译成中文为：以"Bearer"开头，匹配一串由大小写字母、数字以及特定字符(:、.、_、~、+、/)组成的字符串，长度可以为0或任意正整数，并将其命名为"token"。
+	 */
+	public static final Pattern AUTHORIZATION_PATTERN = Pattern.compile("^Bearer (?<token>[a-zA-Z0-9-:._~+/]+=*)$",
 			Pattern.CASE_INSENSITIVE);
 
 	public static String getSubject(String token) {
@@ -76,7 +79,7 @@ public class TokenUtil {
 		if (!StringUtils.startsWithIgnoreCase(authorization, "bearer")) {
 			return null;
 		}
-		Matcher matcher = authorizationPattern.matcher(authorization);
+		Matcher matcher = AUTHORIZATION_PATTERN.matcher(authorization);
 		if (!matcher.matches()) {
 			throw new IllegalArgumentException("Bearer token is malformed");
 		}

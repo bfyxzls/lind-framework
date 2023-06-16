@@ -52,7 +52,7 @@ public class LogRecordAspect {
 	public void after(JoinPoint joinPoint, Object result) {
 		if (result instanceof CommonResult) {
 			// 方法正常返回之后，记录日志
-			if (((CommonResult) result).getCode() == 200)// 正常返回
+			if (((CommonResult) result).isSuccess())// 正常返回
 			{
 				loggerService.insert(generateLog(joinPoint));
 			}

@@ -1,4 +1,4 @@
-import {getRequest} from "/lib/index.js"
+import {getRequest} from "/static/lib/index.js"
 // 定义组件
 var todoItem = Vue.extend({
     props: {

@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class HashedWheelTimer implements ScheduledExecutorService {
+public class LindHashedWheelTimer implements ScheduledExecutorService {
 
 	private static final String DEFAULT_TIMER_NAME = "hashed-wheel-timer";
 
@@ -34,7 +34,7 @@ public class HashedWheelTimer implements ScheduledExecutorService {
 
 	private volatile int cursor = 0;
 
-	public HashedWheelTimer(long res, int wheelSize, WaitStrategy strategy) {
+	public LindHashedWheelTimer(long res, int wheelSize, WaitStrategy strategy) {
 		this(DEFAULT_TIMER_NAME, res, wheelSize, strategy,
 				Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors(), new ThreadFactory() {
 					AtomicInteger i = new AtomicInteger();
@@ -48,7 +48,7 @@ public class HashedWheelTimer implements ScheduledExecutorService {
 				}));
 	}
 
-	public HashedWheelTimer(String name, long res, int wheelSize, WaitStrategy strategy, ExecutorService exec) {
+	public LindHashedWheelTimer(String name, long res, int wheelSize, WaitStrategy strategy, ExecutorService exec) {
 		this.waitStrategy = strategy;
 
 		this.wheel = new Set[wheelSize];

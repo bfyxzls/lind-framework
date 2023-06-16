@@ -5,13 +5,13 @@
         <meta charset="UTF-8">
         <title><#nested "head"></title>
         <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-        <link rel="stylesheet" href="/css/iview.css">
-        <link rel="stylesheet" href="/css/site.css">
-        <script charset="UTF-8" src="/js/vue.min.js"></script>
-        <script charset="UTF-8" src="/js/axios.min.js"></script>
-        <script charset="UTF-8" src="/js/iview.min.js"></script>
-        <script charset="UTF-8" src="/lib/index.js" type="module"></script>
-        <script charset="UTF-8" src="/lib/alert.js" type="module"></script>
+        <link rel="stylesheet" href="static/css/iview.css">
+        <link rel="stylesheet" href="static/css/site.css">
+        <script charset="UTF-8" src="static/js/vue.min.js"></script>
+        <script charset="UTF-8" src="static/js/axios.min.js"></script>
+        <script charset="UTF-8" src="static/js/iview.min.js"></script>
+        <script charset="UTF-8" src="static/lib/index.js" type="module"></script>
+        <script charset="UTF-8" src="static/lib/alert.js" type="module"></script>
 
         <style>
             body {

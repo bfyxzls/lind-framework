@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lind.common.exception.HttpCodeEnum;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.http.HttpStatus;
 
 import javax.annotation.Nullable;
 import java.io.Serializable;
@@ -20,9 +19,9 @@ public class CommonResult<T> implements Serializable {
 	private static final long serialVersionUID = 1573835682597272725L;
 
 	/**
-	 * 状态码.
+	 * 业务错误码.
 	 */
-	private int code;
+	private String code;
 
 	private String message;
 
@@ -34,7 +33,7 @@ public class CommonResult<T> implements Serializable {
 	private CommonResult() {
 	}
 
-	private CommonResult(Integer code, String message, T data) {
+	private CommonResult(String code, String message, T data) {
 		this.code = code;
 		this.message = message;
 		this.data = data;
@@ -43,7 +42,7 @@ public class CommonResult<T> implements Serializable {
 	/**
 	 * 根据状态码和消息构建结果.
 	 */
-	public static <T> CommonResult<T> build(Integer code, String msg, T data) {
+	public static <T> CommonResult<T> build(String code, String msg, T data) {
 		return new CommonResult<>(code, msg, data);
 	}
 
@@ -84,9 +83,19 @@ public class CommonResult<T> implements Serializable {
 	}
 
 	/**
+	 * failure.
+	 **/
+	public static <T> CommonResult<T> failure(HttpCodeEnum httpCodeEnum, String message) {
+		CommonResult<T> result = new CommonResult<>();
+		result.code = httpCodeEnum.getCode();
+		result.message = message;
+		return result;
+	}
+
+	/**
 	 * 失败无响应数据自定义状态码及消息.
 	 */
-	public static <T> CommonResult<T> failure(Integer code, String message) {
+	public static <T> CommonResult<T> failure(String code, String message) {
 		CommonResult<T> result = new CommonResult<>();
 		result.code = code;
 		result.message = message;
@@ -115,13 +124,23 @@ public class CommonResult<T> implements Serializable {
 	}
 
 	/**
+	 * clientFailure.
+	 */
+	public static <T> CommonResult<T> clientFailure(String message, String code) {
+		CommonResult<T> result = new CommonResult<>();
+		result.code = code;
+		result.message = message;
+		return result;
+	}
+
+	/**
 	 * 权限不足，返回码403
 	 * @param message
 	 * @param <T>
 	 * @return
 	 */
 	public static <T> CommonResult<T> forbiddenFailure(@Nullable String message) {
-		return failure(HttpStatus.FORBIDDEN.value(), message);
+		return failure(HttpCodeEnum.FORBIDDEN.getCode(), message);
 	}
 
 	/**
@@ -130,7 +149,7 @@ public class CommonResult<T> implements Serializable {
 	 * @return
 	 */
 	public static <T> CommonResult<T> unauthorizedFailure(@Nullable String message) {
-		return failure(HttpStatus.UNAUTHORIZED.value(), message);
+		return failure(HttpCodeEnum.UNAUTHORIZED.getCode(), message);
 	}
 
 	/**

@@ -22,7 +22,7 @@ public class StringTest {
 
 	@Test
 	public void write() {
-		redisService.opsForValue().set("test4", "oktest");
+		redisService.opsForValue().set("test4", "oktest1");
 	}
 
 	@Test

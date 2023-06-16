@@ -13,6 +13,7 @@ import com.lind.redis.service.RedisService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -32,6 +33,7 @@ public class LettuceRedisAutoConfigure {
 		return template;
 	}
 
+	@Primary
 	@Bean(name = "redisTemplate")
 	@ConditionalOnClass(RedisOperations.class) // 依据RedisOperations是否存在而决定是否注册这个bean
 	public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory factory) {

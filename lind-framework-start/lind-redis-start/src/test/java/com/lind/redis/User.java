@@ -3,6 +3,7 @@ package com.lind.redis;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * @author lind
@@ -15,5 +16,7 @@ class User implements Serializable {
 	private Integer id;
 
 	private String name;
+
+	private LocalDateTime createTime;
 
 }

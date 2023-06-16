@@ -1,13 +1,16 @@
 package com.lind.redis.lock.aspect;
 
+import com.lind.redis.lock.UserIdAuditorAware;
 import com.lind.redis.lock.annotation.RepeatSubmit;
 import com.lind.redis.lock.exception.RepeatSubmitException;
-import com.lind.redis.lock.template.UserIdAuditorAware;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -25,7 +28,7 @@ import static org.springframework.util.Assert.notNull;
 @Slf4j
 @Aspect
 @RequiredArgsConstructor
-public class RepeatSubmitAspect {
+public class RepeatSubmitAspect implements ApplicationContextAware {
 
 	/**
 	 * 拦截器执行顺序.
@@ -36,15 +39,19 @@ public class RepeatSubmitAspect {
 	 * @after
 	 */
 	private final RedisTemplate<String, String> redisTemplate;
-
-	private final UserIdAuditorAware userIdAuditorAware;
+	ApplicationContext applicationContext;
 
 	@Around("@annotation(repeatSubmit)")
 	public Object around(ProceedingJoinPoint proceedingJoinPoint, RepeatSubmit repeatSubmit) throws Throwable {
 		ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 		notNull(attributes, "attributes is null");
 		HttpServletRequest request = attributes.getRequest();
-		String key = repeatSubmit.redisKey() + ":" + userIdAuditorAware.getCurrentAuditor().orElse("system") + ":"
+		UserIdAuditorAware userIdAuditorAware = applicationContext.getBean(UserIdAuditorAware.class);
+		String currUser = "system";
+		if (userIdAuditorAware != null) {
+			currUser = userIdAuditorAware.getCurrentAuditor().orElse("system");
+		}
+		String key = repeatSubmit.redisKey() + ":" + currUser + ":"
 				+ DigestUtils.md5DigestAsHex(request.getServletPath().getBytes("UTF-8"));
 		// 如果缓存中有这个url视为重复提交
 		Object hasSubmit = redisTemplate.opsForValue().get(key);
@@ -59,6 +66,11 @@ public class RepeatSubmitAspect {
 			log.warn(message);
 			throw new RepeatSubmitException(message);
 		}
+	}
+
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.applicationContext = applicationContext;
 	}
 
 }

@@ -14,22 +14,24 @@ import static java.util.Objects.requireNonNull;
  * @since 1.0.0
  */
 public class StreamUtils {
-    private static final int DEFAULT_BUF_SIZE = 1024;
 
-    public static String readToEnd(InputStream stream, Charset charset) throws IOException {
-        requireNonNull(stream);
-        requireNonNull(charset);
+	private static final int DEFAULT_BUF_SIZE = 1024;
 
-        final StringBuilder sb = new StringBuilder();
-        final char[] buffer = new char[DEFAULT_BUF_SIZE];
+	public static String readToEnd(InputStream stream, Charset charset) throws IOException {
+		requireNonNull(stream);
+		requireNonNull(charset);
 
-        try (Reader in = new InputStreamReader(stream, charset)) {
-            int charsRead = 0;
-            while ((charsRead = in.read(buffer, 0, buffer.length)) > 0) {
-                sb.append(buffer, 0, charsRead);
-            }
-        }
+		final StringBuilder sb = new StringBuilder();
+		final char[] buffer = new char[DEFAULT_BUF_SIZE];
 
-        return sb.toString();
-    }
+		try (Reader in = new InputStreamReader(stream, charset)) {
+			int charsRead = 0;
+			while ((charsRead = in.read(buffer, 0, buffer.length)) > 0) {
+				sb.append(buffer, 0, charsRead);
+			}
+		}
+
+		return sb.toString();
+	}
+
 }

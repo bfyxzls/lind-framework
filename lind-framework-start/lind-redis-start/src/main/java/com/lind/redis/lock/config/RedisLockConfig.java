@@ -1,11 +1,9 @@
 package com.lind.redis.lock.config;
 
 import com.lind.redis.config.LettuceRedisAutoConfigure;
+import com.lind.redis.lock.UserIdAuditorAware;
 import com.lind.redis.lock.aspect.RepeatSubmitAspect;
-import com.lind.redis.lock.template.DefaultUserIdAuditorAwareImpl;
 import com.lind.redis.lock.template.RedisLockTemplate;
-import com.lind.redis.lock.template.RedisUserManualLockTemplate;
-import com.lind.redis.lock.template.UserIdAuditorAware;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -42,8 +40,8 @@ public class RedisLockConfig {
 
 	@Bean
 	@ConditionalOnBean(name = "redisTemplateString")
-	public RepeatSubmitAspect repeatSubmitAspect(RedisTemplate redisTemplate, UserIdAuditorAware userIdAuditorAware) {
-		return new RepeatSubmitAspect(redisTemplate, userIdAuditorAware);
+	public RepeatSubmitAspect repeatSubmitAspect(RedisTemplate redisTemplate) {
+		return new RepeatSubmitAspect(redisTemplate);
 	}
 
 	@Bean
@@ -51,19 +49,6 @@ public class RedisLockConfig {
 	public RedisLockTemplate redisLockTemplate(RedisLockRegistry redisLockRegistry,
 			RedisLockProperty redisLockProperty) {
 		return new RedisLockTemplate(redisLockRegistry, redisLockProperty);
-	}
-
-	@Bean
-	@ConditionalOnBean(RedisLockTemplate.class)
-	public RedisUserManualLockTemplate redisUserManualLockTemplate(RedisTemplate<String, String> redisTemplate,
-			RedisLockProperty redisLockProperty, RedisLockTemplate redisLockTemplate) {
-		return new RedisUserManualLockTemplate(redisTemplate, redisLockProperty, redisLockTemplate);
-	}
-
-	@Bean
-	@ConditionalOnMissingBean(UserIdAuditorAware.class)
-	public UserIdAuditorAware userIdAuditorAware() {
-		return new DefaultUserIdAuditorAwareImpl();
 	}
 
 }

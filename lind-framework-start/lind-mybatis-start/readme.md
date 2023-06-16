@@ -66,7 +66,7 @@ public class BasicTest {}
 对于一些软删除，分页等配置，我们在resources/META-INF/spring.factories里进行了自动注入，不需要开发人员去干预
 ```
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.lind.mybatis.config.MybatisPlusConfig
+  com.lind.mybatis.config.MybatisAutoConfiguration
 
 ```
 

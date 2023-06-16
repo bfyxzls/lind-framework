@@ -17,9 +17,14 @@ import java.util.Optional;
 
 /**
  * mybatis plus 相关配置. register mapper.
+ * 在@Configuration注解中，proxyBeanMethods属性的默认值是true，如果省略了这个属性，则该注解会生成一个代理对象来创建@Bean方法中被注入的其他@Bean方法，以保证这些方法在容器中的单例模式。
+ * 如果设置了proxyBeanMethods =
+ * false，那么则会禁止使用CGLIB代理来调用@Bean方法中的其他@Bean方法，每次调用@Bean方法都会创建一个新的对象。这个属性可以提高应用程序的启动速度，特别是当应用程序具有许多@Configuration类和@Bean方法时。
+ * 一般情况下，proxyBeanMethods =
+ * true（默认值）是最好的选择，它可以确保所注入的@Bean方法是单例的。但当应用程序只是在运行时少量地进行动态的依赖注入时，可以考虑将proxyBeanMethods属性设置为false。
  */
-@Configuration
-public class MybatisPlusConfig implements ApplicationContextAware {
+@Configuration(proxyBeanMethods = false)
+public class MybatisAutoConfiguration implements ApplicationContextAware {
 
 	ApplicationContext applicationContext;
 

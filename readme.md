@@ -4,7 +4,7 @@
 > 目前正在开发基于最新的springboot2.7的精简版本lind-fast框架
 
 # 升级
-* 命令行执行 mvn versions:set -DnewVersion=1.1.0 //更新整个项目版本
+* 命令行执行 mvn versions:set -DnewVersion=1.1.3-SNAPSHOT //更新整个项目版本,SNAPSHOT的同一个版本可以多次发到仓库里
 * 提交 mvn versions:commit //提交，删除多余的pom.xml.versionsBackup
 * mvn deploy 根项目
 * 先deploy lind-framework-bom项目，再deploy lind-framework项目

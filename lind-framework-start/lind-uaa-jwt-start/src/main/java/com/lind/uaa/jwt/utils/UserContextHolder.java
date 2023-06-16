@@ -14,9 +14,14 @@ import java.util.concurrent.ConcurrentHashMap;
  * 获取当前线程变量中的 用户id、用户名称、Token等信息 注意： 必须在网关通过请求头的方法传入，同时在HeaderInterceptor拦截器设置值。 否则这里无法获取
  *
  * 每次请求时，会从header头中拿到token并存储到UserContextHolder中，当次请求有效.
+ *
  */
 public class UserContextHolder {
 
+	// TransmittableThreadLocal 是 Alibaba 开发的 ThreadLocal 扩展库，可以跨线程传递数据。类似于
+	// ThreadLocal，每个线程都有自己独立的 TransmittableThreadLocal 值，可以通过 get() 和 set()
+	// 方法访问和修改这些值。不同的是，TransmittableThreadLocal 可以在线程池（如
+	// ForkJoinPool、ThreadPoolExecutor）中复用线程时，将当前的值自动传递给新线程，从而避免值的丢失或遗漏。
 	private static final TransmittableThreadLocal<Map<String, Object>> THREAD_LOCAL = new TransmittableThreadLocal<>();
 
 	public static void set(String key, Object value) {

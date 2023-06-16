@@ -18,7 +18,8 @@ public class KeyAffinityExecutorTest {
 
 	public static void executeByAffinitydPool(List<ThreadPoolUtilsTest.Person> personList) {
 		personList.stream().forEach(p -> executor.executeEx(p.getId(), () -> {
-			System.out.println(JSON.toJSONString(p));
+			System.out.println(
+					Thread.currentThread().getName() + Thread.currentThread().getId() + ":" + JSON.toJSONString(p));
 		}));
 	}
 
@@ -42,6 +43,12 @@ public class KeyAffinityExecutorTest {
 		executeByAffinitydPool(personList);
 
 		Thread.sleep(1000);
+		/**
+		 * id相同的使用同一个线程池 MY-POOL11:{"data":"1s","id":1} MY-POOL12:{"data":"2s","id":2}
+		 * MY-POOL13:{"data":"3s","id":3} MY-POOL11:{"data":"11s","id":1}
+		 * MY-POOL11:{"data":"111s","id":1} MY-POOL11:{"data":"1111s","id":1}
+		 * MY-POOL13:{"data":"33s","id":3} MY-POOL12:{"data":"22s","id":2}
+		 */
 	}
 
 }

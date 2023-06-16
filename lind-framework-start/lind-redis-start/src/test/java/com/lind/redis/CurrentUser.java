@@ -1,6 +1,6 @@
 package com.lind.redis;
 
-import com.lind.redis.lock.template.UserIdAuditorAware;
+import org.springframework.data.domain.AuditorAware;
 
 import java.util.Optional;
 
@@ -9,7 +9,7 @@ import java.util.Optional;
  * @date 2022/7/13 11:21
  * @since 1.0.0
  */
-public class CurrentUser implements UserIdAuditorAware {
+public class CurrentUser implements AuditorAware<String> {
 
 	@Override
 	public Optional<String> getCurrentAuditor() {

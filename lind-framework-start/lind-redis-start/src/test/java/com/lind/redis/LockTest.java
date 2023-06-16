@@ -42,18 +42,21 @@ public class LockTest {
 	private WebApplicationContext webApplicationContext;
 
 	void lock5Second() {
-		distributedLockTemplate.execute("订单流水号", 2, TimeUnit.SECONDS, new Callback() {
+		// 锁最大排除时等待的时间，超过这个时间还没拿到锁，那就放弃.
+
+		distributedLockTemplate.execute("订单流水号", 70, TimeUnit.SECONDS, new Callback() {
 			@Override
 			public Object onGetLock() throws InterruptedException {
 				// 获得锁后要做的事
 				log.info("{} 拿到锁，需要5秒钟，这时有请求打入应该被阻塞或者拒绝", Thread.currentThread().getName());
-				TimeUnit.SECONDS.sleep(5L);
+				TimeUnit.SECONDS.sleep(80);
+				log.info("大任务执行完成");
 				return null;
 			}
 
 			@Override
 			public Object onTimeout() throws InterruptedException {
-				// 获取到锁（获取锁超时）后要做的事
+				// 获取锁超时后要做的事
 				log.info("{} 没拿到锁", Thread.currentThread().getName());
 				return null;
 			}
@@ -64,9 +67,12 @@ public class LockTest {
 	public void lock() throws InterruptedException {
 		Thread thread1 = new Thread(() -> lock5Second());
 		Thread thread2 = new Thread(() -> lock5Second());
+		Thread thread3 = new Thread(() -> lock5Second());
+
 		thread1.start();
 		thread2.start();
-		TimeUnit.SECONDS.sleep(5L);
+		thread3.start();
+		TimeUnit.SECONDS.sleep(120L);
 	}
 
 	@Before
