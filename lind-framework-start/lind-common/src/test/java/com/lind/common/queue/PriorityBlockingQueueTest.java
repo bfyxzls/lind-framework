@@ -39,8 +39,8 @@ public class PriorityBlockingQueueTest {
 
 		@Override
 		public int compareTo(Student o) {
-			return o.score - this.score;
-		}
+			return this.score - o.score;
+		}// 升序:this.score-o.score，降序:o.score - this.score
 
 		@Override
 		public String toString() {

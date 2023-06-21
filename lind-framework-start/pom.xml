@@ -29,6 +29,7 @@
     <modules>
         <module>lind-redis-start</module>
         <module>lind-common</module>
+        <module>lind-common-core</module>
         <module>lind-elasticsearch-start</module>
         <module>lind-mybatis-start</module>
         <module>lind-uaa-start</module>

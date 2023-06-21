@@ -1,4 +1,4 @@
-package com.lind.common.collection;
+package com.lind.common.queue;
 
 import lombok.Data;
 import lombok.SneakyThrows;
@@ -72,6 +72,7 @@ public class PriorityQueueTest {
 
 		@Override
 		public int compareTo(Customer o) {
+			// 升序
 			if (this.id < o.id)
 				return -1;
 			else if (this.id == o.id)

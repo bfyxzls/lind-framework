@@ -1,4 +1,4 @@
-package com.lind.common.thread;
+package com.lind.common.thread.lock;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;

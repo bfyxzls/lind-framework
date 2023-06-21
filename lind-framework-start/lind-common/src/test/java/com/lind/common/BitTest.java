@@ -6,6 +6,12 @@ import org.junit.Test;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * 为什么使用右移操作符呢？
+ *
+ * 右移操作符在这里的好处是可以对整数进行快速的二进制位操作，避免了使用除法操作。除法运算相对较慢，尤其 * 是在某些硬件上。
+ * 使用右移操作符可以提高计算效率，而且在容量计算上能够保持较好的整数近似值，避免了无用的浮点运算。
+ */
 @Slf4j
 public class BitTest {
 
@@ -127,6 +133,33 @@ public class BitTest {
 	public void bit32_4byte1() {
 		for (int i = 0; i < 8; i++)
 			log.info("{}={}", i, normalizeTicksPerWheel(i));
+
+	}
+
+	/**
+	 * hash的扩容.
+	 */
+	@Test
+	public void hashExtension() {
+		int n = 1024;
+		// 相当于0.75*n,使用右移，可以更好的进行整型的计划，速度远大于除法
+		int newN = n - (n >>> 2);
+		log.info("bin 0.75*n={}", newN);
+		log.info("dec 0.75*n={}", n * 0.75);
+
+	}
+
+	@Test
+	public void convert() {
+		log.info("{}", -128 & 0xff); // 128
+		log.info("{}", -2 & 0xff); // 254
+		log.info("{}", -1 & 0xff); // 255
+		log.info("{}", 0 & 0xff); // 0
+		log.info("{}", 1 & 0xff); // 1
+		log.info("{}", 127 & 0xff); // 127
+		log.info("{}", 128 & 0xff); // 128，与-128是一样的
+
+		System.out.println("* byte字节码与运算原值(-54)换行后(-54 & 0x0FF)：" + (-54 & 0x0FF));
 
 	}
 

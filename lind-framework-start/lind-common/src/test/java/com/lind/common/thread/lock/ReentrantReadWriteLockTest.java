@@ -1,4 +1,4 @@
-package com.lind.common.thread;
+package com.lind.common.thread.lock;
 
 import cn.hutool.core.map.MapUtil;
 import lombok.SneakyThrows;
@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-public class ThreadLockTest {
+public class ReentrantReadWriteLockTest {
 
 	private AtomicInteger isSnapshotFlushing = new AtomicInteger(0);
 

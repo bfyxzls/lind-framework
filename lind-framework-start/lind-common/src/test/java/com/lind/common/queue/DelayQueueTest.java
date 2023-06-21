@@ -1,5 +1,7 @@
 package com.lind.common.queue;
 
+import java.util.ArrayDeque;
+import java.util.EnumSet;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
@@ -16,7 +18,6 @@ public class DelayQueueTest {
 
 	public static void main(String[] args) throws InterruptedException {
 		DelayQueue<DelayedElement> queue = new DelayQueue<>();
-
 		queue.put(new DelayedElement("5-Tom", 5, TimeUnit.SECONDS));
 		queue.put(new DelayedElement("2-Jerry", 2, TimeUnit.SECONDS));
 		queue.put(new DelayedElement("3-Alice", 3, TimeUnit.SECONDS));

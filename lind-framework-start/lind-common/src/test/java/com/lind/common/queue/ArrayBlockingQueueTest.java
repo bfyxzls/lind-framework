@@ -46,6 +46,7 @@ public class ArrayBlockingQueueTest {
 			try {
 				for (int i = 0; i < 10; i++) {
 					System.out.println("Producer inserting: " + i);
+					// 队列满时，offer返回false，如果使用add方式，直接抛IllegalStateException
 					while (!queue.offer(i)) {
 						System.out.println("Queue full, waiting for consumer to take...");
 						Thread.sleep(1000);

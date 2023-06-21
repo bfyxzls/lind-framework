@@ -1,5 +1,6 @@
 package com.lind.common.util;
 
+import com.lind.common.minibase.Bytes;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Assert;
@@ -9,8 +10,10 @@ import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.RandomAccessFile;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -88,4 +91,21 @@ public class FileUtilsTest {
 		Assert.assertEquals("world", new String(FileUtils.readFileContent(file)));
 	}
 
+	@Test
+	public void randomAccessFile() throws IOException {
+		File f = new File("d:\\append.txt");
+		// fileSize(8B)+ blockCount(4B) + blockIndexOffset(8B) + blockIndexOffset(8B) +
+		// DISK_FILE_MAGIC
+		// (8B)
+		final int TRAILER_SIZE = 8 + 4 + 8 + 8 + 8;
+		RandomAccessFile in = new RandomAccessFile(f, "r");
+
+		long fileSize = f.length();
+		assert fileSize > TRAILER_SIZE;
+		in.seek(fileSize - TRAILER_SIZE);//跳过前36个字符
+
+		byte[] buffer = new byte[8];
+		assert in.read(buffer) == buffer.length;
+
+	}
 }

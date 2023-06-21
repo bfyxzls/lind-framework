@@ -13,7 +13,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 public class LinkedBlockingDequeTest {
 
 	public static void main(String[] args) throws InterruptedException {
-		LinkedBlockingDeque<String> deque = new LinkedBlockingDeque<>(2);
+		LinkedBlockingDeque<String> deque = new LinkedBlockingDeque<>(1);
 
 		Thread producer = new Thread(() -> {
 			try {
@@ -21,6 +21,8 @@ public class LinkedBlockingDequeTest {
 				System.out.println("Producer added message: Hello");
 				deque.putLast("World");
 				System.out.println("Producer added message: World");
+				deque.putLast("!");
+				System.out.println("Producer added message: !");
 			}
 			catch (InterruptedException e) {
 				e.printStackTrace();
@@ -33,6 +35,8 @@ public class LinkedBlockingDequeTest {
 				System.out.println("Consumer received message: " + message1);
 				String message2 = deque.takeLast();
 				System.out.println("Consumer received message: " + message2);
+				String message3 = deque.takeLast();
+				System.out.println("Consumer received message: " + message3);
 			}
 			catch (InterruptedException e) {
 				e.printStackTrace();

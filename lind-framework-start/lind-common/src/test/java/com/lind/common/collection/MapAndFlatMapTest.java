@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -54,6 +55,50 @@ public class MapAndFlatMapTest {
 			return curTimeout;
 		});
 		log.info("{}", timeoutMap);
+	}
+
+	@Test
+	public void putIfAbsent() {
+		Map<Integer, String> map = new HashMap<Integer, String>() {
+			{
+				put(3, "three");
+			}
+		};
+
+		for (int i = 0; i < 10; i++) {
+			// 与老版不同的是，putIfAbent() 方法在 put 之前， 不用在写if null continue了
+			// 会判断 key 是否已经存在，存在则直接返回 value,不再会put了, 否则如果不存在，就put, 再返回 value
+			map.putIfAbsent(i, "val" + i);
+		}
+		// forEach 可以很方便地对 map 进行遍历操作
+		map.forEach((key, value) -> System.out.println(value));
+	}
+
+	@Test
+	public void test27() {
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>() {
+			{
+				put(1, 10);
+				put(3, 30);
+				put(9, 90);
+			}
+		};
+		// 如下：对 key 为 3 的值，内部会先判断值是否存在，存在，则做 value + key 的拼接操作
+		map.computeIfPresent(3, (num, val) -> val + num);
+		log.info("3={}", map.get(3)); // val33
+
+		// 先判断 key 为 9 的元素是否存在，存在，则做删除操作
+		map.computeIfPresent(9, (num, val) -> null);
+		boolean result=map.containsKey(9); // false
+		log.info("9={}",result); // val33
+
+		// computeIfAbsent(), 当 key 不存在时，才会做相关处理
+		// 如下：先判断 key 为 23 的元素是否存在，不存在，则添加
+		map.computeIfAbsent(23, num -> 230);
+		map.containsKey(23); // true
+
+		map.forEach((key, value) -> System.out.println(value));
+
 	}
 
 }

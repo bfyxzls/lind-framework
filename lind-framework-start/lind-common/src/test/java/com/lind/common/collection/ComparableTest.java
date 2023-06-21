@@ -14,8 +14,14 @@ public class ComparableTest {
 
 	@Test
 	public void testArray() {
+		/**
+		 * Student{age=30, name='lr', score=98.0}
+		 * Student{age=8, name='lmw', score=90.0}
+		 * Student{age=9, name='zhz', score=90.0}
+		 * Student{age=10, name='zzl', score=90.0}
+		 */
 		Student[] students = new Student[] { new Student(10, "zzl", 90), new Student(30, "lr", 98),
-				new Student(9, "zhz", 90) };
+				new Student(8, "lmw", 90), new Student(9, "zhz", 90) };
 
 		Arrays.sort(students);
 		for (Student student : students) {

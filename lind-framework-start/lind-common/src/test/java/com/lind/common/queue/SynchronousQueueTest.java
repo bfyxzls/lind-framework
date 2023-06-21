@@ -2,6 +2,11 @@ package com.lind.common.queue;
 
 import org.junit.Test;
 
+import java.util.LinkedList;
+import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.SynchronousQueue;
 
 /**
@@ -22,7 +27,9 @@ public class SynchronousQueueTest {
 			try {
 				String message = "Hello, World!";
 				System.out.println("Producer is adding message: " + message);
-				queue.put(message);
+				for(int i=0;i<5;i++) {
+					queue.put(message);
+				}
 			}
 			catch (InterruptedException e) {
 				e.printStackTrace();
@@ -31,8 +38,12 @@ public class SynchronousQueueTest {
 
 		Thread consumer = new Thread(() -> {
 			try {
-				String message = queue.take();
-				System.out.println("Consumer received message: " + message);
+				while(!queue.isEmpty()) {
+					String message = queue.take();
+					System.out.println("Consumer received message: " + message);
+					Thread.sleep(2000);// 消费的比较慢，也影响了生产的速度
+
+				}
 			}
 			catch (InterruptedException e) {
 				e.printStackTrace();
@@ -41,6 +52,7 @@ public class SynchronousQueueTest {
 
 		producer.start();
 		consumer.start();
+
 
 		producer.join();
 		consumer.join();

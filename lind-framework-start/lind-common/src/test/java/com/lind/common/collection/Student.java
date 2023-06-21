@@ -28,24 +28,19 @@ public class Student implements Comparable<Student> {
 	}
 
 	/**
-	 * -1的排在前面，1的排在后面，很好理解 本例子中，score大的在前而，scope相等时，age小的在前面
+	 * -1的排在前面，1的排在后面，很好理解 本例子中，score大的在前而，scope相等时，age小的在前面 升序排序: 如果 this 对象小于传入的对象，则
+	 * compareTo 应该返回负数。 如果 this 对象等于传入的对象，则 compareTo 应该返回零。 如果 this 对象大于传入的对象，则
+	 * compareTo 应该返回正数。 return this.age-o.age;
 	 * @param o
 	 * @return
 	 */
 	@Override
 	public int compareTo(Student o) {
-		if (this.score > o.score)
-			return -1;
-		else if (this.score < o.score)
-			return 1;
-		else {
-			if (this.age < o.age)
-				return -1;
-			else if (this.age > o.age)
-				return 1;
-			else
-				return 0;
-		}
+		if (this.score != o.score)
+			return (int) (o.score - this.score);
+		else
+			return this.age - o.age;
+
 	}
 
 }
