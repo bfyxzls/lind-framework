@@ -23,14 +23,14 @@ public class LindAutoConfig {
 		LindProperty.Type type = lindProperty.getType();
 		Lind lind;
 		switch (type) {
-		case ORDER:
-			lind = new LindOrder();
-			break;
-		case PRODUCT:
-			lind = new LindProduct();
-			break;
-		default:
-			throw new IllegalArgumentException("not support type");
+			case ORDER:
+				lind = new LindOrder();
+				break;
+			case PRODUCT:
+				lind = new LindProduct();
+				break;
+			default:
+				throw new IllegalArgumentException("not support type");
 
 		}
 		return lind;

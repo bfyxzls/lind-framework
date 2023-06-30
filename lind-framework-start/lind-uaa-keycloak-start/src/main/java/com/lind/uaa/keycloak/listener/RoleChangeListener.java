@@ -38,15 +38,15 @@ public class RoleChangeListener {
 					com.alibaba.fastjson.JSONObject jsonObj = JSON.parseObject(s);
 					String userId = null;
 					switch (record.topic()) {
-					case "KC_REALM_ROLE_MAPPING_CREATE":
-						// KC_REALM_ROLE_MAPPING_CREATE在kc发布事件时对这个authDetails.userId进行了重写，默认它是操作人，现在改为被操作人了
-						userId = jsonObj.getJSONObject("authDetails").getString("userId");
-						break;
-					case "KC_REALM_ROLE_MAPPING_DELETE":
-						userId = jsonObj.getString("resourcePath").split("/")[1];
-						break;
-					default:
-						break;
+						case "KC_REALM_ROLE_MAPPING_CREATE":
+							// KC_REALM_ROLE_MAPPING_CREATE在kc发布事件时对这个authDetails.userId进行了重写，默认它是操作人，现在改为被操作人了
+							userId = jsonObj.getJSONObject("authDetails").getString("userId");
+							break;
+						case "KC_REALM_ROLE_MAPPING_DELETE":
+							userId = jsonObj.getString("resourcePath").split("/")[1];
+							break;
+						default:
+							break;
 					}
 					if (userId != null) {
 						System.err.println("用户【" + userId + "】被更新了角色");

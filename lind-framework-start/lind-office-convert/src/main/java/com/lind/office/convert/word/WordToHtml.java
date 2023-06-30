@@ -143,12 +143,12 @@ public class WordToHtml {
 			file.mkdirs();
 		}
 		switch (docPath.substring(docPath.lastIndexOf(".")).toLowerCase()) {
-		case ".doc":
-			return docToHtml(docPath, imagePathStr, imageUrlPath, targetFileName);
-		case ".docx":
-			return docxToHtml(docPath, imagePathStr, imageUrlPath, targetFileName);
-		default:
-			throw new IllegalArgumentException("不支持的扩展名");
+			case ".doc":
+				return docToHtml(docPath, imagePathStr, imageUrlPath, targetFileName);
+			case ".docx":
+				return docxToHtml(docPath, imagePathStr, imageUrlPath, targetFileName);
+			default:
+				throw new IllegalArgumentException("不支持的扩展名");
 		}
 	}
 

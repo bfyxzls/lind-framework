@@ -35,12 +35,12 @@ public class KeyValue implements Comparable<KeyValue> {
 
 		public static Op code2Op(byte code) {
 			switch (code) {
-			case 0:
-				return Put;
-			case 1:
-				return Delete;
-			default:
-				throw new IllegalArgumentException("Unknown code: " + code);
+				case 0:
+					return Put;
+				case 1:
+					return Delete;
+				default:
+					throw new IllegalArgumentException("Unknown code: " + code);
 			}
 		}
 

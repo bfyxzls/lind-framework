@@ -313,40 +313,40 @@ public class LZString {
 		}
 
 		switch (bits) {
-		case 0:
-			bits = 0;
-			maxpower = Math.pow(2, 8);
-			power = 1;
-			while (power != Double.valueOf(maxpower).intValue()) {
-				resb = data.val & data.position;
-				data.position >>= 1;
-				if (data.position == 0) {
-					data.position = 32768;
-					data.val = data.string.charAt(data.index++);
+			case 0:
+				bits = 0;
+				maxpower = Math.pow(2, 8);
+				power = 1;
+				while (power != Double.valueOf(maxpower).intValue()) {
+					resb = data.val & data.position;
+					data.position >>= 1;
+					if (data.position == 0) {
+						data.position = 32768;
+						data.val = data.string.charAt(data.index++);
+					}
+					bits |= (resb > 0 ? 1 : 0) * power;
+					power <<= 1;
 				}
-				bits |= (resb > 0 ? 1 : 0) * power;
-				power <<= 1;
-			}
-			c += (char) bits;
-			break;
-		case 1:
-			bits = 0;
-			maxpower = Math.pow(2, 16);
-			power = 1;
-			while (power != Double.valueOf(maxpower).intValue()) {
-				resb = data.val & data.position;
-				data.position >>= 1;
-				if (data.position == 0) {
-					data.position = 32768;
-					data.val = data.string.charAt(data.index++);
+				c += (char) bits;
+				break;
+			case 1:
+				bits = 0;
+				maxpower = Math.pow(2, 16);
+				power = 1;
+				while (power != Double.valueOf(maxpower).intValue()) {
+					resb = data.val & data.position;
+					data.position >>= 1;
+					if (data.position == 0) {
+						data.position = 32768;
+						data.val = data.string.charAt(data.index++);
+					}
+					bits |= (resb > 0 ? 1 : 0) * power;
+					power <<= 1;
 				}
-				bits |= (resb > 0 ? 1 : 0) * power;
-				power <<= 1;
-			}
-			c += (char) bits;
-			break;
-		case 2:
-			return "";
+				c += (char) bits;
+				break;
+			case 2:
+				return "";
 
 		}
 
@@ -377,57 +377,57 @@ public class LZString {
 			}
 
 			switch (d = bits) {
-			case 0:
-				bits = 0;
-				maxpower = Math.pow(2, 8);
-				power = 1;
-				while (power != Double.valueOf(maxpower).intValue()) {
-					resb = data.val & data.position;
-					data.position >>= 1;
-					if (data.position == 0) {
-						data.position = 32768;
-						data.val = data.string.charAt(data.index++);
+				case 0:
+					bits = 0;
+					maxpower = Math.pow(2, 8);
+					power = 1;
+					while (power != Double.valueOf(maxpower).intValue()) {
+						resb = data.val & data.position;
+						data.position >>= 1;
+						if (data.position == 0) {
+							data.position = 32768;
+							data.val = data.string.charAt(data.index++);
+						}
+						bits |= (resb > 0 ? 1 : 0) * power;
+						power <<= 1;
 					}
-					bits |= (resb > 0 ? 1 : 0) * power;
-					power <<= 1;
-				}
 
-				String temp = "";
-				temp += (char) bits;
-				dictionary.add(dictSize++, temp);
+					String temp = "";
+					temp += (char) bits;
+					dictionary.add(dictSize++, temp);
 
-				d = dictSize - 1;
+					d = dictSize - 1;
 
-				enlargeIn--;
+					enlargeIn--;
 
-				break;
-			case 1:
-				bits = 0;
-				maxpower = Math.pow(2, 16);
-				power = 1;
-				while (power != Double.valueOf(maxpower).intValue()) {
-					resb = data.val & data.position;
-					data.position >>= 1;
-					if (data.position == 0) {
-						data.position = 32768;
-						data.val = data.string.charAt(data.index++);
+					break;
+				case 1:
+					bits = 0;
+					maxpower = Math.pow(2, 16);
+					power = 1;
+					while (power != Double.valueOf(maxpower).intValue()) {
+						resb = data.val & data.position;
+						data.position >>= 1;
+						if (data.position == 0) {
+							data.position = 32768;
+							data.val = data.string.charAt(data.index++);
+						}
+						bits |= (resb > 0 ? 1 : 0) * power;
+						power <<= 1;
 					}
-					bits |= (resb > 0 ? 1 : 0) * power;
-					power <<= 1;
-				}
 
-				temp = "";
-				temp += (char) bits;
+					temp = "";
+					temp += (char) bits;
 
-				dictionary.add(dictSize++, temp);
+					dictionary.add(dictSize++, temp);
 
-				d = dictSize - 1;
+					d = dictSize - 1;
 
-				enlargeIn--;
+					enlargeIn--;
 
-				break;
-			case 2:
-				return result.toString();
+					break;
+				case 2:
+					return result.toString();
 			}
 
 			if (Double.valueOf(enlargeIn).intValue() == 0) {
@@ -476,68 +476,68 @@ public class LZString {
 		for (int i = 0; i < input.length(); i++) {
 			c = input.charAt(i);
 			switch (status++) {
-			case 0:
-				output += (char) ((c >> 1) + 32);
-				current = (c & 1) << 14;
-				break;
-			case 1:
-				output += (char) ((current + (c >> 2)) + 32);
-				current = (c & 3) << 13;
-				break;
-			case 2:
-				output += (char) ((current + (c >> 3)) + 32);
-				current = (c & 7) << 12;
-				break;
-			case 3:
-				output += (char) ((current + (c >> 4)) + 32);
-				current = (c & 15) << 11;
-				break;
-			case 4:
-				output += (char) ((current + (c >> 5)) + 32);
-				current = (c & 31) << 10;
-				break;
-			case 5:
-				output += (char) ((current + (c >> 6)) + 32);
-				current = (c & 63) << 9;
-				break;
-			case 6:
-				output += (char) ((current + (c >> 7)) + 32);
-				current = (c & 127) << 8;
-				break;
-			case 7:
-				output += (char) ((current + (c >> 8)) + 32);
-				current = (c & 255) << 7;
-				break;
-			case 8:
-				output += (char) ((current + (c >> 9)) + 32);
-				current = (c & 511) << 6;
-				break;
-			case 9:
-				output += (char) ((current + (c >> 10)) + 32);
-				current = (c & 1023) << 5;
-				break;
-			case 10:
-				output += (char) ((current + (c >> 11)) + 32);
-				current = (c & 2047) << 4;
-				break;
-			case 11:
-				output += (char) ((current + (c >> 12)) + 32);
-				current = (c & 4095) << 3;
-				break;
-			case 12:
-				output += (char) ((current + (c >> 13)) + 32);
-				current = (c & 8191) << 2;
-				break;
-			case 13:
-				output += (char) ((current + (c >> 14)) + 32);
-				current = (c & 16383) << 1;
-				break;
-			case 14:
-				output += (char) ((current + (c >> 15)) + 32);
-				output += (char) ((c & 32767) + 32);
+				case 0:
+					output += (char) ((c >> 1) + 32);
+					current = (c & 1) << 14;
+					break;
+				case 1:
+					output += (char) ((current + (c >> 2)) + 32);
+					current = (c & 3) << 13;
+					break;
+				case 2:
+					output += (char) ((current + (c >> 3)) + 32);
+					current = (c & 7) << 12;
+					break;
+				case 3:
+					output += (char) ((current + (c >> 4)) + 32);
+					current = (c & 15) << 11;
+					break;
+				case 4:
+					output += (char) ((current + (c >> 5)) + 32);
+					current = (c & 31) << 10;
+					break;
+				case 5:
+					output += (char) ((current + (c >> 6)) + 32);
+					current = (c & 63) << 9;
+					break;
+				case 6:
+					output += (char) ((current + (c >> 7)) + 32);
+					current = (c & 127) << 8;
+					break;
+				case 7:
+					output += (char) ((current + (c >> 8)) + 32);
+					current = (c & 255) << 7;
+					break;
+				case 8:
+					output += (char) ((current + (c >> 9)) + 32);
+					current = (c & 511) << 6;
+					break;
+				case 9:
+					output += (char) ((current + (c >> 10)) + 32);
+					current = (c & 1023) << 5;
+					break;
+				case 10:
+					output += (char) ((current + (c >> 11)) + 32);
+					current = (c & 2047) << 4;
+					break;
+				case 11:
+					output += (char) ((current + (c >> 12)) + 32);
+					current = (c & 4095) << 3;
+					break;
+				case 12:
+					output += (char) ((current + (c >> 13)) + 32);
+					current = (c & 8191) << 2;
+					break;
+				case 13:
+					output += (char) ((current + (c >> 14)) + 32);
+					current = (c & 16383) << 1;
+					break;
+				case 14:
+					output += (char) ((current + (c >> 15)) + 32);
+					output += (char) ((c & 32767) + 32);
 
-				status = 0;
-				break;
+					status = 0;
+					break;
 			}
 		}
 
@@ -556,70 +556,70 @@ public class LZString {
 			c = (((int) input.charAt(i)) - 32);
 
 			switch (status++) {
-			case 0:
-				current = c << 1;
-				break;
-			case 1:
-				output.append((char) (current | (c >> 14)));
-				current = (c & 16383) << 2;
-				break;
-			case 2:
-				output.append((char) (current | (c >> 13)));
-				current = (c & 8191) << 3;
-				break;
-			case 3:
-				output.append((char) (current | (c >> 12)));
-				current = (c & 4095) << 4;
-				break;
-			case 4:
-				output.append((char) (current | (c >> 11)));
-				current = (c & 2047) << 5;
-				break;
-			case 5:
-				output.append((char) (current | (c >> 10)));
-				current = (c & 1023) << 6;
-				break;
-			case 6:
-				output.append((char) (current | (c >> 9)));
-				current = (c & 511) << 7;
-				break;
-			case 7:
-				output.append((char) (current | (c >> 8)));
-				current = (c & 255) << 8;
-				break;
-			case 8:
-				output.append((char) (current | (c >> 7)));
-				current = (c & 127) << 9;
-				break;
-			case 9:
-				output.append((char) (current | (c >> 6)));
-				current = (c & 63) << 10;
-				break;
-			case 10:
-				output.append((char) (current | (c >> 5)));
-				current = (c & 31) << 11;
-				break;
-			case 11:
-				output.append((char) (current | (c >> 4)));
-				current = (c & 15) << 12;
-				break;
-			case 12:
-				output.append((char) (current | (c >> 3)));
-				current = (c & 7) << 13;
-				break;
-			case 13:
-				output.append((char) (current | (c >> 2)));
-				current = (c & 3) << 14;
-				break;
-			case 14:
-				output.append((char) (current | (c >> 1)));
-				current = (c & 1) << 15;
-				break;
-			case 15:
-				output.append((char) (current | c));
+				case 0:
+					current = c << 1;
+					break;
+				case 1:
+					output.append((char) (current | (c >> 14)));
+					current = (c & 16383) << 2;
+					break;
+				case 2:
+					output.append((char) (current | (c >> 13)));
+					current = (c & 8191) << 3;
+					break;
+				case 3:
+					output.append((char) (current | (c >> 12)));
+					current = (c & 4095) << 4;
+					break;
+				case 4:
+					output.append((char) (current | (c >> 11)));
+					current = (c & 2047) << 5;
+					break;
+				case 5:
+					output.append((char) (current | (c >> 10)));
+					current = (c & 1023) << 6;
+					break;
+				case 6:
+					output.append((char) (current | (c >> 9)));
+					current = (c & 511) << 7;
+					break;
+				case 7:
+					output.append((char) (current | (c >> 8)));
+					current = (c & 255) << 8;
+					break;
+				case 8:
+					output.append((char) (current | (c >> 7)));
+					current = (c & 127) << 9;
+					break;
+				case 9:
+					output.append((char) (current | (c >> 6)));
+					current = (c & 63) << 10;
+					break;
+				case 10:
+					output.append((char) (current | (c >> 5)));
+					current = (c & 31) << 11;
+					break;
+				case 11:
+					output.append((char) (current | (c >> 4)));
+					current = (c & 15) << 12;
+					break;
+				case 12:
+					output.append((char) (current | (c >> 3)));
+					current = (c & 7) << 13;
+					break;
+				case 13:
+					output.append((char) (current | (c >> 2)));
+					current = (c & 3) << 14;
+					break;
+				case 14:
+					output.append((char) (current | (c >> 1)));
+					current = (c & 1) << 15;
+					break;
+				case 15:
+					output.append((char) (current | c));
 
-				status = 0;
-				break;
+					status = 0;
+					break;
 			}
 
 			i++;

@@ -8,10 +8,14 @@ import java.util.List;
  * @since 1.0.0
  */
 class RaftNode {
-    int candidateId;
-    int leaderId;
-    int nodeId;
-    int currentTerm;
+
+	int candidateId;
+
+	int leaderId;
+
+	int nodeId;
+
+	int currentTerm;
 
 	int votedFor;
 

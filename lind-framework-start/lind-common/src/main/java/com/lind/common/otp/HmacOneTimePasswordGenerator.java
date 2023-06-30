@@ -80,24 +80,24 @@ public class HmacOneTimePasswordGenerator {
 		this.mac = Mac.getInstance(algorithm);
 
 		switch (passwordLength) {
-		case 6: {
-			this.modDivisor = 1_000_000;
-			break;
-		}
+			case 6: {
+				this.modDivisor = 1_000_000;
+				break;
+			}
 
-		case 7: {
-			this.modDivisor = 10_000_000;
-			break;
-		}
+			case 7: {
+				this.modDivisor = 10_000_000;
+				break;
+			}
 
-		case 8: {
-			this.modDivisor = 100_000_000;
-			break;
-		}
+			case 8: {
+				this.modDivisor = 100_000_000;
+				break;
+			}
 
-		default: {
-			throw new IllegalArgumentException("Password length must be between 6 and 8 digits.");
-		}
+			default: {
+				throw new IllegalArgumentException("Password length must be between 6 and 8 digits.");
+			}
 		}
 
 		this.passwordLength = passwordLength;

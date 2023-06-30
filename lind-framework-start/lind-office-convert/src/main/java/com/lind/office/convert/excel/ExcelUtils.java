@@ -125,29 +125,29 @@ public class ExcelUtils {
 		DecimalFormat df2 = new DecimalFormat("0.00"); // 格式化数字
 
 		switch (cell.getCellType()) {
-		case STRING:
-			JSONObject jsonObject2 = JSONUtil.parseObj(cell.getRichStringCellValue().getString());
-			value = jsonObject2;
-			break;
-		case NUMERIC:
-			if ("General".equals(cell.getCellStyle().getDataFormatString())) {
-				value = df.format(cell.getNumericCellValue());
-			}
-			else if ("m/d/yy".equals(cell.getCellStyle().getDataFormatString())) {
-				value = sdf.format(cell.getDateCellValue());
-			}
-			else {
-				value = df2.format(cell.getNumericCellValue());
-			}
-			break;
-		case BOOLEAN:
-			value = cell.getBooleanCellValue();
-			break;
-		case BLANK:
-			value = "";
-			break;
-		default:
-			break;
+			case STRING:
+				JSONObject jsonObject2 = JSONUtil.parseObj(cell.getRichStringCellValue().getString());
+				value = jsonObject2;
+				break;
+			case NUMERIC:
+				if ("General".equals(cell.getCellStyle().getDataFormatString())) {
+					value = df.format(cell.getNumericCellValue());
+				}
+				else if ("m/d/yy".equals(cell.getCellStyle().getDataFormatString())) {
+					value = sdf.format(cell.getDateCellValue());
+				}
+				else {
+					value = df2.format(cell.getNumericCellValue());
+				}
+				break;
+			case BOOLEAN:
+				value = cell.getBooleanCellValue();
+				break;
+			case BLANK:
+				value = "";
+				break;
+			default:
+				break;
 		}
 		return value;
 	}

@@ -13,8 +13,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 class NodeInfo {
-    int id;
 
-    // 构造函数和其他属性
-    // ...
+	int id;
+
+	// 构造函数和其他属性
+	// ...
+
 }

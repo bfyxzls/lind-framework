@@ -6,9 +6,12 @@ package com.lind.common.core.raft;
  * @since 1.0.0
  */
 class LogEntry {
-    int term;
-    String command;
 
-    // 构造函数和其他属性
-    // ...
+	int term;
+
+	String command;
+
+	// 构造函数和其他属性
+	// ...
+
 }

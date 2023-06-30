@@ -152,14 +152,14 @@ public class Server {
 		// services mapping
 		try {
 			switch (uri) {
-			case "/beat":
-				return "beat:" + requestData;
+				case "/beat":
+					return "beat:" + requestData;
 
-			case "/kill":
-				return "kill:" + requestData;
+				case "/kill":
+					return "kill:" + requestData;
 
-			default:
-				return "default";
+				default:
+					return "default";
 			}
 		}
 		catch (Exception e) {

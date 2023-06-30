@@ -39,6 +39,7 @@ public class RepeatSubmitAspect implements ApplicationContextAware {
 	 * @after
 	 */
 	private final RedisTemplate<String, String> redisTemplate;
+
 	ApplicationContext applicationContext;
 
 	@Around("@annotation(repeatSubmit)")

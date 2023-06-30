@@ -41,16 +41,16 @@ public class LevelColorConverter extends ClassicConverter {
 	 */
 	private String getColor(Level level) {
 		switch (level.toInt()) {
-		case Level.DEBUG_INT:
-			return DEBUG_COLOR;
-		case Level.INFO_INT:
-			return INFO_COLOR;
-		case Level.ERROR_INT:
-			return ERROR_COLOR;
-		case Level.WARN_INT:
-			return WARN_COLOR;
-		default:
-			return "";
+			case Level.DEBUG_INT:
+				return DEBUG_COLOR;
+			case Level.INFO_INT:
+				return INFO_COLOR;
+			case Level.ERROR_INT:
+				return ERROR_COLOR;
+			case Level.WARN_INT:
+				return WARN_COLOR;
+			default:
+				return "";
 		}
 	}
 

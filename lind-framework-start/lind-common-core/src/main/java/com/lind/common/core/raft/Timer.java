@@ -6,8 +6,10 @@ package com.lind.common.core.raft;
  * @since 1.0.0
  */
 class Timer {
-    long timeout;
 
-    // 构造函数和其他方法
-    // ...
+	long timeout;
+
+	// 构造函数和其他方法
+	// ...
+
 }

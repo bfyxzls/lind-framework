@@ -85,39 +85,39 @@ public class ExcelToListMap {
 				Cell cell = cellIterator.next();
 				String columnName = head.getCell(cell.getColumnIndex()).toString();
 				switch (cell.getCellType()) {
-				case STRING: // field that represents string cell type
+					case STRING: // field that represents string cell type
 
-					try {
-						JsonNode node = mapper.readTree(cell.getStringCellValue());
-						if (node.isArray()) {
-							ArrayNode arrayNode = (ArrayNode) node;
-							try {
-								List<Map> innerList = new ArrayList<>();
-								for (JsonNode jsonNode : arrayNode) {
-									innerList.add(mapper.convertValue(jsonNode, Map.class));
+						try {
+							JsonNode node = mapper.readTree(cell.getStringCellValue());
+							if (node.isArray()) {
+								ArrayNode arrayNode = (ArrayNode) node;
+								try {
+									List<Map> innerList = new ArrayList<>();
+									for (JsonNode jsonNode : arrayNode) {
+										innerList.add(mapper.convertValue(jsonNode, Map.class));
+									}
+									map.put(columnName, innerList);
 								}
-								map.put(columnName, innerList);
-							}
-							catch (Exception ex) {
-								// 简单类型的数组
-								map.put(columnName,
-										mapper.readValue(cell.getStringCellValue(), new TypeReference<List<String>>() {
-										}));
-							}
+								catch (Exception ex) {
+									// 简单类型的数组
+									map.put(columnName, mapper.readValue(cell.getStringCellValue(),
+											new TypeReference<List<String>>() {
+											}));
+								}
 
+							}
+							else {
+								map.put(columnName, mapper.convertValue(node, Map.class));
+							}
 						}
-						else {
-							map.put(columnName, mapper.convertValue(node, Map.class));
+						catch (JsonParseException ex) {
+							map.put(columnName, cell.getStringCellValue());
 						}
-					}
-					catch (JsonParseException ex) {
+						break;
+					case NUMERIC:
 						map.put(columnName, cell.getStringCellValue());
-					}
-					break;
-				case NUMERIC:
-					map.put(columnName, cell.getStringCellValue());
-					break;
-				default:
+						break;
+					default:
 				}
 			}
 			mapList.add(map);

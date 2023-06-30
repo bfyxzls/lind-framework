@@ -7,7 +7,7 @@ package com.lind.common.core.raft;
  */
 // 节点状态
 enum NodeState {
-    FOLLOWER,
-    CANDIDATE,
-    LEADER
+
+	FOLLOWER, CANDIDATE, LEADER
+
 }
