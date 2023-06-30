@@ -66,8 +66,8 @@ public class ByteDefineTest {
 		pos += HEADER_LEN;
 		String nameStr = new String(Bytes.slice(result, pos, nameLen));
 		pos += nameLen;
-		EventData eventData=new EventData(nameLen,nameStr);
-		log.info("event data:{}",eventData);
+		EventData eventData = new EventData(nameLen, nameStr);
+		log.info("event data:{}", eventData);
 	}
 
 	@Data

@@ -59,10 +59,12 @@ public class StringTest {
 
 	@Test
 	public void StringTo16() {
-		String str = "abc";
-		String str16 = BinHexSwitchUtils.bytesToHexString(str.getBytes());
-		log.info("result={}", str16);
-		log.info("result={}", new String(BinHexSwitchUtils.hexStringToBytes(str16)));
+		for (int i = 1; i < 10000; i++) {
+			String str = "abc";
+			String str16 = BinHexSwitchUtils.bytesToHexString(str.getBytes());
+			log.info("result={}", str16);
+			log.info("result={}", new String(BinHexSwitchUtils.hexStringToBytes(str16)));
+		}
 	}
 
 	/**

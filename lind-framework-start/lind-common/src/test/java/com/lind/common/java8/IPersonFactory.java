@@ -7,8 +7,11 @@ package com.lind.common.java8;
  */
 @FunctionalInterface
 public interface IPersonFactory<P extends StreamTest.Person> {
-    P create(String firstName, String lastName);
-    default void print(){
-        System.out.println("print hello.");
-    }
+
+	P create(String firstName, String lastName);
+
+	default void print() {
+		System.out.println("print hello.");
+	}
+
 }

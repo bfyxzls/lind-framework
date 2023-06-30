@@ -27,7 +27,7 @@ public class SynchronousQueueTest {
 			try {
 				String message = "Hello, World!";
 				System.out.println("Producer is adding message: " + message);
-				for(int i=0;i<5;i++) {
+				for (int i = 0; i < 5; i++) {
 					queue.put(message);
 				}
 			}
@@ -38,7 +38,7 @@ public class SynchronousQueueTest {
 
 		Thread consumer = new Thread(() -> {
 			try {
-				while(!queue.isEmpty()) {
+				while (!queue.isEmpty()) {
 					String message = queue.take();
 					System.out.println("Consumer received message: " + message);
 					Thread.sleep(2000);// 消费的比较慢，也影响了生产的速度
@@ -52,7 +52,6 @@ public class SynchronousQueueTest {
 
 		producer.start();
 		consumer.start();
-
 
 		producer.join();
 		consumer.join();

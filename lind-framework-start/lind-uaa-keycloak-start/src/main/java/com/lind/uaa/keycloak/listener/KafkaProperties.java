@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * 自定义的kc的kafka连接串.
  */
-@ConfigurationProperties("kc-kafka")
+@ConfigurationProperties("keycloak.uaa.kafka")
 public class KafkaProperties {
 
 	/**

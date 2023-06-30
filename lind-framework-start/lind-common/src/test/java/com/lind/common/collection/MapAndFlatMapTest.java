@@ -89,8 +89,8 @@ public class MapAndFlatMapTest {
 
 		// 先判断 key 为 9 的元素是否存在，存在，则做删除操作
 		map.computeIfPresent(9, (num, val) -> null);
-		boolean result=map.containsKey(9); // false
-		log.info("9={}",result); // val33
+		boolean result = map.containsKey(9); // false
+		log.info("9={}", result); // val33
 
 		// computeIfAbsent(), 当 key 不存在时，才会做相关处理
 		// 如下：先判断 key 为 23 的元素是否存在，不存在，则添加

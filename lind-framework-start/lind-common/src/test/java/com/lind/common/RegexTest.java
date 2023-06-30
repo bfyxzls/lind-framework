@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -27,6 +28,20 @@ public class RegexTest {
 	 */
 	private static final Pattern AUTHORIZATION_PATTERN = Pattern.compile("^Bearer (?<token>[a-zA-Z0-9-:._~+/]+=*)$",
 			Pattern.CASE_INSENSITIVE);
+
+	public static String removeUrlSpaceParams(String needValid) {
+		needValid = needValid.replaceAll("%C2%A0", "%20");
+		needValid = needValid.replaceAll(" ", "%20");
+		needValid = needValid.replaceAll("<", "%3C");
+		needValid = needValid.replaceAll(">", "%3E");
+		needValid = needValid.replaceAll("\\{", "%7B");
+		needValid = needValid.replaceAll("}", "%7D");
+		needValid = needValid.replaceAll("\"", "%20");
+		needValid = needValid.replaceAll("　", "%E3%80%80");
+		needValid = needValid.replaceAll("》", "%E3%80%8B");
+		needValid = needValid.replaceAll("《", "%E3%80%8A");
+		return needValid;
+	}
 
 	@Test
 	public void basic() {
@@ -50,6 +65,31 @@ public class RegexTest {
 		else {
 			log.info("Bearer token={}", matcher.group("token"));
 		}
+	}
+
+	// 邮箱@截取
+	@Test
+	public void emailSplit() {
+		Pattern pattern = Pattern.compile("(.*)@(.*)");
+
+		for (int i = 0; i < 1000; i++) {
+			String email = "zzl" + i + "@example.com";
+			Matcher matcher = pattern.matcher(email);
+			if (matcher.matches()) {
+				String username = matcher.group(1); // 获取@前面的部分
+				String domain = matcher.group(2); // 获取@后面的部分
+				log.info("username={},domain={}", username, domain);
+			}
+		}
+	}
+
+	@Test
+	public void emailSplit2() {
+		String email = "example@example.com";
+		int atIndex = email.indexOf("@");
+		String username = email.substring(0, atIndex); // 获取@前面的部分
+		String domain = email.substring(atIndex + 1); // 获取@后面的部分
+		log.info("username={},domain={}", username, domain);
 	}
 
 	/**
@@ -82,6 +122,13 @@ public class RegexTest {
 		}
 		System.out.println(matches); // 输出所有匹配结果
 
+	}
+
+	@Test
+	public void urlEncode() {
+		String redirect_uri = "https://pkulaw.com/chl/4d5b6c562483fccebdfb.html?keyword=最高人民法院 最高人民检察院关于常见犯罪的量刑指导意见(试行）";
+		redirect_uri = redirect_uri.replaceAll("\\xa0", "");
+		URI uri = URI.create(redirect_uri);
 	}
 
 }

@@ -102,10 +102,11 @@ public class FileUtilsTest {
 
 		long fileSize = f.length();
 		assert fileSize > TRAILER_SIZE;
-		in.seek(fileSize - TRAILER_SIZE);//跳过前36个字符
+		in.seek(fileSize - TRAILER_SIZE);// 跳过前36个字符
 
 		byte[] buffer = new byte[8];
 		assert in.read(buffer) == buffer.length;
 
 	}
+
 }

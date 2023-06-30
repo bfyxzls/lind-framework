@@ -62,12 +62,16 @@ public class UrlUtils {
 	 * @return
 	 */
 	public static String removeUrlSpaceParams(String needValid) {
+		needValid = needValid.replaceAll("\\xa0", "%20");// %C2%A0，在windows里是NBSP，非断空格，我们去掉它
 		needValid = needValid.replaceAll(" ", "%20");
 		needValid = needValid.replaceAll("<", "%3C");
 		needValid = needValid.replaceAll(">", "%3E");
 		needValid = needValid.replaceAll("\\{", "%7B");
 		needValid = needValid.replaceAll("}", "%7D");
 		needValid = needValid.replaceAll("\"", "%20");
+		needValid = needValid.replaceAll("　", "%E3%80%80");
+		needValid = needValid.replaceAll("》", "%E3%80%8B");
+		needValid = needValid.replaceAll("《", "%E3%80%8A");
 		return needValid;
 	}
 

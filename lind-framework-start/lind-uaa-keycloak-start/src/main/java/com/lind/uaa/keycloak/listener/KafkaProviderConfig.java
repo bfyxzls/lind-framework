@@ -26,7 +26,7 @@ import java.util.Map;
  */
 @Configuration
 @RequiredArgsConstructor
-@ConditionalOnProperty(value = "kc-kafka.enabled", matchIfMissing = true)
+@ConditionalOnProperty(value = "keycloak.uaa.kafka.enabled", matchIfMissing = true)
 @EnableConfigurationProperties(KafkaProperties.class)
 public class KafkaProviderConfig {
 

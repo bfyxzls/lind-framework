@@ -65,8 +65,8 @@ public class ComparatorTest {
 	public void testPredicate() {
 		Predicate<String> predicate = (s) -> s.length() > 0;
 
-		boolean foo0 = predicate.test("foo");           // true
-		boolean foo1 = predicate.negate().test("foo");  // negate否定相当于!true
+		boolean foo0 = predicate.test("foo"); // true
+		boolean foo1 = predicate.negate().test("foo"); // negate否定相当于!true
 		Assert.isTrue(foo0, "Expression must be true");
 		assert !foo1;
 		Predicate<Boolean> nonNull = Objects::nonNull;
@@ -78,20 +78,25 @@ public class ComparatorTest {
 
 	@Test
 	public void testFunction() {
-		Function<String, Integer> toInteger = Integer::valueOf;                                         //转Integer
-		Function<String, String> backToString = toInteger.andThen(String::valueOf);                     //转String
-		Function<String, String> afterToStartsWith = backToString.andThen(new Something()::startsWith); //截取第一位
+		Function<String, Integer> toInteger = Integer::valueOf; // 转Integer
+		Function<String, String> backToString = toInteger.andThen(String::valueOf); // 转String
+		Function<String, String> afterToStartsWith = backToString.andThen(new Something()::startsWith); // 截取第一位
 		String apply = afterToStartsWith.apply("123");// "123"
 		System.out.println(apply);
 	}
+
 	class Something {
+
 		String startsWith(String s) {
 			return String.valueOf(s.charAt(0));
 		}
+
 	}
+
 	class Person extends StreamTest.Person {
 
 		String firstName;
+
 		String lastName;
 
 		Person() {

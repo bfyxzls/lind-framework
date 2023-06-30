@@ -57,9 +57,7 @@ logging:
 ```
 ## 相关配置
 ```$xslt
-uaa:
-  permitAll: /users # 开放的地址，它们将会被动调用`kc-session`这个接口完成用户状态同步
-  redirectUri: http://192.168.3.181:9090/about # 回调地址，token会追加在这个地址上，为空表示直接在页面上输出token
+
 keycloak:
   auth-server-url: http://devcas.pkulaw.com:18081/auth # kc服务器地址
   realm: demo # 域名称
@@ -70,6 +68,9 @@ keycloak:
   principal-attribute: preferred_username
   use-resource-role-mappings: false # 如果设置为true，则适配器将在令牌内部查找用户的应用程序级角色映射。 如果为false，它将查看用户角色映射的领域级别。 这是可选的。 默认值为false。
   cors: true
+  uaa:
+  permitAll: /users # 开放的地址，它们将会被动调用`kc-session`这个接口完成用户状态同步
+  redirectUri: http://192.168.3.181:9090/about # 回调地址，token会追加在这个地址上，为空表示直接在页面上输出token
 ```
 ## 实现相关接口
 主要是指角色与你的权限的对应关系，如果由使用方去实现这两个接口，将用户对应的角色返回即可，你可以对你的实现方法采用缓存的设计及提高性能。
@@ -150,7 +151,8 @@ public class PermissionServiceImpl implements PermissionService {
 * 不需要认证就可以访问的接口，使用`permitAll`来配置，即白名单列表
 > 例子，下面配置实现了当登录成功之后重定向到`http://192.168.3.181:9090/about`页面，对/about接口开放访问
 ```
-uaa
+keycloak:
+uaa:
  permitAll: /about
  redirectUri: http://192.168.3.181:9090/about
 ```
@@ -239,3 +241,11 @@ public class ScopeJsonSerializer<T> extends JsonSerializer<T> {
 }
 ```
 在DTO实体中使用，先在实体上声明注解`@JsonSerialize(using = ScopeJsonSerializer.class)`，之后在需要保护的字段上添加@ScopeSet注解即可
+
+# kafka和redis配置
+```yaml
+keycloak:
+  uaa:
+    kafka.enabled: true
+    cache.redis.enabled: true
+```

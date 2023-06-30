@@ -21,7 +21,7 @@ import java.util.Optional;
  */
 @Slf4j
 @RequiredArgsConstructor
-@ConditionalOnProperty(value = "kc-kafka.enabled", matchIfMissing = true)
+@ConditionalOnProperty(value = "keycloak.uaa.kafka.enabled", matchIfMissing = true)
 public class RoleChangeListener {
 
 	private final CacheProvider cacheProvider;

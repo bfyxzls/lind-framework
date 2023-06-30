@@ -55,9 +55,11 @@ public class HtmlUtils {
 		// htmlStr = htmlStr.substring(0, htmlStr.indexOf("。")+1);
 		return htmlStr;
 	}
+
 	/**
-	 * <p>Escapes the value for a HTML element attribute.</p>
-	 *
+	 * <p>
+	 * Escapes the value for a HTML element attribute.
+	 * </p>
 	 * @param value
 	 * @return
 	 */
@@ -69,19 +71,25 @@ public class HtmlUtils {
 
 			if (chr == '<') {
 				escaped.append("&lt;");
-			} else if (chr == '>') {
+			}
+			else if (chr == '>') {
 				escaped.append("&gt;");
-			} else if (chr == '"') {
+			}
+			else if (chr == '"') {
 				escaped.append("&quot;");
-			} else if (chr == '\'') {
+			}
+			else if (chr == '\'') {
 				escaped.append("&apos;");
-			} else if (chr == '&') {
+			}
+			else if (chr == '&') {
 				escaped.append("&amp;");
-			} else {
+			}
+			else {
 				escaped.append(chr);
 			}
 		}
 
 		return escaped.toString();
 	}
+
 }

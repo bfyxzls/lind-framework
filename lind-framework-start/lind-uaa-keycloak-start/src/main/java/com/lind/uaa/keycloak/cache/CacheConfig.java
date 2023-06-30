@@ -14,7 +14,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 public class CacheConfig {
 
 	@Bean
-	@ConditionalOnProperty(value = "kc-cache.redis.enabled", matchIfMissing = true)
+	@ConditionalOnProperty(value = "keycloak.uaa.cache.redis.enabled", matchIfMissing = true)
 	public CacheProvider redisCacheProvider(RedisTemplate<String, String> redisTemplate) {
 		return new RedisCacheProvider(redisTemplate);
 	}
