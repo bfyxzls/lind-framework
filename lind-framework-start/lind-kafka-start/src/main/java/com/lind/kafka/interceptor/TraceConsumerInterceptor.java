@@ -4,6 +4,8 @@ import org.apache.kafka.clients.consumer.ConsumerInterceptor;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.OffsetAndMetadata;
 import org.apache.kafka.common.TopicPartition;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
 import java.util.Map;
@@ -15,12 +17,14 @@ import java.util.Map;
  */
 public class TraceConsumerInterceptor implements ConsumerInterceptor<String, String> {
 
+	private static final Logger logger = LoggerFactory.getLogger(TraceConsumerInterceptor.class);
+
 	@Override
 	public ConsumerRecords<String, String> onConsume(ConsumerRecords<String, String> consumerRecords) {
 		consumerRecords.forEach(o -> {
 			o.headers().forEach(header -> {
 				if (header.key().equals("traceId")) {
-					System.out.println(header.key() + ":" + header.value());
+					logger.debug("{}:{}", header.key(), header.value());
 					MDC.put("traceId", new String(header.value()));
 				}
 			});

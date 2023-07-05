@@ -39,9 +39,6 @@ public class ValidateCodeBeanConfig {
 	@Autowired
 	private ValidateCodeProperties validateCodeProperties;
 
-	@Autowired
-	private Producer captchaProducer;
-
 	@Bean(name = "captchaProducer")
 	public DefaultKaptcha getKaptchaBean() {
 		DefaultKaptcha defaultKaptcha = new DefaultKaptcha();
@@ -68,7 +65,7 @@ public class ValidateCodeBeanConfig {
 	public ValidateCodeGenerator imageValidateCodeGenerator() {
 		ImageCodeGenerator codeGenerator = new ImageCodeGenerator();
 		codeGenerator.setSecurityProperties(validateCodeProperties.getImage());
-		codeGenerator.setCaptchaProducer(captchaProducer);
+		codeGenerator.setCaptchaProducer(getKaptchaBean());
 		return codeGenerator;
 	}
 
@@ -81,7 +78,7 @@ public class ValidateCodeBeanConfig {
 	public ValidateCodeGenerator imageStreamValidateCodeGenerator() {
 		ImageStreamCodeGenerator codeGenerator = new ImageStreamCodeGenerator();
 		codeGenerator.setSecurityProperties(validateCodeProperties.getImage());
-		codeGenerator.setCaptchaProducer(captchaProducer);
+		codeGenerator.setCaptchaProducer(getKaptchaBean());
 		return codeGenerator;
 	}
 

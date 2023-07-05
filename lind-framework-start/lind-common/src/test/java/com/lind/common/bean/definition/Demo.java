@@ -22,6 +22,7 @@ public class Demo {
 		car.print();
 	}
 
+	// 不能被实现了，因为它被代理了
 	interface Bird {
 
 		void run();

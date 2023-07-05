@@ -37,6 +37,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, TUser> implements 
 		return getPageData(page, TUser.class);
 	}
 
+	@Override
+	public Page getByPage(Page page) {
+		return getRepository().selectPage(page, null);
+	}
+
 	private QueryWrapper<TUser> getWrapper(Map<String, Object> params) {
 		String dictTypeId = (String) params.get("username");
 		QueryWrapper<TUser> wrapper = new QueryWrapper<>();

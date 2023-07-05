@@ -3,6 +3,7 @@ package com.lind.kafka.entity;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -38,6 +39,6 @@ public class MessageEntity<T> implements Serializable, MessageEntityAware {
 	/**
 	 * 发送时间
 	 */
-	private Date sendTime;
+	private LocalDateTime sendTime;
 
 }

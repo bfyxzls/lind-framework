@@ -3,6 +3,7 @@ package com.lind.mybatis;
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lind.common.dto.PageDTO;
 import com.lind.common.dto.PageParam;
 import com.lind.mybatis.config.Constant;
@@ -27,6 +28,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 @Slf4j
 @ActiveProfiles("integTest")
@@ -87,6 +89,18 @@ public class BasicTest {
 			}
 			log.info("---------------------page------------------");
 		}
+	}
+
+	@Test
+	public void getLogByPage() {
+		int[] numbers = IntStream.rangeClosed(1, 10).toArray();
+		for (int number : numbers) {
+			TUser user = new TUser();
+			user.setUsername("lind" + number);
+			userService.insert(user);
+		}
+		Page<TUser> userPages = userService.getByPage(new Page(2, 2));
+		userPages.getRecords().forEach(o -> log.info("{}", o.getUsername()));
 	}
 
 	private void print(String name) {

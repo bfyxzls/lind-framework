@@ -2,6 +2,7 @@ package com.lind.common;
 
 import cn.hutool.core.date.DateTime;
 import com.lind.common.encrypt.HashUtils;
+import com.lind.common.tree.Trie;
 import com.lind.common.util.BinHexSwitchUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -172,6 +173,15 @@ public class StringTest {
 			}
 		}
 		log.info("{}", ipAddress);
+	}
+
+	@Test
+	public void search() {
+		String word="hello";
+		for (int i = 0; i < word.length(); i++) {
+			char ch = word.charAt(i);
+			log.info("ch={}",ch);
+		}
 	}
 
 }

@@ -1,4 +1,3 @@
-# 自动注入的bean
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.lind.verification.code.ValidateCodeBeanConfig,\
   com.lind.verification.code.image.ImageCodeProcessor,\

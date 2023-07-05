@@ -8,6 +8,9 @@ import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.type.AnnotationMetadata;
 
+/**
+ * 构建一个FactoryBean对像.
+ */
 public class RunFactoryBeanDefinitionRegistry implements ImportBeanDefinitionRegistrar {
 
 	@SneakyThrows
