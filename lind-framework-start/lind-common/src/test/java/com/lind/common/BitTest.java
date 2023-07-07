@@ -163,4 +163,21 @@ public class BitTest {
 
 	}
 
+	@Test
+	public void pi() {
+		//π/4 = 1 - 1/3 + 1/5 - 1/7 + 1/9 - 1/11 + ...
+		double sum = 0;
+		int flag = 1;
+		for (int i = 1; i <= 10000; i++) {
+			if (i % 2 == 0) {
+				flag = -1;
+			}
+			else {
+				flag = 1;
+			}
+			sum += (flag) * 1.0 / (i * 2 - 1);
+		}
+		System.out.println("pi=" + sum * 4);
+	}
+
 }

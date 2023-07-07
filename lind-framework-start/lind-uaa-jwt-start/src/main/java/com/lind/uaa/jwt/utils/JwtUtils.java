@@ -37,7 +37,7 @@ public class JwtUtils {
 		String[] audience = { "app", "web" };
 		return JWT.create().withAudience(audience) // 观众，相当于接受者
 				.withIssuedAt(new Date()) // 生成签名的时间
-				.withExpiresAt(DateUtils.addHours(new Date(), 2)) // 生成签名的有效期
+				.withExpiresAt(DateUtils.addHours(new Date(), 2)) // 签名的过期时间
 				.withClaim("data", JSON.toJSONString(data)) // 存数据
 				.withNotBefore(new Date()) // 生效时间
 				.withJWTId(UUID.randomUUID().toString()) // 编号
