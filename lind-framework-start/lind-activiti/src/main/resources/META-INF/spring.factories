@@ -1,4 +1,3 @@
-# 自动注入的bean
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
     com.lind.activiti.config.ActivitiConfig,\
     com.lind.activiti.event.MangerSignCompleteEventListener,\
@@ -13,5 +12,4 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
     com.lind.activiti.controller.modeler.StencilsetRestResource,\
     com.lind.activiti.entity.ActReNode,\
     com.lind.activiti.util.ActivitiHelper,\
-    com.lind.activiti.config.ApplicationReadyEventListener,\
-    com.lind.activiti.repository.ActReNodeRepository
+    com.lind.activiti.config.ApplicationReadyEventListener

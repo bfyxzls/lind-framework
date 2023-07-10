@@ -1,0 +1,21 @@
+server:
+  port: 9091
+spring:
+  activiti:
+    check-process-definitions: false
+    font:
+      activityFontName: 宋体
+      labelFontName: 宋体
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.4.26:3306/activiti?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+
