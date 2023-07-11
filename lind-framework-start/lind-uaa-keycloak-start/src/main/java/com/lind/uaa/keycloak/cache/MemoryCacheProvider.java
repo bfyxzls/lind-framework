@@ -11,7 +11,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @since 1.0.0
  */
 @ConditionalOnMissingBean(CacheProvider.class)
-@Component
 public class MemoryCacheProvider implements CacheProvider {
 
 	static ConcurrentHashMap<String, String> dic = new ConcurrentHashMap<>();

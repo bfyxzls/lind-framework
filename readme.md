@@ -47,7 +47,7 @@ lind-start项目结构
    * lind-schedule 任务调组件
    * lind-spi java原生的插件组件
    * lind-uaa-jwt-start 基于JWT的授权组件
-   * lind-uaa-keycloak-start 基于keycloak的授权组件
+   * lind-uaa-keycloak-start 基于keycloak的授权组件,springboot.2.3.x，如果切换2.7.x会有循环引用问题
    * lind-uaa-start 用户授权组件
    * lind-verification-code-start 验证码组件
 

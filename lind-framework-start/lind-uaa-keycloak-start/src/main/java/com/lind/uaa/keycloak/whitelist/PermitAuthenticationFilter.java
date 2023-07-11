@@ -27,7 +27,6 @@ import static com.lind.uaa.keycloak.config.Constant.AUTHORIZATION;
 /**
  * 白名单过滤器，完成将header中的Authorization删除.
  */
-@Component("permitAuthenticationFilter")
 @RequiredArgsConstructor
 @Slf4j
 public class PermitAuthenticationFilter extends OncePerRequestFilter {

@@ -12,11 +12,10 @@ import javax.servlet.Filter;
 /**
  * 白名单配置.
  */
-@Component("permitAllSecurityConfig")
 public class PermitAllSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 
 	@Autowired
-	private Filter permitAuthenticationFilter;
+	private PermitAuthenticationFilter permitAuthenticationFilter;
 
 	@Override
 	public void configure(HttpSecurity http) {
