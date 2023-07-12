@@ -1,6 +1,6 @@
-package com.lind.elasticsearch.parser.impl;
+package com.lind.common.core.parser.impl;
 
-import com.lind.elasticsearch.parser.FieldTypeParser;
+import com.lind.common.core.parser.FieldTypeParser;
 
 public class NestedTypeParser extends BaseAbstractTypeParser implements FieldTypeParser<Object> {
 

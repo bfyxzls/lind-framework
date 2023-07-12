@@ -1,4 +1,4 @@
-package com.lind.elasticsearch.util;
+package com.lind.common.core.parser.util;
 
 public class ParserUtils {
 

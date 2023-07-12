@@ -1,3 +1,5 @@
+# 版本
+* 1.1.3 去掉parser包，将它移动到common-core项目，因为它与es无关，只做将数据按着类型进行粘贴
 # es7的部署
 ```
 docker run --restart=always -p 9200:9200 -p 9300:9300 -e discovery.type=single-node -e ES_JAVA_OPTS="-Xms512m -Xmx512m" --name=docker-elasticsearch -d  elasticsearch:7.6.2

@@ -1,4 +1,4 @@
-package com.lind.elasticsearch.parser;
+package com.lind.common.core.parser;
 
 public interface FieldTypeParserFactory {
 

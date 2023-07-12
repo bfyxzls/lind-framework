@@ -140,7 +140,7 @@ $(function () {
 
     jQuery.validator.addMethod("myValid01", function (value, element) {
         var length = value.length;
-        var valid = /^[a-z][a-z0-9]*$/;
+        var valid = /^[a-z][a-z0-9_-]*$/;//小写开头，后面包含大写，小写，_或者-的字符
         return this.optional(element) || valid.test(value);
     }, I18n.user_username_valid);
 

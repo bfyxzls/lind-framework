@@ -40,6 +40,5 @@
 <@netCommon.commonScript />
 <script src="${request.contextPath}/static/adminlte/plugins/iCheck/icheck.min.js"></script>
 <script src="${request.contextPath}/static/js/login.1.js"></script>
-<iframe src="http://192.168.4.26:8080/auth/realms/fabao"></iframe>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.lind.elasticsearch.parser;
+package com.lind.common.core.parser;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -12,6 +12,8 @@
   * 之前的尝试MappingJackson2HttpMessageConverter
   * JsonSerializer的实现
 
+> 目前框架只支持springboot2.3.x，如果使用最新的springboot2.7.x，会出现循环引用的问题
+
 # 前后分离项目
 ```
 keycloak.bearer-only: true #如果没有权限直接401，前后分离项目使用它，当后端返回401时，前端自己去KC认证，这个值为false时，属于前后一体模块，将会进行跳转KC登录

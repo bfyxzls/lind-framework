@@ -1,4 +1,4 @@
-package com.lind.elasticsearch.exception;
+package com.lind.common.core.parser.exception;
 
 public class FieldValidException extends RuntimeException {
 
