@@ -165,7 +165,7 @@ public class BitTest {
 
 	@Test
 	public void pi() {
-		//π/4 = 1 - 1/3 + 1/5 - 1/7 + 1/9 - 1/11 + ...
+		// π/4 = 1 - 1/3 + 1/5 - 1/7 + 1/9 - 1/11 + ...
 		double sum = 0;
 		int flag = 1;
 		for (int i = 1; i <= 10000; i++) {

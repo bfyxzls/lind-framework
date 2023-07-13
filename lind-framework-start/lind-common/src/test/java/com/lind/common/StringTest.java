@@ -177,10 +177,10 @@ public class StringTest {
 
 	@Test
 	public void search() {
-		String word="hello";
+		String word = "hello";
 		for (int i = 0; i < word.length(); i++) {
 			char ch = word.charAt(i);
-			log.info("ch={}",ch);
+			log.info("ch={}", ch);
 		}
 	}
 

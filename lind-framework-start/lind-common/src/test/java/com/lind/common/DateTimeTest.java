@@ -113,7 +113,7 @@ public class DateTimeTest {
 	@Test
 	public void cacleBetweenDaysJava8() throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date d1 =new Date();
+		Date d1 = new Date();
 		Date d2 = sdf.parse("2023-07-02 00:00:10");
 		long daysBetween = (d2.getTime() - d1.getTime() + 1000000) / (60 * 60 * 24 * 1000);
 		System.out.println("相隔 " + daysBetween + " 天");

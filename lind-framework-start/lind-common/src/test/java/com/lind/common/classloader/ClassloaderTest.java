@@ -10,8 +10,7 @@ import java.io.IOException;
 public class ClassloaderTest {
 
 	/**
-	 * Note: 读取jar包内部的文件.
-	 * Warning: 读取jar包内部的文件，需要使用getResourceAsStream，而不是getResource.
+	 * Note: 读取jar包内部的文件. Warning: 读取jar包内部的文件，需要使用getResourceAsStream，而不是getResource.
 	 * @throws IOException
 	 */
 	@Test

@@ -11,8 +11,10 @@ import org.springframework.web.servlet.view.RedirectView;
  */
 @Controller
 public class HomeController {
-    @GetMapping("/")
-    public RedirectView redirectToDemoIndex() {
-        return new RedirectView("/quartz-view/list");
-    }
+
+	@GetMapping("/")
+	public RedirectView redirectToDemoIndex() {
+		return new RedirectView("/quartz-view/list");
+	}
+
 }

@@ -67,7 +67,7 @@ public class DictionarySearch {
 		/**
 		 * 子节点. 使用hashMap为了更快的找到某个元素.
 		 */
-		HashMap<Character,TrieNode> son = new HashMap<>();
+		HashMap<Character, TrieNode> son = new HashMap<>();
 
 		TrieNode(Character c) {
 			value = c;

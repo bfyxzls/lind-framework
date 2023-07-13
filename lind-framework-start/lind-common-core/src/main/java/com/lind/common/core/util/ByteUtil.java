@@ -32,13 +32,15 @@ import java.io.InputStream;
  */
 public class ByteUtil {
 
+	public final static String HEX_TMP = "0123456789ABCDEF";
+
 	/**
 	 * 将一个2位字节数组转换为char字符。<br>
 	 * 注意，函数中不会对字节数组长度进行判断，请自行保证传入参数的正确性。
 	 * @param b 字节数组
 	 * @return char字符
 	 */
-	public static char bytesToChar(byte[] b) {
+	public static char toChar(byte[] b) {
 		char c = (char) ((b[0] << 8) & 0xFF00L);
 		c |= (char) (b[1] & 0xFFL);
 		return c;
@@ -50,8 +52,8 @@ public class ByteUtil {
 	 * @param b 字节数组
 	 * @return 双精度浮点数
 	 */
-	public static double bytesToDouble(byte[] b) {
-		return Double.longBitsToDouble(bytesToLong(b));
+	public static double toDouble(byte[] b) {
+		return Double.longBitsToDouble(toLong(b));
 	}
 
 	/**
@@ -60,7 +62,7 @@ public class ByteUtil {
 	 * @param start
 	 * @return
 	 */
-	public static double bytesHighFirstToDouble(byte[] bytes, int start) {
+	public static double highFirstToDouble(byte[] bytes, int start) {
 		long l = ((long) bytes[start] << 56) & 0xFF00000000000000L;
 		// 如果不强制转换为long，那么默认会当作int，导致最高32位丢失
 		l |= ((long) bytes[1 + start] << 48) & 0xFF000000000000L;
@@ -80,8 +82,8 @@ public class ByteUtil {
 	 * @param b 字节数组
 	 * @return 浮点数
 	 */
-	public static float bytesToFloat(byte[] b) {
-		return Float.intBitsToFloat(bytesToInt(b));
+	public static float toFloat(byte[] b) {
+		return Float.intBitsToFloat(toInt(b));
 	}
 
 	/**
@@ -90,7 +92,7 @@ public class ByteUtil {
 	 * @param b 字节数组
 	 * @return 整数
 	 */
-	public static int bytesToInt(byte[] b) {
+	public static int toInt(byte[] b) {
 		int i = (b[0] << 24) & 0xFF000000;// 4278190080
 		i |= (b[1] << 16) & 0xFF0000;// 16711680
 		i |= (b[2] << 8) & 0xFF00;// 65280
@@ -104,7 +106,7 @@ public class ByteUtil {
 	 * @param b 字节数组
 	 * @return 长整数
 	 */
-	public static long bytesToLong(byte[] b) {
+	public static long toLong(byte[] b) {
 		long l = ((long) b[0] << 56) & 0xFF00000000000000L;
 		// 如果不强制转换为long，那么默认会当作int，导致最高32位丢失
 		l |= ((long) b[1] << 48) & 0xFF000000000000L;
@@ -117,7 +119,7 @@ public class ByteUtil {
 		return l;
 	}
 
-	public static long bytesHighFirstToLong(byte[] b) {
+	public static long highFirstToLong(byte[] b) {
 		long l = ((long) b[0] << 56) & 0xFF00000000000000L;
 		// 如果不强制转换为long，那么默认会当作int，导致最高32位丢失
 		l |= ((long) b[1] << 48) & 0xFF000000000000L;
@@ -135,7 +137,7 @@ public class ByteUtil {
 	 * @param c 字符（java char 2个字节）
 	 * @return 代表字符的字节数组
 	 */
-	public static byte[] charToBytes(char c) {
+	public static byte[] toBytes(char c) {
 		byte[] b = new byte[8];
 		b[0] = (byte) (c >>> 8);
 		b[1] = (byte) c;
@@ -147,8 +149,8 @@ public class ByteUtil {
 	 * @param d 双精度浮点数
 	 * @return 代表双精度浮点数的字节数组
 	 */
-	public static byte[] doubleToBytes(double d) {
-		return longToBytes(Double.doubleToLongBits(d));
+	public static byte[] toBytes(double d) {
+		return toBytes(Double.doubleToLongBits(d));
 	}
 
 	/**
@@ -156,8 +158,8 @@ public class ByteUtil {
 	 * @param f 浮点数
 	 * @return 代表浮点数的字节数组
 	 */
-	public static byte[] floatToBytes(float f) {
-		return intToBytes(Float.floatToIntBits(f));
+	public static byte[] toBytes(float f) {
+		return toBytes(Float.floatToIntBits(f));
 	}
 
 	/**
@@ -165,7 +167,7 @@ public class ByteUtil {
 	 * @param i 整数
 	 * @return 代表整数的字节数组
 	 */
-	public static byte[] intToBytes(int i) {
+	public static byte[] toBytes(int i) {
 		byte[] b = new byte[4];
 		b[0] = (byte) (i >>> 24);
 		b[1] = (byte) (i >>> 16);
@@ -179,7 +181,7 @@ public class ByteUtil {
 	 * @param l 长整数
 	 * @return 代表长整数的字节数组
 	 */
-	public static byte[] longToBytes(long l) {
+	public static byte[] toBytes(long l) {
 		byte[] b = new byte[8];
 		b[0] = (byte) (l >>> 56);
 		b[1] = (byte) (l >>> 48);
@@ -193,11 +195,54 @@ public class ByteUtil {
 	}
 
 	/**
+	 * 字符串转换为字节数组
+	 * @param s
+	 * @return
+	 * @throws IOException
+	 */
+	public static byte[] toBytes(String s) throws IOException {
+		if (s == null)
+			return new byte[0];
+		return s.getBytes("UTF-8");
+	}
+
+	/**
+	 * 字节数组转换为16进制字符串
+	 * @param buf
+	 * @return
+	 * @throws IOException
+	 */
+	public static String toHex(byte[] buf) {
+		return toHex(buf, 0, buf.length);
+	}
+
+	/**
+	 * 字节数组转换为16进制字符串
+	 * @param buf
+	 * @param offset
+	 * @param len
+	 * @return
+	 */
+	public static String toHex(byte[] buf, int offset, int len) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = offset; i < offset + len; i++) {
+			int x = buf[i];
+			if (x > 32 && x < 127) {
+				sb.append((char) x);
+			}
+			else {
+				sb.append("\\x").append(HEX_TMP.charAt((x >> 4) & 0x0F)).append(HEX_TMP.charAt(x & 0x0F));
+			}
+		}
+		return sb.toString();
+	}
+
+	/**
 	 * 字节数组和整型的转换
 	 * @param bytes 字节数组
 	 * @return 整型
 	 */
-	public static int bytesToInt(byte[] bytes, int start) {
+	public static int toInt(byte[] bytes, int start) {
 		int num = bytes[start] & 0xFF;
 		num |= ((bytes[start + 1] << 8) & 0xFF00);
 		num |= ((bytes[start + 2] << 16) & 0xFF0000);
@@ -210,7 +255,7 @@ public class ByteUtil {
 	 * @param bytes 字节数组
 	 * @return 整型
 	 */
-	public static int bytesHighFirstToInt(byte[] bytes, int start) {
+	public static int highFirstToInt(byte[] bytes, int start) {
 		int num = bytes[start + 3] & 0xFF;
 		num |= ((bytes[start + 2] << 8) & 0xFF00);
 		num |= ((bytes[start + 1] << 16) & 0xFF0000);
@@ -224,7 +269,7 @@ public class ByteUtil {
 	 * @param start
 	 * @return
 	 */
-	public static char bytesHighFirstToChar(byte[] bytes, int start) {
+	public static char highFirstToChar(byte[] bytes, int start) {
 		char c = (char) (((bytes[start] & 0xFF) << 8) | (bytes[start + 1] & 0xFF));
 		return c;
 	}
@@ -235,9 +280,56 @@ public class ByteUtil {
 	 * @param start
 	 * @return
 	 */
-	public static float bytesHighFirstToFloat(byte[] bytes, int start) {
-		int l = bytesHighFirstToInt(bytes, start);
+	public static float highFirstToFloat(byte[] bytes, int start) {
+		int l = highFirstToInt(bytes, start);
 		return Float.intBitsToFloat(l);
+	}
+
+	/**
+	 * 比较两个字节数组
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	public static int compare(byte[] a, byte[] b) {
+		if (a == b)
+			return 0;
+		if (a == null)
+			return -1;
+		if (b == null)
+			return 1;
+		for (int i = 0, j = 0; i < a.length && j < b.length; i++, j++) {
+			int x = a[i] & 0xFF;
+			int y = b[i] & 0xFF;
+			if (x != y) {
+				return x - y;
+			}
+		}
+		return a.length - b.length;
+	}
+
+	/**
+	 * 分割字节数组
+	 * @param buf
+	 * @param offset
+	 * @param len
+	 * @return
+	 * @throws IOException
+	 */
+	public static byte[] slice(byte[] buf, int offset, int len) throws IOException {
+		if (buf == null) {
+			throw new IOException("buffer is null");
+		}
+		if (offset < 0 || len < 0) {
+			throw new IOException("Invalid offset: " + offset + " or len: " + len);
+		}
+		if (offset + len > buf.length) {
+			throw new IOException(
+					"Buffer overflow, offset: " + offset + ", len: " + len + ", buf.length:" + buf.length);
+		}
+		byte[] result = new byte[len];
+		System.arraycopy(buf, offset, result, 0, len);
+		return result;
 	}
 
 	/**
