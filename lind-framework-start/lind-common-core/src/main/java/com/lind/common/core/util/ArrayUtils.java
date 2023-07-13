@@ -37,10 +37,4 @@ public class ArrayUtils {
 		return INDEX_NOT_FOUND;
 	}
 
-	public static void main(String[] args) {
-		System.out.println(isEmpty(new String[] { "a", "b", "c" }));
-		System.out.println(contains(StringUtils.split("1,2,3", ","), String.valueOf(1)));
-		System.out.println(contains(StringUtils.split("1,2,3", ","), String.valueOf(11)));
-	}
-
 }

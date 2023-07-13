@@ -1,4 +1,4 @@
-package com.lind.common.core.util;
+package com.lind.common.core.id;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,9 +8,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * 分布式ID生成器,长度9个字节,18个十六进制数. 模仿Mongodb ObjectId生成规则.
  */
-public class IdMakerUtils {
+public class IdMakerGenerator {
 
-	private static final Logger LOG = LoggerFactory.getLogger(IdMakerUtils.class);
+	private static final Logger LOG = LoggerFactory.getLogger(IdMakerGenerator.class);
 
 	private static final AtomicInteger _nextInc = new AtomicInteger(1);
 

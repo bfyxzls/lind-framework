@@ -1,11 +1,11 @@
-package com.lind.common.core.util;
+package com.lind.common.core.id;
 
 /**
  * 雪花算法：ID生成器.
  */
-public class SnowFlakeUtils {
+public class SnowFlakeGenerator {
 
-	private static final SnowFlakeUtils flowIdWorker = new SnowFlakeUtils(1);
+	private static final SnowFlakeGenerator flowIdWorker = new SnowFlakeGenerator(1);
 
 	/**
 	 * 时间起始标记点，作为基准，一般取系统的最近时间.
@@ -51,7 +51,7 @@ public class SnowFlakeUtils {
 
 	private long lastTimestamp = -1L;
 
-	private SnowFlakeUtils(long id) {
+	private SnowFlakeGenerator(long id) {
 		if (id > this.maxWorkerId || id < 0L) {
 			throw new IllegalArgumentException(
 					String.format("worker Id can't be greater than %d or less than 0", this.maxWorkerId));
@@ -59,7 +59,7 @@ public class SnowFlakeUtils {
 		this.id = id;
 	}
 
-	public static SnowFlakeUtils getFlowIdInstance() {
+	public static SnowFlakeGenerator getFlowIdInstance() {
 		return flowIdWorker;
 	}
 

@@ -5,7 +5,6 @@ import java.util.List;
 
 /**
  * 位运算技巧. 一个数和s^n-1进行`与运算`，结果一定在2^n-1范围之内，并且相邻的数，结果也是相邻的.
- * 例如：84&15(2^4-1)=4，那么85^15就一定等于5，86^15就一定等于6，以此类推.
  */
 public class BinFlagUtils {
 
@@ -59,8 +58,8 @@ public class BinFlagUtils {
 	 * @param values
 	 * @return
 	 */
-	public static Integer addValueList(List<Integer> values) {
-		return addValueList(0, values);
+	public static Integer increaseValueList(List<Integer> values) {
+		return increaseValueList(0, values);
 	}
 
 	/**
@@ -69,7 +68,7 @@ public class BinFlagUtils {
 	 * @param values
 	 * @return
 	 */
-	public static Integer addValueList(Integer source, List<Integer> values) {
+	public static Integer increaseValueList(Integer source, List<Integer> values) {
 		if (values != null) {
 			for (Integer o : values) {
 				if (!isTowPower(o)) {
@@ -80,6 +79,19 @@ public class BinFlagUtils {
 
 		}
 		return source;
+	}
+
+	/**
+	 * 减去某个数.
+	 * @param source
+	 * @param value
+	 * @return
+	 */
+	public static Integer decreaseValue(Integer source, Integer value) {
+		if (!isTowPower(value)) {
+			throw new IllegalArgumentException("button grant number need 2 power(1,2,4,8,16...)");
+		}
+		return source & (~value);
 	}
 
 }

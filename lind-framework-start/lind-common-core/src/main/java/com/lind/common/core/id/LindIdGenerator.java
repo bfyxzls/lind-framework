@@ -1,4 +1,6 @@
-package com.lind.common.core.util;
+package com.lind.common.core.id;
+
+import com.lind.common.core.util.ByteUtil;
 
 import java.io.Serializable;
 import java.util.regex.Pattern;

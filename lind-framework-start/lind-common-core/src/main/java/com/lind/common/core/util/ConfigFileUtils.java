@@ -23,7 +23,13 @@ public class ConfigFileUtils {
 		try {
 			// 读取resources/application.properties文件
 			InputStream fis = ConfigFileUtils.class.getClassLoader().getResourceAsStream("application.properties");
-			properties.load(fis);
+			if (fis != null) {
+				properties.load(fis);
+			}
+			fis = ConfigFileUtils.class.getClassLoader().getResourceAsStream("application.yml");
+			if (fis != null) {
+				properties.load(fis);
+			}
 			this.printInfo();
 		}
 		catch (IOException e) {
@@ -43,7 +49,7 @@ public class ConfigFileUtils {
 		for (Object propertyKey : propKeySet) {
 			String propValue = properties.getProperty(propertyKey.toString());
 			if (propValue != null) {
-				System.out.println("--------------------====" + propertyKey.toString() + ":" + propValue);
+				logger.debug("{}:{}", propertyKey, propValue);
 			}
 		}
 	}
@@ -51,11 +57,11 @@ public class ConfigFileUtils {
 	public String getStrPropertyValue(String name) {
 		String var = System.getenv(name);
 		if (var != null) {
-			logger.info("System variable, key: " + name + ", value: " + var);
+			logger.debug("System variable, key: " + name + ", value: " + var);
 			return var;
 		}
 		var = properties.getProperty(name);
-		logger.info("User variable, key: " + name + ", value: " + var);
+		logger.debug("User variable, key: " + name + ", value: " + var);
 		return var;
 	}
 
@@ -66,7 +72,7 @@ public class ConfigFileUtils {
 			return valor;
 		}
 		catch (Exception e) {
-			logger.info("Get Int Property Value field: " + e.getMessage());
+			logger.error("Get Int Property Value field: " + e.getMessage());
 			return defaultValue;
 		}
 	}

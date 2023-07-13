@@ -29,7 +29,7 @@ public class BinFlagUtilsTest {
 
 	@Test
 	public void addValueListTest() {
-		Assert.assertTrue(BinFlagUtils.addValueList(Arrays.asList(1, 2, 4, 4, 4)) == 7);
+		Assert.assertTrue(BinFlagUtils.increaseValueList(Arrays.asList(1, 2, 4, 4, 4)) == 7);
 	}
 
 }

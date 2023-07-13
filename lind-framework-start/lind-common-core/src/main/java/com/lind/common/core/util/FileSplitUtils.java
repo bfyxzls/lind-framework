@@ -13,16 +13,7 @@ import java.util.List;
  */
 public class FileSplitUtils {
 
-	private static final String INPUT_FILE_PATH = "d:\\webshu_0_to_20221226.csv.4";
-
 	private static final String TEMP_DIRECTORY = "d:\\dudu";
-
-	public static void main(String[] args) throws IOException {
-
-		File input = new File(INPUT_FILE_PATH);
-		fileJoin2(splitFile(input, 1802));
-
-	}
 
 	public static List<File> splitFile(File largeFile, int noOfFiles) throws IOException {
 		return splitBySize(largeFile, getSizeInBytes(largeFile.length(), noOfFiles));

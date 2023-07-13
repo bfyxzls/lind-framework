@@ -21,7 +21,12 @@ public class BinHexSwitchUtilsTest {
 
 	@Test
 	public void hexStringToBin() {
-		System.out.println(BinHexSwitchUtils.hexStringToBin("1"));
+		System.out.println(BinHexSwitchUtils.hexStringToBin("ffff"));
+	}
+
+	@Test
+	public void binStringToHex() {
+		System.out.println(BinHexSwitchUtils.binStringToHex("1111111111111111"));
 	}
 
 }

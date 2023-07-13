@@ -21,14 +21,17 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.io.RandomAccessFile;
+import java.io.Reader;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Function;
 
+import static java.util.Objects.requireNonNull;
 import static org.springframework.util.Assert.notNull;
 
 /**
@@ -37,6 +40,8 @@ import static org.springframework.util.Assert.notNull;
 public class FileUtils {
 
 	public static final String OBJ_NO_NULL = "对象不能为空";
+
+	private static final int DEFAULT_BUF_SIZE = 1024;
 	static Function<String, String> resourceFun;
 
 	private static Logger logger = LoggerFactory.getLogger(FileUtils.class);
@@ -532,6 +537,30 @@ public class FileUtils {
 				}
 			}
 		}
+	}
+
+	/**
+	 * 读取流中的所有内容.
+	 * @param stream
+	 * @param charset
+	 * @return
+	 * @throws IOException
+	 */
+	public static String readToEnd(InputStream stream, Charset charset) throws IOException {
+		requireNonNull(stream);
+		requireNonNull(charset);
+
+		final StringBuilder sb = new StringBuilder();
+		final char[] buffer = new char[DEFAULT_BUF_SIZE];
+
+		try (Reader in = new InputStreamReader(stream, charset)) {
+			int charsRead = 0;
+			while ((charsRead = in.read(buffer, 0, buffer.length)) > 0) {
+				sb.append(buffer, 0, charsRead);
+			}
+		}
+
+		return sb.toString();
 	}
 
 }

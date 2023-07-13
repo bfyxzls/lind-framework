@@ -1,7 +1,8 @@
 package com.lind.common.core.util;
 
 /**
- * CRC16校验码计算
+ * CRC16校验码计算 CRC16（Cyclic Redundancy Check）是一种校验算法，用于检测和验证数据的完整性
+ * 在Redis中,CRC16被用于进行数据分片和哈希槽的计算
  */
 public class CRC16Utils {
 
@@ -96,29 +97,6 @@ public class CRC16Utils {
 		}
 		crc &= 0xffff;
 		return crc;
-	}
-
-	public static void main(String[] args) {
-		System.out.println(crc16("test3") % 16384); // 输出13026
-		System.out.println(crc16("hello") % 16384); // 输出866
-		System.out.println("group01".hashCode()); // 输出293427392
-		System.out.println("group02".hashCode()); // 输出293427393
-		System.out.println("group03".hashCode()); // 输出293427394
-		System.out.println("group04".hashCode()); // 输出293427395
-		System.out.println(crc16("group01") % 16384); // 输出7544
-		System.out.println(crc16("group02") % 16384); // 输出11547
-		System.out.println(crc16("group03") % 16384); // 输出15674
-		System.out.println(crc16("group04")); // 输出19933
-		System.out.println(keyHashSlot("group01")); // 输出7544
-		System.out.println(keyHashSlot("group02")); // 输出11547
-		System.out.println(keyHashSlot("group03")); // 输出15674
-		System.out.println(keyHashSlot("group04")); // 输出3549
-		System.out.println(keyHashSlot("{group04}00")); // 输出3549
-		System.out.println(keyHashSlot("{group04}10")); // 输出3549
-		System.out.println(CRC_XModem("group01".getBytes())); // hash输出7544，和模拟redis的crc16算出结果一致
-		System.out.println(CRC_XModem("group02".getBytes())); // hash输出11547，和模拟redis的crc16算出结果一致
-		System.out.println(CRC_XModem("group03".getBytes())); // hash输出15674，和模拟redis的crc16算出结果一致
-		System.out.println(CRC_XModem("group04".getBytes())); // hash输出19933，和模拟redis的crc16算出结果一致
 	}
 
 }

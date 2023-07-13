@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
+import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -105,6 +106,13 @@ public class FileUtilsTest {
 		byte[] buffer = new byte[8];
 		assert in.read(buffer) == buffer.length;
 
+	}
+
+	@Test
+	public void readToEnd() throws IOException {
+		String msg = FileUtils.readToEnd(FileUtilsTest.class.getClassLoader().getResourceAsStream("zzl.txt"),
+				Charset.defaultCharset());
+		System.out.println(msg);
 	}
 
 }
