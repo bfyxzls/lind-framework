@@ -2,6 +2,7 @@ package com.lind.common.core.util;
 
 import lombok.Builder;
 import org.junit.Test;
+import org.springframework.util.SerializationUtils;
 
 import java.io.Serializable;
 
@@ -16,6 +17,13 @@ public class ObjectByteUtilsTest {
 	public void convert() {
 		byte[] buffer = ObjectByteUtils.toByteArray(Info.builder().title("lind").build());
 		Info info = (Info) ObjectByteUtils.toObject(buffer);
+		System.out.println(info.title);
+	}
+
+	@Test
+	public void serializationUtils() {
+		byte[] buffer = SerializationUtils.serialize(Info.builder().title("lind").build());
+		Info info = (Info) SerializationUtils.deserialize(buffer);
 		System.out.println(info.title);
 	}
 

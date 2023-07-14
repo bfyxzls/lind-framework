@@ -15,46 +15,6 @@ public class SimilarUtils {
 	// *?
 	private static final Pattern pattern = Pattern.compile("(<a href=[^>]*? class=.fjLink[^>]*?>).*?</a>");
 
-	public static LinkedList<String> tagA(String input) {
-
-		LinkedList<String> tagAList = new LinkedList<>();
-
-		Matcher matcher = pattern.matcher(input);
-		while (matcher.find()) {
-			tagAList.add(matcher.start() + 1 + "," + (matcher.end() - 4));
-		}
-
-		return tagAList;
-	}
-
-	/**
-	 * 比较两个字符的相似度，为1表示相等.
-	 * @param str1
-	 * @param str2
-	 * @return
-	 */
-	public static double degree(String str1, String str2) {
-		/*
-		 * 先移除无意义字符，再比较长短，否则 如果长串中无效字符过多会出现 ArrayIndexOutOfBoundsException
-		 */
-		String newStrA = removeSign(str1);
-		String newStrB = removeSign(str2);
-
-		if (newStrA.length() < newStrB.length()) {
-			String temps = newStrA;
-			newStrA = newStrB;
-			newStrB = temps;
-		}
-
-		return longestCommonSubstring(newStrA, newStrB);
-
-		// 用较大的字符串长度作为分母，相似子串作为分子计算出字串相似度
-		/*
-		 * int temp = Math.max(newStrA.length(), newStrB.length()); int temp2 =
-		 * longestCommonSubstring(newStrA, newStrB).length(); return temp2 * 1.0 / temp;
-		 */
-	}
-
 	/**
 	 * 将字符串的所有数据依次写成一行
 	 */
@@ -126,11 +86,95 @@ public class SimilarUtils {
 		 */
 	}
 
+	/**
+	 * 获取字符串中的所有<a>标签的起始位置和结束位置.
+	 * @param input
+	 * @return
+	 */
+	public static LinkedList<String> getATagIndex(String input) {
+
+		LinkedList<String> tagAList = new LinkedList<>();
+
+		Matcher matcher = pattern.matcher(input);
+		while (matcher.find()) {
+			tagAList.add(matcher.start() + 1 + "," + (matcher.end() - 4));
+		}
+
+		return tagAList;
+	}
+
+	/**
+	 * 比较两个字符的相似度，为1表示相等.
+	 * @param str1
+	 * @param str2
+	 * @return
+	 */
+	public static double degree(String str1, String str2) {
+		/*
+		 * 先移除无意义字符，再比较长短，否则 如果长串中无效字符过多会出现 ArrayIndexOutOfBoundsException
+		 */
+		String newStrA = removeSign(str1);
+		String newStrB = removeSign(str2);
+
+		if (newStrA.length() < newStrB.length()) {
+			String temps = newStrA;
+			newStrA = newStrB;
+			newStrB = temps;
+		}
+
+		return longestCommonSubstring(newStrA, newStrB);
+
+		// 用较大的字符串长度作为分母，相似子串作为分子计算出字串相似度
+		/*
+		 * int temp = Math.max(newStrA.length(), newStrB.length()); int temp2 =
+		 * longestCommonSubstring(newStrA, newStrB).length(); return temp2 * 1.0 / temp;
+		 */
+	}
+
 	/*
 	 * 结果转换成百分比形式
 	 */
 	public static String similarityResult(double resule) {
 		return NumberFormat.getPercentInstance(new Locale("en ", "US ")).format(resule);
+	}
+
+	/**
+	 * 计算两个字符串的相似度（编辑距离算法）
+	 * @param str1
+	 * @param str2
+	 * @return
+	 */
+	public static int calculateSimilarity(String str1, String str2) {
+		int m = str1.length();
+		int n = str2.length();
+
+		int[][] dp = new int[m + 1][n + 1];
+
+		// 初始化边界条件
+		for (int i = 0; i <= m; i++) {
+			dp[i][0] = i;
+		}
+
+		for (int j = 0; j <= n; j++) {
+			dp[0][j] = j;
+		}
+
+		// 动态规划计算编辑距离
+		for (int i = 1; i <= m; i++) {
+			for (int j = 1; j <= n; j++) {
+				if (str1.charAt(i - 1) == str2.charAt(j - 1)) {
+					dp[i][j] = dp[i - 1][j - 1];
+				}
+				else {
+					dp[i][j] = 1 + Math.min(dp[i - 1][j - 1], Math.min(dp[i][j - 1], dp[i - 1][j]));
+				}
+			}
+		}
+
+		// 返回相似度
+		int maxLen = Math.max(m, n);
+		double similarity = 1.0 - (double) dp[m][n] / maxLen;
+		return (int) (similarity * 100);
 	}
 
 }

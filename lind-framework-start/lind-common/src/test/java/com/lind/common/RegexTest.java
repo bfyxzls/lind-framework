@@ -1,6 +1,6 @@
 package com.lind.common;
 
-import com.lind.common.jackson.JsonSerialization;
+import com.lind.common.core.jackson.JsonSerialization;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.slf4j.Logger;

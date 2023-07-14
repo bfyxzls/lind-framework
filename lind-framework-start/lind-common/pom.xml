@@ -31,6 +31,10 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>com.lind</groupId>
+            <artifactId>lind-common-core</artifactId>
+        </dependency>
         <!-- 状态机相关 -->
         <dependency>
             <groupId>com.github.stateless4j</groupId>

@@ -1,4 +1,4 @@
-package com.lind.common;
+package com.lind.common.core;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -12,7 +12,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
-import com.lind.common.jackson.JsonSerialization;
+import com.lind.common.core.jackson.JsonSerialization;
+import com.lind.common.core.util.FileUtils;
+import com.lind.common.core.util.FileUtilsTest;
 import lombok.Data;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +22,9 @@ import org.junit.Test;
 import org.springframework.util.Assert;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -29,10 +33,40 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-public class JacksonTest extends AbstractTest {
+public class JacksonTest {
 
 	private static final TypeReference<Map<String, String>> MAP_TYPE_REPRESENTATION = new TypeReference<Map<String, String>>() {
 	};
+
+	ObjectMapper objectMapper = new ObjectMapper();
+
+	/**
+	 * 将json转换为对象.
+	 * @param path 文件路径
+	 */
+	public <T> T fromJson(String path, Class<T> cls) throws IOException {
+		InputStream inputStream = FileUtilsTest.class.getClassLoader().getResourceAsStream(path);
+		T themesRepresentation = JsonSerialization.readValue(inputStream, cls);
+		return themesRepresentation;
+	}
+
+	/**
+	 * 解析带有类型的json.
+	 * @param path
+	 * @param cls
+	 * @return
+	 * @param <T>
+	 * @throws IOException
+	 */
+	public <T> T fromJsonType(String path, Class<T> cls) throws IOException {
+		String json = FileUtils.readToEnd(FileUtilsTest.class.getClassLoader().getResourceAsStream(path),
+				Charset.defaultCharset());
+		ObjectMapper om = new ObjectMapper();
+		om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+		om.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL,
+				JsonTypeInfo.As.WRAPPER_ARRAY);
+		return om.readValue(json, cls);
+	}
 
 	@SneakyThrows
 	@Test
@@ -76,7 +110,7 @@ public class JacksonTest extends AbstractTest {
 		String msg = om.writeValueAsString(user);
 		log.info(msg);
 		/**
-		 * ["com.lind.common.JacksonTest$User",{"username":"lind","email":"zzl@sina.com","authorities":null}]
+		 * ["com.lind.common.core.JacksonTest$User",{"username":"lind","email":"zzl@sina.com","authorities":null}]
 		 */
 	}
 
@@ -86,7 +120,7 @@ public class JacksonTest extends AbstractTest {
 	@SneakyThrows
 	@Test
 	public void objectJacksonRead() {
-		User user = fromJsonType("redis.json", User.class);
+		User user = fromJsonType("user.json", User.class);
 		log.info("user:{}", user.getUsername());
 	}
 

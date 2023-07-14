@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
- * 序列化与反序列化.
+ * 序列化与反序列化. 也可以直接使用springframework的SerializationUtils
  */
 public class ObjectByteUtils {
 

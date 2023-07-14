@@ -317,6 +317,11 @@
             </dependency>
             <dependency>
                 <groupId>com.lind</groupId>
+                <artifactId>lind-common-core</artifactId>
+                <version>${lind-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
                 <artifactId>lind-common</artifactId>
                 <version>${lind-framework.version}</version>
             </dependency>
