@@ -1,6 +1,6 @@
 package com.lind.common;
 
-import com.lind.common.util.StopWatchUtils;
+import com.lind.common.core.util.StopWatchUtils;
 import lombok.SneakyThrows;
 import org.junit.Test;
 import org.springframework.util.StopWatch;

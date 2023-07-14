@@ -1,6 +1,6 @@
 package com.lind.rbac;
 
-import com.lind.common.jackson.convert.EnableJacksonFormatting;
+import com.lind.common.core.jackson.convert.EnableJacksonFormatting;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

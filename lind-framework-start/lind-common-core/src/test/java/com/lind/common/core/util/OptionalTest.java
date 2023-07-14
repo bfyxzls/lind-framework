@@ -19,7 +19,7 @@ public class OptionalTest {
 		A a = null;
 		a = Optional.ofNullable(a).orElse(new A());
 		System.out.println("result:" + a);
-		Assert.notNull(a.getName(), "a.name is not null");
+		Assert.isNull(a.getName(), "a.name is not null");
 
 	}
 

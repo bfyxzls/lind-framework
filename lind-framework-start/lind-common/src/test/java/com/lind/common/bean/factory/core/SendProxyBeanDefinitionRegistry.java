@@ -1,6 +1,6 @@
 package com.lind.common.bean.factory.core;
 
-import com.lind.common.util.ClassUtils;
+import com.lind.common.core.util.ClassUtils;
 import lombok.Data;
 import lombok.SneakyThrows;
 import org.springframework.beans.MutablePropertyValues;

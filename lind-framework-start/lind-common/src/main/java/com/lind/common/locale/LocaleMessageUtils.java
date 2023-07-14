@@ -1,15 +1,10 @@
 package com.lind.common.locale;
 
-import cn.hutool.extra.spring.SpringUtil;
-import com.lind.common.util.SpringContextUtils;
+import com.lind.common.core.util.SpringContextUtils;
 import lombok.experimental.UtilityClass;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.servlet.LocaleResolver;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Locale;
 
 /**

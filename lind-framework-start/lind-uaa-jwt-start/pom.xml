@@ -43,7 +43,10 @@
             <groupId>com.lind</groupId>
             <artifactId>lind-common</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.lind</groupId>
+            <artifactId>lind-common-core</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

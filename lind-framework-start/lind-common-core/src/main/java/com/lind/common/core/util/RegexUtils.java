@@ -1,7 +1,7 @@
 package com.lind.common.core.util;
 
 import org.apache.commons.lang3.RegExUtils;
-import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.text.StringEscapeUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.util.regex.Matcher;

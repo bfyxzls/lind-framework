@@ -35,11 +35,14 @@ public class NioTest {
 		System.out.println(text.toString());
 
 		// 与入数据
+		FileChannel channelWrite = FileChannel.open(Paths.get("D:\\a.txt"), StandardOpenOption.WRITE,
+				StandardOpenOption.CREATE);
+
 		for (int i = 0; i < text.length(); i++) {
 			buf.put((byte) text.charAt(i)); // 填充缓冲区，需要将 2 字节的 char 强转为 1 自己的 byte
 			if (buf.position() == buf.limit() || i == text.length() - 1) { // 缓存区已满或者已经遍历到最后一个字符
 				buf.flip(); // 将缓冲区由写模式置为读模式
-				channel.write(buf); // 将缓冲区的数据写到通道
+				channelWrite.write(buf); // 将缓冲区的数据写到通道
 				buf.clear(); // 清空缓存区，将缓冲区置为写模式，下次才能使用
 			}
 		}

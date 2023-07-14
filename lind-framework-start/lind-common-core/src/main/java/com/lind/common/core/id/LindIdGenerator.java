@@ -1,6 +1,6 @@
 package com.lind.common.core.id;
 
-import com.lind.common.core.util.ByteUtil;
+import com.lind.common.core.util.ByteUtils;
 
 import java.io.Serializable;
 import java.util.regex.Pattern;
@@ -60,11 +60,11 @@ public class LindIdGenerator implements Serializable {
 		int index = 0;
 		System.arraycopy(type.getBytes(), 0, bytes, index, TYPE_LENGTH);
 		index += TYPE_LENGTH;
-		System.arraycopy(ByteUtil.toBytes(subjectLength), 0, bytes, index, SUB_LENGTH);
+		System.arraycopy(ByteUtils.toBytes(subjectLength), 0, bytes, index, SUB_LENGTH);
 		index += SUB_LENGTH;
 		System.arraycopy(subject.getBytes(), 0, bytes, index, subjectLength);
 		index += subjectLength;
-		System.arraycopy(ByteUtil.toBytes(offset), 0, bytes, index, OFFSET_LENGTH);
+		System.arraycopy(ByteUtils.toBytes(offset), 0, bytes, index, OFFSET_LENGTH);
 		return bytes;
 	}
 
@@ -90,8 +90,8 @@ public class LindIdGenerator implements Serializable {
 		byte[] offset = new byte[OFFSET_LENGTH];
 		System.arraycopy(bytes, index, offset, 0, OFFSET_LENGTH);
 
-		return String.join("-", new String(type), String.valueOf(ByteUtil.toInt(subLength)), new String(subject),
-				String.valueOf(ByteUtil.toInt(offset)));
+		return String.join("-", new String(type), String.valueOf(ByteUtils.toInt(subLength)), new String(subject),
+				String.valueOf(ByteUtils.toInt(offset)));
 
 	}
 

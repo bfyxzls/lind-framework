@@ -13,6 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Slf4j
+@SuppressWarnings("unchecked")
 public class RegexUtilsTest {
 
 	private static final Pattern DATA_FILE_RE = Pattern.compile("data\\.([0-9]+)"); // data.1

@@ -16,7 +16,7 @@ public class SystemEnvProperties extends Properties {
 	}
 
 	public SystemEnvProperties() {
-		this.overrides = Collections.EMPTY_MAP;
+		this.overrides = Collections.emptyMap();
 	}
 
 	@Override

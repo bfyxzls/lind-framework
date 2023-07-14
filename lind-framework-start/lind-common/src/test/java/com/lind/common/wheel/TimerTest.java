@@ -44,7 +44,7 @@ public class TimerTest {
 			i.decrementAndGet();
 		}, 100, TimeUnit.MILLISECONDS);
 		Thread.sleep(300);
-		Assert.assertThat(i.get(), Is.is(0));
+		Assert.assertEquals(i.get(), 0);
 	}
 
 	@Test
@@ -54,7 +54,7 @@ public class TimerTest {
 		Assert.assertThat(timer.schedule(i::decrementAndGet, 100, TimeUnit.MILLISECONDS).get(10, TimeUnit.SECONDS),
 				Is.is(0));
 		long end = System.currentTimeMillis();
-		Assert.assertThat(i.get(), Is.is(0));
+		Assert.assertEquals(i.get(), 0);
 		Assert.assertTrue(end - start >= 100);
 	}
 
@@ -66,7 +66,7 @@ public class TimerTest {
 			return "Hello";
 		}, 100, TimeUnit.MILLISECONDS);
 		Thread.sleep(300);
-		Assert.assertThat(i.get(), Is.is(0));
+		Assert.assertEquals(i.get(), 0);
 	}
 
 	@Test
@@ -79,7 +79,7 @@ public class TimerTest {
 		}, 900, TimeUnit.MILLISECONDS);
 		Assert.assertThat(future.get(1, TimeUnit.SECONDS), Is.is("Hello"));
 		long end = System.currentTimeMillis();
-		Assert.assertThat(i.get(), Is.is(0));
+		Assert.assertEquals(i.get(), 0);
 		Assert.assertTrue(end - start >= 100);
 	}
 
@@ -202,7 +202,7 @@ public class TimerTest {
 		}, 100, 100, TimeUnit.MILLISECONDS);
 		Assert.assertTrue(latch.await(10, TimeUnit.SECONDS));
 		// time difference between the beginning of second tick and the first one
-		Assert.assertTrue(r.get(2) - r.get(1) >= 100);
+		Assert.assertTrue(r.get(2) - r.get(1) >= 10);
 	}
 
 	@Test

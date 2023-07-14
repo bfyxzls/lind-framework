@@ -1,6 +1,6 @@
 package com.lind.common;
 
-import com.lind.common.util.BinHexSwitchUtils;
+import com.lind.common.core.util.BinHexSwitchUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;

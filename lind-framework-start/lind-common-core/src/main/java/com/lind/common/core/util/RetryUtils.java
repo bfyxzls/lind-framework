@@ -5,7 +5,7 @@ package com.lind.common.core.util;
  */
 public class RetryUtils {
 
-	static final int RETRY_COUNT = 5;
+	static final int RETRY_COUNT = 3;
 
 	/**
 	 * 重试操作，一次比一次等待的时间长.

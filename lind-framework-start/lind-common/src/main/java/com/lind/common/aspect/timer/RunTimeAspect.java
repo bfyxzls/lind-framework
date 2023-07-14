@@ -1,6 +1,6 @@
 package com.lind.common.aspect.timer;
 
-import com.lind.common.util.StopWatchUtils;
+import com.lind.common.core.util.StopWatchUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

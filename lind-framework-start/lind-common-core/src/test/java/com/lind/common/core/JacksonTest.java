@@ -120,7 +120,7 @@ public class JacksonTest {
 	@SneakyThrows
 	@Test
 	public void objectJacksonRead() {
-		User user = fromJsonType("user.json", User.class);
+		User user = fromJsonType("userType.json", User.class);
 		log.info("user:{}", user.getUsername());
 	}
 

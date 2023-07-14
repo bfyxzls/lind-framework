@@ -20,16 +20,19 @@ public class FileSplitUtils {
 	}
 
 	public static List<File> splitBySize(File largeFile, int maxChunkSize) throws IOException {
+		InputStream in = Files.newInputStream(largeFile.toPath());
+		return splitByInputStream(in, maxChunkSize);
+	}
+
+	public static List<File> splitByInputStream(InputStream in, int maxChunkSize) throws IOException {
 		List<File> list = new ArrayList<>();
 		int numberOfFiles = 0;
-		try (InputStream in = Files.newInputStream(largeFile.toPath())) {
-			final byte[] buffer = new byte[maxChunkSize];
-			int dataRead = in.read(buffer);
-			while (dataRead > -1) {
-				list.add(stageLocally(buffer, dataRead));
-				numberOfFiles++;
-				dataRead = in.read(buffer);
-			}
+		final byte[] buffer = new byte[maxChunkSize];
+		int dataRead = in.read(buffer);
+		while (dataRead > -1) {
+			list.add(stageLocally(buffer, dataRead));
+			numberOfFiles++;
+			dataRead = in.read(buffer);
 		}
 		System.out.println("Number of files generated: " + numberOfFiles);
 		return list;

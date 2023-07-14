@@ -3,6 +3,7 @@ package com.lind.common.core.util;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +12,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.RandomAccessFile;
 import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
@@ -60,7 +60,7 @@ public class FileUtilsTest {
 	@Test
 	public void readResourceStream() throws IOException {
 
-		InputStream resource = FileUtilsTest.class.getClassLoader().getResourceAsStream("zzl.html");
+		InputStream resource = FileUtilsTest.class.getClassLoader().getResourceAsStream("user.json");
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
 		int bufSize = 1024;
@@ -72,9 +72,11 @@ public class FileUtilsTest {
 		logger.info(bos.toString());
 	}
 
-	@Test
-	public void readBigFile() throws IOException {
-		FileUtils.splitBigFile();
+	@Before
+	public void init() {
+		FileUtils.writeFileContent(new File("d:\\test-del"), "hello".getBytes());
+		FileUtils.writeFileContent(new File("d:\\append.txt"), "hello".getBytes());
+
 	}
 
 	@Test
@@ -91,26 +93,8 @@ public class FileUtilsTest {
 	}
 
 	@Test
-	public void randomAccessFile() throws IOException {
-		File f = new File("d:\\append.txt");
-		// fileSize(8B)+ blockCount(4B) + blockIndexOffset(8B) + blockIndexOffset(8B) +
-		// DISK_FILE_MAGIC
-		// (8B)
-		final int TRAILER_SIZE = 8 + 4 + 8 + 8 + 8;
-		RandomAccessFile in = new RandomAccessFile(f, "r");
-
-		long fileSize = f.length();
-		assert fileSize > TRAILER_SIZE;
-		in.seek(fileSize - TRAILER_SIZE);// 跳过前36个字符
-
-		byte[] buffer = new byte[8];
-		assert in.read(buffer) == buffer.length;
-
-	}
-
-	@Test
 	public void readToEnd() throws IOException {
-		String msg = FileUtils.readToEnd(FileUtilsTest.class.getClassLoader().getResourceAsStream("zzl.txt"),
+		String msg = FileUtils.readToEnd(FileUtilsTest.class.getClassLoader().getResourceAsStream("user.json"),
 				Charset.defaultCharset());
 		System.out.println(msg);
 	}

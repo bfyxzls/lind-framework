@@ -324,11 +324,6 @@ public class FileUtils {
 		bw.close();
 	}
 
-	@SneakyThrows
-	public static void splitBigFile() {
-		splitBigFile("d:\\Untitled-1.csv", "d:\\dudu\\" + UUID.randomUUID() + "@", 10000);
-	}
-
 	/**
 	 * 拆分大文件.
 	 * @param input 从哪个文件读取

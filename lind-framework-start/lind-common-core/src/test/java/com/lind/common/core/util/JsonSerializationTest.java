@@ -1,12 +1,13 @@
 package com.lind.common.core.util;
 
+import com.lind.common.core.dto.Theme;
+import com.lind.common.core.dto.ThemeRepresentation;
 import com.lind.common.core.jackson.JsonSerialization;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 @Slf4j
 public class JsonSerializationTest {
@@ -30,44 +31,6 @@ public class JsonSerializationTest {
 		for (ThemeRepresentation item : themesRepresentation.getThemes()) {
 			log.info("ThemeRepresentation.name:{},types:{}", item.getName(), item.getTypes());
 		}
-	}
-
-	public static class ThemeRepresentation {
-
-		private String name;
-
-		private String[] types;
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public String[] getTypes() {
-			return types;
-		}
-
-		public void setTypes(String[] types) {
-			this.types = types;
-		}
-
-	}
-
-	public class Theme {
-
-		private List<ThemeRepresentation> themes;
-
-		public List<ThemeRepresentation> getThemes() {
-			return themes;
-		}
-
-		public void setThemes(List<ThemeRepresentation> themes) {
-			this.themes = themes;
-		}
-
 	}
 
 }

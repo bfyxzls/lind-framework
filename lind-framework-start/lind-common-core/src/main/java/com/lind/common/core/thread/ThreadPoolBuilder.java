@@ -15,6 +15,7 @@ import java.util.concurrent.*;
  * -------- -------- --------------【corePoolSize核心线程数】 -------------- --------------
  * -------------- --------------
  */
+@SuppressWarnings("rawtypes")
 public class ThreadPoolBuilder {
 
 	/**

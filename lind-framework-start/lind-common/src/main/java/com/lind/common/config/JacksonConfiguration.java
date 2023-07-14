@@ -19,7 +19,7 @@ package com.lind.common.config;
 import cn.hutool.core.date.DatePattern;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import com.lind.common.jackson.module.JavaTimeModule;
+import com.lind.common.core.jackson.module.JavaTimeModule;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

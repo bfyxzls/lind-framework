@@ -76,9 +76,18 @@ public class CopyUtils {
 		List<T> list = new ArrayList<>();
 
 		for (S obj : src) {
-			T t = null;
-			BeanUtils.copyProperties(obj, t, classT);
-			list.add(t);
+			try {
+				T t = classT.newInstance();
+				BeanUtils.copyProperties(obj, t, classT);
+				list.add(t);
+			}
+			catch (InstantiationException e) {
+				throw new RuntimeException(e);
+			}
+			catch (IllegalAccessException e) {
+				throw new RuntimeException(e);
+			}
+
 		}
 		return list;
 	}

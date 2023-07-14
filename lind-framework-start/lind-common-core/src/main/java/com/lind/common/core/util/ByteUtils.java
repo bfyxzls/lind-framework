@@ -30,7 +30,7 @@ import java.io.InputStream;
  * double: 双精度浮点数(小数) 占8个字节 64位二进制 byte[0] byte[1] byte[2] byte[3] byte[4] byte[5] byte[6]
  * byte[7]<br>
  */
-public class ByteUtil {
+public class ByteUtils {
 
 	public final static String HEX_TMP = "0123456789ABCDEF";
 

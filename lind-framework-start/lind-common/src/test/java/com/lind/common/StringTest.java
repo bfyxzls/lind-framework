@@ -3,7 +3,7 @@ package com.lind.common;
 import cn.hutool.core.date.DateTime;
 import com.lind.common.encrypt.HashUtils;
 import com.lind.common.tree.Trie;
-import com.lind.common.util.BinHexSwitchUtils;
+import com.lind.common.core.util.BinHexSwitchUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;

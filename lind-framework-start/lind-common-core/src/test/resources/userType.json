@@ -1,0 +1,8 @@
+[
+  "com.lind.common.core.JacksonTest$User",
+  {
+    "username": "lind",
+    "email": "zzl@sina.com",
+    "authorities": null
+  }
+]

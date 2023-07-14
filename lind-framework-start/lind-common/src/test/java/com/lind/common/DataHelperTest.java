@@ -1,6 +1,6 @@
 package com.lind.common;
 
-import com.lind.common.util.DataHelper;
+import com.lind.common.core.util.DataUtils;
 import org.junit.Test;
 import org.springframework.util.StopWatch;
 
@@ -20,7 +20,7 @@ public class DataHelperTest {
 		}
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
-		DataHelper.fillDataByPage(sumList, 100, (o) -> {
+		DataUtils.fillDataByPage(sumList, 100, (o) -> {
 			try {
 				Thread.sleep(1000);
 			}

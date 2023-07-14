@@ -1,6 +1,6 @@
 package com.lind.common;
 
-import com.lind.common.util.IdMakerUtils;
+import com.lind.common.core.id.IdMakerGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
@@ -30,7 +30,7 @@ public class IdMakerTest {
 	public void mongodbId() throws InterruptedException {
 
 		for (int i = 0; i < 10; i++) {
-			log.info("id={}", IdMakerUtils.generateId(0));
+			log.info("id={}", IdMakerGenerator.generateId(0));
 		}
 
 	}

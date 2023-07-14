@@ -1,6 +1,6 @@
 package com.lind.common.thread.forkjointask;
 
-import com.lind.common.util.ListUtils;
+import com.lind.common.core.util.CollectionUtils;
 import lombok.SneakyThrows;
 import org.junit.Test;
 import org.springframework.util.StopWatch;
@@ -32,7 +32,7 @@ public class RunnableTest {
 
 		// 将大集合分成5份，每份20个数据，这样有5个线程就可以干完了，而咱们设置的线程数据是10，事实上有5个线程是空闲的
 		// 线程初始化可以改成Executors.newFixedThreadPool(5)
-		ListUtils.splitList(list, 10).forEach(o -> {
+		CollectionUtils.split(list, 10).forEach(o -> {
 			bufferInserts.add(new DoUrl(o));
 		});
 

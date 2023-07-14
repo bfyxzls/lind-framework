@@ -48,7 +48,7 @@ public class ConsistenceHashUtilsTest {
 
 	@Test
 	public void test() {
-		test();
+		init();
 	}
 
 }

@@ -1,6 +1,6 @@
 package com.lind.common;
 
-import com.lind.common.util.ByteUtil;
+import com.lind.common.core.util.ByteUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
@@ -107,7 +107,7 @@ public class BitTest {
 
 	@Test
 	public void bit32_4byte() {
-		byte[] digest = ByteUtil.intToBytes(1024);
+		byte[] digest = ByteUtils.toBytes(1024);
 		// hash code, 把long截取到32-bits
 		long hashCode = ((long) (digest[3] & 0xFF) << 24) | ((long) (digest[2] & 0xFF) << 16)
 				| ((long) (digest[1] & 0xFF) << 8) | (digest[0] & 0xFF);

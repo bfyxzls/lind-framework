@@ -40,13 +40,15 @@
         </dependency>
         <dependency>
             <groupId>com.lind</groupId>
+            <artifactId>lind-common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.lind</groupId>
             <artifactId>lind-uaa-jwt-start</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>com.lind</groupId>
             <artifactId>lind-logger-start</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
         <!-- 热加载-->
         <dependency>
