@@ -1,6 +1,6 @@
 package com.lind.feign;
 
-import com.lind.common.util.MapUtils;
+import com.lind.common.core.util.MapUtils;
 
 import java.util.HashMap;
 import java.util.Map;

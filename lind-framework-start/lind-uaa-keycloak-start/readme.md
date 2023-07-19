@@ -71,8 +71,8 @@ keycloak:
   use-resource-role-mappings: false # 如果设置为true，则适配器将在令牌内部查找用户的应用程序级角色映射。 如果为false，它将查看用户角色映射的领域级别。 这是可选的。 默认值为false。
   cors: true
   uaa:
-  permitAll: /users # 开放的地址，它们将会被动调用`kc-session`这个接口完成用户状态同步
-  redirectUri: http://192.168.3.181:9090/about # 回调地址，token会追加在这个地址上，为空表示直接在页面上输出token
+    permitAll: /users # 开放的地址，它们将会被动调用`kc-session`这个接口完成用户状态同步
+    redirectUri: http://192.168.3.181:9090/about # 回调地址，token会追加在这个地址上，为空表示直接在页面上输出token
 ```
 ## 实现相关接口
 主要是指角色与你的权限的对应关系，如果由使用方去实现这两个接口，将用户对应的角色返回即可，你可以对你的实现方法采用缓存的设计及提高性能。
@@ -154,9 +154,9 @@ public class PermissionServiceImpl implements PermissionService {
 > 例子，下面配置实现了当登录成功之后重定向到`http://192.168.3.181:9090/about`页面，对/about接口开放访问
 ```
 keycloak:
-uaa:
- permitAll: /about
- redirectUri: http://192.168.3.181:9090/about
+  uaa:
+    permitAll: /about
+    redirectUri: http://192.168.3.181:9090/about
 ```
 
 ## 授取码混合认证
