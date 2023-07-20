@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lind.common.dto.PageDTO;
 import com.lind.common.rest.CommonResult;
-import com.lind.common.util.CopyUtils;
+import com.lind.common.core.util.CopyUtils;
 import com.lind.rbac.dao.RoleDao;
 import com.lind.rbac.dao.RolePermissionDao;
 import com.lind.rbac.dto.RoleDTO;
