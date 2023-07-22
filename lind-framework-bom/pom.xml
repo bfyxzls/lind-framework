@@ -70,10 +70,16 @@
         <druid-spring-boot-starter.version>1.1.9</druid-spring-boot-starter.version>
         <jgroups.version>4.2.6.Final</jgroups.version>
         <commons-text.version>1.9</commons-text.version>
+        <redisson.version>3.23.0</redisson.version>
     </properties>
     <!-- maven依赖版本统一，子工程不需要声明包版本 -->
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-text</artifactId>

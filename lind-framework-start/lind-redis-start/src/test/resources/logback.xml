@@ -1,0 +1,10 @@
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <logger name="com.example" level="INFO"/> <!-- 设置你的项目包名 -->
+    <!-- 如果还有其他包或类的日志需要设置，可以继续添加logger配置 -->
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>
