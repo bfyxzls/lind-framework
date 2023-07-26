@@ -1,6 +1,5 @@
 package com.lind.redis;
 
-import com.lind.redis.limit.RedissonSlidingWindowRateLimiter;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
@@ -59,22 +58,6 @@ public class RedissonTest {
 		redisson.shutdown();
 	}
 
-	@Test
-	public void scrollWindow() throws InterruptedException {
-		// 模拟处理请求
-		log.debug("有吗");
-		RedissonSlidingWindowRateLimiter redissonSlidingWindowRateLimiter = new RedissonSlidingWindowRateLimiter(
-				"myRateLimiter", 3000, 3);
-		for (int i = 1; i <= 15; i++) {
-			if (redissonSlidingWindowRateLimiter.allowRequest()) {
-				System.out.println("处理请求 " + i + " 成功");
-				Thread.sleep(1000);
-			}
-			else {
-				System.out.println("处理请求 " + i + " 失败，超过限流速率");
-			}
-		}
-	}
 
 	@Test
 	public void luaSimple() {
