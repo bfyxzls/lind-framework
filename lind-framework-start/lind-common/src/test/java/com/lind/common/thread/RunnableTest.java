@@ -9,17 +9,22 @@ import java.util.concurrent.Executors;
  * @since 1.0.0
  */
 public class RunnableTest {
-    class job implements Runnable{
 
-        @Override
-        public void run() {
-            System.out.println("hello world");
-        }
-    }
-    ExecutorService executorService;
-    public static void main(String[] args) {
-        RunnableTest runnableTest = new RunnableTest();
-        runnableTest.executorService= Executors.newFixedThreadPool(2);
-        runnableTest.executorService.submit(runnableTest.new job());
-    }
+	ExecutorService executorService;
+
+	public static void main(String[] args) {
+		RunnableTest runnableTest = new RunnableTest();
+		runnableTest.executorService = Executors.newFixedThreadPool(2);
+		runnableTest.executorService.submit(runnableTest.new job());
+	}
+
+	class job implements Runnable {
+
+		@Override
+		public void run() {
+			System.out.println("hello world");
+		}
+
+	}
+
 }

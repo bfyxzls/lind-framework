@@ -70,7 +70,7 @@ public class DisruptorTest {
 		 * 5 waitStrategy: 等待策略,BlockingWaitStrategy是最低效的策略；YieldingWaitStrategy性能是最好的
 		 */
 		// 1. 实例化disruptor对象
-		Disruptor<OrderEvent> disruptor = new Disruptor<OrderEvent>(orderEventFactory, ringBufferSize, executor,
+		Disruptor<OrderEvent> disruptor = new Disruptor<>(orderEventFactory, ringBufferSize, executor,
 				ProducerType.SINGLE, new YieldingWaitStrategy());
 
 		// 2. 添加消费者的监听 (构建disruptor 与 消费者的一个关联关系)

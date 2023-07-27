@@ -3,6 +3,7 @@ package com.lind.common.wheel;
 import io.netty.util.HashedWheelTimer;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.Is;
 import org.junit.After;
 import org.junit.Assert;
@@ -51,8 +52,8 @@ public class TimerTest {
 	public void oneShotRunnableFutureTest() throws InterruptedException, ExecutionException, TimeoutException {
 		AtomicInteger i = new AtomicInteger(1);
 		long start = System.currentTimeMillis();
-		Assert.assertThat(timer.schedule(i::decrementAndGet, 100, TimeUnit.MILLISECONDS).get(10, TimeUnit.SECONDS),
-				Is.is(0));
+		MatcherAssert.assertThat(
+				timer.schedule(i::decrementAndGet, 100, TimeUnit.MILLISECONDS).get(10, TimeUnit.SECONDS), Is.is(0));
 		long end = System.currentTimeMillis();
 		Assert.assertEquals(i.get(), 0);
 		Assert.assertTrue(end - start >= 100);
@@ -77,7 +78,7 @@ public class TimerTest {
 			i.decrementAndGet();
 			return "Hello";
 		}, 900, TimeUnit.MILLISECONDS);
-		Assert.assertThat(future.get(1, TimeUnit.SECONDS), Is.is("Hello"));
+		MatcherAssert.assertThat(future.get(1, TimeUnit.SECONDS), Is.is("Hello"));
 		long end = System.currentTimeMillis();
 		Assert.assertEquals(i.get(), 0);
 		Assert.assertTrue(end - start >= 100);

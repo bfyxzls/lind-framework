@@ -1,6 +1,5 @@
 package com.lind.common;
 
-import com.lmax.disruptor.EventFactory;
 import com.lmax.disruptor.EventHandler;
 import com.lmax.disruptor.EventTranslator;
 import com.lmax.disruptor.WorkHandler;
@@ -33,13 +32,9 @@ public class DisruptorCar {
 			ExecutorService executor = Executors.newFixedThreadPool(4);
 
 			// 初始化一个 Disruptor
-			Disruptor<MyInParkingDataEvent> disruptor = new Disruptor<MyInParkingDataEvent>(
-					new EventFactory<MyInParkingDataEvent>() {
-						@Override
-						public MyInParkingDataEvent newInstance() {
-							return new MyInParkingDataEvent(); // Event 初始化工厂
-						}
-					}, bufferSize, executor, ProducerType.SINGLE, new YieldingWaitStrategy());
+			Disruptor<MyInParkingDataEvent> disruptor = new Disruptor<>(() -> {
+				return new MyInParkingDataEvent(); // Event 初始化工厂
+			}, bufferSize, executor, ProducerType.SINGLE, new YieldingWaitStrategy());
 
 			// 使用disruptor创建消费者组 MyParkingDataInDbHandler 和 MyParkingDataToKafkaHandler
 			EventHandlerGroup<MyInParkingDataEvent> handlerGroup = disruptor
