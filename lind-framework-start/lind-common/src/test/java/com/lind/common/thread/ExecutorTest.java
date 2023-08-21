@@ -1,6 +1,6 @@
 package com.lind.common.thread;
 
-import com.lind.common.config.TaskExecutorConfiguration;
+import com.lind.common.dto.config.TaskExecutorConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;

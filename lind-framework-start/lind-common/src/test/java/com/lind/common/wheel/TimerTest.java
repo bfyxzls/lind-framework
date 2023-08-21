@@ -39,6 +39,19 @@ public class TimerTest {
 	}
 
 	@Test
+	public void testLindHashWheelTimer() throws InterruptedException {
+		log.info("start");
+		timer.schedule(() -> {
+			log.info("hello");
+		}, 3, TimeUnit.SECONDS);
+		timer.schedule(() -> {
+			log.info("hello");
+		}, 5, TimeUnit.SECONDS);
+
+		Thread.sleep(10000);
+	}
+
+	@Test
 	public void oneShotRunnableTest() throws InterruptedException {
 		AtomicInteger i = new AtomicInteger(1);
 		timer.schedule(() -> {

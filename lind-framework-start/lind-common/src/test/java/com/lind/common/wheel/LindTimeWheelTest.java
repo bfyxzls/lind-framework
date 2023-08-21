@@ -17,7 +17,7 @@ public class LindTimeWheelTest {
 	public static void main(String[] args) {
 		log.info("任务开始");
 		LindTimeWheel timeWheel = new LindTimeWheel(1000, 10); // 每秒一个槽，总共10个槽
-		timeWheel.addTask(() -> log.info("Task 1 executed"), 1000); // 3秒后执行任务1
+		timeWheel.addTask(() -> log.info("Task 1 executed"), 3000); // 3秒后执行任务1
 		timeWheel.addTask(() -> log.info("Task 2 executed"), 5000); // 5秒后执行任务2
 		timeWheel.addTask(() -> log.info("Task 3 executed"), 7000); // 7秒后执行任务3
 		try {

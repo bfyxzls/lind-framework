@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.lind.common.config;
+package com.lind.common.dto.config;
 
 import cn.hutool.core.date.DatePattern;
 import com.fasterxml.jackson.databind.ObjectMapper;

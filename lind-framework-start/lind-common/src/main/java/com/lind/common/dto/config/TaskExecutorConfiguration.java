@@ -1,4 +1,4 @@
-package com.lind.common.config;
+package com.lind.common.dto.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

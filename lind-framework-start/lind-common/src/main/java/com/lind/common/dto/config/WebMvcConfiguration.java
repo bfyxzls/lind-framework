@@ -1,4 +1,4 @@
-package com.lind.common.config;
+package com.lind.common.dto.config;
 
 import cn.hutool.core.date.DatePattern;
 import org.springframework.context.annotation.Configuration;

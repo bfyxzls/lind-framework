@@ -11,7 +11,8 @@ import org.springframework.context.ApplicationContextAware;
  */
 public class LindAware implements ApplicationContextAware {
 
-	ApplicationContext applicationContext;
+	// 这里是静态化的，避免在使用LindAware的时候，无法获取到applicationContext，一般在AOP拦截器时是无法直接使用@Autowired注入的，这时就用到它了.
+	static ApplicationContext applicationContext;
 
 	LindContext lindContext;
 

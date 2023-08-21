@@ -9,8 +9,8 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.lind.common.locale.LocalMessageConfig,\
   com.lind.common.init.ApplicationLoggerInitializer,\
   com.lind.common.rest.ResponseBodyAdvice,\
-  com.lind.common.config.JacksonConfiguration,\
-  com.lind.common.config.WebMvcConfiguration,\
-  com.lind.common.config.TaskExecutorConfiguration,\
+  com.lind.common.dto.config.JacksonConfiguration,\
+  com.lind.common.dto.config.WebMvcConfiguration,\
+  com.lind.common.dto.config.TaskExecutorConfiguration,\
   com.lind.common.pattern.pipeline.HandlerFactory
 

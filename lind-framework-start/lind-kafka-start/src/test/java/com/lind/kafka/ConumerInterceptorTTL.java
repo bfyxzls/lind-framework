@@ -16,6 +16,7 @@ import java.util.Map;
 
 /**
  * 消费者拦截器，注意我们的配置使用的是com.lind.kafka.config.KafkaProperties类，需要在这里添加interceptorClasses配置项
+ * 事实上，我们应该用生产者拦截器，在生产消息时，如果消费包含TTL，就将这个消息在TTL时间之后，再发到死信队列中。
  *
  * @author lind
  * @date 2023/3/21 13:45
@@ -54,7 +55,7 @@ public class ConumerInterceptorTTL implements ConsumerInterceptor<String, String
 					}
 				}
 				// 消息超时判定[now()-record.timestamp()/1000/60/60]小时
-				if (ttl > 0 && now - record.timestamp() > ttl * 1000) {
+				if (ttl > 0 && now - record.timestamp() < ttl * 1000) {
 					// 可以放在死信队列中
 					log.info("放到死信:{}", record);
 				}
