@@ -1,4 +1,4 @@
-package com.lind.common.wheel;
+package com.lind.common.wheel.hashwheel;
 
 import java.util.Collection;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class LindHashedWheelTimer implements ScheduledExecutorService {
+public class HashedWheelTimer implements ScheduledExecutorService {
 
 	private static final String DEFAULT_TIMER_NAME = "hashed-wheel-timer";
 
@@ -28,16 +28,16 @@ public class LindHashedWheelTimer implements ScheduledExecutorService {
 
 	private final ExecutorService executor;
 
-	private WaitStrategy waitStrategy;
+	private final WaitStrategy waitStrategy;
 
-	private Set<Registration<?>>[] wheel;
+	private final Set<Registration<?>>[] wheel;
 
 	private volatile int cursor = 0;
 
-	public LindHashedWheelTimer(long res, int wheelSize, WaitStrategy strategy) {
+	public HashedWheelTimer(long res, int wheelSize, WaitStrategy strategy) {
 		this(DEFAULT_TIMER_NAME, res, wheelSize, strategy,
 				Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors(), new ThreadFactory() {
-					AtomicInteger i = new AtomicInteger();
+					final AtomicInteger i = new AtomicInteger();
 
 					@Override
 					public Thread newThread(Runnable r) {
@@ -48,7 +48,7 @@ public class LindHashedWheelTimer implements ScheduledExecutorService {
 				}));
 	}
 
-	public LindHashedWheelTimer(String name, long res, int wheelSize, WaitStrategy strategy, ExecutorService exec) {
+	public HashedWheelTimer(String name, long res, int wheelSize, WaitStrategy strategy, ExecutorService exec) {
 		this.waitStrategy = strategy;
 
 		this.wheel = new Set[wheelSize];
@@ -60,7 +60,7 @@ public class LindHashedWheelTimer implements ScheduledExecutorService {
 		this.resolution = res;
 		this.executor = exec;
 		this.loop = Executors.newSingleThreadExecutor(new ThreadFactory() {
-			AtomicInteger i = new AtomicInteger();
+			final AtomicInteger i = new AtomicInteger();
 
 			@Override
 			public Thread newThread(Runnable r) {

@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2023/6/8 17:27
  * @since 1.0.0
  */
-public class LindTimeWheel {
+public class SimpleTimeWheel {
 
 	private final int tickMs; // 时间轮槽的时间间隔
 
@@ -31,7 +31,7 @@ public class LindTimeWheel {
 
 	private int currentTickIndex; // 当前时间轮指针指向的槽索引
 
-	public LindTimeWheel(int tickMs, int wheelSize) {
+	public SimpleTimeWheel(int tickMs, int wheelSize) {
 		this.tickMs = tickMs;
 		this.wheelSize = wheelSize;
 		this.startMs = System.currentTimeMillis();

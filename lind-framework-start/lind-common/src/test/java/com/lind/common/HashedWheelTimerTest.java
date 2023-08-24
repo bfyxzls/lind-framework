@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @Slf4j
-public class LindHashedWheelTimerTest {
+public class HashedWheelTimerTest {
 
 	@Test(timeout = 50000000)
 	public void testTimerOverflowWheelLength() throws InterruptedException {

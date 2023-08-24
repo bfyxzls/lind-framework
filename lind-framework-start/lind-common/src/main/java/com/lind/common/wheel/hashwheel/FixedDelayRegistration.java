@@ -1,4 +1,4 @@
-package com.lind.common.wheel;
+package com.lind.common.wheel.hashwheel;
 
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;

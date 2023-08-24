@@ -1,6 +1,7 @@
 package com.lind.common.wheel;
 
-import io.netty.util.HashedWheelTimer;
+import com.lind.common.wheel.hashwheel.HashedWheelTimer;
+import com.lind.common.wheel.hashwheel.WaitStrategy;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.hamcrest.MatcherAssert;
@@ -25,11 +26,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 public class TimerTest {
 
-	LindHashedWheelTimer timer;
+	HashedWheelTimer timer;
 
 	@Before
 	public void before() {
-		timer = new LindHashedWheelTimer(TimeUnit.MILLISECONDS.toNanos(10), 8, new WaitStrategy.SleepWait());
+		timer = new HashedWheelTimer(TimeUnit.MILLISECONDS.toMillis(1000), 8, new WaitStrategy.SleepWait());
 	}
 
 	@After
@@ -42,12 +43,14 @@ public class TimerTest {
 	public void testLindHashWheelTimer() throws InterruptedException {
 		log.info("start");
 		timer.schedule(() -> {
-			log.info("hello");
+			log.info("hello3");
 		}, 3, TimeUnit.SECONDS);
 		timer.schedule(() -> {
-			log.info("hello");
+			log.info("hello5");
 		}, 5, TimeUnit.SECONDS);
-
+		timer.schedule(() -> {
+			log.info("hello8");
+		}, 10, TimeUnit.SECONDS);
 		Thread.sleep(10000);
 	}
 
@@ -222,7 +225,7 @@ public class TimerTest {
 	@Test
 	public void nettyTest() throws InterruptedException {
 
-		HashedWheelTimer wheelTimer = new HashedWheelTimer();
+		io.netty.util.HashedWheelTimer wheelTimer = new io.netty.util.HashedWheelTimer();
 		wheelTimer.newTimeout(timeout -> log.info("1s delay"), 1, TimeUnit.SECONDS);
 		wheelTimer.newTimeout(timeout -> log.info("10s delay"), 10, TimeUnit.SECONDS);
 		wheelTimer.newTimeout(timeout -> log.info("11s delay"), 11, TimeUnit.SECONDS);

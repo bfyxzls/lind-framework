@@ -1,12 +1,12 @@
-package com.lind.common.wheel;
+package com.lind.common.wheel.hashwheel;
 
 import java.util.concurrent.Callable;
 
 public class FixedRateRegistration<T> extends OneShotRegistration<T> {
 
-	private int rescheduleRounds;
+	private final int rescheduleRounds;
 
-	private int scheduleOffset;
+	private final int scheduleOffset;
 
 	public FixedRateRegistration(Callable<T> callable, int fireRounds, long delay, int rescheduleRounds,
 			int scheduleOffset) {

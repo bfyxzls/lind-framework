@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class NettyTest {
 
 	// CountDownLatch的作用很简单，就是一个或者一组线程在开始执行操作之前，必须要等到其他线程执行完才可以
-	private CountDownLatch countDownLatch = new CountDownLatch(2);
+	private final CountDownLatch countDownLatch = new CountDownLatch(2);
 
 	@Test
 	public void test1() throws Exception {
@@ -26,11 +26,11 @@ public class NettyTest {
 		timer.newTimeout((timeout) -> {
 			log.info("task1 execute");
 			countDownLatch.countDown();
-		}, 500, TimeUnit.MILLISECONDS);
+		}, 5, TimeUnit.SECONDS);
 		timer.newTimeout((timeout) -> {
 			log.info("task2 execute");
 			countDownLatch.countDown();
-		}, 2, TimeUnit.SECONDS);
+		}, 10, TimeUnit.SECONDS);
 		countDownLatch.await();
 		timer.stop();
 		Thread.sleep(10000);
