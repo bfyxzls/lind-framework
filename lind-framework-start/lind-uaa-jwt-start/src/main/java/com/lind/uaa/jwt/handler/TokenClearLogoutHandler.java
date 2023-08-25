@@ -1,7 +1,7 @@
 package com.lind.uaa.jwt.handler;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.lind.common.util.IpInfoUtil;
+import com.lind.common.core.util.IpInfoUtils;
 import com.lind.redis.service.RedisService;
 import com.lind.uaa.jwt.config.Constants;
 import com.lind.uaa.jwt.config.JwtAuthenticationToken;
@@ -30,9 +30,9 @@ public class TokenClearLogoutHandler implements LogoutHandler {
 	RedisService redisService;
 
 	@Autowired
-	IpInfoUtil ipInfoUtil;
+	IpInfoUtils ipInfoUtil;
 
-	private JwtUserService jwtUserService;
+	private final JwtUserService jwtUserService;
 
 	public TokenClearLogoutHandler(JwtUserService jwtUserService) {
 		this.jwtUserService = jwtUserService;

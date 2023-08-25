@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.lind.common.dto.config;
+package com.lind.common.core.jackson;
 
-import cn.hutool.core.date.DatePattern;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.lind.common.core.jackson.module.DefaultValueModule;
 import com.lind.common.core.jackson.module.JavaTimeModule;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -33,7 +33,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 /**
- * json响应配置.
+ * json响应配置. Long到字符串，避免Long被截取 Date日期格式化 LocalDate日期格式化
  *
  * @author lengleng
  * @author L.cm
@@ -51,10 +51,12 @@ public class JacksonConfiguration {
 		return builder -> {
 			builder.locale(Locale.CHINA);
 			builder.timeZone(TimeZone.getTimeZone(ZoneId.systemDefault()));
-			// 早期的Date类型的格式化
-			builder.simpleDateFormat(DatePattern.NORM_DATETIME_PATTERN);
+			// 早期的Date类型的格式化，默认的返回日期2022-04-21T10:28:00，添加后返回日期2022-04-21 10:28:07
+			builder.simpleDateFormat(JavaTimeModule.NORM_DATETIME_PATTERN);
 			// java8建议的LocalDate,LocalDateTime,LocalTime的格式化
 			builder.modules(new JavaTimeModule());
+			// 默认值的处理
+			builder.modules(new DefaultValueModule());
 			// Long 类型转 String 类型,避免js丢失精度
 			builder.serializerByType(Long.class, ToStringSerializer.instance);
 		};

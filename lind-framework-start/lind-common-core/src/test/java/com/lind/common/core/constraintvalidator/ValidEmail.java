@@ -16,10 +16,12 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = CustomEmailValidator.class)
 @Documented
-public @interface ValidEmail{
-    String message() default "Invalid email address";
+public @interface ValidEmail {
 
-    Class<?>[] groups() default {};
+	String message() default "Invalid email address";
 
-    Class<? extends javax.validation.Payload>[] payload() default {};
+	Class<?>[] groups() default {};
+
+	Class<? extends javax.validation.Payload>[] payload() default {};
+
 }

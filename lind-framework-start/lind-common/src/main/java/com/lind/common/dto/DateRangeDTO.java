@@ -1,17 +1,14 @@
 package com.lind.common.dto;
 
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
 @Data
-public class DateRangeDTO implements DateRangeParam {
+public class DateRangeDTO {
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate fromDate;
+	private LocalDate fromDate;// 如果没有指定Json格式，如果你转2022-01-01这种日期，那它会报错.
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate toDate;
 
 }

@@ -11,13 +11,13 @@ import org.junit.Test;
 
 public class ConstraintValidatorTest {
 
-    @Test
-    public void validUserEmail() {
-        User user = new User();
-        user.setEmail("123@sina.com");
-        // 创建一个验证器工厂
-        BeanValidatorUtils.validateWithException(user);
-        System.out.println(user.getEmail());
-    }
+	@Test
+	public void validUserEmail() {
+		User user = new User();
+		user.setEmail("123@sina.com");
+		// 创建一个验证器工厂
+		BeanValidatorUtils.validateWithException(user);
+		System.out.println(user.getEmail());
+	}
 
 }

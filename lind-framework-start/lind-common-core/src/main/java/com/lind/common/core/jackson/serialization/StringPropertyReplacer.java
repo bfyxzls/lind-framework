@@ -1,4 +1,4 @@
-package com.lind.common.core.jackson;
+package com.lind.common.core.jackson.serialization;
 
 import java.io.File;
 import java.util.Properties;
@@ -110,7 +110,7 @@ public final class StringPropertyReplacer {
 
 			// Open bracket immediately after dollar
 			else if (c == '{' && state == SEEN_DOLLAR) {
-				buffer.append(string.substring(start, i - 1));
+				buffer.append(string, start, i - 1);
 				state = IN_BRACKET;
 				start = i - 1;
 				openBracketsCount = 1;
@@ -208,7 +208,7 @@ public final class StringPropertyReplacer {
 
 		// Collect the trailing characters
 		if (start != chars.length)
-			buffer.append(string.substring(start, chars.length));
+			buffer.append(string, start, chars.length);
 
 		if (buffer.indexOf("${") != -1) {
 			return replaceProperties(buffer.toString(), resolver);

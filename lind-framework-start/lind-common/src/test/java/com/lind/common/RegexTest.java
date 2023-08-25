@@ -1,6 +1,6 @@
 package com.lind.common;
 
-import com.lind.common.core.jackson.JsonSerialization;
+import com.lind.common.core.jackson.serialization.JsonSerialization;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -208,7 +208,7 @@ public class RegexTest {
 		}
 		matcher.appendTail(result);
 
-		System.out.println(result.toString());
+		System.out.println(result);
 	}
 
 	// 获取美元

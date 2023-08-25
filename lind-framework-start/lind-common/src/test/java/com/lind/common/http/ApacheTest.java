@@ -1,7 +1,7 @@
 package com.lind.common.http;
 
 import com.alibaba.fastjson.JSON;
-import com.lind.common.core.jackson.JsonSerialization;
+import com.lind.common.core.jackson.serialization.JsonSerialization;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

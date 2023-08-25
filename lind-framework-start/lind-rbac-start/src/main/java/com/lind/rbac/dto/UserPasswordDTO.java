@@ -1,6 +1,6 @@
 package com.lind.rbac.dto;
 
-import com.lind.common.util.RegexUtils;
+import com.lind.common.core.util.RegexUtils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

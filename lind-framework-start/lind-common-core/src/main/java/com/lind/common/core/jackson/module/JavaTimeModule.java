@@ -43,7 +43,9 @@ import java.util.Locale;
 
 public class JavaTimeModule extends SimpleModule {
 
-	public static final DateTimeFormatter NORM_DATETIME_FORMATTER = createFormatter("yyyy-MM-dd HH:mm:ss");
+	public static final String NORM_DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
+
+	public static final DateTimeFormatter NORM_DATETIME_FORMATTER = createFormatter(NORM_DATETIME_PATTERN);
 
 	public JavaTimeModule() {
 		super(PackageVersion.VERSION);

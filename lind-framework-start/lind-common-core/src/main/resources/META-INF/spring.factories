@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.lind.common.core.util.IpInfoUtils,\
+com.lind.common.core.util.SpringContextUtils,\
+com.lind.common.core.util.VerifyCodeUtils,\
+com.lind.common.core.jackson.JacksonConfiguration

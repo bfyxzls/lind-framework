@@ -1,4 +1,4 @@
-package com.lind.common.core.jackson;
+package com.lind.common.core.jackson.serialization;
 
 import java.util.Collections;
 import java.util.Map;

@@ -1,6 +1,6 @@
 package com.lind.logger.service.impl;
 
-import com.lind.common.util.IpInfoUtil;
+import com.lind.common.core.util.IpInfoUtils;
 import com.lind.logger.service.CurrentIpAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 public class DefaultCurrentIpAware implements CurrentIpAware {
 
 	@Autowired
-	IpInfoUtil ipInfoUtil;
+	IpInfoUtils ipInfoUtil;
 
 	@Autowired(required = false)
 	private HttpServletRequest request;

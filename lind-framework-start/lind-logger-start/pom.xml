@@ -30,5 +30,10 @@
             <artifactId>lind-common</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.lind</groupId>
+            <artifactId>lind-common-core</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
     </dependencies>
 </project>

@@ -1,15 +1,11 @@
 # 自动注入的bean
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.lind.common.util.LindExecutorPool,\
   com.lind.common.otp.OneTimePasswordGeneratorConfig,\
-  com.lind.common.util.SpringContextUtils,\
-  com.lind.common.util.VerifyCodeUtils,\
-  com.lind.common.util.IpInfoUtil,\
   com.lind.common.enums.NameValueEnumConverterFactory,\
   com.lind.common.locale.LocalMessageConfig,\
   com.lind.common.init.ApplicationLoggerInitializer,\
   com.lind.common.rest.ResponseBodyAdvice,\
-  com.lind.common.dto.config.JacksonConfiguration,\
+  com.lind.common.core.jackson.JacksonConfiguration,\
   com.lind.common.dto.config.WebMvcConfiguration,\
   com.lind.common.dto.config.TaskExecutorConfiguration,\
   com.lind.common.pattern.pipeline.HandlerFactory

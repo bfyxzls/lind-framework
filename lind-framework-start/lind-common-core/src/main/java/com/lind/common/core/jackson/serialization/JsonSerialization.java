@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.lind.common.core.jackson;
+package com.lind.common.core.jackson.serialization;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParser;
