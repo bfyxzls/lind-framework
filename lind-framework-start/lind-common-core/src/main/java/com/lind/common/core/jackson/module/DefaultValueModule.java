@@ -1,7 +1,6 @@
 package com.lind.common.core.jackson.module;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.BeanDescription;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializationConfig;
@@ -88,8 +87,7 @@ public class DefaultValueModule extends SimpleModule {
 		public class NullArrayJsonSerializer extends JsonSerializer<Object> {
 
 			@Override
-			public void serialize(Object value, JsonGenerator jgen, SerializerProvider provider)
-					throws IOException {
+			public void serialize(Object value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
 				if (value == null) {
 					jgen.writeStartArray();
 					jgen.writeEndArray();

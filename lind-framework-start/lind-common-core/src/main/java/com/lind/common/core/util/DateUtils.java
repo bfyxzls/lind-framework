@@ -1,10 +1,13 @@
 package com.lind.common.core.util;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 
 /**
  * 日期工具类. DateTimeFormatter 是线程安全的
@@ -31,6 +34,20 @@ public class DateUtils {
 
 	private static final DateTimeFormatter dateTimeFormatterThreadLocal = DateTimeFormatter
 			.ofPattern(DEFAULT_DATE_FORMAT);
+
+	public static String YYYY = "yyyy";
+
+	public static String YYYY_MM = "yyyy-MM";
+
+	public static String YYYY_MM_DD = "yyyy-MM-dd";
+
+	public static String YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
+
+	public static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
+
+	private static final String[] parsePatterns = { "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM",
+			"yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", "yyyy/MM", "yyyy.MM.dd", "yyyy.MM.dd HH:mm:ss",
+			"yyyy.MM.dd HH:mm", "yyyy.MM" };
 
 	private DateUtils() {
 	}
@@ -86,6 +103,23 @@ public class DateUtils {
 		catch (Exception e) {
 			throw new IllegalArgumentException("LocalDateTime转换字符串类型日期失败");
 		}
+	}
+
+	public static String datePath() {
+		Date now = new Date();
+		return DateFormatUtils.format(now, "yyyy/MM/dd");
+	}
+
+	public static final String parseDateToStr(final String format, final Date date) {
+		return new SimpleDateFormat(format).format(date);
+	}
+
+	public static final String dateTimeNow(final String format) {
+		return parseDateToStr(format, new Date());
+	}
+
+	public static final String dateTimeNow() {
+		return dateTimeNow(YYYYMMDDHHMMSS);
 	}
 
 }
