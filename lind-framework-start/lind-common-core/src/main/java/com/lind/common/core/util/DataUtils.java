@@ -83,6 +83,25 @@ public class DataUtils {
 	}
 
 	/**
+	 * 将大集合拆分成小集合，然后串行处理.
+	 * @param list
+	 * @param pageSize
+	 * @param consumer
+	 * @param <T>
+	 */
+	public static <T> void fillDataListByPage(List<T> list, int pageSize, Consumer<List<T>> consumer) {
+		List<List<T>> innerList = new ArrayList<>();
+		splitList(list, pageSize).forEach(o -> innerList.add(o));
+		int totalPage = innerList.size();
+		AtomicInteger i = new AtomicInteger();
+		innerList.forEach(o -> {
+			consumer.accept(o);
+			i.getAndIncrement();
+			logger.info("【当前数据页:{}/{}】", i.get(), totalPage);
+		});
+	}
+
+	/**
 	 * 多线程并发处理数据.
 	 *
 	 * @param <T>

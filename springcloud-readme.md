@@ -54,7 +54,8 @@ public class MyConfiguration {
 
 ## 如何包括Hystrix
 
-要将Hystrix包含在您的项目中，请使用起始者，其组ID为org.springframework.cloud，工件ID为​​spring-cloud-starter-netflix-hystrix。有关使用当前Spring Cloud版本Train设置构建系统的详细信息，请参见Spring Cloud项目页面。
+要将Hystrix包含在您的项目中，请使用起始者，其组ID为org.springframework.cloud，工件ID为spring-cloud-starter-netflix-hystrix。有关使用当前Spring
+Cloud版本Train设置构建系统的详细信息，请参见Spring Cloud项目页面。
 
 以下示例显示了具有Hystrix断路器的最小Eureka服务器：
 ```

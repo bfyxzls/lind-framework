@@ -50,7 +50,7 @@ You can now run `./mvnw spring-javaformat:apply` to reformat code.
 If you want to enforce that all code matches the required style, add the following:
 
 [source,xml,indent=0,subs="normal"]
-
+* 下面代码，在进行构建时，如果代码格式不符合规范，将会报错
 ```
 	<build>
 		<plugins>
@@ -70,6 +70,24 @@ If you want to enforce that all code matches the required style, add the followi
 			</plugin>
 		</plugins>
 	</build>
+```
+
+下面配置将完成在构建之前，自动进行格式化
+
+```
+<plugin>
+    <groupId>io.spring.javaformat</groupId>
+    <artifactId>spring-javaformat-maven-plugin</artifactId>
+    <version>0.0.35</version>
+    <executions>
+        <execution>
+            <goals>
+                <goal>apply</goal>
+            </goals>
+            <phase>validate</phase>
+        </execution>
+    </executions>
+</plugin>
 ```
 
 NOTE: The source formatter does not fundamentally change your code.

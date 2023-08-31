@@ -29,4 +29,15 @@ public class DataUtilsTest {
 		});
 	}
 
+	@Test
+	public void bulkList() {
+		List<Integer> integerList = new ArrayList<>();
+		for (int i = 0; i < 10000; i++) {
+			integerList.add(i);
+		}
+		DataUtils.fillDataListByPage(integerList, 100, o -> {
+			System.out.println(o.size());
+		});
+	}
+
 }
