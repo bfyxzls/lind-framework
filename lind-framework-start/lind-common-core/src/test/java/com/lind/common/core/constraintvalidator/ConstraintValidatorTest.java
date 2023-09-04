@@ -17,6 +17,8 @@ public class ConstraintValidatorTest {
 		user.setEmail("123@sina.com");
 		// 创建一个验证器工厂
 		BeanValidatorUtils.validateWithException(user);
+		user.setEmail("123@sinacom");
+		BeanValidatorUtils.validateWithException(user);
 		System.out.println(user.getEmail());
 	}
 

@@ -12,6 +12,10 @@ public class IpInfoUtilsTest {
 		System.out.println(IpInfoUtils.ip2long("129.168.4.1") <= a);
 		System.out.println(IpInfoUtils.ip2long("192.168.4.26") >= a);
 
+		a = IpInfoUtils.ip2long("118.213.222.123");
+		System.out.println(IpInfoUtils.ip2long("118.213.222.098") <= a);
+		System.out.println(IpInfoUtils.ip2long("118.213.222.126") >= a);
+
 	}
 
 }
