@@ -1,10 +1,16 @@
 package com.lind.common.proxy.invocation_handler;
 
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
 /**
  * @author lind
  * @date 2022/12/26 9:30
  * @since 1.0.0
  */
+@RunWith(SpringRunner.class)
+@SpringBootTest()
 public class Test {
 
 	@org.junit.Test

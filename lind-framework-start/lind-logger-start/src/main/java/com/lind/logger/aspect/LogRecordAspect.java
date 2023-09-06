@@ -23,6 +23,18 @@ import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+/**
+ * @Aspect 注解的使用：@Aspect 注解通常用于声明切面，而切面是 Spring 管理的组件。因此，@Autowired 注解可以直接用于切面类， 以注入其他
+ * Spring 托管的 bean。Spring AOP通过代理机制实现，切面类被 Spring 托管，因此可以利用 Spring 的依赖注入功能。
+ *
+ * InvocationHandler 接口的实现类：InvocationHandler 接口的实现类通常不是由 Spring 管理的，它们是标准 Java 类。
+ * 在这种情况下，Spring 的依赖注入机制不会自动生效，因为 Spring 无法感知和管理这些类。如果你在 InvocationHandler 实现类中需要依赖注入的功能，
+ * 你需要手动注入依赖或者在创建代理对象时进行注入。
+ *
+ * 总之，差异在于组件是否由 Spring 管理。Spring 管理的组件可以利用 @Autowired 注解来实现依赖注入，而标准 Java 类通常需要手动注入依赖。
+ * @Aspect 注解的类通常是由 Spring 管理的，因此可以使用 @Autowired 注解来注入其他组件。 而 InvocationHandler
+ * 接口的实现类通常不是由 Spring 管理的，所以不能直接使用 @Autowired 注解。
+ */
 @Slf4j
 @Aspect
 public class LogRecordAspect {

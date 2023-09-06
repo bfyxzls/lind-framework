@@ -18,7 +18,8 @@
         <skipTests>true</skipTests>
         <source>1.8</source> <!-- 源代码使用的JDK版本，避免出现“请使用 -Xlint:unchecked 重新编译的警告” -->
         <target>1.8</target> <!-- 需要生成的目标class文件的编译版本 -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><!-- 用于指定项目源代码的字符编码 -->
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding><!-- 用于指定生成报告和文档的字符编码 -->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <spring-boot-dependencies.version>2.3.3.RELEASE</spring-boot-dependencies.version>

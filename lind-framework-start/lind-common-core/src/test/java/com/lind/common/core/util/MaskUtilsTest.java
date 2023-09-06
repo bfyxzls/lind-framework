@@ -52,4 +52,28 @@ public class MaskUtilsTest {
 											// 2^n - 1
 	}
 
+	// 只保留低4位的值.
+	@Test
+	public void clearHigh() {
+		int value = 0b11011010; // 二进制表示的整数
+		int mask = 0b00001111; // 用于提取低4位的掩码
+		int result = value & mask; // 结果将是低4位的值
+		System.out.println("result=" + result);
+	}
+
+	// 提取颜色.
+	@Test
+	public void extractColor() {
+		int pixelColor = 0xFFAABBCC; // 一个32位的颜色值
+		int redMask = 0xFF0000; // 红色通道的掩码
+		int redChannel = (pixelColor & redMask) >> 16; // 提取红色通道值
+		System.out.println("redChannel=" + redChannel);
+
+		int greenChannel = (pixelColor & 0x00ff00) >> 8; // 提取绿色通道值,每个16进制数是4位，2个16进制是8位，所以右移8位
+		System.out.println("greenChannel=" + greenChannel);
+
+		int blueChannel = (pixelColor & 0x0000ff); // 提取蓝色通道值
+		System.out.println("blueChannel=" + blueChannel);
+
+	}
 }

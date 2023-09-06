@@ -193,6 +193,10 @@
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-transport</artifactId>
+        </dependency>
         <!-- 阿里TTL，解决线程间数据传值问题 -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -212,6 +216,7 @@
             <groupId>org.jgroups</groupId>
             <artifactId>jgroups</artifactId>
         </dependency>
+
     </dependencies>
     <build>
         <plugins>
