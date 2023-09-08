@@ -76,4 +76,5 @@ public class MaskUtilsTest {
 		System.out.println("blueChannel=" + blueChannel);
 
 	}
+
 }

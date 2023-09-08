@@ -232,7 +232,7 @@ public class RegexTest {
 
 		if (matcher.find()) {
 			String result = matcher.group(1);
-			System.out.println("{"+result+"}");
+			System.out.println("{" + result + "}");
 		}
 		else {
 			// 如果字符串中没有匹配的内容，您可以处理相应的情况
