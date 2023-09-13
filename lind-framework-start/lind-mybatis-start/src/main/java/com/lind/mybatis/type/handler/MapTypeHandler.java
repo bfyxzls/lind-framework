@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * k/v字典map到字符串的转换.
+ * k/v字典map到字符串的转换. 使用：@TableField(typeHandler = MapTypeHandler.class)
  */
 @MappedJdbcTypes(JdbcType.VARCHAR)
 @MappedTypes(Map.class)

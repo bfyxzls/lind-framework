@@ -33,15 +33,32 @@ lind-framework项目
     * lind-logger-start 日志拦截器，记录行为日志
     * lind-mybatis-start 封装了mybatis plus的操作
     * lind-nacos-start 统一了nacos的版本，添加了配置热更新demo
-    * lind-office-convert 封装了对excel,word的操作
-    * lind-rbac-start 用户角色管理相关的封装
-    * lind-redis-start 对redis的封装，序列化的统一，分布锁组件， 限流组件
-    * lind-schedule 任务调组件
-    * lind-spi java原生的插件组件
-    * lind-uaa-jwt-start 基于JWT的授权组件
-    * lind-uaa-keycloak-start 基于keycloak的授权组件,springboot.2.3.x，如果切换2.7.x会有循环引用问题
-    * lind-uaa-start 用户授权组件
-    * lind-verification-code-start 验证码组件
+  * lind-office-convert 封装了对excel,word的操作
+  * lind-rbac-start 用户角色管理相关的封装
+  * lind-redis-start 对redis的封装，序列化的统一，分布锁组件， 限流组件
+  * lind-schedule 任务调组件
+  * lind-spi java原生的插件组件
+  * lind-uaa-jwt-start 基于JWT的授权组件
+  * lind-uaa-keycloak-start 基于keycloak的授权组件,springboot.2.3.x，如果切换2.7.x会有循环引用问题
+  * lind-uaa-start 用户授权组件
+  * lind-verification-code-start 验证码组件
+
+# MIT License
+
+MIT许可证（MIT License），又称麻省理工学院许可证（Massachusetts Institute of Technology License）或X11许可证（X11
+License），是一种宽松的开源软件许可证。它是用于开源项目的最常见和广泛使用的许可证之一。MIT许可证允许开发人员在很少的限制下使用、修改、分发和子许可软件。以下是关于MIT许可证的一些关键要点：
+
+1. **允许使用**：MIT许可证授予使用软件的权利，无需支付费用或获得特殊许可。
+
+2. **允许修改**：您可以修改MIT许可证下的软件，无需受到严格的限制。
+
+3. **允许分发**：您可以将MIT许可证下的软件分发给他人，无论是以源代码形式还是编译后的形式。
+
+4. **无担保**：MIT许可证明确声明，软件是按"原样"提供，没有任何担保或保证。
+
+5. **保留版权声明**：MIT许可证要求在所有副本中包含原始软件的版权声明和许可证条款。
+
+总的来说，MIT许可证非常灵活和容易理解，使开发者能够自由地使用和分享开源软件，同时也提供了一些基本的法律保障。因此，许多开源项目选择采用MIT许可证，以鼓励广泛的使用和贡献。但需要注意的是，MIT许可证不会对软件的质量或适用性提供任何担保，使用者需要自行承担风险。
 
 # maven的执行阶段
 
