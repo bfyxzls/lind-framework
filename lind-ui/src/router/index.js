@@ -16,6 +16,7 @@ Vue.use(Router)
  * redirect: noRedirect             // 当设置 noRedirect 的时候该路由在面包屑导航中不可被点击
  * name:'router-name'               // 设定路由的名字，一定要填写不然使用<keep-alive>时会出现各种问题
  * query: '{"id": 1, "name": "ry"}' // 访问路由的默认传递参数
+ * props: (route) => ({ tableName: route.params.tableName || 'sys_oper_log'    }) // 添加路由参数默认值
  * roles: ['admin', 'common']       // 访问路由的角色权限
  * permissions: ['a:a:a', 'b:b:b']  // 访问路由的菜单权限
  * meta : {
@@ -69,24 +70,37 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/index'),
         name: 'Index',
-        meta: {title: '首页', icon: 'dashboard', affix: true}
+        meta: {title: '首页', icon: 'dashboard', affix: true /* affix不显示关闭按钮 */}
       }
     ]
-  }, {
+  },
+  {
+    //不带模板的详细页
+    path: '/detail',
+    query: '{"tableName":"sys_oper_log"}',//?后面的默认参数
+    component: () => import('@/views/test/detail'),
+    name: 'testDetail',//路由的名称，随意
+    meta: {title: '表单页', icon: 'dashboard'},
+    hidden: true
+  },
+  {
     path: '/test',
     component: Layout,
-    hidden: true,
     redirect: 'noredirect',
+    meta: {title: '测试', icon: 'dashboard'},
     children: [
       {
         path: 'index',
         component: () => import('@/views/test/index'),
-        name: 'test',
+        name: 'testIndex',
+        meta: {title: '测试主页', icon: 'dashboard'}
       },
       {
-        path: '/',
-        component: () => import('@/views/test/index'),
-        name: 'test',
+        path: 'detail',
+        query: '{"tableName":"sys_oper_log"}',//?后面的默认参数
+        component: () => import('@/views/test/detail'),
+        name: 'testDetail',//路由的名称，随意
+        meta: {title: '表单页', icon: 'dashboard'}
       }
     ]
   },

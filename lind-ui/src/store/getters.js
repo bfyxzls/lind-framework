@@ -15,5 +15,6 @@ const getters = {
   topbarRouters: state => state.permission.topbarRouters,
   defaultRoutes: state => state.permission.defaultRoutes,
   sidebarRouters: state => state.permission.sidebarRouters,
+  testCount: state => state.test.count // 获取test模块中的state里的count值
 }
 export default getters
