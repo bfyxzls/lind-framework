@@ -1,4 +1,4 @@
-package com.lind.spi;
+package com.lind.spi.provider;
 
 public interface Provider {
 

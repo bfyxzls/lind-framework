@@ -1,4 +1,4 @@
-package com.lind.verification.code;
+package com.lind.verification.code.common;
 
 /**
  * 校验码类型

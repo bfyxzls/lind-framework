@@ -1,4 +1,4 @@
-package com.lind.logback;
+package com.lind.logback.config;
 
 import com.lind.logback.mdc.LogInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;

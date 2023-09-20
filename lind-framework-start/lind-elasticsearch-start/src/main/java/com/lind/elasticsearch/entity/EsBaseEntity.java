@@ -1,12 +1,8 @@
 package com.lind.elasticsearch.entity;
 
-import com.lind.common.util.SnowFlakeUtils;
+import com.lind.common.core.id.SnowFlakeGenerator;
 import lombok.Data;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.annotation.*;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -26,7 +22,7 @@ public class EsBaseEntity {
 	 * 主键.
 	 */
 	@Id
-	private final String id = String.valueOf(SnowFlakeUtils.getFlowIdInstance().nextId());
+	private final String id = String.valueOf(SnowFlakeGenerator.getFlowIdInstance().nextId());
 
 	/**
 	 * 创建时间.

@@ -11,8 +11,8 @@
 
 package com.lind.verification.code.email;
 
-import com.lind.verification.code.ValidateCode;
-import com.lind.verification.code.ValidateCodeGenerator;
+import com.lind.verification.code.common.ValidateCode;
+import com.lind.verification.code.common.ValidateCodeGenerator;
 import com.lind.verification.code.properties.ValidateCodeProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

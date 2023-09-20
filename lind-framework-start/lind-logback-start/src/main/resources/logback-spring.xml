@@ -6,7 +6,7 @@
     <springProperty scope="context" name="springAppName" defaultValue="" source="spring.application.name"/>
 
     <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="com.lind.logback.StandardPatternLayout">
+        <layout class="com.lind.logback.config.StandardPatternLayout">
             <pattern>%d{yyyy-MM-dd HH:mm:ss} ${springAppName} %traceId %currentUser [%thread] %color %msg%n</pattern>
         </layout>
     </appender>
@@ -14,7 +14,7 @@
         <!-- 正在记录的日志文件的路径及文件名 -->
         <file>${log.path}/info.log</file>
         <!--日志文件输出格式-->
-        <layout class="com.lind.logback.StandardPatternLayout">
+        <layout class="com.lind.logback.config.StandardPatternLayout">
             <pattern>%d{yyyy-MM-dd HH:mm:ss} ${springAppName} %traceId %currentUser [%thread] %5level %msg%n</pattern>
         </layout>
         <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
@@ -39,7 +39,7 @@
         <!-- 正在记录的日志文件的路径及文件名 -->
         <file>${log.path}/warn.log</file>
         <!--日志文件输出格式-->
-        <layout class="com.lind.logback.StandardPatternLayout">
+        <layout class="com.lind.logback.config.StandardPatternLayout">
             <pattern>%d{yyyy-MM-dd HH:mm:ss} ${springAppName} %traceId %currentUser [%thread] %5level %msg%n</pattern>
         </layout>
         <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
@@ -64,7 +64,7 @@
         <!-- 正在记录的日志文件的路径及文件名 -->
         <file>${log.path}/error.log</file>
         <!--日志文件输出格式-->
-        <layout class="com.lind.logback.StandardPatternLayout">
+        <layout class="com.lind.logback.config.StandardPatternLayout">
             <pattern>%d{yyyy-MM-dd HH:mm:ss} ${springAppName} %traceId %currentUser [%thread] %5level %msg%n</pattern>
         </layout>
         <!-- 日志记录器的滚动策略，按日期，按大小记录 -->

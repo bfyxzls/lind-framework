@@ -73,6 +73,7 @@ public class KafkaProviderConfig {
 		paras.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, kafkaProperties.getKeySerializer());
 		paras.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, kafkaProperties.getValueSerializer());
 		paras.put(ProducerConfig.ACKS_CONFIG, kafkaProperties.getAcks());
+		paras.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, kafkaProperties.getProducer().getInterceptorClasses());
 		return new DefaultKafkaProducerFactory<>(paras);
 	}
 

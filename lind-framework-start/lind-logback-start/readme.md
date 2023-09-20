@@ -97,7 +97,7 @@ public class StandardPatternLayout extends PatternLayout {
 ```
 * 添加对应的配置项，不需要添加conversionRule项，在pattern中，也是可以直接使用定义好的常量的
 ```
-<layout class="com.lind.logback.StandardPatternLayout">
+<layout class="com.lind.logback.config.StandardPatternLayout">
     <pattern>
         %d{yyyy-MM-dd HH:mm:ss.SSS} ${springAppName} %browserType %ip %currentUser [%thread] %color %msg%n
     </pattern>

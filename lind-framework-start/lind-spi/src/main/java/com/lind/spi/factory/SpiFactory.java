@@ -1,6 +1,7 @@
-package com.lind.spi;
+package com.lind.spi.factory;
 
 import cn.hutool.core.io.FileUtil;
+import com.lind.spi.util.DynamicClassLoader;
 import lombok.SneakyThrows;
 
 import java.io.File;
@@ -8,13 +9,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardWatchEventKinds;
-import java.nio.file.WatchEvent;
-import java.nio.file.WatchKey;
-import java.nio.file.WatchService;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ServiceLoader;
@@ -111,7 +106,7 @@ public class SpiFactory {
 		try {
 			Method method = sysclass.getDeclaredMethod("addURL", parameters);
 			method.setAccessible(true);
-			method.invoke(sysloader, new Object[] { u });
+			method.invoke(sysloader, u);
 		}
 		catch (Throwable t) {
 			t.printStackTrace();
@@ -133,7 +128,7 @@ public class SpiFactory {
 			System.out.println("getProviderFactory:" + providerFactory.getId());
 		}
 		for (U providerFactory : load) {
-			if (providerFactory.getId().toLowerCase().equals(id.toLowerCase())) {
+			if (providerFactory.getId().equalsIgnoreCase(id)) {
 				return providerFactory;
 			}
 		}

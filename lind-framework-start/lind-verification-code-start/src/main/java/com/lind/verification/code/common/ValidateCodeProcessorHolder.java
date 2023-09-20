@@ -9,7 +9,7 @@
  * 项目官网: http://paascloud.net
  */
 
-package com.lind.verification.code;
+package com.lind.verification.code.common;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

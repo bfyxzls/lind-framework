@@ -1,5 +1,6 @@
-package com.lind.spi;
+package com.lind.spi.factory;
 
+import com.lind.spi.provider.Provider;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 

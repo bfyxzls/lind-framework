@@ -11,6 +11,8 @@ import org.slf4j.MDC;
 import java.util.Map;
 
 /**
+ * 消息者的拦截器.
+ *
  * @author lind
  * @date 2023/4/2 15:04
  * @since 1.0.0

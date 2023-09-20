@@ -12,21 +12,22 @@ import org.springframework.test.context.ContextConfiguration;
  * @since 1.0.0
  */
 @EnableScheduling
-@ContextConfiguration(classes = {RemoteScheduler.class, DynamicSchedulerFactory.class})
+@ContextConfiguration(classes = { RemoteScheduler.class, DynamicSchedulerFactory.class })
 public class TestDynamicJob {
 
-    @Test
-    public void newJob() throws SchedulerException, InterruptedException {
-        DynamicJob dynamicJob = new DynamicJob();
-        dynamicJob.jobName("zhansan1");
-        dynamicJob.target(Demo.class);
-        dynamicJob.cronExpression("0/1 * * * * ?");
-        if (DynamicSchedulerFactory.existJob(dynamicJob)) {
-            DynamicSchedulerFactory.resumeJob(dynamicJob);
-        } else {
-            DynamicSchedulerFactory.registerJob(dynamicJob);
-        }
-        Thread.sleep(10000);
-    }
+	@Test
+	public void newJob() throws SchedulerException, InterruptedException {
+		DynamicJob dynamicJob = new DynamicJob();
+		dynamicJob.jobName("zhansan1");
+		dynamicJob.target(Demo.class);
+		dynamicJob.cronExpression("0/1 * * * * ?");
+		if (DynamicSchedulerFactory.existJob(dynamicJob)) {
+			DynamicSchedulerFactory.resumeJob(dynamicJob);
+		}
+		else {
+			DynamicSchedulerFactory.registerJob(dynamicJob);
+		}
+		Thread.sleep(10000);
+	}
 
 }

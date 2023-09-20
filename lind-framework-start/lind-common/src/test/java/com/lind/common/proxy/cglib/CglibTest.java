@@ -1,6 +1,5 @@
 package com.lind.common.proxy.cglib;
 
-import com.lind.common.proxy.staticproxy.UserService;
 import com.lind.common.proxy.staticproxy.UserServiceImpl;
 import org.junit.Test;
 
@@ -14,7 +13,8 @@ public class CglibTest {
 	@Test
 	public void test_proxy_cglib() {
 		CglibProxy cglibProxy = new CglibProxy();
-		UserService userService = (UserService) cglibProxy.newInstall(new UserServiceImpl());
+		// cglib可以直接代理具体类，而jdk的原生代理只能代码接口
+		UserServiceImpl userService = (UserServiceImpl) cglibProxy.newInstall(new UserServiceImpl());
 		userService.select();
 	}
 

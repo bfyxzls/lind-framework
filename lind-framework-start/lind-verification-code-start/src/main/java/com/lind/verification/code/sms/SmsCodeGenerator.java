@@ -1,7 +1,7 @@
 package com.lind.verification.code.sms;
 
-import com.lind.verification.code.ValidateCode;
-import com.lind.verification.code.ValidateCodeGenerator;
+import com.lind.verification.code.common.ValidateCode;
+import com.lind.verification.code.common.ValidateCodeGenerator;
 import com.lind.verification.code.properties.ValidateCodeProperties;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

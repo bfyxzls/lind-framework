@@ -1,4 +1,4 @@
-package com.lind.verification.code;
+package com.lind.verification.code.common;
 
 /**
  * The class Validate code exception.

@@ -17,6 +17,8 @@ import java.util.Map;
 import static com.lind.kafka.util.ConvertUtils.toLong;
 
 /**
+ * 生产环境的拦截器.
+ *
  * @author lind
  * @date 2023/8/20 19:44
  * @since 1.0.0
@@ -34,7 +36,7 @@ public class ProducerInterceptorTTL implements ProducerInterceptor<Integer, Stri
 	private static ApplicationContext applicationContext;
 
 	// 时间轮，用于延时发送消息
-	private static LindTimeWheel timeWheel = new LindTimeWheel(1000, 8);
+	private static final LindTimeWheel timeWheel = new LindTimeWheel(1000, 8);
 
 	@Override
 	public ProducerRecord onSend(ProducerRecord<Integer, String> record) {
@@ -91,7 +93,7 @@ public class ProducerInterceptorTTL implements ProducerInterceptor<Integer, Stri
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		this.applicationContext = applicationContext;
+		ProducerInterceptorTTL.applicationContext = applicationContext;
 	}
 
 }

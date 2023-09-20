@@ -13,8 +13,8 @@ package com.lind.verification.code.image;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lind.common.rest.CommonResult;
-import com.lind.verification.code.ValidateCodeGenerator;
-import com.lind.verification.code.ValidateCodeRepository;
+import com.lind.verification.code.common.ValidateCodeGenerator;
+import com.lind.verification.code.common.ValidateCodeRepository;
 import com.lind.verification.code.impl.AbstractValidateCodeProcessor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.ServletWebRequest;

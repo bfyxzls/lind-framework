@@ -1,4 +1,4 @@
-package com.lind.verification.code;
+package com.lind.verification.code.common;
 
 import org.springframework.web.context.request.ServletWebRequest;
 

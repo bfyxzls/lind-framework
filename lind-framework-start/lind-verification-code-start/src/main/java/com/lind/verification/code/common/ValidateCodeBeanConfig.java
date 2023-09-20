@@ -9,9 +9,8 @@
  * 项目官网: http://paascloud.net
  */
 
-package com.lind.verification.code;
+package com.lind.verification.code.common;
 
-import com.google.code.kaptcha.Producer;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
 import com.lind.verification.code.email.DefaultEmailCodeSender;

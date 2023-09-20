@@ -1,7 +1,13 @@
 package com.lind.kafka.config;
 
 import lombok.Data;
+import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.util.unit.DataSize;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @ConfigurationProperties("spring.kafka")
 public class KafkaProperties {
@@ -56,6 +62,12 @@ public class KafkaProperties {
 	 * 消费者配置
 	 */
 	private Consumer consumer = new Consumer();
+
+	private final Producer producer = new Producer();
+
+	public Producer getProducer() {
+		return producer;
+	}
 
 	public boolean isEnabled() {
 		return enabled;
@@ -167,6 +179,27 @@ public class KafkaProperties {
 
 	public void setValueDeserializer(String valueDeserializer) {
 		this.valueDeserializer = valueDeserializer;
+	}
+
+	@Data
+	public static class Producer {
+
+		private final org.springframework.boot.autoconfigure.kafka.KafkaProperties.Ssl ssl = new org.springframework.boot.autoconfigure.kafka.KafkaProperties.Ssl();
+
+		private final org.springframework.boot.autoconfigure.kafka.KafkaProperties.Security security = new org.springframework.boot.autoconfigure.kafka.KafkaProperties.Security();
+		private final Map<String, String> properties = new HashMap();
+		private String acks;
+		private DataSize batchSize;
+		private List<String> bootstrapServers;
+		private DataSize bufferMemory;
+		private String clientId;
+		private String compressionType;
+		private Class<?> keySerializer = StringSerializer.class;
+		private Class<?> valueSerializer = StringSerializer.class;
+		private Integer retries;
+		private String transactionIdPrefix;
+		private String interceptorClasses;
+
 	}
 
 	@Data

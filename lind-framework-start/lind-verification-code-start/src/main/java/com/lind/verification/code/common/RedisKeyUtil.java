@@ -9,7 +9,7 @@
  * 项目官网: http://paascloud.net
  */
 
-package com.lind.verification.code;
+package com.lind.verification.code.common;
 
 import com.google.common.base.Preconditions;
 import lombok.AccessLevel;

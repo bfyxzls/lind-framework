@@ -1,4 +1,4 @@
-package com.lind.spi;
+package com.lind.spi.util;
 
 /*
  * Copyright 2018 Mordechai Meisels

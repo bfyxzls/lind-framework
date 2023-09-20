@@ -1,6 +1,6 @@
 package com.lind.logger;
 
-import com.lind.common.util.MapUtils;
+import com.lind.common.core.util.MapUtils;
 
 import java.util.Map;
 

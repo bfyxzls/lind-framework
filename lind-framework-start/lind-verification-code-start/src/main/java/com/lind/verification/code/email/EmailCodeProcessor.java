@@ -11,10 +11,10 @@
 
 package com.lind.verification.code.email;
 
-import com.lind.verification.code.CodeConstants;
-import com.lind.verification.code.ValidateCode;
-import com.lind.verification.code.ValidateCodeGenerator;
-import com.lind.verification.code.ValidateCodeRepository;
+import com.lind.verification.code.common.CodeConstants;
+import com.lind.verification.code.common.ValidateCode;
+import com.lind.verification.code.common.ValidateCodeGenerator;
+import com.lind.verification.code.common.ValidateCodeRepository;
 import com.lind.verification.code.impl.AbstractValidateCodeProcessor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.ServletRequestUtils;

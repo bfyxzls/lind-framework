@@ -12,7 +12,7 @@
 package com.lind.verification.code.image;
 
 import com.google.code.kaptcha.Producer;
-import com.lind.verification.code.ValidateCodeGenerator;
+import com.lind.verification.code.common.ValidateCodeGenerator;
 import com.lind.verification.code.properties.ImageCodeProperties;
 import org.springframework.web.context.request.ServletWebRequest;
 

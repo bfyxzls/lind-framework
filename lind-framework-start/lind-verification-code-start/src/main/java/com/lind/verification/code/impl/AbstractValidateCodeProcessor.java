@@ -11,12 +11,7 @@
 
 package com.lind.verification.code.impl;
 
-import com.lind.verification.code.ValidateCode;
-import com.lind.verification.code.ValidateCodeException;
-import com.lind.verification.code.ValidateCodeGenerator;
-import com.lind.verification.code.ValidateCodeProcessor;
-import com.lind.verification.code.ValidateCodeRepository;
-import com.lind.verification.code.ValidateCodeType;
+import com.lind.verification.code.common.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.ServletRequestBindingException;

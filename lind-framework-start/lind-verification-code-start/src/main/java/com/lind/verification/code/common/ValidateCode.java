@@ -9,7 +9,7 @@
  * 项目官网: http://paascloud.net
  */
 
-package com.lind.verification.code;
+package com.lind.verification.code.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -126,12 +126,11 @@ public class ValidateCode implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		final StringBuilder sb = new StringBuilder("ValidateCode{");
-		sb.append("code='").append(code).append('\'');
-		sb.append(", type='").append(type).append('\'');
-		sb.append(", expireTime=").append(expireTime);
-		sb.append('}');
-		return sb.toString();
+		String sb = "ValidateCode{" + "code='" + code + '\'' +
+				", type='" + type + '\'' +
+				", expireTime=" + expireTime +
+				'}';
+		return sb;
 	}
 
 }

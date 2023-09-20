@@ -9,6 +9,6 @@ spring:
       group-id: default
       enable-auto-commit: false
       auto-offset-reset: earliest #earliest #生产环境配置latest，只获取最新消息
-      interceptor-classes: com.lind.kafka.ConumerInterceptorTTL
-  profiles:
-    active: dev
+      interceptor-classes: com.lind.kafka.interceptor.TraceConsumerInterceptor
+    producer:
+      interceptor-classes: com.lind.kafka.interceptor.ProducerInterceptorTTL

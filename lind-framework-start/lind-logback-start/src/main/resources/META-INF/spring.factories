@@ -1,7 +1,7 @@
 # 自动注入的bean
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.lind.logback.LoggerConfig,\
+  com.lind.logback.config.LoggerConfig,\
   com.lind.logback.mdc.HystrixCircuitBreakerConfiguration,\
   com.lind.logback.trace.FeignTraceIdInterceptor,\
   com.lind.logback.trace.RestTemplateTraceIdInterceptor,\
-  com.lind.logback.LogbackConfigurer
+  com.lind.logback.config.LogbackConfigurer

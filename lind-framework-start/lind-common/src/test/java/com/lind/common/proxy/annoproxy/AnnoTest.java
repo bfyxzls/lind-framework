@@ -18,6 +18,7 @@ public class AnnoTest {
 
 	@Test
 	public void update() {
+		// 在拦截器中为user.name赋值
 		userService.update(new User());
 	}
 

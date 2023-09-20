@@ -1,13 +1,7 @@
-package com.lind.logback;
+package com.lind.logback.config;
 
 import ch.qos.logback.classic.PatternLayout;
-import com.lind.logback.convert.BrowserTypeConvert;
-import com.lind.logback.convert.CurrentUserConvert;
-import com.lind.logback.convert.IpConvert;
-import com.lind.logback.convert.LevelColorConverter;
-import com.lind.logback.convert.OsConvert;
-import com.lind.logback.convert.TraceIdConvert;
-import com.lind.logback.convert.UriConvert;
+import com.lind.logback.convert.*;
 
 /**
  * 将扩展的classicConvert进行注册，以后不需要在logback-spring.xml加添加conversionRule配置项了，直接修改layout项即可

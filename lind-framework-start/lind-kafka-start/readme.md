@@ -235,7 +235,8 @@ public class ProducerInterceptorTTL implements ProducerInterceptor<Integer, Stri
 }
 ```
 
-* 通过application.yml进行拦截器的配置
+* 通过application.yml进行拦截器的配置，不同版本配置方式不同
+  **org.springframework.kafka:spring-kafka:2.7.14**
 
 ```
 spring:
@@ -243,4 +244,13 @@ spring:
     producer:
       properties:
         interceptor.classes: com.ruoyi.lawyer.delay.ProducerInterceptorTTL
+```
+
+**org.springframework.kafka:spring-kafka:2.5.5.RELEASE**
+
+```
+spring:
+  kafka:
+    producer:
+      interceptor.classes: com.ruoyi.lawyer.delay.ProducerInterceptorTTL
 ```

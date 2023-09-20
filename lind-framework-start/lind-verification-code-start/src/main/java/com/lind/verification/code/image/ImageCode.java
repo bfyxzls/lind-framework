@@ -11,7 +11,7 @@
 
 package com.lind.verification.code.image;
 
-import com.lind.verification.code.ValidateCode;
+import com.lind.verification.code.common.ValidateCode;
 
 import java.awt.image.BufferedImage;
 import java.time.LocalDateTime;

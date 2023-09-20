@@ -11,9 +11,9 @@
 
 package com.lind.verification.code.impl;
 
-import com.lind.verification.code.ValidateCode;
-import com.lind.verification.code.ValidateCodeRepository;
-import com.lind.verification.code.ValidateCodeType;
+import com.lind.verification.code.common.ValidateCode;
+import com.lind.verification.code.common.ValidateCodeRepository;
+import com.lind.verification.code.common.ValidateCodeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
