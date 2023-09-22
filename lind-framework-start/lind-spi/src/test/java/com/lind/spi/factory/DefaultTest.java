@@ -4,6 +4,8 @@ import com.lind.spi.provider.Provider;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.nio.file.*;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ServiceLoader;
@@ -37,4 +39,33 @@ public class DefaultTest {
 		}
 	}
 
+	// 观察某个文件夹下是否有文件变化
+	@Test
+	public void watchDir() {
+		try (WatchService watchService = FileSystems.getDefault().newWatchService()) {
+			// 给path路径加上文件观察服务
+			Paths.get("d:\\watch").register(watchService, StandardWatchEventKinds.ENTRY_CREATE,
+					StandardWatchEventKinds.ENTRY_MODIFY, StandardWatchEventKinds.ENTRY_DELETE);
+			while (true) {
+				final WatchKey key = watchService.take();
+				for (WatchEvent<?> watchEvent : key.pollEvents()) {
+					final WatchEvent.Kind<?> kind = watchEvent.kind();
+					if (kind == StandardWatchEventKinds.OVERFLOW) {
+						continue;
+					}
+					final WatchEvent<Path> watchEventPath = (WatchEvent<Path>) watchEvent;
+					final Path filename = watchEventPath.context();
+					System.out.println(kind + " -> " + filename);
+				}
+				boolean valid = key.reset();
+				if (!valid) {
+					break;
+				}
+			}
+
+		}
+		catch (IOException | InterruptedException ex) {
+			System.err.println(ex);
+		}
+	}
 }

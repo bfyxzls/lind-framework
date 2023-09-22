@@ -30,8 +30,8 @@ CREATE TABLE `t_user`
     `master_id`            varchar(64)   DEFAULT NULL COMMENT '主账户id',
     PRIMARY KEY (`id`)
 );
-DROP TABLE IF EXISTS `t_log_20230525`;
-CREATE TABLE `t_log_20230525`
+DROP TABLE IF EXISTS `t_log`;
+CREATE TABLE `t_log`
 (
     `id`          varchar(255) NOT NULL,
     `create_by`   varchar(255) DEFAULT NULL,

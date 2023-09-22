@@ -1,24 +1,27 @@
 spring:
-  profiles: integTest
-  h2:
-    console:
-      enabled: false
-      path: /h2
   datasource:
-    url: jdbc:h2:mem:testdb;MODE=MYSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false
-    driver-class-name: org.h2.Driver
-    schema: classpath:*.sql
-    #   data: classpath:data/*.sql
-    initialization-mode: always
-    platform: h2
+    url: jdbc:mysql://localhost:3306/mini_admin?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      auto-commit: true
+      connection-test-query: SELECT 1
+      connection-timeout: 10000
+      idle-timeout: 30000
+      max-lifetime: 900000
+      maximum-pool-size: 30
+      minimum-idle: 10
+      pool-name: HikariCP
+      validation-timeout: 1000
 
-mybatis-plus:
-  mapperLocations: classpath:mapper/*.xml
-  typeAliasesPackage: com.pkulaw.mybatis.entity
+
+mybatis:
+  typeAliasesPackage: com.lind.mybatis.entity
   configuration:
     mapUnderscoreToCamelCase: true
-
 logging:
   level:
-    root: warn
-    org.springframework.*: warn
+    root: debug
+    org.springframework.*: info

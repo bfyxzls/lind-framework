@@ -6,7 +6,7 @@ Spring Boot是Spring家族具有划时代意义的一款产品，它发展自Spr
 
     瑕不掩瑜，Spring Boot前进的步伐浩浩荡荡，学就完了
 
-这不，我就在前几天收到一个“求助”，希望使用@AutoConfigureBefore来控制配置的顺序，但并未能如愿。本文就针对这个场景case稍作展开，讨论下使用@AutoConfigureBefore、@AutoConfigureAfter、@AutoCo	nfigureOrder三大注解控制自动配置执行顺序的正确姿势。
+这不，我就在前几天收到一个“求助”，希望使用@AutoConfigureBefore来控制配置的顺序，但并未能如愿。本文就针对这个场景case稍作展开，讨论下使用@AutoConfigureBefore、@AutoConfigureAfter、@AutoConfigureOrder三大注解控制自动配置执行顺序的正确姿势。
 
     提示：Spring Boot的自动配置是通过@EnableAutoConfiguration注解驱动的，预设是开启状态。你也可以通过spring.boot.enableautoconfiguration = false来关闭它，回退到Spring Framework时代。显然这不是本文需要讨论的内容~
 

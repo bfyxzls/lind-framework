@@ -26,7 +26,9 @@
         <guava.version>28.2-jre</guava.version>
         <mysql.drive.version>8.0.17</mysql.drive.version>
         <HikariCP.version>3.4.2</HikariCP.version>
+<!--        <mybatis-plus-boot-starter.version>3.5.2</mybatis-plus-boot-starter.version> 这版动态分表不太好 -->
         <mybatis-plus-boot-starter.version>3.4.3</mybatis-plus-boot-starter.version>
+
         <fastjson.version>1.2.69</fastjson.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
         <httpclient.version>4.5.12</httpclient.version>

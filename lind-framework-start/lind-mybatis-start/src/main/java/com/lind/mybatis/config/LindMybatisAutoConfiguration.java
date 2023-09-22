@@ -23,8 +23,8 @@ import java.util.Optional;
  * 一般情况下，proxyBeanMethods =
  * true（默认值）是最好的选择，它可以确保所注入的@Bean方法是单例的。但当应用程序只是在运行时少量地进行动态的依赖注入时，可以考虑将proxyBeanMethods属性设置为false。
  */
-@Configuration(proxyBeanMethods = false)
-public class MybatisAutoConfiguration implements ApplicationContextAware {
+@Configuration(proxyBeanMethods = true)
+public class LindMybatisAutoConfiguration implements ApplicationContextAware {
 
 	ApplicationContext applicationContext;
 
@@ -32,7 +32,7 @@ public class MybatisAutoConfiguration implements ApplicationContextAware {
 	 * 拦截器
 	 */
 	@Bean
-	public MybatisPlusInterceptor mybatisPlusInterceptor() {
+	public MybatisPlusInterceptor lindMybatisPlusInterceptor() {
 		MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
 		// 分页插件, 对于单一数据库类型来说,都建议配置该值,避免每次分页都去抓取数据库类型
 		PaginationInnerInterceptor lindPaginationInnerInterceptor = new LindPaginationInnerInterceptor();
@@ -62,7 +62,7 @@ public class MybatisAutoConfiguration implements ApplicationContextAware {
 	 * @return {@link MetaObjectHandler}
 	 */
 	@Bean
-	public AuditFieldFillMetaObjectHandler mybatisPlusMetaObjectHandler() {
+	public AuditFieldFillMetaObjectHandler lindMybatisPlusMetaObjectHandler() {
 		return new AuditFieldFillMetaObjectHandler();
 	}
 

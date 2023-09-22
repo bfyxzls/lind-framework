@@ -1,10 +1,8 @@
-package com.lind.mybatis;
+package com.lind.mybatis.test;
 
 import com.baomidou.mybatisplus.extension.plugins.handler.TableNameHandler;
 import com.baomidou.mybatisplus.extension.plugins.inner.DynamicTableNameInnerInterceptor;
 import com.lind.mybatis.parser.DaysTableNameParser;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.HashMap;
 
@@ -16,10 +14,10 @@ import java.util.HashMap;
  * @date 2023/5/24 13:49
  * @since 1.0.0
  */
-@Configuration
+// @Configuration
 public class DbConfig {
 
-	@Bean
+	// @Bean
 	public DynamicTableNameInnerInterceptor tableNamePlusInterceptor() {
 		DynamicTableNameInnerInterceptor dynamicTableNameInnerInterceptor = new DynamicTableNameInnerInterceptor();
 		HashMap<String, TableNameHandler> map = new HashMap<String, TableNameHandler>();
@@ -27,7 +25,7 @@ public class DbConfig {
 		// 这里为不同的表设置对应表名处理器
 		map.put("t_log", new DaysTableNameParser());
 		// 3.4.3.2 作废该方式
-		dynamicTableNameInnerInterceptor.setTableNameHandlerMap(map);
+		// dynamicTableNameInnerInterceptor.setTableNameHandlerMap(map);
 		return dynamicTableNameInnerInterceptor;
 	}
 

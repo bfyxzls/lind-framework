@@ -1,4 +1,4 @@
-package com.lind.mybatis;
+package com.lind.mybatis.test;
 
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
