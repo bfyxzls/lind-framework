@@ -19,9 +19,10 @@ import java.util.Map;
  * @date 2022/7/1 17:41
  * @description
  */
-@Service
+//@Service
 public class BaseServiceImpl<E extends BaseMapper<T>, T> implements BaseService<T> {
 
+	// 这种方式在mybatis-plus注入多个mapper时会报错,因为mybatis-plus会自动注入一个BaseMapper
 	@Autowired
 	E e;
 
