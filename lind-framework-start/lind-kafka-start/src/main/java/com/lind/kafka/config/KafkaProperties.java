@@ -187,17 +187,29 @@ public class KafkaProperties {
 		private final org.springframework.boot.autoconfigure.kafka.KafkaProperties.Ssl ssl = new org.springframework.boot.autoconfigure.kafka.KafkaProperties.Ssl();
 
 		private final org.springframework.boot.autoconfigure.kafka.KafkaProperties.Security security = new org.springframework.boot.autoconfigure.kafka.KafkaProperties.Security();
+
 		private final Map<String, String> properties = new HashMap();
+
 		private String acks;
+
 		private DataSize batchSize;
+
 		private List<String> bootstrapServers;
+
 		private DataSize bufferMemory;
+
 		private String clientId;
+
 		private String compressionType;
+
 		private Class<?> keySerializer = StringSerializer.class;
+
 		private Class<?> valueSerializer = StringSerializer.class;
+
 		private Integer retries;
+
 		private String transactionIdPrefix;
+
 		private String interceptorClasses;
 
 	}

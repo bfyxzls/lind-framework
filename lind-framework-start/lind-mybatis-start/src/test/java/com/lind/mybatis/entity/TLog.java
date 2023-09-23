@@ -8,7 +8,7 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = false)
 @TableName("t_log")
-public class TLog extends BaseEntity {
+public class TLog {
 
 	private String message;
 

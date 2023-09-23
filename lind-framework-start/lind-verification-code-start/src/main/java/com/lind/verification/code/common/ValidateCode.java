@@ -126,10 +126,8 @@ public class ValidateCode implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		String sb = "ValidateCode{" + "code='" + code + '\'' +
-				", type='" + type + '\'' +
-				", expireTime=" + expireTime +
-				'}';
+		String sb = "ValidateCode{" + "code='" + code + '\'' + ", type='" + type + '\'' + ", expireTime=" + expireTime
+				+ '}';
 		return sb;
 	}
 
