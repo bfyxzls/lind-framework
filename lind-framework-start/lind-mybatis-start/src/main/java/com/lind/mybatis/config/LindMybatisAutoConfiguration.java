@@ -6,8 +6,10 @@ import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.DynamicTableNameInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import com.lind.mybatis.datasource.DruidConfig;
 import com.lind.mybatis.plugins.LindPaginationInnerInterceptor;
 import org.springframework.beans.BeansException;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +25,7 @@ import java.util.Optional;
  * 一般情况下，proxyBeanMethods =
  * true（默认值）是最好的选择，它可以确保所注入的@Bean方法是单例的。但当应用程序只是在运行时少量地进行动态的依赖注入时，可以考虑将proxyBeanMethods属性设置为false。
  */
-@Configuration(proxyBeanMethods = true)
+@Configuration(proxyBeanMethods = false)
 public class LindMybatisAutoConfiguration implements ApplicationContextAware {
 
 	ApplicationContext applicationContext;

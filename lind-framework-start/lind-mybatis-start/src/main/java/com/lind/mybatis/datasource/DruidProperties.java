@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  *
  * @author ruoyi
  */
-@Configuration
+//@Configuration
 public class DruidProperties {
 
 	@Value("${spring.datasource.druid.initialSize}")
