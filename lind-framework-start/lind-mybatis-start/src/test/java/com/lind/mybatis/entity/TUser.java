@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.ToString;
 
 @Data
-@ToString(callSuper = false)
+@ToString(callSuper = true)
 @TableName("t_user")
 public class TUser extends BaseEntity {
 
