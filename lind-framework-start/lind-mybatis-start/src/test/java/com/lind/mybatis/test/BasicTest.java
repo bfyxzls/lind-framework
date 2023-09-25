@@ -1,5 +1,6 @@
 package com.lind.mybatis.test;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lind.mybatis.dao.UserDao;
 import com.lind.mybatis.entity.TUser;
 import lombok.extern.slf4j.Slf4j;
@@ -8,9 +9,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Slf4j
 @RunWith(SpringRunner.class)
@@ -39,10 +37,9 @@ public class BasicTest {
 
     @Test
     public void read() {
-        Map<String,Object> map=new HashMap<>();
-        map.put("username","lind");
-        log.info("user1:{}",
-                userDao.selectByMap(map));
+		QueryWrapper<TUser> wrapper = new QueryWrapper<>();
+		wrapper.lambda().eq(TUser::getCreateBy, 2);
+		log.info("user1:{}", userDao.selectList(wrapper));
     }
 
     // @Test

@@ -1,3 +1,4 @@
+
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -67,5 +68,7 @@ mybatis-plus:
     mapUnderscoreToCamelCase: true
 logging:
   level:
-    root: debug
+    root: info
     org.springframework.*: info
+server:
+  port: 5055

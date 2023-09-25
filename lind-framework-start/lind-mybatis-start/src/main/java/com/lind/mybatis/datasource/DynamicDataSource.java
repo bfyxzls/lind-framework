@@ -6,9 +6,7 @@ import javax.sql.DataSource;
 import java.util.Map;
 
 /**
- * 动态数据源
- *
- * @author ruoyi
+ * 动态数据源 测试发现对mybatis可以使用，如果是mybatis-plus这种方法不生效.
  */
 public class DynamicDataSource extends AbstractRoutingDataSource {
 
