@@ -1,3 +1,4 @@
+本组件支持mybatis和mybatis-plus
 # 原理
 
 mybatis在执行sql前通过数据源去找数据库连接-->`determineCurrentLookupKey`

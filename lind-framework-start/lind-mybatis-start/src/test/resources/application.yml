@@ -66,6 +66,7 @@ mybatis-plus:
   typeAliasesPackage: com.lind.mybatis.entity
   configuration:
     mapUnderscoreToCamelCase: true
+
 logging:
   level:
     root: info

@@ -1,5 +1,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.lind.mybatis.config.LindMybatisAutoConfiguration,\
   com.lind.mybatis.datasource.DruidProperties,\
-  com.lind.mybatis.datasource.DruidProperties
+  com.lind.mybatis.datasource.DruidConfig,\
+  com.lind.mybatis.datasource.DataSourceAspect
 

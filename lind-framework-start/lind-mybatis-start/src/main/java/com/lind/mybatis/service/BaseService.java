@@ -1,105 +1,86 @@
 package com.lind.mybatis.service;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.lind.common.core.util.CopyUtils;
+import com.lind.common.dto.PageData;
+import com.lind.mybatis.base.BaseEntity;
+import com.lind.mybatis.config.Constant;
 
 import java.util.List;
+import java.util.Map;
 
 /**
- * 业务基类.
+ * @author lind
+ * @date 2022/7/1 17:41
+ * @description
  */
-@FunctionalInterface
-public interface BaseService<E> {
+public abstract class BaseService<T extends BaseEntity> {
 
 	/**
-	 * 需要子类中把方法实现注入进来.
-	 * @return
+	 * 获取分页对象
+	 * @param params 分页查询参数
+	 * @param defaultOrderField 默认排序字段
+	 * @param isAsc 排序方式
 	 */
-	BaseMapper<E> getRepository();
+	protected IPage<T> getPage(Map<String, Object> params, String defaultOrderField, boolean isAsc) {
+		// 分页参数
+		long curPage = 1;
+		long limit = 10;
 
-	/**
-	 * 根据ID获取.
-	 * @param id 主键
-	 * @return
-	 */
-	default E get(String id) {
-		return getRepository().selectById(id);
+		if (params.get(Constant.PAGE) != null) {
+			curPage = Long.parseLong((String) params.get(Constant.PAGE));
+		}
+		if (params.get(Constant.LIMIT) != null) {
+			limit = Long.parseLong((String) params.get(Constant.LIMIT));
+		}
+
+		// 分页对象
+		Page<T> page = new Page<>(curPage, limit);
+
+		// 分页参数
+		params.put(Constant.PAGE, page);
+
+		// 排序字段
+		String orderField = (String) params.get(Constant.ORDER_FIELD);
+		String order = (String) params.get(Constant.ORDER);
+
+		// 前端字段排序
+		if (StringUtils.isNotBlank(orderField) && StringUtils.isNotBlank(order)) {
+			if (Constant.ASC.equalsIgnoreCase(order)) {
+				return page.addOrder(OrderItem.asc(orderField));
+			}
+			else {
+				return page.addOrder(OrderItem.desc(orderField));
+			}
+		}
+
+		// 没有排序字段，则不排序
+		if (StringUtils.isBlank(defaultOrderField)) {
+			return page;
+		}
+
+		// 默认排序
+		if (isAsc) {
+			page.addOrder(OrderItem.asc(defaultOrderField));
+		}
+		else {
+			page.addOrder(OrderItem.desc(defaultOrderField));
+		}
+
+		return page;
 	}
 
-	/**
-	 * 保存.
-	 * @param entity 实体
-	 * @return
-	 */
-	default Integer insert(E entity) {
-		return getRepository().insert(entity);
+	protected <T> PageData<T> getPageData(List<?> list, long total, Class<T> target) {
+		List<T> targetList = CopyUtils.copyListProperties(list, target);
+
+		return new PageData<>(targetList, total);
 	}
 
-	/**
-	 * 修改.
-	 * @param entity 实体
-	 * @return
-	 */
-	default Integer update(E entity) {
-		return getRepository().updateById(entity);
-	}
-
-	/**
-	 * 修改.
-	 * @param entity 实体
-	 * @return
-	 */
-	default Integer update(Wrapper<E> entityWrapper, E entity) {
-		return getRepository().update(entity, entityWrapper);
-	}
-
-	/**
-	 * 删除.
-	 * @param id 主键
-	 */
-	default void delete(String id) {
-		getRepository().deleteById(id);
-	}
-
-	/**
-	 * 批量删除.
-	 * @param idList 列表
-	 */
-	default void delete(List<String> idList) {
-		getRepository().deleteBatchIds(idList);
-	}
-
-	/**
-	 * 根据条件查询获取.
-	 * @param entityWrapper 条件
-	 * @return
-	 */
-	default List<E> findAll(Wrapper<E> entityWrapper) {
-		return getRepository().selectList(entityWrapper);
-	}
-
-	/**
-	 * 分页获取.
-	 * @param pageNum 页号
-	 * @param pageSize 每页记录数
-	 * @param entityWrapper 条件
-	 * @return
-	 */
-	default IPage<E> findAll(int pageNum, int pageSize, Wrapper<E> entityWrapper) {
-		Page<E> page = new Page<>(pageNum, pageSize);
-		IPage<E> results = getRepository().selectPage(page, entityWrapper);
-		return results;
-	}
-
-	/**
-	 * 获取查询条件的结果数
-	 * @param entityWrapper 条件
-	 * @return
-	 */
-	default long count(Wrapper<E> entityWrapper) {
-		return getRepository().selectCount(entityWrapper);
+	protected <T> PageData<T> getPageData(IPage page, Class<T> target) {
+		return getPageData(page.getRecords(), page.getTotal(), target);
 	}
 
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @since 1.0.0
  */
 @Component
-@AutoConfigureBefore(Father.class) // 在我儿子之前，我先初始化
+@AutoConfigureBefore(Father.class) // 在我儿子Father之前，我GrandFather先初始化
 public class GrandFather {
 
 	public GrandFather() {
