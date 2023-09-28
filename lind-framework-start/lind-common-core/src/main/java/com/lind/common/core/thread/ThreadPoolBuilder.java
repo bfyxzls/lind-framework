@@ -7,13 +7,9 @@ import java.util.concurrent.*;
 /**
  * 线程池生产者. 1.首先检测线程池运行状态，如果不是 RUNNING，则直接拒绝，线程池要保证在 RUNNING 的状态下执行任务。 2.如果 workerCount <
  * corePoolSize，则创建并启动一个线程来执行新提交的任务。 3.如果 workerCount >=
- * corePoolSize，且线程池内的阻塞队列未满，则将任务添加到该阻塞队列中。 4.如果 workerCount >= corePoolSize
- * 且线程池内的阻塞队列已满,并且workerCount < maximumPoolSize，，则创建并启动一个线程来执行新提交的任务。 5.如果 workerCount >=
- * maximumPoolSize，并且线程池内的阻塞队列已满，则根据拒绝策略来处理该任务 , 默认的处理方式是直接抛异常。 线程花瓶
- * ---------------------------------【maximumPoolSize最大线程数】 -----------------------------
- * --------------------- --------------- --------【BlockingQueue阻塞队列】 -------- --------
- * -------- -------- --------------【corePoolSize核心线程数】 -------------- --------------
- * -------------- --------------
+ * corePoolSize，且线程池内的阻塞队列未满，则将任务添加到该阻塞队列中。 4.如果 workerCount >=
+ * corePoolSize且线程池内的阻塞队列已满,并且workerCount < maximumPoolSize，则创建并启动一个线程来执行新提交的任务。 5.如果
+ * workerCount >= maximumPoolSize，并且线程池内的阻塞队列已满，则根据拒绝策略来处理该任务 , 默认的处理方式是直接抛异常。
  */
 @SuppressWarnings("rawtypes")
 public class ThreadPoolBuilder {

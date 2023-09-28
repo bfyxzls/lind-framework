@@ -1,4 +1,4 @@
-package com.lind.elasticsearch.entity;
+package com.lind.elasticsearch.serializer;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
@@ -13,7 +13,7 @@ import java.util.Date;
 public class DateDeserialize extends JsonDeserializer {
 
 	@Override
-	public Object deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+	public Object deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
 
 		String str = p.getText().trim();
 

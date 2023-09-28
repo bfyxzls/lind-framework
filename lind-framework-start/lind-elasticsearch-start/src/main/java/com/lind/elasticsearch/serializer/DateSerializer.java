@@ -1,4 +1,4 @@
-package com.lind.elasticsearch.entity;
+package com.lind.elasticsearch.serializer;
 
 import cn.hutool.core.date.DateUtil;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class DateSerializer extends JsonSerializer<Date> {
 
-	private String pattern;
+	private final String pattern;
 
 	public DateSerializer(String pattern) {
 		this.pattern = pattern;
