@@ -2,6 +2,7 @@ package com.lind.mybatis.test;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lind.common.dto.PageDTO;
 import com.lind.common.dto.PageParam;
@@ -94,6 +95,18 @@ public class BasicTest {
 		params.put("page", "1");// 来自前端URL地址上的字符串型当前页码
 		params.put("limit", "10");
 		userService.readPage(params).getRecords().forEach(o -> log.info("{}", o.getUsername()));
+	}
+
+	/**
+	 * mybatis-plus分页查询
+	 */
+	@Test
+	public void plusPage() {
+		Page page = new Page();
+		page.setCurrent(1);
+		page.setSize(10);
+		IPage<TUser> users = userDao.selectPage(page, Wrappers.emptyWrapper());
+		log.info("{}", users);
 	}
 
 	// @Test

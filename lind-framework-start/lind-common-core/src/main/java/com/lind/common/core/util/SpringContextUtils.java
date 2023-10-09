@@ -8,6 +8,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEvent;
+import org.springframework.core.env.Environment;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
@@ -135,6 +136,12 @@ public class SpringContextUtils implements BeanFactoryPostProcessor, Application
 		return applicationContext.getEnvironment().getActiveProfiles();
 	}
 
+	/**
+	 * 获取当前的环境配置，无配置返回null
+	 */
+	public static Environment getEnvironment() {
+		return applicationContext.getEnvironment();
+	}
 	/**
 	 * 获取当前的环境配置，当有多个环境配置时，只获取第一个
 	 * @return 当前的环境配置

@@ -20,7 +20,8 @@ public class ApplicationLoggerInitializer implements EnvironmentPostProcessor, O
 		String logBase = environment.getProperty("LOGGING_PATH", "logs");
 		System.out.println("appName=" + appName);
 		// spring boot admin 直接加载日志
-		System.setProperty("logging.file.name", String.format("%s/%s/debug.log", logBase, appName));
+		// System.setProperty("logging.file.name", String.format("%s/%s/debug.log",
+		// logBase, appName));
 	}
 
 	@Override

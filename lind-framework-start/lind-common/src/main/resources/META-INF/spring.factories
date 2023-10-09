@@ -1,3 +1,5 @@
+org.springframework.boot.env.EnvironmentPostProcessor=\
+  com.lind.common.env.MpwEnvironmentPostProcessor
 # 自动注入的bean
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.lind.common.otp.OneTimePasswordGeneratorConfig,\
