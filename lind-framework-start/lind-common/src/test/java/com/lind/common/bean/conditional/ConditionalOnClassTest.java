@@ -2,7 +2,6 @@ package com.lind.common.bean.conditional;
 
 import com.lind.common.bean.conditional.missingbean.MissingBean;
 import com.lind.common.bean.conditional.onbean.FishFood;
-import com.lind.common.test.Eat;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +17,6 @@ public class ConditionalOnClassTest {
 
 	@Autowired
 	FishFood fishFood;
-
-	@Autowired
-	Eat eat;
 
 	/**
 	 * @ConditionalOnMissingBean.
@@ -38,9 +34,5 @@ public class ConditionalOnClassTest {
 		fishFood.hello();
 	}
 
-	@Test
-	public void eatTest() {
-		eat.drink();
-	}
 
 }

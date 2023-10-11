@@ -1,6 +1,5 @@
 package com.lind.common.registrar;
 
-import com.lind.common.ImportBeanDefinitionRegistrarTest;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.context.annotation.ComponentScan;

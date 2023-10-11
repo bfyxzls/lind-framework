@@ -12,9 +12,9 @@ public class CglibTest {
 
 	@Test
 	public void test_proxy_cglib() {
-		CglibProxy cglibProxy = new CglibProxy();
+		CglibProxyUserService cglibProxyUserService = new CglibProxyUserService();
 		// cglib可以直接代理具体类，而jdk的原生代理只能代码接口
-		UserServiceImpl userService = (UserServiceImpl) cglibProxy.newInstall(new UserServiceImpl());
+		UserServiceImpl userService = (UserServiceImpl) cglibProxyUserService.newInstall(new UserServiceImpl());
 		userService.select();
 	}
 

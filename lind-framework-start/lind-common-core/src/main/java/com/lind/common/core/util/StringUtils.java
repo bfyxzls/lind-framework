@@ -2,14 +2,9 @@ package com.lind.common.core.util;
 
 import org.springframework.util.AntPathMatcher;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * string tool
@@ -518,4 +513,114 @@ public class StringUtils {
 		return buf.toString();
 	}
 
+	public static String replace(final String text, final String searchString, final String replacement) {
+		return replace(text, searchString, replacement, -1);
+	}
+
+	/**
+	 * <p>
+	 * Replaces a String with another String inside a larger String, for the first
+	 * {@code max} values of the search String.
+	 * </p>
+	 *
+	 * <p>
+	 * A {@code null} reference passed to this method is a no-op.
+	 * </p>
+	 *
+	 * <pre>
+	 * StringUtils.replace(null, *, *, *)         = null
+	 * StringUtils.replace("", *, *, *)           = ""
+	 * StringUtils.replace("any", null, *, *)     = "any"
+	 * StringUtils.replace("any", *, null, *)     = "any"
+	 * StringUtils.replace("any", "", *, *)       = "any"
+	 * StringUtils.replace("any", *, *, 0)        = "any"
+	 * StringUtils.replace("abaa", "a", null, -1) = "abaa"
+	 * StringUtils.replace("abaa", "a", "", -1)   = "b"
+	 * StringUtils.replace("abaa", "a", "z", 0)   = "abaa"
+	 * StringUtils.replace("abaa", "a", "z", 1)   = "zbaa"
+	 * StringUtils.replace("abaa", "a", "z", 2)   = "zbza"
+	 * StringUtils.replace("abaa", "a", "z", -1)  = "zbzz"
+	 * </pre>
+	 * @param text text to search and replace in, may be null
+	 * @param searchString the String to search for, may be null
+	 * @param replacement the String to replace it with, may be null
+	 * @param max maximum number of values to replace, or {@code -1} if no maximum
+	 * @return the text with any replacements processed, {@code null} if null String input
+	 */
+	public static String replace(final String text, final String searchString, final String replacement,
+			final int max) {
+		return replace(text, searchString, replacement, max, false);
+	}
+
+	/**
+	 * <p>
+	 * Replaces a String with another String inside a larger String, for the first
+	 * {@code max} values of the search String, case sensitively/insensisitively based on
+	 * {@code ignoreCase} value.
+	 * </p>
+	 *
+	 * <p>
+	 * A {@code null} reference passed to this method is a no-op.
+	 * </p>
+	 *
+	 * <pre>
+	 * StringUtils.replace(null, *, *, *, false)         = null
+	 * StringUtils.replace("", *, *, *, false)           = ""
+	 * StringUtils.replace("any", null, *, *, false)     = "any"
+	 * StringUtils.replace("any", *, null, *, false)     = "any"
+	 * StringUtils.replace("any", "", *, *, false)       = "any"
+	 * StringUtils.replace("any", *, *, 0, false)        = "any"
+	 * StringUtils.replace("abaa", "a", null, -1, false) = "abaa"
+	 * StringUtils.replace("abaa", "a", "", -1, false)   = "b"
+	 * StringUtils.replace("abaa", "a", "z", 0, false)   = "abaa"
+	 * StringUtils.replace("abaa", "A", "z", 1, false)   = "abaa"
+	 * StringUtils.replace("abaa", "A", "z", 1, true)   = "zbaa"
+	 * StringUtils.replace("abAa", "a", "z", 2, true)   = "zbza"
+	 * StringUtils.replace("abAa", "a", "z", -1, true)  = "zbzz"
+	 * </pre>
+	 * @param text text to search and replace in, may be null
+	 * @param searchString the String to search for (case insensitive), may be null
+	 * @param replacement the String to replace it with, may be null
+	 * @param max maximum number of values to replace, or {@code -1} if no maximum
+	 * @param ignoreCase if true replace is case insensitive, otherwise case sensitive
+	 * @return the text with any replacements processed, {@code null} if null String input
+	 */
+	private static String replace(final String text, String searchString, final String replacement, int max,
+			final boolean ignoreCase) {
+		if (isEmpty(text) || isEmpty(searchString) || replacement == null || max == 0) {
+			return text;
+		}
+		if (ignoreCase) {
+			searchString = searchString.toLowerCase();
+		}
+		int start = 0;
+		int end = ignoreCase ? indexOfIgnoreCase(text, searchString, start) : indexOf(text, searchString, start);
+		if (end == INDEX_NOT_FOUND) {
+			return text;
+		}
+		final int replLength = searchString.length();
+		int increase = replacement.length() - replLength;
+		increase = increase < 0 ? 0 : increase;
+		increase *= max < 0 ? 16 : max > 64 ? 64 : max;
+		final StringBuilder buf = new StringBuilder(text.length() + increase);
+		while (end != INDEX_NOT_FOUND) {
+			buf.append(text, start, end).append(replacement);
+			start = end + replLength;
+			if (--max == 0) {
+				break;
+			}
+			end = ignoreCase ? indexOfIgnoreCase(text, searchString, start) : indexOf(text, searchString, start);
+		}
+		buf.append(text, start, text.length());
+		return buf.toString();
+	}
+
+	/**
+	 * 是否为http(s)://开头
+	 * @param link 链接
+	 * @return 结果
+	 */
+	public static boolean ishttp(String link) {
+		return startsWithAny(link, "http", "https");
+	}
 }

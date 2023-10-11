@@ -12,6 +12,7 @@
     <modules>
         <module>lind-framework-start</module>
         <module>lind-framework-bom</module>
+        <module>lind-framework-start/lind-upms</module>
     </modules>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

@@ -32,7 +32,7 @@ public class ProducerInterceptorTTL implements ProducerInterceptor<Integer, Stri
 	// 死信队列,延时后发送到的队列，我们称为死信队列
 	public static String DEAD_TOPIC = "dead_topic";
 
-	// 静态化的上下文，用于获取bean，因为ConsumerInterceptor是通过反射创建的，所以无法通过注入的方式获取bean
+	// 静态化的上下文，用于获取bean，因为ConsumerInterceptor是通过反射创建的，不是spring ioc管理的，所以无法通过注入的方式获取bean
 	private static ApplicationContext applicationContext;
 
 	// 时间轮，用于延时发送消息
