@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
 
 @Component
-public class OneTimePasswordGeneratorConfig {
+public class OTPConfig {
 
 	/**
 	 * TOTP的时间有效期（秒）.

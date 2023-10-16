@@ -2,7 +2,7 @@ org.springframework.boot.env.EnvironmentPostProcessor=\
   com.lind.common.env.MpwEnvironmentPostProcessor
 # 自动注入的bean
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.lind.common.otp.OneTimePasswordGeneratorConfig,\
+  com.lind.common.otp.OTPConfig,\
   com.lind.common.enums.NameValueEnumConverterFactory,\
   com.lind.common.locale.LocalMessageConfig,\
   com.lind.common.init.ApplicationLoggerInitializer,\

@@ -1,8 +1,6 @@
-package com.lind.common.othertest;
+package com.lind.common.otp;
 
 import com.lind.common.encrypt.DESCbcUtils;
-import com.lind.common.otp.HmacOneTimePasswordGenerator;
-import com.lind.common.otp.TimeBasedOneTimePasswordGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.jupiter.params.provider.Arguments;
@@ -10,6 +8,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
@@ -68,21 +68,24 @@ public class HOTPTest {
 	public void totpDesGenerator() throws Exception {
 
 		String plaintext = "hello";
-
 		// 动态同密钥
-		String dynamicPassKey = String.format("%08d",
-				timeBasedOneTimePasswordGenerator.generateOneTimePassword(password, Instant.now()));
-		log.info("dynamicPassKey:{}", dynamicPassKey);
+		// Instant.now()是UTC时间
+		ZoneId localZoneId = ZoneId.systemDefault();
+		ZonedDateTime localTime = Instant.now().atZone(ZoneId.systemDefault()); // 获取本地时间
+		Instant instant = localTime.toInstant();
+		// String dynamicPassKey = String.format("%08d",
+		// timeBasedOneTimePasswordGenerator.generateOneTimePassword(password, instant));
+		// log.info("dynamicPassKey:{}", dynamicPassKey);
+		String dynamicPassKey = "89919373";
 		String result = DESCbcUtils.encrypt(dynamicPassKey, plaintext);
+		log.info("encryptDES加密结果={}", result);
 
-		log.info("encryptDES result={}", result);
-		for (int i = 0; i < 30; i++) {
+		for (int i = 0; i < 40; i++) {
 			// 动态同密钥
 			dynamicPassKey = String.format("%08d",
 					timeBasedOneTimePasswordGenerator.generateOneTimePassword(password, Instant.now()));
-			log.info("dynamicPassKey:{}", dynamicPassKey);
-
-			log.info("{} decryptDES result={}", i, DESCbcUtils.decrypt(dynamicPassKey, result));
+			log.info("dynamicPassKey:{},{} decryptDES result={}", dynamicPassKey, i,
+					DESCbcUtils.decrypt(dynamicPassKey, result));
 			TimeUnit.SECONDS.sleep(1);
 		}
 	}

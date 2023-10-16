@@ -1,4 +1,4 @@
-totpSeconds: 30 # 30秒
+totpSeconds: 60 # 30秒
 spring.application.name: lind-start-common
 jasypt:
   encryptor:
