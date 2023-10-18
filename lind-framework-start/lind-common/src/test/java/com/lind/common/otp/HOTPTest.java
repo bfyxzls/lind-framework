@@ -90,4 +90,20 @@ public class HOTPTest {
 		}
 	}
 
+	@Test
+	public void bitMove() {
+		long counter = 327689;
+		byte[] b = new byte[8];
+
+		b[0] = (byte) ((counter & 0xff00000000000000L) >>> 56);// 最高位，无符号右移。
+		b[1] = (byte) ((counter & 0x00ff000000000000L) >>> 48);
+		b[2] = (byte) ((counter & 0x0000ff0000000000L) >>> 40);
+		b[3] = (byte) ((counter & 0x000000ff00000000L) >>> 32);
+		b[4] = (byte) ((counter & 0x00000000ff000000L) >>> 24);
+		b[5] = (byte) ((counter & 0x0000000000ff0000L) >>> 16);
+		b[6] = (byte) ((counter & 0x000000000000ff00L) >>> 8);
+		b[7] = (byte) (counter & 0x00000000000000ffL);// 最低位,byte[-128,127]
+		System.out.println(b);
+	}
+
 }

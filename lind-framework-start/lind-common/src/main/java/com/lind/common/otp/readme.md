@@ -33,6 +33,161 @@ HOTP， 如果是使用时间来生成验证码，则是 TOTP。
 * s 称为重新同步参数（Resynchronization Parameter）表示服务器将通过累加计数器，来尝试多次验证输入的一次性密码，而这个尝试的次数及为
   s。该参数主要是有效的容忍用户在客户端无意中生成了额外不用于验证的验证码，导致客户端和服务端不一致，但同时也限制了用户无限制的生成不用于验证的一次性密码。
 
+## 基础知识
+
+### javax.crypto.Mac
+
+`javax.crypto.Mac` 是 Java 中用于计算消息认证码（MAC）的类。MAC 是一种用于验证消息完整性和真实性的技术，通常在数据传输和通信中使用。
+
+具体来说，`javax.crypto.Mac` 类提供了以下功能：
+
+1. **MAC 计算**：它允许你使用指定的密钥来计算消息的消息认证码。MAC 是通过将消息和密钥作为输入来生成的，确保了消息的完整性和未被篡改。
+
+2. **多种算法支持**：Java的 `javax.crypto.Mac` 类支持多种不同的MAC算法，例如HMAC（基于哈希函数的MAC）等。
+
+3. **灵活性**：它允许你根据需要使用不同的密钥来计算不同的消息的MAC。这对于确保数据的安全性和验证消息来源非常有用。
+
+4. **提供完整性**：MAC 算法可以防止数据在传输过程中被篡改。如果接收到的消息的MAC与预期的MAC不匹配，那么可以确定消息已被篡改。
+
+总之，`javax.crypto.Mac` 类是Java中用于实现消息认证码的工具，有助于确保数据的完整性和验证消息的真实性。这对于安全通信和数据传输非常重要。
+
+### javax.crypto.Mac验证消息完整性
+
+当验证消息的完整性时，通常使用 HMAC（基于哈希函数的消息认证码）。下面是一个使用 `javax.crypto.Mac` 来计算和验证消息完整性的简单Java示例：
+
+```java
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+
+public class MessageIntegrityVerification {
+    public static void main(String[] args) throws Exception {
+        // 1. 选择一个MAC算法（这里使用HMAC-SHA256）
+        String algorithm = "HmacSHA256";
+
+        // 2. 准备密钥
+        String secretKey = "YourSecretKey"; // 替换成你的密钥
+        Key key = new SecretKeySpec(secretKey.getBytes(), algorithm);
+
+        // 3. 创建MAC对象并初始化
+        Mac mac = Mac.getInstance(algorithm);
+        mac.init(key);
+
+        // 4. 要验证的消息
+        String message = "This is a message to be verified.";
+
+        // 5. 计算MAC
+        byte[] macBytes = mac.doFinal(message.getBytes());
+
+        // 6. 发送消息和MAC给接收方
+        // 接收方将使用相同的密钥和消息来计算MAC，并比较它与接收到的MAC是否匹配
+
+        // 模拟接收方验证
+        boolean isValid = verifyMAC(key, message, macBytes);
+        if (isValid) {
+            System.out.println("消息完整性验证通过。");
+        } else {
+            System.out.println("消息完整性验证失败。");
+        }
+    }
+
+    // 验证MAC的方法
+    public static boolean verifyMAC(Key key, String message, byte[] receivedMAC) throws Exception {
+        Mac mac = Mac.getInstance(key.getAlgorithm());
+        mac.init(key);
+        byte[] calculatedMAC = mac.doFinal(message.getBytes());
+
+        // 使用MessageDigest的isEqual方法来比较两个MAC是否相等
+        return Arrays.equals(calculatedMAC, receivedMAC);
+    }
+}
+```
+
+在上述示例中，我们选择了HMAC-SHA256作为MAC算法，准备了一个密钥，然后计算消息的MAC。在实际应用中，你将消息和MAC发送给接收方，接收方可以使用相同的密钥和消息来验证消息的完整性。
+
+### totp实例中的应用
+
+```
+  /**
+   * 生成key.
+   * @param password
+   * @return
+   * @throws UnsupportedEncodingException
+   */
+  protected Key generateKey(String password) throws UnsupportedEncodingException {
+      byte[] keyBytes = password.getBytes("UTF-8");
+      SecretKeySpec signingKey = new SecretKeySpec(keyBytes, this.mac.getAlgorithm());
+      return signingKey;
+  }
+
+  /**
+   * Generates a one-time password using the given key and counter value.
+   */
+  public synchronized int generateOneTimePassword(String password, final long counter) throws Exception {
+      Key key = generateKey(password);
+      this.mac.init(key);
+      this.buffer[0] = (byte) ((counter & 0xff00000000000000L) >>> 56);
+      this.buffer[1] = (byte) ((counter & 0x00ff000000000000L) >>> 48);
+      this.buffer[2] = (byte) ((counter & 0x0000ff0000000000L) >>> 40);
+      this.buffer[3] = (byte) ((counter & 0x000000ff00000000L) >>> 32);
+      this.buffer[4] = (byte) ((counter & 0x00000000ff000000L) >>> 24);
+      this.buffer[5] = (byte) ((counter & 0x0000000000ff0000L) >>> 16);
+      this.buffer[6] = (byte) ((counter & 0x000000000000ff00L) >>> 8);
+      this.buffer[7] = (byte) (counter & 0x00000000000000ffL);
+
+      this.mac.update(this.buffer, 0, 8);
+
+      try {
+          this.mac.doFinal(this.buffer, 0);
+      }
+      catch (final ShortBufferException e) {
+          // We allocated the buffer to (at least) match the size of the MAC length at
+          // construction time, so this
+          // should never happen.
+          throw new RuntimeException(e);
+      }
+
+      final int offset = this.buffer[this.buffer.length - 1] & 0x0f;
+
+      return ((this.buffer[offset] & 0x7f) << 24 | (this.buffer[offset + 1] & 0xff) << 16
+              | (this.buffer[offset + 2] & 0xff) << 8 | (this.buffer[offset + 3] & 0xff)) % this.modDivisor;
+  }
+```
+
+这段代码的作用是用于生成一个消息验证码（Message Authentication Code），通常用于验证消息的完整性和真实性。这里是一个简要的解释：
+
+1. `generateKey(password)` 函数生成一个密钥 `key`，这个密钥用于计算 MAC。
+
+2. `this.mac.init(key)` 初始化一个 MAC 实例，以便后续用密钥进行消息认证码的计算。
+
+3. 接下来的代码将 `counter` 的不同字节部分提取出来，并存储在 `this.buffer` 数组中，以便用于计算 MAC。`counter`
+   是一个长整数，每个字节代表一个特定的位。
+
+4. this.buffer[0] = (byte) ((counter & 0xff00000000000000L) >>> 56);
+
+   这行代码的实际意义是从一个长整数 `counter` 中提取出特定的字节，然后将其转换为字节类型 `(byte)`。
+
+   让我解释这行代码的各个部分：
+
+    - `counter & 0xff00000000000000L`：这部分是一个位运算，使用与操作 `&` 和一个掩码 `0xff00000000000000L`
+      ，它的作用是保留 `counter` 的最高字节（8个比特）并将其他字节清零。
+
+    - `>>> 56`：这部分是无符号右移操作，它将上面结果的字节向右移动，使得最终的结果在字节的最低位置。
+
+   所以，`(byte) ((counter & 0xff00000000000000L) >>> 56)` 这行代码提取了 `counter`
+   的最高字节，并将其作为一个字节值返回。这通常用于将长整数的不同字节部分转换为字节数据，以便后续用于计算消息验证码等操作。
+
+5. `this.mac.update(this.buffer, 0, 8)` 使用 `this.buffer` 中的数据来更新 MAC 实例，以便进行 MAC 计算。
+
+6. `this.mac.doFinal(this.buffer, 0)` 完成 MAC 计算，将结果存储在 `this.buffer` 中。
+
+7. 最后，通过 `try` 和 `catch` 块捕获 `ShortBufferException` 异常，如果发生异常，会抛出一个 `RuntimeException`
+   。这是因为在构造时，`this.buffer` 被分配了足够大的空间来存储 MAC 的结果，所以不应该发生短缓冲区异常。
+
+总之，这段代码的主要作用是使用给定的密钥和计数器生成一个消息验证码，以确保消息的完整性和真实性。
+
 ## 算法流程
 
 ![](./assets/readme-1697075367273.png)
