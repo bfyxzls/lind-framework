@@ -1,9 +1,12 @@
 package com.lind.common.encrypt;
 
+import com.lind.common.encrypt.hash.Base16;
+import com.lind.common.encrypt.hash.Base62;
 import lombok.SneakyThrows;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
@@ -15,9 +18,9 @@ import static org.apache.commons.lang3.Validate.notNull;
  */
 public class HashUtils {
 
-	private static char[] encodes = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".toCharArray();
+	private static final char[] encodes = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".toCharArray();
 
-	private static byte[] decodes = new byte[256];
+	private static final byte[] decodes = new byte[256];
 
 	static {
 		for (int i = 0; i < encodes.length; i++) {
@@ -88,7 +91,7 @@ public class HashUtils {
 	public static String md5(String inputStr) {
 		byte[] secretBytes = null;
 		try {
-			secretBytes = MessageDigest.getInstance("md5").digest(inputStr.getBytes("UTF-8"));
+			secretBytes = MessageDigest.getInstance("md5").digest(inputStr.getBytes(StandardCharsets.UTF_8));
 		}
 		catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException("没有这个md5算法！");
@@ -138,7 +141,7 @@ public class HashUtils {
 	public static String sha(String inputStr) throws UnsupportedEncodingException {
 		notNull(inputStr);
 		BigInteger sha = null;
-		byte[] inputData = inputStr.getBytes("utf-8");
+		byte[] inputData = inputStr.getBytes(StandardCharsets.UTF_8);
 		try {
 			MessageDigest messageDigest = MessageDigest.getInstance("SHA");
 			messageDigest.update(inputData);

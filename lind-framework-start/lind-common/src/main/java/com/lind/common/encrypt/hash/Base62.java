@@ -1,4 +1,4 @@
-package com.lind.common.encrypt;
+package com.lind.common.encrypt.hash;
 
 import java.io.ByteArrayOutputStream;
 

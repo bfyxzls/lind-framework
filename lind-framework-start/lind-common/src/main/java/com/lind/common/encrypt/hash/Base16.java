@@ -1,4 +1,4 @@
-package com.lind.common.encrypt;
+package com.lind.common.encrypt.hash;
 
 /**
  * 自定义了Base16,将生成A到P这16个字符.
@@ -28,10 +28,10 @@ public class Base16 {
 		for (int i = 0; i < r.length; i++) {
 			int digit1 = s.charAt(i * 2), digit2 = s.charAt(i * 2 + 1);
 			if (digit1 >= 'A' && digit1 <= 'P')
-				digit1 -= 'A' - 0; // 原来'A'-10，表示减去前面10个数字
+				digit1 -= 'A'; // 原来'A'-10，表示减去前面10个数字
 
 			if (digit2 >= 'A' && digit2 <= 'P')
-				digit2 -= 'A' - 0;
+				digit2 -= 'A';
 
 			r[i] = (byte) ((digit1 << 4) + digit2);
 		}
