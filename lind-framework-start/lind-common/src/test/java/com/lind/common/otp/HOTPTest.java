@@ -18,7 +18,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 @Slf4j
 public class HOTPTest {
 
-	final static String password = "pkulaw";
+	final static String password = "bdyh_2021_cas";
 
 	TimeBasedOneTimePasswordGenerator timeBasedOneTimePasswordGenerator;
 

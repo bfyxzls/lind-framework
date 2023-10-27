@@ -79,6 +79,15 @@ public class SimpleTimeWheel {
 	}
 
 	public void addTask(Runnable task, long delayMs) {
+		// delayMs为多长时间后任务被执行
+		// expireMs被计算为当前时间 startMs 加上 delayMs，表示任务的过期时间
+		// currentMs表示当前时间
+		// 如果 expireMs 小于当前时间 currentMs 加上时间轮的时间间隔
+		// tickMs，则任务将被添加到当前时间轮槽（slot）中。这表示任务的执行时间已经过期，可以立即执行，因此将其添加到当前槽中。
+		// 如果任务的执行时间在未来，就需要计算任务应该添加到哪个时间轮槽中
+		// 1. 首先，计算需要跨越的时间轮圈数，即 (delayMs - tickMs) / tickMs，这表示任务需要等待多少个时间轮的刻度才能执行。
+		// 2. 然后，计算任务应该添加到哪个槽中。这是通过将 (currentMs + delayMs) / tickMs
+		// 加上跨越的时间轮圈数（totalTicks）并取模时间轮的大小（wheelSize）来完成。这告诉我们任务应该添加到哪个时间轮槽。
 		long expireMs = startMs + delayMs;
 		long currentMs = System.currentTimeMillis();
 
@@ -88,7 +97,7 @@ public class SimpleTimeWheel {
 			timerTaskSlots.get(currentIndex).add(task);
 		}
 		else {
-			// 计算需要跨越的时间轮圈数和所在槽索引
+			// 计算需要跨越的时间轮圈数和所在槽索引，例如槽数是8，我需要10秒后启动任务，就需要这个算法了
 			int totalTicks = (int) ((delayMs - tickMs) / tickMs);
 			int currentIndex = (int) (((currentMs + delayMs) / tickMs + totalTicks) % wheelSize);
 			timerTaskSlots.get(currentIndex).add(() -> {

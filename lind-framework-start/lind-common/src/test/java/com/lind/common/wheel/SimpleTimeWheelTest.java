@@ -23,9 +23,9 @@ public class SimpleTimeWheelTest {
 	public static void main(String[] args) {
 		log.info("任务开始");
 		SimpleTimeWheel timeWheel = new SimpleTimeWheel(1000, 8); // 每秒一个槽，总共10个槽
-		timeWheel.addTask(() -> log.info("Task 1 executed"), 3000); // 3秒后执行任务1
-		timeWheel.addTask(() -> log.info("Task 2 executed"), 5000); // 5秒后执行任务2
 		timeWheel.addTask(() -> log.info("Task 3 executed"), 10000); // 7秒后执行任务3
+		timeWheel.addTask(() -> log.info("Task 1 executed"), 2000); // 3秒后执行任务1
+		// timeWheel.addTask(() -> log.info("Task 2 executed"), 5000); // 5秒后执行任务2
 		try {
 			TimeUnit.SECONDS.sleep(1000);
 		}
