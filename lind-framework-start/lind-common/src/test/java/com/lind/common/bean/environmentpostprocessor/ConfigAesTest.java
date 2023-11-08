@@ -1,6 +1,5 @@
 package com.lind.common.bean.environmentpostprocessor;
 
-import com.lind.common.core.util.SpringContextUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,8 +22,8 @@ public class ConfigAesTest {
 	@Test
 	public void mpwTest() {
 		// AESNetUtils.encrypt("中国人", "lind123456123456");//vFLIjoQXy4Pzo1/hOm8hWw==
-		System.out.println(SpringContextUtils.getEnvironment().getProperty("author.name"));
-		System.out.println(SpringContextUtils.getEnvironment().getProperty("author.nationality"));
+		// System.out.println(SpringContextUtils.getEnvironment().getProperty("author.name"));
+		// System.out.println(SpringContextUtils.getEnvironment().getProperty("author.nationality"));
 	}
 
 }

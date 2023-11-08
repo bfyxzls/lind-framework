@@ -16,7 +16,7 @@ public class ByteToIntAndLong {
 		// 每个byte有符号字符由8bit组成，取值为-128~127
 		byte[] aByte = Bytes.toBytes(a);
 		int b = Bytes.toInt(aByte);
-        Assert.assertEquals(a, b);
+		Assert.assertEquals(a, b);
 	}
 
 	@Test
@@ -25,7 +25,7 @@ public class ByteToIntAndLong {
 		// 每个byte有符号字符由8bit组成，取值为-128~127
 		byte[] aByte = Bytes.toBytes(a);
 		long b = Bytes.toLong(aByte);
-        Assert.assertEquals(a, b);
+		Assert.assertEquals(a, b);
 	}
 
 }

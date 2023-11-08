@@ -22,8 +22,7 @@ public class TotpCSharpTest {
 	public void test_30s_8bit() throws Exception {
 		String totp = generateTOTP("ABCDEFHGIJKLMNOPQRST234UVWXYZ567", 300, 8);
 		System.out.println(totp);
-		String userId = "178faf9e-ba08-4d95-8435-1d6b77164143";
-		String sign = HashUtils.md5(userId + totp).toUpperCase();
+		String sign = HashUtils.md5("0f2070f9-0a33-49aa-a2d2-50a6d090eb30" + totp).toUpperCase();
 		System.out.println(sign);
 		// http://192.168.4.26:8080/auth/realms/fabao/protocol/openid-connect/auth?client_id=account&redirect_uri=http%3A%2F%2F192.168.4.26%3A8080%2Fauth%2Frealms%2Ffabao%2Faccount%2Flogin-redirect&scope=openid&response_type=code&userId=347c9e9e-076c-45e3-be74-c482fffcc6e5&sign=333CCCE6F5430E5703B61FB86FB340B2
 	}

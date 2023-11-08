@@ -97,9 +97,9 @@ public class SimpleTimeWheel {
 			timerTaskSlots.get(currentIndex).add(task);
 		}
 		else {
-			// 计算需要跨越的时间轮圈数和所在槽索引，例如槽数是8，我需要10秒后启动任务，就需要这个算法了
-			int totalTicks = (int) ((delayMs - tickMs) / tickMs);
-			int currentIndex = (int) (((currentMs + delayMs) / tickMs + totalTicks) % wheelSize);
+			// 计算需要跨越的时间轮针数和所在槽索引，例如槽数是8，我需要10秒后启动任务，就需要这个算法了
+			int totalTicks = (int) ((delayMs - tickMs) / tickMs); // 例如延时20秒，相当于指针要走19个，(20_000-1000)/1000=19
+			int currentIndex = (int) (((currentMs + delayMs) / tickMs + totalTicks) % wheelSize); // ((0+20000)/1000+19)%8=39%8=7
 			timerTaskSlots.get(currentIndex).add(() -> {
 				long current = System.currentTimeMillis();
 				if (current >= expireMs) {

@@ -240,6 +240,17 @@
             <!--                </executions>-->
             <!--            </plugin>-->
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Dependencies>com.lind.common.core</Dependencies>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
 
         </plugins>
     </build>

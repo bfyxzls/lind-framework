@@ -2,8 +2,13 @@
 
 主要是由框架级工具进行封装，springboot的start包的使用，完成对工具包的自动注入，所有start包的版本都继承lind-framework的版本
 
-> 目前正在开发基于最新的springboot2.7的精简版本lind-fast框架
+* 目前正在开发基于最新的springboot2.7的精简版本lind-fast框架
+* 图标地址：https://shields.io/badges
 
+<p align="center">
+	<a href="https://gitee.com/y_project/RuoYi"><img src="https://img.shields.io/badge/lind_framework-v1.1.3-blue"></a>
+	<a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-red"></a>
+</p>
 # 升级
 
 * 命令行执行 mvn versions:set -DnewVersion=1.1.3-SNAPSHOT //更新整个项目版本,SNAPSHOT的同一个版本可以多次发到仓库里

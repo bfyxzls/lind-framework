@@ -18,7 +18,8 @@ import static org.apache.commons.lang3.Validate.notNull;
  */
 public class HashUtils {
 
-	private static final char[] encodes = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".toCharArray();
+	private static final char[] encodes = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+			.toCharArray();
 
 	private static final byte[] decodes = new byte[256];
 

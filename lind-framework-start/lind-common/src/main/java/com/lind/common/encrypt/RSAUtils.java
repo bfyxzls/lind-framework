@@ -7,20 +7,12 @@ import org.springframework.util.Base64Utils;
 import org.springframework.util.ResourceUtils;
 
 import javax.crypto.Cipher;
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
-import java.io.FileWriter;
-import java.io.InputStream;
-import java.io.Writer;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.security.KeyFactory;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.Signature;
+import java.security.*;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+
 
 /**
  * RSA非对称加密算法. 公钥加密，私钥解密；多人拥有公钥，可以加密，一个拥有私钥，完成解密; 密钥加签，公钥验签；多人拥有公钥，可以签名，一个拥有私钥，完成验证签名。
@@ -28,9 +20,14 @@ import java.security.spec.X509EncodedKeySpec;
 public class RSAUtils {
 
 	/**
-	 * 签名算法.
+	 * 签名算法 MD5WithRSA.
 	 */
 	public static final String SIGN_ALGORITHMS = "MD5WithRSA";
+
+	/**
+	 * 签名算法 SHA256WithRSA.
+	 */
+	public static final String SIGN_ALGORITHMS_SHA256 = "SHA256withRSA";
 
 	/**
 	 * RSA最大加密的块.
@@ -214,9 +211,9 @@ public class RSAUtils {
 		PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
 		KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM_NAME);
 		PrivateKey key = keyFactory.generatePrivate(keySpec);
-		Signature signature = Signature.getInstance(SIGN_ALGORITHMS);
+		Signature signature = Signature.getInstance(SIGN_ALGORITHMS_SHA256);
 		signature.initSign(key);
-		signature.update(data.getBytes());
+		signature.update(data.getBytes(StandardCharsets.UTF_8));
 		return new String(Base64Utils.encode(signature.sign()));
 	}
 
@@ -232,10 +229,10 @@ public class RSAUtils {
 		X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
 		KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM_NAME);
 		PublicKey key = keyFactory.generatePublic(keySpec);
-		Signature signature = Signature.getInstance(SIGN_ALGORITHMS);
+		Signature signature = Signature.getInstance(SIGN_ALGORITHMS_SHA256);
 		signature.initVerify(key);
-		signature.update(srcData.getBytes());
-		return signature.verify(Base64Utils.decode(sign.getBytes()));
+		signature.update(srcData.getBytes(StandardCharsets.UTF_8));
+		return signature.verify(Base64Utils.decode(sign.getBytes(StandardCharsets.UTF_8)));
 	}
 
 }

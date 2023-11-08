@@ -61,8 +61,7 @@ public class MpwEnvironmentPostProcessor implements EnvironmentPostProcessor {
 			}
 
 			if (MapUtils.isNotEmpty(map))
-				environment.getPropertySources()
-						.addFirst(new MapPropertySource("custom-encrypt", map));
+				environment.getPropertySources().addFirst(new MapPropertySource("custom-encrypt", map));
 		}
 	}
 

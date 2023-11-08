@@ -28,7 +28,7 @@ public class EnumImplementInterTest {
 			}
 		}
 
-    }
+	}
 
 	interface Hello {
 

@@ -112,8 +112,7 @@ public class BitOperationTest {
 		int STOP = 1 << statusBig; // 1*2^4=16
 		int TIDYING = 2 << statusBig;// 2*2^4=32
 		int TERMINATED = 3 << statusBig;// 3*2^4=48
-		System.out
-				.printf("run=%s,stop=%s,tidying=%s,terminated=%s%n", RUNNING, STOP, TIDYING, TERMINATED);
+		System.out.printf("run=%s,stop=%s,tidying=%s,terminated=%s%n", RUNNING, STOP, TIDYING, TERMINATED);
 
 		int ctl = 15 | TIDYING;// TIDYING的第3个增量
 		System.out.println("ctl=" + ctl);
