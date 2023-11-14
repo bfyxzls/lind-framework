@@ -22,4 +22,10 @@ public class HashUtilsTest {
 		logger.info(HashUtils.md5("123456", salt.getBytes()));
 	}
 
+	@Test
+	public void md532() {
+		logger.info(HashUtils.md5("00b1a78c-8667-4ba7-81e1-c594716fdd172023-11-13bdyh_2021_caspassword"));
+
+	}
+
 }

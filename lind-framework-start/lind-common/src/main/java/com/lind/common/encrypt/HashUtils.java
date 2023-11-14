@@ -90,18 +90,7 @@ public class HashUtils {
 	 */
 	@SneakyThrows
 	public static String md5(String inputStr) {
-		byte[] secretBytes = null;
-		try {
-			secretBytes = MessageDigest.getInstance("md5").digest(inputStr.getBytes(StandardCharsets.UTF_8));
-		}
-		catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException("没有这个md5算法！");
-		}
-		String md5code = new BigInteger(1, secretBytes).toString(16);
-		for (int i = 0; i < 32 - md5code.length(); i++) {
-			md5code = "0" + md5code;
-		}
-		return md5code;
+		return md5(inputStr, null);
 	}
 
 	/**
@@ -116,7 +105,9 @@ public class HashUtils {
 			// Create MessageDigest instance for MD5
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			// Add password bytes to digest
-			md.update(salt);
+			if (salt != null) {
+				md.update(salt);
+			}
 			// Get the hash's bytes
 			byte[] bytes = md.digest(passwordToHash.getBytes());
 			// This bytes[] has bytes in decimal format;

@@ -201,7 +201,7 @@ public class RSAUtils {
 	}
 
 	/**
-	 * 签名
+	 * 签名,会用到签名算法
 	 * @param data 待签名数据
 	 * @param privateKey 私钥
 	 * @return java.lang.String
@@ -218,7 +218,7 @@ public class RSAUtils {
 	}
 
 	/**
-	 * 验签
+	 * 验签,会用到签名算法
 	 * @param srcData 原始字符串
 	 * @param publicKey 公钥
 	 * @param sign 签名
