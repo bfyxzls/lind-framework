@@ -23,7 +23,11 @@ public class HotpCSharpUtil {
 	 * @throws Exception
 	 */
 	public static String generateTOTP(byte[] key, int timeStep, int digits) throws Exception {
-		return generateTOTP(new Base32().encodeToString(key), timeStep, digits);
+		return generateTOTP(System.currentTimeMillis(), new Base32().encodeToString(key), timeStep, digits);
+	}
+
+	public static String generateTOTP(String base32Key, int timeStep, int digits) throws Exception {
+		return generateTOTP(System.currentTimeMillis(), base32Key, timeStep, digits);
 	}
 
 	/**
@@ -34,7 +38,7 @@ public class HotpCSharpUtil {
 	 * @return
 	 * @throws Exception
 	 */
-	public static String generateTOTP(String base32Key, int timeStep, int digits) throws Exception {
+	public static String generateTOTP(long timespan, String base32Key, int timeStep, int digits) throws Exception {
 		/**
 		 * 1. 服务器和客户端都知道共享的密钥。 2. 客户端获取当前时间戳，通常是以秒为单位。 3.
 		 * 客户端将当前时间戳除以时间步长并取整，以获得一个时间窗口（Time Window）的序号。 4.
@@ -44,7 +48,7 @@ public class HotpCSharpUtil {
 		if (base32Key.length() != 32) {
 			throw new Exception("base32Key length must be 32 characters");
 		}
-		long counter = (System.currentTimeMillis() / 1000) / timeStep; // 生成时间窗口,30秒之内生产的counter是一样的
+		long counter = (timespan / 1000) / timeStep; // 生成时间窗口,30秒之内生产的counter是一样的
 		byte[] key = new Base32().decode(base32Key); // 使用安全的base32解码
 		SecretKeySpec secretKey = new SecretKeySpec(key, "HmacSHA1"); // 使用HmacSHA1算法
 		Mac mac = Mac.getInstance("HmacSHA1");
@@ -62,6 +66,7 @@ public class HotpCSharpUtil {
 				| (hash[offset + 3] & 0xFF)); // 通过偏移量进行截取，截取4个字节，然后转换成整型
 
 		int otp = binary % (int) Math.pow(10, digits); // 生成指定位数的数字
+		System.out.println("timespan:" + timespan + ",counter:" + counter + ",otp:" + otp);
 		return String.format("%0" + digits + "d", otp);
 	}
 
