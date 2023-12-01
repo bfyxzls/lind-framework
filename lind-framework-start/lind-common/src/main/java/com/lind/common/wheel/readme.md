@@ -43,7 +43,7 @@ HashedWheelTimer 本质是一种类似延迟任务队列的实现，适用于对
 
 # 两种实现
 
-* SimpleTimeWheel 一个简单的时间轮实现，用于理解时间轮的原理
+* SimpleTimeWheel 一个简单的时间轮实现，用于理解时间轮的原理，添加了超过1个轮没有执行的任务，再从新放入轮中的功能
 * hashwheel.HashWheelTimer 一个基于时间轮的延迟任务队列实现
 
 # 源码分析

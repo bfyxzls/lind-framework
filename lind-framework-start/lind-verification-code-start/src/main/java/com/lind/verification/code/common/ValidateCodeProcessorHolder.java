@@ -12,7 +12,6 @@
 package com.lind.verification.code.common;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
@@ -21,7 +20,6 @@ import java.util.Map;
  *
  * @author paascloud.net @gmail.com
  */
-@Component
 public class ValidateCodeProcessorHolder {
 
 	private final Map<String, ValidateCodeProcessor> validateCodeProcessors;

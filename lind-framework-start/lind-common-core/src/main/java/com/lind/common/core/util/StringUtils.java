@@ -623,4 +623,5 @@ public class StringUtils {
 	public static boolean ishttp(String link) {
 		return startsWithAny(link, "http", "https");
 	}
+
 }

@@ -1,5 +1,8 @@
 package com.lind.common.wheel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -17,13 +20,15 @@ import java.util.concurrent.TimeUnit;
  */
 public class SimpleTimeWheel {
 
+	private final static Logger logger = LoggerFactory.getLogger(SimpleTimeWheel.class);
+
 	private final int tickMs; // 时间轮槽的时间间隔
 
 	private final int wheelSize; // 时间轮槽的数量
 
 	private final long startMs; // 时间轮启动时间
 
-	private final List<List<Runnable>> timerTaskSlots; // 时间轮槽，存放任务
+	private final List<List<WorkTask>> timerTaskSlots; // 时间轮槽，存放任务
 
 	private final ExecutorService executorService; // 用于执行任务的线程池
 
@@ -31,7 +36,7 @@ public class SimpleTimeWheel {
 
 	private int currentTickIndex; // 当前时间轮指针指向的槽索引
 
-	public SimpleTimeWheel(int tickMs, int wheelSize) {
+	public SimpleTimeWheel(int tickMs, int wheelSize) throws InterruptedException {
 		this.tickMs = tickMs;
 		this.wheelSize = wheelSize;
 		this.startMs = System.currentTimeMillis();
@@ -94,36 +99,69 @@ public class SimpleTimeWheel {
 		if (expireMs < currentMs + tickMs) {
 			// 将任务添加到当前时间轮槽中
 			int currentIndex = (int) (((currentMs + delayMs) / tickMs) % wheelSize);
-			timerTaskSlots.get(currentIndex).add(task);
+			WorkTask workTask = new WorkTask() {
+				@Override
+				public boolean isRunning() {
+					return true;
+				}
+
+				@Override
+				public void run() {
+					task.run();
+				}
+			};
+			timerTaskSlots.get(currentIndex).add(workTask);
 		}
 		else {
 			// 计算需要跨越的时间轮针数和所在槽索引，例如槽数是8，我需要10秒后启动任务，就需要这个算法了
 			int totalTicks = (int) ((delayMs - tickMs) / tickMs); // 例如延时20秒，相当于指针要走19个，(20_000-1000)/1000=19
 			int currentIndex = (int) (((currentMs + delayMs) / tickMs + totalTicks) % wheelSize); // ((0+20000)/1000+19)%8=39%8=7
-			timerTaskSlots.get(currentIndex).add(() -> {
-				long current = System.currentTimeMillis();
-				if (current >= expireMs) {
-					task.run();
+			WorkTask workTask = new WorkTask() {
+				@Override
+				public boolean isRunning() {
+					return System.currentTimeMillis() >= expireMs;
 				}
-			});
+
+				@Override
+				public void run() {
+					if (isRunning()) {
+						task.run();
+					}
+				}
+			};
+			timerTaskSlots.get(currentIndex).add(workTask);
 		}
 	}
 
 	private void moveNextTick() {
 		int nextTickIndex = (currentTickIndex + 1) % wheelSize;
-		List<Runnable> tasksToExecute = new ArrayList<>();
+		List<WorkTask> tasksToExecute = new ArrayList<>();
 		synchronized (lockArray[nextTickIndex]) {
 			tasksToExecute.addAll(timerTaskSlots.get(nextTickIndex));
 			timerTaskSlots.get(nextTickIndex).clear();
 		}
-		for (Runnable task : tasksToExecute) {
+		for (WorkTask task : tasksToExecute) {
+			if (!task.isRunning()) {
+				timerTaskSlots.get(nextTickIndex).add(task);
+			}
 			executorService.execute(task);
 		}
+
 		currentTickIndex = nextTickIndex;
 	}
 
 	public void stop() {
 		executorService.shutdown();
+	}
+
+	public interface WorkTask extends Runnable {
+
+		/**
+		 * 是否已经运行.
+		 * @return
+		 */
+		boolean isRunning();
+
 	}
 
 }

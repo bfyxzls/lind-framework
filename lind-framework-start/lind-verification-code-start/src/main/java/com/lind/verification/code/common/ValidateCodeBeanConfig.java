@@ -14,17 +14,19 @@ package com.lind.verification.code.common;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
 import com.lind.verification.code.email.DefaultEmailCodeSender;
+import com.lind.verification.code.email.EmailCodeGenerator;
 import com.lind.verification.code.email.EmailCodeSender;
 import com.lind.verification.code.image.ImageCodeGenerator;
 import com.lind.verification.code.image.ImageStreamCodeGenerator;
 import com.lind.verification.code.properties.ValidateCodeProperties;
 import com.lind.verification.code.sms.DefaultSmsCodeSender;
+import com.lind.verification.code.sms.SmsCodeGenerator;
 import com.lind.verification.code.sms.SmsCodeSender;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 import java.util.Properties;
 
@@ -38,7 +40,7 @@ public class ValidateCodeBeanConfig {
 	@Autowired
 	private ValidateCodeProperties validateCodeProperties;
 
-	@Bean(name = "captchaProducer")
+	// @Bean(name = "captchaProducer")
 	public DefaultKaptcha getKaptchaBean() {
 		DefaultKaptcha defaultKaptcha = new DefaultKaptcha();
 		Properties properties = new Properties();
@@ -59,8 +61,8 @@ public class ValidateCodeBeanConfig {
 	 * 图片验证码图片生成器
 	 * @return validate code generator
 	 */
-	@Bean
-	@ConditionalOnMissingBean(name = "imageValidateCodeGenerator")
+	@Bean("imageValidateCodeGenerator")
+	@Primary
 	public ValidateCodeGenerator imageValidateCodeGenerator() {
 		ImageCodeGenerator codeGenerator = new ImageCodeGenerator();
 		codeGenerator.setSecurityProperties(validateCodeProperties.getImage());
@@ -72,8 +74,7 @@ public class ValidateCodeBeanConfig {
 	 * 图片验证码图片生成器
 	 * @return validate code generator
 	 */
-	@Bean("imagestreamValidateCodeGenerator")
-	@ConditionalOnMissingBean(name = "imagestreamValidateCodeGenerator")
+	@Bean("imageStreamValidateCodeGenerator")
 	public ValidateCodeGenerator imageStreamValidateCodeGenerator() {
 		ImageStreamCodeGenerator codeGenerator = new ImageStreamCodeGenerator();
 		codeGenerator.setSecurityProperties(validateCodeProperties.getImage());
@@ -81,12 +82,21 @@ public class ValidateCodeBeanConfig {
 		return codeGenerator;
 	}
 
+	@Bean
+	public ValidateCodeGenerator smsCodeGenerator() {
+		return new SmsCodeGenerator();
+	}
+
+	@Bean
+	public ValidateCodeGenerator emailCodeGenerator() {
+		return new EmailCodeGenerator();
+	}
+
 	/**
 	 * 短信验证码发送器
 	 * @return sms code sender
 	 */
 	@Bean
-	@ConditionalOnMissingBean(SmsCodeSender.class)
 	public SmsCodeSender smsCodeSender() {
 		return new DefaultSmsCodeSender();
 	}
@@ -96,7 +106,6 @@ public class ValidateCodeBeanConfig {
 	 * @return sms code sender
 	 */
 	@Bean
-	@ConditionalOnMissingBean(EmailCodeSender.class)
 	public EmailCodeSender emailCodeSender() {
 		return new DefaultEmailCodeSender();
 	}

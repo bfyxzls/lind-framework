@@ -82,4 +82,5 @@ public class OptionalTest {
 		Stream<String> arr = Stream.of("a", "b", "c");
 		log.info("result:{}", arr.filter(o -> o.equals("aa")).findAny().isPresent());
 	}
+
 }

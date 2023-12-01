@@ -29,7 +29,6 @@ import java.util.Optional;
 @AutoConfigureAfter({ DruidConfig.class })
 public class LindMybatisAutoConfiguration implements ApplicationContextAware {
 
-
 	ApplicationContext applicationContext;
 
 	/**

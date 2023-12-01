@@ -16,7 +16,6 @@ import com.lind.verification.code.common.ValidateCodeGenerator;
 import com.lind.verification.code.properties.ValidateCodeProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import java.util.Arrays;
@@ -28,7 +27,6 @@ import java.util.Map;
  * @author paascloud.net @gmail.com
  */
 @Slf4j
-@Component("emailValidateCodeGenerator")
 public class EmailCodeGenerator implements ValidateCodeGenerator {
 
 	@Autowired

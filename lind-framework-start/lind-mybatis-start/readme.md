@@ -10,7 +10,7 @@
 </dependency>
 ```
 # 配置
-使用mybatis-plus-boot-starter的标准配置即可
+使用mybatis-plus-boot-starter的标 准配置即可
 
 # 实体类
 统一继承base.BaseEntity，已经实现了审记功能，帮我们自己在添加和更新时填充的建立人，更新人，建立时间和更新时间等字段。

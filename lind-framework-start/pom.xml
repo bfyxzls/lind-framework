@@ -51,6 +51,7 @@
         <module>lind-hbase-start</module>
         <module>lind-minio-start</module>
         <module>lind-sharding-jdbc-start</module>
+        <module>lind-codegen</module>
 
     </modules>
     <dependencyManagement>

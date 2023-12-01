@@ -142,6 +142,7 @@ public class SpringContextUtils implements BeanFactoryPostProcessor, Application
 	public static Environment getEnvironment() {
 		return applicationContext.getEnvironment();
 	}
+
 	/**
 	 * 获取当前的环境配置，当有多个环境配置时，只获取第一个
 	 * @return 当前的环境配置

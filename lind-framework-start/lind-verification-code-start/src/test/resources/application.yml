@@ -1,0 +1,4 @@
+lind:
+  validate-code:
+    sms:
+      length: 6

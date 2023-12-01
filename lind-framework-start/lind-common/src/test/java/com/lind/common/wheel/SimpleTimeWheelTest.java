@@ -20,18 +20,15 @@ import java.util.concurrent.TimeUnit;
 public class SimpleTimeWheelTest {
 
 	// 示例使用
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		log.info("任务开始");
-		SimpleTimeWheel timeWheel = new SimpleTimeWheel(1000, 8); // 每秒一个槽，总共10个槽
-		timeWheel.addTask(() -> log.info("Task 3 executed"), 10000); // 7秒后执行任务3
-		timeWheel.addTask(() -> log.info("Task 1 executed"), 20000); // 3秒后执行任务1
-		// timeWheel.addTask(() -> log.info("Task 2 executed"), 5000); // 5秒后执行任务2
-		try {
-			TimeUnit.SECONDS.sleep(1000);
-		}
-		catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		// 每秒一个槽，总共10个槽,槽太少相当于时间延时支持的就小【最大支持10S的延时】,如果延时时间太大，这些任务并不会被执行
+		SimpleTimeWheel timeWheel = new SimpleTimeWheel(1000, 8);
+		timeWheel.addTask(() -> log.info("Task 1 executed"), 5000); // 5秒后执行任务1
+		timeWheel.addTask(() -> log.info("Task 2 executed"), 10000); // 10秒后执行任务2
+		timeWheel.addTask(() -> log.info("Task 3 executed"), 20000); // 20秒后执行任务3
+
+		TimeUnit.MINUTES.sleep(1);
 		log.info("任务结束");
 		timeWheel.stop();
 		// 显式关闭线程池并等待任务执行完成
