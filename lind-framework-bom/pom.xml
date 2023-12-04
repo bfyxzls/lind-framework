@@ -75,6 +75,7 @@
         <redisson.version>3.23.0</redisson.version>
         <commons-io.version>2.11.0</commons-io.version>
         <thumbnailator.version>0.4.14</thumbnailator.version>
+        <jasypt.version>2.1.0</jasypt.version>
     </properties>
     <!-- maven依赖版本统一，子工程不需要声明包版本 -->
     <dependencyManagement>
@@ -443,7 +444,12 @@
                 <artifactId>lind-verification-code-start</artifactId>
                 <version>${lind-framework.version}</version>
             </dependency>
-
+            <!--配置文件加解密-->
+            <dependency>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-spring-boot-starter</artifactId>
+                <version>${jasypt.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

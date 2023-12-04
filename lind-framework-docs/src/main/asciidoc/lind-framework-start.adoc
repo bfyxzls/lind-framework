@@ -1,0 +1,20 @@
+== lind-framework-start
+
+lind-framework-start是lind-framework框架的父项目包依赖管理项目，里面存储框架所需要的依赖包和它们的版本号。
+
+使用lind-framework-bom之后，可以保证我们在引用lind框架时的版本统一，你在自己的项目及大型微服务项目中，也可以通过bom的思想来管理包的依赖清单及版本清单。
+
+NOTE: lind-framework-start类似于spring-cloud-alibaba，在部署新版本时，部署完lind-framework-bom之后，再去部署它，它下面的子项目不需要重复部署，如果子项目是一个SNAPSHOT版本，可以单独部署这个子项目。
+
+=== 如何引入 lind-framework-start
+
+如果要在您的项目中引入 lind-framework-start，一般是以parent的形式引入的，子项目直接继承它的所有包依赖和插件。
+
+[source,xml]
+----
+<parent>
+    <artifactId>lind-framework-start</artifactId>
+    <groupId>com.lind</groupId>
+    <version>1.1.0</version>
+</parent>
+----

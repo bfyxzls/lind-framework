@@ -1,0 +1,21 @@
+== lind-framework-bom
+
+lind-framework-bom是lind-framework框架的包依赖管理项目，里面存储框架所需要的依赖包和它们的版本号。
+
+使用lind-framework-bom之后，可以保证我们在引用lind框架时的版本统一，你在自己的项目及大型微服务项目中，也可以通过bom的思想来管理包的依赖清单及版本清单。
+
+NOTE: 目前 lind-framework-bom 已经成为整个lind-framework项目中的最核心项目，在部署新版本时，需要先部署bom项目。
+
+=== 如何引入 lind-framework-bom
+
+如果要在您的项目中引入 lind-framework-bom，使用 group ID 为 `com.lind` 和 artifact ID 为 `lind-framework-bom` 的 scope为import的方式。
+
+[source,xml]
+----
+<dependency>
+    <groupId>com.lind</groupId>
+    <artifactId>lind-framework-bom</artifactId>
+    <type>pom</type>
+    <scope>import</scope>
+</dependency>
+----

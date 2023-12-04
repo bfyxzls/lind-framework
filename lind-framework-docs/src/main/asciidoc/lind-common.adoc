@@ -1,0 +1,20 @@
+== lind-common
+
+lind-common是lind-framework框架的公共项目包，里面存储框架中所需要的工具类，包括拦截、类加载、队列、加解密算法、枚举、配置加载、异常、json解析、负载均衡算法、国际化、代理、树结构、多线程、时间轮、excel操作、zip操作等。
+
+使用lind-common之后，可以保证我们在业务开发时，不重复造轮子，加快开发效率。
+
+NOTE: lind-common类似于hutool或者util包，作用只在于对其它项目提供开箱即用的工具。
+
+=== 如何引入 lind-common
+
+如果要在您的项目中引入 lind-common，使用 group ID 为 `com.lind` 和 artifact ID 为 `lind-common` 的方式。
+
+[source,xml]
+----
+<parent>
+    <artifactId>lind-common</artifactId>
+    <groupId>com.lind</groupId>
+    <version>1.1.0</version>
+</parent>
+----

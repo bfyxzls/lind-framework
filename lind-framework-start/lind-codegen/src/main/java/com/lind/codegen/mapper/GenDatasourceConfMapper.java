@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lind.codegen.entity;
+package com.lind.codegen.mapper;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.lind.codegen.entity.GenDatasourceConf;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 数据源表
@@ -27,40 +25,7 @@ import lombok.Data;
  * @author lengleng
  * @date 2019-03-31 16:00:20
  */
-@Data
-@TableName("gen_datasource_conf")
-public class GenDatasourceConf {
-
-	/**
-	 * 主键
-	 */
-	@TableId(type = IdType.ASSIGN_ID)
-	private Long id;
-
-	/**
-	 * 名称
-	 */
-	private String name;
-
-	/**
-	 * jdbcurl
-	 */
-	private String url;
-
-	/**
-	 * 用户名
-	 */
-	private String username;
-
-	/**
-	 * 密码
-	 */
-	private String password;
-
-	/**
-	 * 删除标记
-	 */
-	@TableLogic
-	private String delFlag;
+@Mapper
+public interface GenDatasourceConfMapper extends BaseMapper<GenDatasourceConf> {
 
 }
