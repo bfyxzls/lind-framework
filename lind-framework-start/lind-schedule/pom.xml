@@ -70,5 +70,10 @@
             <artifactId>spring-webmvc</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.lind</groupId>
+            <artifactId>lind-schedule-web</artifactId>
+            <version>${version}</version>
+        </dependency>
     </dependencies>
 </project>

@@ -52,6 +52,7 @@
         <module>lind-minio-start</module>
         <module>lind-sharding-jdbc-start</module>
         <module>lind-codegen</module>
+        <module>lind-schedule-web</module>
 
     </modules>
     <dependencyManagement>

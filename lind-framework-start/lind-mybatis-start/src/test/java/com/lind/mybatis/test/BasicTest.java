@@ -1,13 +1,19 @@
 package com.lind.mybatis.test;
 
+import cn.hutool.core.io.FileUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.google.common.hash.BloomFilter;
+import com.google.common.hash.Funnels;
 import com.lind.common.dto.PageDTO;
 import com.lind.common.dto.PageParam;
+import com.lind.mybatis.dao.LawyerInfoDao;
 import com.lind.mybatis.dao.UserDao;
+import com.lind.mybatis.entity.LawyerInfo;
 import com.lind.mybatis.entity.TUser;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +21,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,11 +34,51 @@ import java.util.Map;
 @SpringBootTest
 public class BasicTest {
 
+	static final String FILE_NAME = "d:\\bloomfilter.dat";
+
 	@Autowired
 	UserDao userDao;
 
 	@Autowired
 	UserService userService;
+
+	// @Test
+	// public void getLogByPage() {
+	// int[] numbers = IntStream.rangeClosed(1, 10).toArray();
+	// for (int number : numbers) {
+	// TUser user = new TUser();
+	// user.setUsername("lind" + number);
+	// userService.insert(user);
+	// }
+	// Page<TUser> userPages = userService.getByPage(new Page(2, 2));
+	// userPages.getRecords().forEach(o -> log.info("{}", o.getUsername()));
+	// }
+	//
+	// private void print(String name) {
+	// QueryWrapper<TUser> wrapper = new QueryWrapper<>();
+	// wrapper.lambda().eq(TUser::getUsername, name);
+	// for (TUser item : userService.findAll(wrapper)) {
+	// log.info("user={}", item.toString());
+	// }
+	// }
+	//
+	// @Test
+	// public void pageData() {
+	// for (int i = 0; i < 10; i++) {
+	// TUser user = new TUser();
+	// user.setUsername("lind" + i);
+	// userService.insert(user);
+	// }
+	// Map<String, Object> params = new HashMap<>();
+	// params.put(Constant.PAGE, "1");
+	// params.put(Constant.LIMIT, "3");
+	// params.put(Constant.ORDER_FIELD, "username");
+	// params.put(Constant.ORDER, "desc");
+	// params.put("username", "lind");
+	// userService.page(params).getList().forEach(o -> log.info("{}", o.getUsername()));
+	// }
+	@Autowired
+	LawyerInfoDao lawyerInfoDao;
 
 	@Test
 	public void insert() {
@@ -109,40 +160,49 @@ public class BasicTest {
 		log.info("{}", users);
 	}
 
-	// @Test
-	// public void getLogByPage() {
-	// int[] numbers = IntStream.rangeClosed(1, 10).toArray();
-	// for (int number : numbers) {
-	// TUser user = new TUser();
-	// user.setUsername("lind" + number);
-	// userService.insert(user);
-	// }
-	// Page<TUser> userPages = userService.getByPage(new Page(2, 2));
-	// userPages.getRecords().forEach(o -> log.info("{}", o.getUsername()));
-	// }
-	//
-	// private void print(String name) {
-	// QueryWrapper<TUser> wrapper = new QueryWrapper<>();
-	// wrapper.lambda().eq(TUser::getUsername, name);
-	// for (TUser item : userService.findAll(wrapper)) {
-	// log.info("user={}", item.toString());
-	// }
-	// }
-	//
-	// @Test
-	// public void pageData() {
-	// for (int i = 0; i < 10; i++) {
-	// TUser user = new TUser();
-	// user.setUsername("lind" + i);
-	// userService.insert(user);
-	// }
-	// Map<String, Object> params = new HashMap<>();
-	// params.put(Constant.PAGE, "1");
-	// params.put(Constant.LIMIT, "3");
-	// params.put(Constant.ORDER_FIELD, "username");
-	// params.put(Constant.ORDER, "desc");
-	// params.put("username", "lind");
-	// userService.page(params).getList().forEach(o -> log.info("{}", o.getUsername()));
-	// }
+	/**
+	 * 50万字符占用磁盘(1,198,606B)1.14M
+	 */
+	@Test
+	public void guavaBloomFilter() {
+		int expectedInsertions = 1000000;// 预期的插入元素数量
+		double fpp = 0.01; // 期望的误判率
+		BloomFilter<String> bloomFilter = BloomFilter.create(Funnels.stringFunnel(Charset.defaultCharset()),
+				expectedInsertions, fpp);
+		QueryWrapper<LawyerInfo> wrapper = Wrappers.emptyWrapper();
+		Page page = new Page();
+		page.setSize(500);
+		for (int i = 1; i <= 1000; i++) {
+			page.setCurrent(i);
+			lawyerInfoDao.selectPage(page, wrapper).getRecords().forEach(o -> {
+				LawyerInfo lawyerInfo = (LawyerInfo) o;
+				bloomFilter.put(lawyerInfo.getLawyerName());
+			});
+		}
+		if (FileUtil.exist(FILE_NAME)) {
+			FileUtil.del(FILE_NAME);
+		}
+		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
+			oos.writeObject(bloomFilter);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@SneakyThrows
+	@Test
+	public void guavaContainBloomFilter() {
+		BloomFilter<String> bloomFilter;
+		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_NAME))) {
+			bloomFilter = (BloomFilter<String>) ois.readObject();
+			if (bloomFilter.mightContain("张六岭")) {
+				System.out.println("The element '张六岭' might exist in the BloomFilter.");
+			}
+			else {
+				System.out.println("The element '张六岭' definitely does not exist in the BloomFilter.");
+			}
+		}
+	}
 
 }

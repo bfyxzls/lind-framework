@@ -237,6 +237,18 @@ public class RegexUtilsTest {
 
 	}
 
+	@Test
+	public void ipAddressReg() {
+		String range1 = "192.168.0.1-192.168.0.255";
+		String range2 = "10.0.0.1-10.0.0.10";
+		String range3 = "10.0.0.1/10.1.1.2";
+		String regex = "^\\b(?:\\d{1,3}\\.){3}\\d{1,3}-\\b(?:\\d{1,3}\\.){3}\\d{1,3}$";
+
+		System.out.println(range1 + " is valid format: " + range1.matches(regex));
+		System.out.println(range2 + " is valid format: " + range2.matches(regex));
+		System.out.println(range3 + " is valid format: " + range3.matches(regex));
+	}
+
 	class TrieNode {
 
 		TrieNode[] children;

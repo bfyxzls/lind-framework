@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lind.common.exception.HttpCodeEnum;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 
-import javax.annotation.Nullable;
 import java.io.Serializable;
 import java.util.Objects;
 
