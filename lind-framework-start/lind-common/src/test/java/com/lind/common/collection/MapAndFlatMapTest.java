@@ -14,6 +14,15 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 public class MapAndFlatMapTest {
 
+	static final double DEFAULT_LOAD_FACTOR = 0.75;
+
+	@Test
+	public void cap() {
+		int expectedSize = 10;
+		int newVal = (int) Math.ceil(expectedSize / (double) DEFAULT_LOAD_FACTOR);
+		System.out.println("newVal:" + newVal);
+	}
+
 	@Test
 	public void map() {
 		List<List<Integer>> lists = new ArrayList<>();

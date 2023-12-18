@@ -2,13 +2,13 @@ package com.lind.common.otp;
 
 import com.lind.common.core.util.ByteUtils;
 import com.lind.common.core.util.DateUtils;
-import com.lind.common.encrypt.HashUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.util.stream.IntStream;
 
+import static com.lind.common.encrypt.HashUtils.md5;
 import static com.lind.common.otp.HotpCSharpUtil.generateTOTP;
 
 /**
@@ -34,7 +34,7 @@ public class TotpCSharpTest {
 	public void test_auto_login() {
 		String userId = "oPBM51GIn6yc8MWZoCCz6_zr09lc";
 		System.out.println(
-				HashUtils.md5(userId + generateTOTP("ABCDEFHGIJKLMNOPQRST234UVWXYZ567", 300, 8)).toUpperCase());
+				md5(userId + generateTOTP("ABCDEFHGIJKLMNOPQRST234UVWXYZ567", 300, 8)).toUpperCase());
 	}
 
 	@Test
@@ -127,4 +127,17 @@ public class TotpCSharpTest {
 		log.info("{}", ByteUtils.toBytes(counter));
 	}
 
+	@SneakyThrows
+	@Test
+	public void carsiTotp() {
+
+		String totp = generateTOTP("ABCDEFHGIJKLMNOPQRST234UVWXYZ567", 300, 8);
+		String affiliation = "staff@shufe.edu.cn";
+		String eptid = "tEgCVjfCJv8OQJx/PB+GLng1X7Y=";
+		String sign = md5(affiliation + eptid + totp).toUpperCase();
+		String url = String.format(
+				"https://login.pkulaw.com/register/CarsiRegister?sign=%s&affiliation=staff@shufe.edu.cn&eptid=tEgCVjfCJv8OQJx/PB+GLng1X7Y=",
+				sign);
+		log.info("{}", url);
+	}
 }

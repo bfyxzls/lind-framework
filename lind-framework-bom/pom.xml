@@ -76,10 +76,17 @@
         <commons-io.version>2.11.0</commons-io.version>
         <thumbnailator.version>0.4.14</thumbnailator.version>
         <jasypt.version>2.1.0</jasypt.version>
+        <screw-core.version>1.0.5</screw-core.version>
     </properties>
     <!-- maven依赖版本统一，子工程不需要声明包版本 -->
     <dependencyManagement>
         <dependencies>
+            <!-- 数据库文档生成 -->
+            <dependency>
+                <groupId>cn.smallbun.screw</groupId>
+                <artifactId>screw-core</artifactId>
+                <version>${screw-core.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson</artifactId>

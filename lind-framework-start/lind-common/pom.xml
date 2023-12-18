@@ -31,6 +31,25 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- 数据库文档生成 -->
+        <dependency>
+            <groupId>cn.smallbun.screw</groupId>
+            <artifactId>screw-core</artifactId>
+            <version>1.0.5</version>
+        </dependency>
+
+        <!-- HikariCP -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+        </dependency>
+        <!--mysql driver-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+
         <dependency>
             <groupId>com.lind</groupId>
             <artifactId>lind-common-core</artifactId>
