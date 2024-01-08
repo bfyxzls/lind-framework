@@ -1,13 +1,15 @@
-package com.lind.redis.lock.config;
+package com.lind.redis.config;
 
-import com.lind.redis.config.LettuceRedisAutoConfigure;
-import com.lind.redis.lock.UserIdAuditorAware;
-import com.lind.redis.lock.aspect.RepeatSubmitAspect;
+import com.lind.redis.aspect.RepeatSubmitAspect;
 import com.lind.redis.lock.template.RedisLockTemplate;
 import lombok.RequiredArgsConstructor;
+import org.redisson.Redisson;
+import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
@@ -49,6 +51,14 @@ public class RedisLockConfig {
 	public RedisLockTemplate redisLockTemplate(RedisLockRegistry redisLockRegistry,
 			RedisLockProperty redisLockProperty) {
 		return new RedisLockTemplate(redisLockRegistry, redisLockProperty);
+	}
+
+	@Bean
+	public RedissonClient redissonClient(RedisProperties redisProperties) {
+		Config config = new Config();
+		// 也可以将 redis 配置信息保存到配置文件
+		config.useSingleServer().setAddress("redis://" + redisProperties.getHost() + ":" + redisProperties.getPort());
+		return Redisson.create(config);
 	}
 
 }

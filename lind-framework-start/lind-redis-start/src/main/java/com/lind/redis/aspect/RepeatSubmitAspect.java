@@ -1,7 +1,7 @@
-package com.lind.redis.lock.aspect;
+package com.lind.redis.aspect;
 
+import com.lind.redis.annotation.RepeatSubmit;
 import com.lind.redis.lock.UserIdAuditorAware;
-import com.lind.redis.lock.annotation.RepeatSubmit;
 import com.lind.redis.lock.exception.RepeatSubmitException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -57,8 +57,8 @@ public class RepeatSubmitAspect implements ApplicationContextAware {
 		// 如果缓存中有这个url视为重复提交
 		Object hasSubmit = redisTemplate.opsForValue().get(key);
 		if (Objects.isNull(hasSubmit)) {
-			redisTemplate.opsForValue().set(key, request.getServletPath());
-			redisTemplate.expire(key, repeatSubmit.expireTime(), TimeUnit.SECONDS);
+			// redis单行命令，保证原子性
+			redisTemplate.opsForValue().set(key, request.getServletPath(), repeatSubmit.expireTime(), TimeUnit.SECONDS);
 			Object o = proceedingJoinPoint.proceed();
 			return o;
 		}

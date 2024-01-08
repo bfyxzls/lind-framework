@@ -1,6 +1,6 @@
 package com.lind.redis;
 
-import com.lind.redis.lock.annotation.RepeatSubmit;
+import com.lind.redis.annotation.RepeatSubmit;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

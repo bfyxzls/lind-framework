@@ -1,14 +1,16 @@
 spring:
+  application:
+    name: lind-kafka-start
   kafka:
-    bootstrap-servers: 192.168.60.146:9092
+    bootstrap-servers: 192.168.10.132:9091,192.168.10.133:9092,192.168.10.134:9097 #192.168.60.146:9092
     key.serializer: org.apache.kafka.common.serialization.StringSerializer
     value.serializer: org.apache.kafka.common.serialization.StringSerializer
     listener:
       missing-topics-fatal: false
     consumer:
-      group-id: default
+      group-id: ${spring.application.name}
       enable-auto-commit: false
-      auto-offset-reset: earliest #earliest #生产环境配置latest，只获取最新消息
+      auto-offset-reset: latest #earliest #生产环境配置latest，只获取最新消息
       interceptor-classes: com.lind.kafka.interceptor.TraceConsumerInterceptor
     producer:
       interceptor-classes: com.lind.kafka.interceptor.ProducerInterceptorTTL

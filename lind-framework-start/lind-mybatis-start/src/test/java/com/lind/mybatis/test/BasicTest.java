@@ -42,41 +42,6 @@ public class BasicTest {
 	@Autowired
 	UserService userService;
 
-	// @Test
-	// public void getLogByPage() {
-	// int[] numbers = IntStream.rangeClosed(1, 10).toArray();
-	// for (int number : numbers) {
-	// TUser user = new TUser();
-	// user.setUsername("lind" + number);
-	// userService.insert(user);
-	// }
-	// Page<TUser> userPages = userService.getByPage(new Page(2, 2));
-	// userPages.getRecords().forEach(o -> log.info("{}", o.getUsername()));
-	// }
-	//
-	// private void print(String name) {
-	// QueryWrapper<TUser> wrapper = new QueryWrapper<>();
-	// wrapper.lambda().eq(TUser::getUsername, name);
-	// for (TUser item : userService.findAll(wrapper)) {
-	// log.info("user={}", item.toString());
-	// }
-	// }
-	//
-	// @Test
-	// public void pageData() {
-	// for (int i = 0; i < 10; i++) {
-	// TUser user = new TUser();
-	// user.setUsername("lind" + i);
-	// userService.insert(user);
-	// }
-	// Map<String, Object> params = new HashMap<>();
-	// params.put(Constant.PAGE, "1");
-	// params.put(Constant.LIMIT, "3");
-	// params.put(Constant.ORDER_FIELD, "username");
-	// params.put(Constant.ORDER, "desc");
-	// params.put("username", "lind");
-	// userService.page(params).getList().forEach(o -> log.info("{}", o.getUsername()));
-	// }
 	@Autowired
 	LawyerInfoDao lawyerInfoDao;
 
@@ -101,6 +66,13 @@ public class BasicTest {
 	public void read() {
 		QueryWrapper<TUser> wrapper = new QueryWrapper<>();
 		wrapper.lambda().eq(TUser::getCreateBy, 2);
+		log.info("user1:{}", userDao.selectList(wrapper));
+	}
+
+	@Test
+	public void sort() {
+		QueryWrapper<TUser> wrapper = new QueryWrapper<>();
+		wrapper.lambda().eq(TUser::getCreateBy, 2).orderByDesc(TUser::getCreateBy);
 		log.info("user1:{}", userDao.selectList(wrapper));
 	}
 

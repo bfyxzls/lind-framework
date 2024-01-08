@@ -1,6 +1,6 @@
 package com.lind.redis.lock.template;
 
-import com.lind.redis.lock.config.RedisLockProperty;
+import com.lind.redis.config.RedisLockProperty;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +20,14 @@ public class RedisLockTemplate implements DistributedLockTemplate {
 
 	private final RedisLockProperty redisLockProperty;
 
+	/**
+	 * 分布锁，最大60秒锁定，没有看门狗机制.
+	 * @param lockId 锁id(对应业务唯一ID)
+	 * @param timeout 最大等待获取锁时间，当有线程占用时，其它线程等待（阻塞）时间，当你希望任务排队执行时，这个值可以设大一些，这样保证每个线程都可以执行任务
+	 * @param unit 等待时间单位，当出现锁竞争时，它多长时间去重新获取锁
+	 * @param callback 回调方法
+	 * @return
+	 */
 	@SneakyThrows // 向上层抛出异常
 	@Override
 	public Object execute(String lockId, Integer timeout, TimeUnit unit, Callback callback) {
@@ -32,7 +40,7 @@ public class RedisLockTemplate implements DistributedLockTemplate {
 				getLock = lock.tryLock();// 中断执行,立即返回
 			}
 			else {
-				getLock = lock.tryLock(timeout, unit); // 阻塞执行,实现可重入锁，每100ms重试一次
+				getLock = lock.tryLock(timeout, unit); // 阻塞执行,实现可重入锁，每timeout重试一次
 			}
 			if (getLock) {
 				// 拿到锁

@@ -65,7 +65,8 @@
 
 <#macro commonHeader>
 	<header class="main-header">
-		<a href="${request.contextPath}/" class="logo">
+
+    <a href="${request.contextPath}/" class="logo">
 			<span class="logo-mini"><b>LIND</b></span>
 			<span class="logo-lg"><b>${I18n.admin_name}</b></span>
 		</a>

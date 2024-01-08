@@ -33,8 +33,7 @@ public class TotpCSharpTest {
 	@Test
 	public void test_auto_login() {
 		String userId = "oPBM51GIn6yc8MWZoCCz6_zr09lc";
-		System.out.println(
-				md5(userId + generateTOTP("ABCDEFHGIJKLMNOPQRST234UVWXYZ567", 300, 8)).toUpperCase());
+		System.out.println(md5(userId + generateTOTP("ABCDEFHGIJKLMNOPQRST234UVWXYZ567", 300, 8)).toUpperCase());
 	}
 
 	@Test
@@ -140,4 +139,5 @@ public class TotpCSharpTest {
 				sign);
 		log.info("{}", url);
 	}
+
 }

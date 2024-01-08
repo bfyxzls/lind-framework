@@ -1,7 +1,7 @@
 package com.lind.redis;
 
 import com.lind.redis.config.LettuceRedisAutoConfigure;
-import com.lind.redis.lock.config.RedisLockConfig;
+import com.lind.redis.config.RedisLockConfig;
 import com.lind.redis.lock.template.Callback;
 import com.lind.redis.lock.template.DistributedLockTemplate;
 import lombok.extern.slf4j.Slf4j;

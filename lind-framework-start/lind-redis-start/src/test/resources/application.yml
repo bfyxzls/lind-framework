@@ -1,7 +1,8 @@
 spring:
   redis:
-    host: localhost:6379
+    host: localhost
     database: 0
+    port: 6379
 #    password: bdyh@2020
 
 #    cluster:

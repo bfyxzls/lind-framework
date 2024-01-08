@@ -29,7 +29,7 @@ public class generateDbDoc {
 	 */
 	@Test
 	public void genereateLawyerMgr() {
-		documentGeneration("jdbc:mysql://192.168.60.138:3306/fabao-lawyer-vue", "律师后台", "root", "123456");
+		documentGeneration("jdbc:mysql://192.168.60.136:3306/keycloak", "keycloak", "root", "123456");
 	}
 
 	/**
@@ -63,18 +63,41 @@ public class generateDbDoc {
 		// 忽略表
 		ArrayList<String> ignoreTableName = new ArrayList<>();
 		ignoreTableName.add("test_user");
-		ignoreTableName.add("test_group");
+		ignoreTableName.add("admin_event_entity");
+		ignoreTableName.add("associated_policy");
+		ignoreTableName.add("component");
+		ignoreTableName.add("composite_role");
+		ignoreTableName.add("credential");
+		ignoreTableName.add("event_entity");
+		ignoreTableName.add("jgroupsping");
+		ignoreTableName.add("protocol_mapper");
+		ignoreTableName.add("redirect_uris");
+		ignoreTableName.add("identity_provider");
+		ignoreTableName.add("broker_link");
+		ignoreTableName.add("identity_provider_mapper");
+		ignoreTableName.add("migration_model");
+		ignoreTableName.add("user_required_action");
+		ignoreTableName.add("required_action_provider");
+		ignoreTableName.add("user_consent");
+		ignoreTableName.add("scope_policy");
+
 		// 忽略表前缀
 		ArrayList<String> ignorePrefix = new ArrayList<>();
 		ignorePrefix.add("test_");
-		ignorePrefix.add("sys_");
-		ignorePrefix.add("qrtz_");
-		ignorePrefix.add("gen_");
-
+		ignorePrefix.add("client_");
+		ignorePrefix.add("realm_");
+		ignorePrefix.add("offline_");
+		ignorePrefix.add("databasechangelog");
+		ignorePrefix.add("resource_");
+		ignorePrefix.add("authenticator_");
+		ignorePrefix.add("fed_user_");
+		ignorePrefix.add("authentication_");
+		ignorePrefix.add("group_");
 		// 忽略表后缀
 		ArrayList<String> ignoreSuffix = new ArrayList<>();
-		ignoreSuffix.add("_test");
-
+		ignoreSuffix.add("_config");
+		ignoreSuffix.add("_mapping");
+		ignoreSuffix.add("_scope");
 		ProcessConfig processConfig = ProcessConfig.builder()
 				// 指定生成逻辑、当存在指定表、指定表前缀、指定表后缀时，将生成指定表，其余表不生成、并跳过忽略表配置
 				// 根据名称指定表生成
