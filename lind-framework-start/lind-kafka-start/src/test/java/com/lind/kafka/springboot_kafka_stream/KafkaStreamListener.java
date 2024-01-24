@@ -55,6 +55,7 @@ public class KafkaStreamListener {
 		});
 		/**
 		 * 处理消息的value
+		 * 感觉kafka-stream 是每30秒输出一次数据，而时间窗口只是统计数据的一个范围。
 		 */
 		serializedStream.flatMapValues(new ValueMapper<String, Iterable<String>>() {
 			@Override
@@ -74,7 +75,7 @@ public class KafkaStreamListener {
 					return new KeyValue<>(key.key().toString(), value.toString());
 				})
 				// 发送消息
-				.to("topic-out");
+				.to("topic-out");//每30秒向topic-out发送一次数据
 		return stream;
 	}
 
