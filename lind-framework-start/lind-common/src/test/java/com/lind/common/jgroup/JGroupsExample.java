@@ -3,6 +3,8 @@ package com.lind.common.jgroup;
 import org.jgroups.JChannel;
 import org.jgroups.Message;
 import org.jgroups.ReceiverAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +17,7 @@ import javax.annotation.PostConstruct;
 @Component
 public class JGroupsExample {
 
+	private final static Logger logger = LoggerFactory.getLogger(JGroupsExample.class);
 	private JChannel channel;
 
 	@PostConstruct
@@ -24,7 +27,7 @@ public class JGroupsExample {
 		// 设置 ReceiverAdapter 作为消息接收器
 		channel.setReceiver(new ReceiverAdapter() {
 			public void receive(Message msg) {
-				System.out.println("Received message: " + msg.getObject());
+				logger.info("Received message:{} ", msg);
 			}
 		});
 
