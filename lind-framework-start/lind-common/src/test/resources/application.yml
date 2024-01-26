@@ -20,3 +20,7 @@ mpw:
 author:
   name: mpw:vpTzfVrH5eEbsFmSJO9bSw==
   nationality: mpw:vFLIjoQXy4Pzo1/hOm8hWw==
+
+logging:
+  level:
+    com.lind.common.wheel.SimpleTimeWheel: debug

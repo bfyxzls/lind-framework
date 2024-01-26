@@ -21,6 +21,11 @@
         <dl4j.version>0.7.1</dl4j.version>
         <datavec.version>0.7.1</datavec.version>
         <scala.binary.version>2.10</scala.binary.version>
+
+        <protobuf.version>3.19.1</protobuf.version>
+        <protobuf-plugin.version>0.6.1</protobuf-plugin.version>
+        <grpc.version>1.44.0</grpc.version>
+
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -268,41 +273,36 @@
             <version>${dl4j.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.alipay.sofa</groupId>
+            <artifactId>jraft-core</artifactId>
+            <version>1.3.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel-core</artifactId>
+            <version>3.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>1.21</version> <!-- 替换为你需要的版本号 -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.devh</groupId>
+            <artifactId>grpc-spring-boot-starter</artifactId>
+            <version>2.15.0.RELEASE</version>
+        </dependency>
+
     </dependencies>
-    <build>
-        <plugins>
-            <!--            <plugin>&lt;!&ndash; 使用时先clean，再install&ndash;&gt;-->
-            <!--                <groupId>net.roseboy</groupId>-->
-            <!--                <artifactId>classfinal-maven-plugin</artifactId>-->
-            <!--                <version>1.2.1</version>-->
-            <!--                <configuration>-->
-            <!--                    <password>#</password>&lt;!&ndash; #表示启动时不需要密码，事实上对于代码混淆来说，这个密码没什么用，它只是一个启动密码 &ndash;&gt;-->
-            <!--                    <packages>com.lind.common</packages>&lt;!&ndash; 加密的包名，多个包用逗号分开&ndash;&gt;-->
-            <!--                    <excludes>org.spring</excludes>-->
-            <!--                    <cfgfiles>spring.factories</cfgfiles>-->
-            <!--                </configuration>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <phase>package</phase>-->
-            <!--                        <goals>-->
-            <!--                            <goal>classFinal</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifestEntries>
-                            <Dependencies>com.lind.common.core</Dependencies>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-            </plugin>
 
-        </plugins>
-    </build>
 </project>

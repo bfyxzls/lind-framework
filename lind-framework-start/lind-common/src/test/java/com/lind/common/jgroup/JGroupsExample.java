@@ -18,6 +18,7 @@ import javax.annotation.PostConstruct;
 public class JGroupsExample {
 
 	private final static Logger logger = LoggerFactory.getLogger(JGroupsExample.class);
+
 	private JChannel channel;
 
 	@PostConstruct

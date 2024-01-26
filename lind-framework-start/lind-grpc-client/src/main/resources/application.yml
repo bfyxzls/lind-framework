@@ -1,0 +1,13 @@
+server:
+  port: 9899
+spring:
+  application:
+    name: local-grpc-client
+
+grpc:
+  client:
+    local-grpc-server:
+      address: 'static://127.0.0.1:15867' #当server启动之后，你需要看一下server的端口，例如：gRPC Server started, listening on address: *, port: 15867
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext

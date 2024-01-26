@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: local-grpc-server
+server:
+  port: 58080
+
+grpc:
+  server:
+    port: 15867 # 0表示端口随机

@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Lind时间轮.
+ * Lind时间轮. 增加了WorkTask，当延时任务大于当前时间轮时，需要重新放回时间轮.
  *
  * @author lind
  * @date 2023/6/8 17:27
@@ -114,8 +114,8 @@ public class SimpleTimeWheel {
 		}
 		else {
 			// 计算需要跨越的时间轮针数和所在槽索引，例如槽数是8，我需要10秒后启动任务，就需要这个算法了
-			int totalTicks = (int) ((delayMs - tickMs) / tickMs); // 例如延时20秒，相当于指针要走19个，(20_000-1000)/1000=19
-			int currentIndex = (int) (((currentMs + delayMs) / tickMs + totalTicks) % wheelSize); // ((0+20000)/1000+19)%8=39%8=7
+			int totalTicks = (int) ((delayMs - tickMs) / tickMs); // 例如延时100秒，相当于指针要走99个，(100_000-1000)/1000=99
+			int currentIndex = (int) (((currentMs + delayMs) / tickMs + totalTicks) % wheelSize); // ((0+100_000)/1000+99)%8=39%8=7
 			WorkTask workTask = new WorkTask() {
 				@Override
 				public boolean isRunning() {
@@ -142,6 +142,7 @@ public class SimpleTimeWheel {
 		}
 		for (WorkTask task : tasksToExecute) {
 			if (!task.isRunning()) {
+				logger.info("repeat join time-wheel {}", nextTickIndex);
 				timerTaskSlots.get(nextTickIndex).add(task);
 			}
 			executorService.execute(task);

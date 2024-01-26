@@ -19,6 +19,15 @@ public class OptionalTest {
 	/**
 	 * 为可能为null的对象添加默认值.
 	 */
+	@Test(expected = java.lang.AssertionError.class)
+	public void assertTest() {
+		int a = 0;
+		assert a != 0;
+	}
+
+	/**
+	 * 为可能为null的对象添加默认值.
+	 */
 	@Test
 	public void nullable() {
 		Student student = null;

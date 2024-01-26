@@ -19,20 +19,59 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class SimpleTimeWheelTest {
 
+	static long startMs = System.currentTimeMillis();
+
+	List<SimpleTimeWheel.WorkTask> timerTaskSlots = new ArrayList<>();
+
 	// 示例使用
 	public static void main(String[] args) throws InterruptedException {
 		log.info("任务开始");
 		// 每秒一个槽，总共10个槽,槽太少相当于时间延时支持的就小【最大支持10S的延时】,如果延时时间太大，这些任务并不会被执行
 		SimpleTimeWheel timeWheel = new SimpleTimeWheel(1000, 8);
 		timeWheel.addTask(() -> log.info("Task 1 executed"), 5000); // 5秒后执行任务1
-		timeWheel.addTask(() -> log.info("Task 2 executed"), 10000); // 10秒后执行任务2
-		timeWheel.addTask(() -> log.info("Task 3 executed"), 20000); // 20秒后执行任务3
+		timeWheel.addTask(() -> log.info("Task 2 executed"), 100000); // 100秒后执行任务2
+		timeWheel.addTask(() -> log.info("Task 3 executed"), 200000); // 200秒后执行任务3
 
 		TimeUnit.MINUTES.sleep(1);
 		log.info("任务结束");
 		timeWheel.stop();
 		// 显式关闭线程池并等待任务执行完成
 		timeWheel.awaitTermination();
+	}
+
+	void addTask(long expireMs) {
+		timerTaskSlots.add(new SimpleTimeWheel.WorkTask() {
+			@Override
+			public boolean isRunning() {
+				return System.currentTimeMillis() >= expireMs;
+			}
+
+			@Override
+			public void run() {
+				System.out.println("run:" + expireMs);
+			}
+		});
+	}
+
+	/**
+	 * 基于时间的任务，可重新加入队列，到时间了，再消费.
+	 */
+	@Test
+	public void timeRepeatTask() throws InterruptedException {
+		addTask(startMs + 1000);
+		addTask(startMs + 2000);
+		addTask(startMs + 5000);
+		while (timerTaskSlots.size() > 0) {
+			for (int i = 0; i < timerTaskSlots.size(); i++) {
+				SimpleTimeWheel.WorkTask o = timerTaskSlots.get(i);
+				if (o.isRunning()) {
+					o.run();
+					timerTaskSlots.remove(o);
+				}
+			}
+			TimeUnit.SECONDS.sleep(1);
+		}
+		System.out.println("game over.");
 	}
 
 	/**
