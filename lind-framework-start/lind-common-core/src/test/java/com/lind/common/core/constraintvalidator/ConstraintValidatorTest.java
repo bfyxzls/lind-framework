@@ -26,4 +26,10 @@ public class ConstraintValidatorTest {
 		System.out.println(user.getEmail());
 	}
 
+	@Test(expected = ConstraintViolationException.class)
+	public void validUserSex() {
+		User user = new User();
+		user.setSex(3);
+	}
+
 }
