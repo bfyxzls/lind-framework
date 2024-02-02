@@ -3,6 +3,8 @@ package com.lind.common.core.constraintvalidator;
 import com.lind.common.core.validate.BeanValidatorUtils;
 import org.junit.Test;
 
+import javax.validation.ConstraintViolationException;
+
 /**
  * @author lind
  * @date 2023/7/20 16:32
@@ -11,7 +13,7 @@ import org.junit.Test;
 
 public class ConstraintValidatorTest {
 
-	@Test
+	@Test(expected = ConstraintViolationException.class)
 	public void validUserEmail() {
 		User user = new User();
 		user.setEmail("123@sina.com");
