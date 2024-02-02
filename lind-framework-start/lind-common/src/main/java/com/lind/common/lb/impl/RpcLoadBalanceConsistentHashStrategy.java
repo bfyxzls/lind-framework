@@ -46,11 +46,11 @@ public class RpcLoadBalanceConsistentHashStrategy extends RpcLoadBalance {
 		md5.update(keyBytes);
 		byte[] digest = md5.digest();
 
-		// hash code, Truncate to 32-bits，保证了每个byte的数值在0xFF范围内
+		// hash code, Truncate to 32-bits，digest[3]&0xFF相当于将有符号的byte转换为无符号的int
+		// 在 Java 中，byte 类型是有符号的，取值范围是 -128 到 127，而使用 & 0xFF 操作可以将其转换为0到255之间的无符号整数。
 		long hashCode = ((long) (digest[3] & 0xFF) << 24) | ((long) (digest[2] & 0xFF) << 16)
 				| ((long) (digest[1] & 0xFF) << 8) | (digest[0] & 0xFF);
-
-		long truncateHashCode = hashCode & 0xffffffffL;
+		long truncateHashCode = hashCode & 0xffffffffL;// 保留低32位(这个long类型的数字很特殊，它高32位都是0，低32位都是1)
 		return truncateHashCode;
 	}
 

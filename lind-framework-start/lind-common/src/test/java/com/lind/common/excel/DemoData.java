@@ -1,8 +1,8 @@
 package com.lind.common.excel;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -11,9 +11,9 @@ import java.util.Date;
  *
  * @author Jiaju Zhuang
  **/
-@Getter
-@Setter
-@EqualsAndHashCode
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class DemoData {
 
 	private String string;
