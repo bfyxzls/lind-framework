@@ -1,6 +1,6 @@
 package com.lind.common.core.constraintvalidator;
 
-import com.lind.common.core.util.BeanValidatorUtils;
+import com.lind.common.core.validate.BeanValidatorUtils;
 import org.junit.Test;
 
 /**
@@ -15,9 +15,11 @@ public class ConstraintValidatorTest {
 	public void validUserEmail() {
 		User user = new User();
 		user.setEmail("123@sina.com");
+		user.setSex(0);
 		// 创建一个验证器工厂
 		BeanValidatorUtils.validateWithException(user);
 		user.setEmail("123@sinacom");
+		user.setSex(2);
 		BeanValidatorUtils.validateWithException(user);
 		System.out.println(user.getEmail());
 	}

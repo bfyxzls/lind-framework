@@ -1,4 +1,4 @@
-package com.lind.common.core.constraintvalidator;
+package com.lind.common.core.validate.email;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

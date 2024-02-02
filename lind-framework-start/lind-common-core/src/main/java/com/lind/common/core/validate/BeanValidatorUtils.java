@@ -1,4 +1,4 @@
-package com.lind.common.core.util;
+package com.lind.common.core.validate;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -8,6 +8,7 @@ import java.util.Set;
 
 /**
  * bean对象属性验证
+ * 使用此方法等同于参数前加注解@Validated
  *
  * @author ruoyi
  */
