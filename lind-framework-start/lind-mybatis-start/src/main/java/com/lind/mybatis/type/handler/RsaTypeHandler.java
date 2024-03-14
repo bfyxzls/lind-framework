@@ -1,7 +1,7 @@
 package com.lind.mybatis.type.handler;
 
 import com.lind.common.encrypt.RSAUtils;
-import com.lind.common.core.util.FileUtils;
+import com.lind.common.core.util.file.FileUtils;
 import lombok.SneakyThrows;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;

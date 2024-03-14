@@ -1,32 +1,33 @@
 package com.lind.common.core.validate.flag;
 
+import com.lind.common.core.util.BinFlagUtils;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.List;
 
 /**
- * 状态约束校验器
- * Created by macro on 2018/4/26.
+ * 二进制标识约束校验器，保证值为2的N次幂.
+ *
+ * @author lind
+ * @date 2024/2/20 9:15
+ * @since 1.0.0
  */
-public class FlagValidator implements ConstraintValidator<ValidFlag,Integer> {
-    private String[] values;
-    @Override
-    public void initialize(ValidFlag validFlag) {
-        this.values = validFlag.value();
-    }
+public class FlagValidator implements ConstraintValidator<ValidFlag, List<? extends Number>> {
 
-    @Override
-    public boolean isValid(Integer value, ConstraintValidatorContext constraintValidatorContext) {
-        boolean isValid = false;
-        if(value==null){
-            //当状态为空时使用默认值
-            return true;
-        }
-        for(int i=0;i<values.length;i++){
-            if(values[i].equals(String.valueOf(value))){
-                isValid = true;
-                break;
-            }
-        }
-        return isValid;
-    }
+	@Override
+	public boolean isValid(List<? extends Number> values, ConstraintValidatorContext context) {
+		if (values == null) {
+			return true;
+		}
+		Boolean flag = true;
+		for (Number o : values) {
+			if (!BinFlagUtils.isTowPower(o.longValue())) {
+				flag = false;
+				break;
+			}
+		}
+		return flag;
+	}
+
 }

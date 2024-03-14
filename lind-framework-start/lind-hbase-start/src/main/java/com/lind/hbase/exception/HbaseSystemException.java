@@ -1,7 +1,7 @@
 package com.lind.hbase.exception;
 
 /**
- * @author BD-PC220
+ * hbase统一异常.
  */
 public class HbaseSystemException extends RuntimeException {
 

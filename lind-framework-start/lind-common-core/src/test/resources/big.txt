@@ -6,6 +6,6 @@
 	at java.nio.file.Files.newByteChannel(Files.java:407)
 	at java.nio.file.spi.FileSystemProvider.newInputStream(FileSystemProvider.java:384)
 	at java.nio.file.Files.newInputStream(Files.java:152)
-	at com.lind.common.core.util.FileSplitUtils.splitBySize(FileSplitUtils.java:25)
-	at com.lind.common.core.util.FileSplitUtils.splitFile(FileSplitUtils.java:19)
+	at com.lind.common.core.util.file.FileSplitUtils.splitBySize(FileSplitUtils.java:25)
+	at com.lind.common.core.util.file.FileSplitUtils.splitFile(FileSplitUtils.java:19)
 	at com.lind.common.core.util.FileSplitUtilsTest.main(FileSplitUtilsTest.java:23)

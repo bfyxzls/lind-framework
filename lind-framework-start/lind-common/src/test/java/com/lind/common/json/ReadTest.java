@@ -1,10 +1,20 @@
 package com.lind.common.json;
 
+import cn.hutool.http.HttpRequest;
+import cn.hutool.http.HttpResponse;
+import cn.hutool.json.JSONArray;
+import cn.hutool.json.JSONUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -28,6 +38,33 @@ public class ReadTest {
 			return string.substring(1);
 		}
 		return string;
+	}
+
+	@Test
+	public void updateR() throws IOException {
+		// 读取JSON文件内容
+		String filePath = "D:\\1.json";
+		String content = new String(Files.readAllBytes(Paths.get(filePath)));
+
+		// 使用JsonParser解析JSON字符串
+		JSONArray jsonObject = JSONUtil.parseArray(content);
+		jsonObject.forEach(o -> {
+			String url = "https://lawyer-mgr.pkulaw.com/prod-api/lawyer/lawyerInfo";
+			Map<String, Object> map = new HashMap<>();
+			map.put("gid", JSONUtil.parseObj(o).getStr("gid"));
+			map.put("phone", JSONUtil.parseObj(o).getStr("phone"));
+			try {
+				HttpResponse response = HttpRequest.put(url).header("Content-Type", "application/json") // 添加Content-Type头部
+						.header("Authorization",
+								"Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjBkZDNiN2FjLWMzODktNGE0My05YmU1LTk2MDZjNzc1MmE5MSJ9.zMYZsPhH8zOOFNeTzb27uQWznKPo26INtyNzye6ms71MCndFIrFl83e9C59XWiY6qa0Y-ijRe2IHPAq7jtBj0A") // 添加Authorization头部
+						.body(new ObjectMapper().writeValueAsString(map)).execute();
+				logger.info(response.body());
+			}
+			catch (JsonProcessingException e) {
+				throw new RuntimeException(e);
+			}
+			;
+		});
 	}
 
 	@Test

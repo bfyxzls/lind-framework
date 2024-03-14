@@ -16,8 +16,10 @@ import java.util.concurrent.ThreadLocalRandom;
 public final class UUID implements java.io.Serializable, Comparable<UUID> {
 
 	private static final long serialVersionUID = -1185015143654744140L;
+
 	/** 此UUID的最高64有效位 */
 	private final long mostSigBits;
+
 	/** 此UUID的最低64有效位 */
 	private final long leastSigBits;
 

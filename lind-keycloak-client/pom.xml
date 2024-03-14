@@ -28,6 +28,23 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-framework-bom</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi</artifactId>
+                <version>3.8.7</version>
+
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -45,16 +62,17 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.lind</groupId>
+            <artifactId>lind-common-core</artifactId>
+        </dependency>
+
         <!-- freemarker-starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot</artifactId>
-            <version>2.3.0.RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
+
+
     </dependencies>
 </project>

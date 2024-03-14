@@ -26,7 +26,7 @@
         <guava.version>28.2-jre</guava.version>
         <mysql.drive.version>8.0.17</mysql.drive.version>
         <HikariCP.version>3.4.2</HikariCP.version>
-<!--        <mybatis-plus-boot-starter.version>3.5.2</mybatis-plus-boot-starter.version> 这版动态分表不太好 -->
+        <!--        <mybatis-plus-boot-starter.version>3.5.2</mybatis-plus-boot-starter.version> 这版动态分表不太好 -->
         <mybatis-plus-boot-starter.version>3.4.3</mybatis-plus-boot-starter.version>
 
         <fastjson.version>1.2.69</fastjson.version>
@@ -80,6 +80,9 @@
         <easyexcel-core.version>3.3.3</easyexcel-core.version>
         <commons-compress.version>1.21</commons-compress.version>
         <jraft-core.version>1.3.5</jraft-core.version>
+        <!-- 文件上传相关 -->
+        <minio.version>8.2.2</minio.version>
+        <fastdfs.version>1.27.2</fastdfs.version>
     </properties>
     <!-- maven依赖版本统一，子工程不需要声明包版本 -->
     <dependencyManagement>
@@ -468,13 +471,25 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-compress</artifactId>
-                <version>${commons-compress.version}</version> <!-- 替换为你需要的版本号 -->
+                <version>${commons-compress.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.alipay.sofa</groupId>
                 <artifactId>jraft-core</artifactId>
                 <version>${jraft-core.version}</version>
+            </dependency>
+
+            <!-- 文件上传相关 -->
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.tobato</groupId>
+                <artifactId>fastdfs-client</artifactId>
+                <version>${fastdfs.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

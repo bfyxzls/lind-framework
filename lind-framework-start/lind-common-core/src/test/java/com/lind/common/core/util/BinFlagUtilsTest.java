@@ -86,4 +86,23 @@ public class BinFlagUtilsTest {
 		log.info("mod={}", mod);
 	}
 
+	/**
+	 * 在int64范围内，最大的2的幂次方的范围
+	 */
+	@Test
+	public void maxFlags() {
+		long sum = 0; // max:9223372036854775807,最大可用范围到2^62，可以正常存储62个位数
+		for (int i = 0; i < 64; i++) {
+			double val = Math.pow(2, i);
+			sum += val;
+			log.info("i={},val={},sum={}", i, (long) val, sum);
+		}
+	}
+
+	@Test
+	public void bitMove() {
+		Long result = 4096L << 1;
+		Assert.assertEquals(8192, result.longValue());
+	}
+
 }

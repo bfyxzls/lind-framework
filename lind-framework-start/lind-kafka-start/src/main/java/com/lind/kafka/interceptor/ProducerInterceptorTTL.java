@@ -1,5 +1,6 @@
 package com.lind.kafka.interceptor;
 
+import com.lind.kafka.config.KafkaProperties;
 import com.lind.kafka.util.LindTimeWheel;
 import org.apache.kafka.clients.producer.ProducerInterceptor;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -7,6 +8,7 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.header.Header;
 import org.apache.kafka.common.header.Headers;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -29,8 +31,8 @@ public class ProducerInterceptorTTL implements ProducerInterceptor<Integer, Stri
 	// 消息延时,单位秒
 	public static String TTL = "ttl";
 
-	// 死信队列,延时后发送到的队列，我们称为死信队列
-	public static String DEAD_TOPIC = "dead_topic";
+	@Autowired
+	KafkaProperties kafkaProperties;
 
 	// 静态化的上下文，用于获取bean，因为ConsumerInterceptor是通过反射创建的，不是spring ioc管理的，所以无法通过注入的方式获取bean
 	private static ApplicationContext applicationContext;
@@ -52,7 +54,7 @@ public class ProducerInterceptorTTL implements ProducerInterceptor<Integer, Stri
 			if (header.key().equals(TTL)) {
 				ttl = toLong(header.value());
 			}
-			if (header.key().equals(DEAD_TOPIC)) {
+			if (header.key().equals(kafkaProperties.getDeadTopic())) {
 				deadTopic = new String(header.value());
 			}
 		}

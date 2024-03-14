@@ -1,14 +1,13 @@
-# 项目介绍
+# lind-framework
+[![project](https://img.shields.io/badge/lind_framework-v1.1.3-blue)]()
+[![license](https://img.shields.io/badge/license-MIT-red)](https://opensource.org/license/mit)
 
 主要是由框架级工具进行封装，springboot的start包的使用，完成对工具包的自动注入，所有start包的版本都继承lind-framework的版本
 
 * 目前正在开发基于最新的springboot2.7的精简版本lind-fast框架
 * 图标地址：https://shields.io/badges
 
-<p align="center">
-	<a href="https://gitee.com/y_project/RuoYi"><img src="https://img.shields.io/badge/lind_framework-v1.1.3-blue"></a>
-	<a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-red"></a>
-</p>
+
 # 升级
 
 * 命令行执行 mvn versions:set -DnewVersion=1.1.3-SNAPSHOT //更新整个项目版本,SNAPSHOT的同一个版本可以多次发到仓库里
@@ -108,6 +107,7 @@ jar -uvf a-start-hot-deploy-1.0.0.jar    BOOT-INF/lib/a-start-hot-dependency-1.0
 springboot-start项目里，通过spring.factories进行自动注册，里面可以设置自动配置，自动监听，应用初始化，配置文件类型，环境变量等信息，
 在我们封装扩展包时，可以使用这个文件帮使用者自动装配bean。
 如果不希望自动装配你的bean，可以为bean添加Enable开头的注解，类似于`EnableResourceServer`,`EnableAuthorizationServer`等。
+> springboot2.7之后，更推荐使用`META-INF/spring.components`来代替`spring.factories`文件
 
 # 项目里的公用包
 

@@ -1,0 +1,14 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: upload-service
+file:
+  path: d:\\img\\
+  prefix: lind
+  domain: http://localhost:8080/
+minio:
+  access-key: lind
+  secret-key: lind
+  url: http://localhost:8080/
+  bucket: lind

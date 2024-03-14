@@ -1,13 +1,12 @@
 package com.lind.common.core.util;
 
+import com.lind.common.core.util.file.FileSplitUtils;
 import org.junit.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static com.lind.common.core.util.FileSplitUtils.fileJoin2;
-import static com.lind.common.core.util.FileSplitUtils.splitFile;
+import static com.lind.common.core.util.file.FileSplitUtils.fileJoin2;
 
 /**
  * @author lind

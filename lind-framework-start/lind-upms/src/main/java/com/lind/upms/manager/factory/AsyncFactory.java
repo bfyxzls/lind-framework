@@ -42,11 +42,8 @@ public class AsyncFactory {
 			@Override
 			public void run() {
 				String address = AddressUtils.getRealAddressByIP(ip);
-				String s = LogUtils.getBlock(ip) +
-						address +
-						LogUtils.getBlock(username) +
-						LogUtils.getBlock(status) +
-						LogUtils.getBlock(message);
+				String s = LogUtils.getBlock(ip) + address + LogUtils.getBlock(username) + LogUtils.getBlock(status)
+						+ LogUtils.getBlock(message);
 				// 打印信息到日志
 				sys_user_logger.info(s, args);
 				// 获取客户端操作系统

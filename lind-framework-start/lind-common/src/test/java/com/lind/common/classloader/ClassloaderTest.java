@@ -6,6 +6,9 @@ import org.junit.Test;
 
 import java.io.IOException;
 
+/**
+ * 类加载器测试.
+ */
 @Slf4j
 public class ClassloaderTest {
 

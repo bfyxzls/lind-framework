@@ -21,7 +21,6 @@
         <dl4j.version>0.7.1</dl4j.version>
         <datavec.version>0.7.1</datavec.version>
         <scala.binary.version>2.10</scala.binary.version>
-
         <protobuf.version>3.19.1</protobuf.version>
         <protobuf-plugin.version>0.6.1</protobuf-plugin.version>
         <grpc.version>1.44.0</grpc.version>
@@ -244,11 +243,6 @@
         <dependency>
             <groupId>org.jgroups</groupId>
             <artifactId>jgroups</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <scope>test</scope>
         </dependency>
 
         <!-- 深度学习包 -->

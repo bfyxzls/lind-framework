@@ -81,3 +81,26 @@ String a3 = concurrentSkipListMap.put("zzl2", "zhan2");
 String a4 = concurrentSkipListMap.put("china", "中国");
 System.out.printf(concurrentSkipListMap.toString());
 ```
+# 泛型异常自定义的作用
+**方法定义-显示声明**
+public RetOps<T> assertCode(Integer expect, Function<? super R<T>, ? extends Exception> func)
+throws Exception
+**方法调用**
+
+![](./assets/readme-1708505103068.png)
+
+**方法定义-不显示声明**
+public <Ex extends Exception> RetOps<T> assertCode(Integer expect, Function<? super R<T>, ? extends Ex> func)
+throws Ex 
+**方法调用**
+不需要显示声明异常，编译器会自动推断
+
+![](./assets/readme-1708505972396.png)
+
+**解释说明**
+
+在第一个方法中，使用了泛型类型`<Ex extends Exception>`来定义异常类型，因此在调用该方法时不需要显式声明`throws Ex`。这是因为编译器会根据实际情况推断出可能抛出的异常类型，并进行相应的处理。
+
+而在第二个方法中，直接使用了`Exception`作为返回类型，因此在调用该方法时需要显式声明`throws Exception`，表明该方法可能会抛出Exception或其子类的异常。
+
+通过泛型定义异常类型可以使代码更加灵活，同时也能提供更好的类型安全性。

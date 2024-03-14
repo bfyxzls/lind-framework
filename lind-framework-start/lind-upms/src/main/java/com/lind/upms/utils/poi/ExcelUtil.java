@@ -50,84 +50,106 @@ import java.util.stream.Collectors;
 public class ExcelUtil<T> {
 
 	public static final String FORMULA_REGEX_STR = "=|-|\\+|@";
+
 	public static final String[] FORMULA_STR = { "=", "-", "+", "@" };
+
 	/**
 	 * Excel sheet最大行数，默认65536
 	 */
 	public static final int sheetSize = 65536;
+
 	private static final Logger log = LoggerFactory.getLogger(ExcelUtil.class);
+
 	/**
 	 * 数字格式
 	 */
 	private static final DecimalFormat DOUBLE_FORMAT = new DecimalFormat("######0.00");
+
 	/**
 	 * 用于dictType属性数据存储，避免重复查缓存
 	 */
 	public Map<String, String> sysDictMap = new HashMap<String, String>();
+
 	/**
 	 * 实体对象
 	 */
 	public Class<T> clazz;
+
 	/**
 	 * 需要排除列属性
 	 */
 	public String[] excludeFields;
+
 	/**
 	 * 工作表名称
 	 */
 	private String sheetName;
+
 	/**
 	 * 导出类型（EXPORT:导出数据；IMPORT：导入模板）
 	 */
 	private Type type;
+
 	/**
 	 * 工作薄对象
 	 */
 	private Workbook wb;
+
 	/**
 	 * 工作表对象
 	 */
 	private Sheet sheet;
+
 	/**
 	 * 样式列表
 	 */
 	private Map<String, CellStyle> styles;
+
 	/**
 	 * 导入导出数据列表
 	 */
 	private List<T> list;
+
 	/**
 	 * 注解列表
 	 */
 	private List<Object[]> fields;
+
 	/**
 	 * 当前行号
 	 */
 	private int rownum;
+
 	/**
 	 * 标题
 	 */
 	private String title;
+
 	/**
 	 * 最大高度
 	 */
 	private short maxHeight;
+
 	/**
 	 * 合并后最后行数
 	 */
 	private int subMergedLastRowNum = 0;
+
 	/**
 	 * 合并后开始行数
 	 */
 	private int subMergedFirstRowNum = 1;
+
 	/**
 	 * 对象的子列表方法
 	 */
 	private Method subMethod;
+
 	/**
 	 * 对象的子列表属性
 	 */
 	private List<Field> subFields;
+
 	/**
 	 * 统计列表
 	 */

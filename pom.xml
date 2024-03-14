@@ -18,6 +18,7 @@
         <module>lind-framework-start/lind-grpc-proto</module>
         <module>lind-framework-start/lind-grpc-server</module>
         <module>lind-framework-start/lind-grpc-client</module>
+        <module>lind-framework-start/lind-hibernate-shard</module>
     </modules>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

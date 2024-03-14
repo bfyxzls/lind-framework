@@ -4,6 +4,7 @@ import com.lind.common.core.validate.BeanValidatorUtils;
 import org.junit.Test;
 
 import javax.validation.ConstraintViolationException;
+import java.util.Arrays;
 
 /**
  * @author lind
@@ -30,6 +31,15 @@ public class ConstraintValidatorTest {
 	public void validUserSex() {
 		User user = new User();
 		user.setSex(3);
+	}
+
+	@Test
+	public void valid2N() {
+		User user = new User();
+		user.setSex(1);
+		user.setEmail("bfyxzls@sina.com");
+		user.setPermission(Arrays.asList(1, 2, 4));
+		BeanValidatorUtils.validateWithException(user);
 	}
 
 }

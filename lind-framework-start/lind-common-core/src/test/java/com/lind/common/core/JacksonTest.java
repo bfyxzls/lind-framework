@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
 import com.lind.common.core.jackson.serialization.JsonSerialization;
-import com.lind.common.core.util.FileUtils;
+import com.lind.common.core.util.file.FileUtils;
 import com.lind.common.core.util.FileUtilsTest;
 import lombok.Data;
 import lombok.SneakyThrows;

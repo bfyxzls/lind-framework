@@ -1,5 +1,6 @@
 package com.lind.common.core.util;
 
+import com.lind.common.core.util.file.FileUtils;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Assert;
@@ -13,6 +14,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -23,6 +26,116 @@ public class FileUtilsTest {
 	static String pathObj = "D:\\jar.zip";
 
 	private final AtomicLong maxFileId = new AtomicLong();
+
+	private static void delFolder(File folder) {
+		if (folder.isDirectory()) {
+			File[] files = folder.listFiles();
+			if (files != null) {
+				for (File file : files) {
+
+					if (file.isDirectory()) {
+						if ((file.getName().equals("main") || file.getName().equals("Main"))) {
+							deleteFolder(file);
+						}
+						else {
+							delFolder(file);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private static void deleteFolder(File folder) {
+		if (folder.isDirectory()) {
+			File[] files = folder.listFiles();
+			if (files != null) {
+				for (File file : files) {
+					if (file.isDirectory()) {
+						deleteFolder(file);
+					}
+					else {
+						file.delete();
+					}
+				}
+			}
+			folder.delete();
+		}
+	}
+
+	private static void processFolder(File folder) {
+		if (folder.isDirectory()) {
+			File[] files = folder.listFiles();
+			if (files != null) {
+				for (File file : files) {
+					if (file.isDirectory()) {
+						processFolder(file);
+					}
+					else if (file.getName().endsWith(".jar")) {
+						File mainFolder = new File(file.getParentFile().getParent(), "main");
+						if (!mainFolder.exists()) {
+							mainFolder.mkdir();
+						}
+
+						try {
+							String fileNameNoEx = file.getName().substring(0, file.getName().lastIndexOf("-"));
+							Files.copy(file.toPath(), new File(mainFolder, file.getName()).toPath(),
+									StandardCopyOption.REPLACE_EXISTING);
+							String content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+									+ "<module name=\"org.apache.shardingsphere." + fileNameNoEx
+									+ "\" xmlns=\"urn:jboss:module:1.3\">\n" + "    <resources>\n"
+									+ "        <resource-root path=\"" + file.getName() + "\"/>\n"
+									+ "    </resources>\n" + " <dependencies></dependencies>\n</module>";
+
+							FileUtils.writeFileContent(new File(mainFolder, "module.xml"), content.getBytes());
+						}
+						catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private static void processFolder2(File folder) {
+		if (folder.isDirectory()) {
+			File[] files = folder.listFiles();
+			if (files != null) {
+				for (File file : files) {
+					if (file.isDirectory()) {
+						processFolder2(file);
+					}
+					else if (file.getName().endsWith("-4.1.1.jar")) {
+						File mainFolder = new File(file.getParentFile().getParentFile().getParent(), "main");
+						if (!mainFolder.exists()) {
+							mainFolder.mkdir();
+						}
+
+						try {
+							String fileNameNoEx = file.getName().substring(0, file.getName().lastIndexOf("-"));
+							Files.copy(file.toPath(), new File(mainFolder, file.getName()).toPath(),
+									StandardCopyOption.REPLACE_EXISTING);
+							// String content = "<?xml version=\"1.0\"
+							// encoding=\"UTF-8\"?>\n"
+							// + "<module name=\"org.apache.shardingsphere." +
+							// fileNameNoEx
+							// + "\" xmlns=\"urn:jboss:module:1.3\">\n" + " <resources>\n"
+							// + " <resource-root path=\"" + file.getName() + "\"/>\n"
+							// + " </resources>\n" + "
+							// <dependencies></dependencies>\n</module>";
+							System.out.println("<resource-root path=\"" + file.getName() + "\"/>");
+							// FileUtils.writeFileContent(new File(mainFolder,
+							// "module.xml"), content.getBytes());
+						}
+						catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+	}
 
 	@SneakyThrows
 	@Test
@@ -97,6 +210,14 @@ public class FileUtilsTest {
 		String msg = FileUtils.readToEnd(FileUtilsTest.class.getClassLoader().getResourceAsStream("user.json"),
 				Charset.defaultCharset());
 		System.out.println(msg);
+	}
+
+	@Test
+	public void copyShardingsphereToMain() {
+		String path = "d:\\shardingsphere";
+		File rootFolder = new File(path);
+		delFolder(rootFolder);
+		processFolder2(rootFolder);
 	}
 
 }

@@ -12,6 +12,8 @@ import java.util.Map;
 @ConfigurationProperties("spring.kafka")
 public class KafkaProperties {
 
+	private final Producer producer = new Producer();
+
 	private boolean enabled = true;
 
 	/**
@@ -26,8 +28,6 @@ public class KafkaProperties {
 
 	private String bootstrapServers;
 
-	private String groupID;
-
 	private int retries = 3;
 
 	private int bufferMemory = 1024 * 1024 * 32;
@@ -37,6 +37,9 @@ public class KafkaProperties {
 	private boolean enableAutoCommit = true;
 
 	private int batchSize = 1024 * 16;
+
+	// 死信队列名称
+	private String deadTopic = "dead_topic";
 
 	/**
 	 * Key序列化
@@ -63,7 +66,13 @@ public class KafkaProperties {
 	 */
 	private Consumer consumer = new Consumer();
 
-	private final Producer producer = new Producer();
+	public String getDeadTopic() {
+		return deadTopic;
+	}
+
+	public void setDeadTopic(String deadTopic) {
+		this.deadTopic = deadTopic;
+	}
 
 	public Producer getProducer() {
 		return producer;

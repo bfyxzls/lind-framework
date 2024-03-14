@@ -165,8 +165,8 @@ public class FileUtils {
 			throws UnsupportedEncodingException {
 		String percentEncodedFileName = percentEncode(realFileName);
 
-		String contentDispositionValue = "attachment; filename=" + percentEncodedFileName + ";" +
-				"filename*=" + "utf-8''" + percentEncodedFileName;
+		String contentDispositionValue = "attachment; filename=" + percentEncodedFileName + ";" + "filename*="
+				+ "utf-8''" + percentEncodedFileName;
 
 		response.addHeader("Access-Control-Expose-Headers", "Content-Disposition,download-filename");
 		response.setHeader("Content-disposition", contentDispositionValue);

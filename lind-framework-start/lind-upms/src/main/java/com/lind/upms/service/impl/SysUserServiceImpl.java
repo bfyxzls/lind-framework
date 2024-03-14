@@ -36,18 +36,25 @@ import java.util.stream.Collectors;
 public class SysUserServiceImpl implements ISysUserService {
 
 	private static final Logger log = LoggerFactory.getLogger(SysUserServiceImpl.class);
+
 	@Autowired
 	protected Validator validator;
+
 	@Autowired
 	private SysUserMapper userMapper;
+
 	@Autowired
 	private SysRoleMapper roleMapper;
+
 	@Autowired
 	private SysPostMapper postMapper;
+
 	@Autowired
 	private SysUserRoleMapper userRoleMapper;
+
 	@Autowired
 	private SysUserPostMapper userPostMapper;
+
 	@Autowired
 	private ISysConfigService configService;
 

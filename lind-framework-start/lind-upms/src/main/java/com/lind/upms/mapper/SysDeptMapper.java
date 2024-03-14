@@ -17,7 +17,7 @@ public interface SysDeptMapper {
 	 * @param dept 部门信息
 	 * @return 部门信息集合
 	 */
-    List<SysDept> selectDeptList(SysDept dept);
+	List<SysDept> selectDeptList(SysDept dept);
 
 	/**
 	 * 根据角色ID查询部门树信息
@@ -25,7 +25,7 @@ public interface SysDeptMapper {
 	 * @param deptCheckStrictly 部门树选择项是否关联显示
 	 * @return 选中部门列表
 	 */
-    List<Long> selectDeptListByRoleId(@Param("roleId") Long roleId,
+	List<Long> selectDeptListByRoleId(@Param("roleId") Long roleId,
 			@Param("deptCheckStrictly") boolean deptCheckStrictly);
 
 	/**
@@ -33,35 +33,35 @@ public interface SysDeptMapper {
 	 * @param deptId 部门ID
 	 * @return 部门信息
 	 */
-    SysDept selectDeptById(Long deptId);
+	SysDept selectDeptById(Long deptId);
 
 	/**
 	 * 根据ID查询所有子部门
 	 * @param deptId 部门ID
 	 * @return 部门列表
 	 */
-    List<SysDept> selectChildrenDeptById(Long deptId);
+	List<SysDept> selectChildrenDeptById(Long deptId);
 
 	/**
 	 * 根据ID查询所有子部门（正常状态）
 	 * @param deptId 部门ID
 	 * @return 子部门数
 	 */
-    int selectNormalChildrenDeptById(Long deptId);
+	int selectNormalChildrenDeptById(Long deptId);
 
 	/**
 	 * 是否存在子节点
 	 * @param deptId 部门ID
 	 * @return 结果
 	 */
-    int hasChildByDeptId(Long deptId);
+	int hasChildByDeptId(Long deptId);
 
 	/**
 	 * 查询部门是否存在用户
 	 * @param deptId 部门ID
 	 * @return 结果
 	 */
-    int checkDeptExistUser(Long deptId);
+	int checkDeptExistUser(Long deptId);
 
 	/**
 	 * 校验部门名称是否唯一
@@ -69,40 +69,40 @@ public interface SysDeptMapper {
 	 * @param parentId 父部门ID
 	 * @return 结果
 	 */
-    SysDept checkDeptNameUnique(@Param("deptName") String deptName, @Param("parentId") Long parentId);
+	SysDept checkDeptNameUnique(@Param("deptName") String deptName, @Param("parentId") Long parentId);
 
 	/**
 	 * 新增部门信息
 	 * @param dept 部门信息
 	 * @return 结果
 	 */
-    int insertDept(SysDept dept);
+	int insertDept(SysDept dept);
 
 	/**
 	 * 修改部门信息
 	 * @param dept 部门信息
 	 * @return 结果
 	 */
-    int updateDept(SysDept dept);
+	int updateDept(SysDept dept);
 
 	/**
 	 * 修改所在部门正常状态
 	 * @param deptIds 部门ID组
 	 */
-    void updateDeptStatusNormal(Long[] deptIds);
+	void updateDeptStatusNormal(Long[] deptIds);
 
 	/**
 	 * 修改子元素关系
 	 * @param depts 子元素
 	 * @return 结果
 	 */
-    int updateDeptChildren(@Param("depts") List<SysDept> depts);
+	int updateDeptChildren(@Param("depts") List<SysDept> depts);
 
 	/**
 	 * 删除部门管理信息
 	 * @param deptId 部门ID
 	 * @return 结果
 	 */
-    int deleteDeptById(Long deptId);
+	int deleteDeptById(Long deptId);
 
 }

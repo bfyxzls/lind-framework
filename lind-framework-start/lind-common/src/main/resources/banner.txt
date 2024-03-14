@@ -8,10 +8,7 @@ ${AnsiColor.BRIGHT_BLUE}
                 :::         :::        ::    ::     ::    ::
                 :::::::     :::        ::    ::     ::::::::
 ${AnsiColor.BRIGHT_RED}
-                       blog.51cto.com/u_15765017
+                      https://www.cnblogs.com/lori
 
                   Lind Microservice Architecture
 ${AnsiColor.DEFAULT}
-
-
-
