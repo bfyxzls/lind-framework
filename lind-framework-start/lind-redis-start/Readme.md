@@ -1,6 +1,27 @@
 # Lettuce 和 Jedis 
 Lettuce 和 Jedis 的定位都是Redis的client，所以他们当然可以直接连接redis server。Jedis在实现上是直接连接的redis server，如果在多线程环境下是非线程安全的，这个时候只有使用连接池，为每个Jedis实例增加物理连接Lettuce的连接是基于Netty的，连接实例（StatefulRedisConnection）可以在多个线程间并发访问，应为StatefulRedisConnection是线程安全的，所以一个连接实例（StatefulRedisConnection）就可以满足多线程环境下的并发访问，当然这个也是可伸缩的设计，一个连接实例不够的情况也可以按需增加连接实例。
 
+# 序列化
+## Jackson2Json
+```json
+[
+  "com.lind.redis.User",
+  {
+    "id": 1,
+    "name": "zzl",
+    "createTime": "2024-03-15T09:18:33.39"
+  }
+]
+```
+## fastjson&默认
+```json
+{
+    "@type": "com.ruoyi.common.redis.SerializerTest$User",
+    "createTime": "2024-03-15 09:13:22.526673400",
+    "id": 1,
+    "name": "zzl"
+}
+```
 # lock组件
 实现对某个资源或者代码片断进行锁的添加，这种锁是跨进度，跨服务的。
 # 依赖引用

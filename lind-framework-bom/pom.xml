@@ -83,6 +83,7 @@
         <!-- 文件上传相关 -->
         <minio.version>8.2.2</minio.version>
         <fastdfs.version>1.27.2</fastdfs.version>
+        <fastjson2.version>2.0.43</fastjson2.version>
     </properties>
     <!-- maven依赖版本统一，子工程不需要声明包版本 -->
     <dependencyManagement>
@@ -490,6 +491,11 @@
                 <groupId>com.github.tobato</groupId>
                 <artifactId>fastdfs-client</artifactId>
                 <version>${fastdfs.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
