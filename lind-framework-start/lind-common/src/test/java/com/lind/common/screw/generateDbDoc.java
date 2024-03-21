@@ -29,7 +29,7 @@ public class generateDbDoc {
 	 */
 	@Test
 	public void genereateLawyerMgr() {
-		documentGeneration("jdbc:mysql://192.168.60.136:3306/keycloak", "keycloak", "root", "123456");
+		documentGeneration("jdbc:mysql://192.168.60.138:3306/user-permission-mgr", "user-permission-mgr", "root", "123456");
 	}
 
 	/**
@@ -93,6 +93,8 @@ public class generateDbDoc {
 		ignorePrefix.add("fed_user_");
 		ignorePrefix.add("authentication_");
 		ignorePrefix.add("group_");
+		ignorePrefix.add("sys_");
+		ignorePrefix.add("gen_");
 		// 忽略表后缀
 		ArrayList<String> ignoreSuffix = new ArrayList<>();
 		ignoreSuffix.add("_config");
