@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 public class RegexUtilsTest {
 
 	private static final Pattern DATA_FILE_RE = Pattern.compile("data\\.([0-9]+)"); // data.1
+	private static final String passwordRegex = "^(?:(?=.*[A-Za-z])(?=.*\\d)|(?=.*[A-Za-z])(?=.*[!#$%^&*])|(?=.*\\d)(?=.*[!#$%^&*]))[A-Za-z\\d!#$%^&*]{8,20}$";
 	static List<String> roots = Arrays.asList("cat", "bat", "rat");
 	static String sentence = "the cattle was rattled by the battery";
 
@@ -247,6 +248,14 @@ public class RegexUtilsTest {
 		System.out.println(range1 + " is valid format: " + range1.matches(regex));
 		System.out.println(range2 + " is valid format: " + range2.matches(regex));
 		System.out.println(range3 + " is valid format: " + range3.matches(regex));
+	}
+
+	@Test
+	public void testSimplePassword() {
+		System.out.println("123456".matches(passwordRegex));
+		System.out.println("123456AB#".matches(passwordRegex));
+		System.out.println("a1234567".matches(passwordRegex));
+		System.out.println("aBc#1234".matches(passwordRegex));
 	}
 
 	class TrieNode {

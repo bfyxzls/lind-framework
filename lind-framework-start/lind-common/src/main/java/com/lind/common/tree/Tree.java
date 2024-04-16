@@ -1,5 +1,7 @@
 package com.lind.common.tree;
 
+import lombok.SneakyThrows;
+import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -36,6 +38,23 @@ public interface Tree {
 				}
 			}
 		}
+	}
+
+	/**
+	 * 构建当前元素的孩子节点
+	 * @param allList
+	 * @return
+	 * @param <T>
+	 */
+	@SneakyThrows
+	default <T extends Tree> T covert(List<T> allList) {
+		Class<T> clazz = (Class<T>) this.getClass();
+		T node = clazz.newInstance(); // 初始化新的T对象
+		BeanUtils.copyProperties(this, node);
+		List<Tree> children = allList.stream().filter(subItem -> subItem.getParentId().equals(this.getId()))
+				.map(subItem -> subItem.covert(allList)).collect(Collectors.toList());
+		node.setSons(children);
+		return node;
 	}
 
 }

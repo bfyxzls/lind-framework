@@ -84,6 +84,7 @@
         <minio.version>8.2.2</minio.version>
         <fastdfs.version>1.27.2</fastdfs.version>
         <fastjson2.version>2.0.43</fastjson2.version>
+        <pagehelper.version>5.3.2</pagehelper.version>
     </properties>
     <!-- maven依赖版本统一，子工程不需要声明包版本 -->
     <dependencyManagement>
@@ -496,6 +497,12 @@
                 <groupId>com.alibaba.fastjson2</groupId>
                 <artifactId>fastjson2</artifactId>
                 <version>${fastjson2.version}</version>
+            </dependency>
+            <!-- 统一各数据分页 -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>${pagehelper.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

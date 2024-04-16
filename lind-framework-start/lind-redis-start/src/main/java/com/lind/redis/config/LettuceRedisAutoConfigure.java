@@ -1,7 +1,6 @@
 package com.lind.redis.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -11,14 +10,11 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import com.lind.redis.service.RedisService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
-import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
-import org.springframework.data.redis.core.RedisOperations;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
@@ -26,46 +22,33 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  **/
 public class LettuceRedisAutoConfigure {
 
-	@Bean(name = "redisTemplateString")
-	public StringRedisTemplate redisTemplateString(LettuceConnectionFactory factory) {
-		StringRedisTemplate template = new StringRedisTemplate();
-		template.setConnectionFactory(factory);
-		return template;
+	@Bean
+	public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory,
+			RedisSerializer<Object> redisSerializer) {
+		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+		redisTemplate.setConnectionFactory(redisConnectionFactory);
+		redisTemplate.setKeySerializer(new StringRedisSerializer());
+		redisTemplate.setValueSerializer(redisSerializer);
+		redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+		redisTemplate.setHashValueSerializer(redisSerializer);
+		redisTemplate.afterPropertiesSet();
+		return redisTemplate;
 	}
 
-	@Primary
-	@Bean(name = "redisTemplate")
-	@ConditionalOnClass(RedisOperations.class) // 依据RedisOperations是否存在而决定是否注册这个bean
-	public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory factory) {
-		RedisTemplate<String, Object> template = new RedisTemplate<>();
-		template.setConnectionFactory(factory);
-		Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
-		ObjectMapper om = new ObjectMapper();
-		om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-		om.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL,
-				JsonTypeInfo.As.WRAPPER_ARRAY);
-		jackson2JsonRedisSerializer.setObjectMapper(om);
-		om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-		// 日期序列化处理
-		om.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-		om.registerModule(new Jdk8Module()).registerModule(new JavaTimeModule())
+	@Bean
+	public RedisSerializer<Object> redisSerializer() {
+		// 创建JSON序列化器
+		Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<>(Object.class);
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+		// 必须设置，否则无法将JSON转化为对象，会转化成Map类型
+		objectMapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL);
+		// 时间格式化
+		objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+		objectMapper.registerModule(new Jdk8Module()).registerModule(new JavaTimeModule())
 				.registerModule(new ParameterNamesModule());
-
-		om.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL,
-				JsonTypeInfo.As.WRAPPER_ARRAY);
-		jackson2JsonRedisSerializer.setObjectMapper(om);
-
-		StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-		// key采用String的序列化方式
-		template.setKeySerializer(stringRedisSerializer);
-		// hash的key也采用String的序列化方式
-		template.setHashKeySerializer(stringRedisSerializer);
-		// value序列化方式采用jackson
-		template.setValueSerializer(jackson2JsonRedisSerializer);
-		// hash的value序列化方式采用jackson
-		template.setHashValueSerializer(jackson2JsonRedisSerializer);
-		template.afterPropertiesSet();
-		return template;
+		serializer.setObjectMapper(objectMapper);
+		return serializer;
 	}
 
 	@Bean

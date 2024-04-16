@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.junit.Test;
+import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,27 @@ public class TreeTest {
 		List<NormalTree> ones = normalTreeList.stream().filter(o -> o.parentId.equals("0"))
 				.collect(Collectors.toList());
 		new NormalTree().fillTreeRzSons(ones, normalTreeList);
+
 		System.out.println(ones);
+
+		List<NormalTree> oneLevelRecords = normalTreeList.stream().filter(item -> item.getParentId().equals("0"))
+				.map(item -> item.covert(normalTreeList)).collect(Collectors.toList());
+
+		List<NormalTree> oneLevelRecords2 = normalTreeList.stream().filter(item -> item.getParentId().equals("0"))
+				.map(item -> covert(item, normalTreeList)).collect(Collectors.toList());
+		System.out.println(oneLevelRecords);
+	}
+
+	/**
+	 * 初始对象转化为节点对象
+	 */
+	private NormalTree covert(NormalTree item, List<NormalTree> allList) {
+		NormalTree node = new NormalTree();
+		BeanUtils.copyProperties(item, node);
+		List<NormalTree> children = allList.stream().filter(subItem -> subItem.getParentId().equals(item.getId()))
+				.map(subItem -> covert(subItem, allList)).collect(Collectors.toList());
+		node.setSons(children);
+		return node;
 	}
 
 	@Data

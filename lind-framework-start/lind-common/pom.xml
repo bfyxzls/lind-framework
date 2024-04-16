@@ -24,7 +24,6 @@
         <protobuf.version>3.19.1</protobuf.version>
         <protobuf-plugin.version>0.6.1</protobuf-plugin.version>
         <grpc.version>1.44.0</grpc.version>
-
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -46,7 +45,15 @@
             <artifactId>screw-core</artifactId>
             <version>1.0.5</version>
         </dependency>
-
+        <!-- 统一数据库类 -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+        </dependency>
         <!-- HikariCP -->
         <dependency>
             <groupId>com.zaxxer</groupId>
