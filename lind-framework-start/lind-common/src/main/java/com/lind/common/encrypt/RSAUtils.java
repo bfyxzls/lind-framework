@@ -231,7 +231,12 @@ public class RSAUtils {
 		Signature signature = Signature.getInstance(SIGN_ALGORITHMS_SHA256);
 		signature.initVerify(key);
 		signature.update(srcData.getBytes(StandardCharsets.UTF_8));
-		return signature.verify(Base64Utils.decode(sign.getBytes(StandardCharsets.UTF_8)));
+		try {
+			return signature.verify(Base64Utils.decodeFromString(sign));
+		}
+		catch (Exception ex) {
+			return signature.verify(Base64Utils.decodeFromUrlSafeString(sign));
+		}
 	}
 
 }
