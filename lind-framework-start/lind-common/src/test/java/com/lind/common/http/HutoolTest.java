@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -41,6 +43,24 @@ public class HutoolTest {
 	@Test
 	public void get() {
 		log.info("{}", new String(HttpUtil.get("http://localhost:8181/s?wd=zzl").getBytes()));
+	}
+
+	@Test
+	public void testKcLogin() throws InterruptedException {
+		Map<String, Object> params = new HashMap<>();
+		params.put("client_id", "pkulaw");
+		params.put("client_secret", "c0b7ab8e-485b-4a10-bff8-7c7d3f472096");
+		params.put("grant_type", "password");
+		params.put("username", "test");
+		params.put("password", "12345678a");
+		params.put("scope", "openid");
+		for (int i = 0; i < 2000; i++) {
+			String result = HttpUtil
+					.post("http://192.168.4.26:8080/auth/realms/fabao/protocol/openid-connect/token", params)
+					.toLowerCase();
+			System.out.println("result=" + result);
+			Thread.sleep(1);
+		}
 	}
 
 }

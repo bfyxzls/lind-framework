@@ -77,3 +77,17 @@ spring:
 server:
   port: 8811
   address: 0.0.0.0
+
+keycloak:
+    realm: fabao
+    resource: pkulaw
+    client-key-password: c0b7ab8e-485b-4a10-bff8-7c7d3f472096
+    auth-server-url: http://192.168.4.26:8080/auth/realms/fabao/protocol/openid-connect/auth
+kc:
+    scope: openid
+    authorization-grant-type: password
+    user-info-uri: http://192.168.4.26:8080/auth/realms/fabao/protocol/openid-connect/userinfo
+    token-uri: http://192.168.4.26:8080/auth/realms/fabao/protocol/openid-connect/token
+    logout: http://192.168.4.26:8080/auth/realms/fabao/protocol/openid-connect/logout
+    jwk-set-uri: http://192.168.4.26:8080/auth/realms/fabao/protocol/openid-connect/certs
+    certs-id: E_6ih35yTLJMieI0vqg9MmTQrJ6RcUSxiXeNdcMaoYk

@@ -1,32 +1,16 @@
 package com.lind.common.collection;
 
-import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
 import com.google.common.collect.ImmutableMap;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.collections4.bag.HashBag;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -34,6 +18,7 @@ import java.util.stream.Stream;
 /**
  * 集合操作
  */
+@Slf4j
 public class CollectionTest {
 
 	public static final String USER = "user";
@@ -42,6 +27,21 @@ public class CollectionTest {
 
 	public static void peekFun(Map<String, String> map) {
 		map.put("NAME", map.get("name").toUpperCase());
+	}
+
+	public static List<String> subtract(List<String> list1, List<String> list2) {
+		ArrayList<String> result = new ArrayList();
+		HashBag<String> bag = new HashBag(list2);
+		Iterator i$ = list1.iterator();
+
+		while (i$.hasNext()) {
+			String e = (String) i$.next();
+			if (!bag.remove(e, 1)) {
+				result.add(e);
+			}
+		}
+
+		return result;
 	}
 
 	@Test
@@ -149,6 +149,14 @@ public class CollectionTest {
 		Assert.isTrue(role.stream().filter(StrUtil::isNotBlank).anyMatch(o -> o.equals("admin")));
 	}
 
+	@Test
+	public void findAny() {
+		List<String> role = Arrays.asList("zzl", "admin", "editor", "");
+		role.stream().filter(o -> o.equals("admin")).findAny().ifPresent(o -> {
+			log.info("找到目标，需要处理的逻辑:{}", o);
+		});
+	}
+
 	/**
 	 * 所有元素都不包含admin
 	 */
@@ -229,21 +237,6 @@ public class CollectionTest {
 		allData.stream().filter(o -> dic.contains(o)).collect(Collectors.toList()).forEach(o -> {
 			System.out.println(o);
 		});
-	}
-
-	public static List<String> subtract(List<String> list1, List<String> list2) {
-		ArrayList<String> result = new ArrayList();
-		HashBag<String> bag = new HashBag(list2);
-		Iterator i$ = list1.iterator();
-
-		while (i$.hasNext()) {
-			String e = (String) i$.next();
-			if (!bag.remove(e, 1)) {
-				result.add(e);
-			}
-		}
-
-		return result;
 	}
 
 	@Test
