@@ -19,96 +19,94 @@ import java.util.Map;
  *     com.edw.service.KeycloakRestService
  * </pre>
  *
- * @author Muhammad Edwin < edwin at redhat dot com >
- * 18 Agt 2020 21:47
+ * @author Muhammad Edwin < edwin at redhat dot com > 18 Agt 2020 21:47
  */
 @Service
 public class KeycloakRestService {
 
-    @Autowired
-    private RestTemplate restTemplate;
+	@Autowired
+	private RestTemplate restTemplate;
 
-    @Value("${kc.token-uri}")
-    private String keycloakTokenUri;
+	@Value("${kc.token-uri}")
+	private String keycloakTokenUri;
 
-    @Value("${kc.user-info-uri}")
-    private String keycloakUserInfo;
+	@Value("${kc.user-info-uri}")
+	private String keycloakUserInfo;
 
-    @Value("${kc.logout}")
-    private String keycloakLogout;
+	@Value("${kc.logout}")
+	private String keycloakLogout;
 
-    @Value("${keycloak.resource}")
-    private String clientId;
+	@Value("${keycloak.resource}")
+	private String clientId;
 
-    @Value("${kc.authorization-grant-type}")
-    private String grantType;
+	@Value("${kc.authorization-grant-type}")
+	private String grantType;
 
-    @Value("${keycloak.client-key-password}")
-    private String clientSecret;
+	@Value("${keycloak.client-key-password}")
+	private String clientSecret;
 
-    @Value("${kc.scope}")
-    private String scope;
+	@Value("${kc.scope}")
+	private String scope;
 
-    /**
-     *  login by using username and password to keycloak, and capturing token on response body
-     *
-     * @param username
-     * @param password
-     * @return
-     */
-    public String login(String username, String password) {
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        map.add("username",username);
-        map.add("password",password);
-        map.add("client_id",clientId);
-        map.add("grant_type",grantType);
-        map.add("client_secret",clientSecret);
-        map.add("scope",scope);
+	/**
+	 * login by using username and password to keycloak, and capturing token on response
+	 * body
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	public String login(String username, String password) {
+		MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+		map.add("username", username);
+		map.add("password", password);
+		map.add("client_id", clientId);
+		map.add("grant_type", grantType);
+		map.add("client_secret", clientSecret);
+		map.add("scope", scope);
 
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, new HttpHeaders());
-        return restTemplate.postForObject(keycloakTokenUri, request, String.class);
-    }
+		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, new HttpHeaders());
+		return restTemplate.postForObject(keycloakTokenUri, request, String.class);
+	}
 
-    /**
-     *  a successful user token will generate http code 200, other than that will create an exception
-     *
-     * @param token
-     * @return
-     * @throws Exception
-     */
-    public String checkValidity(String token) throws Exception {
-        return getUserInfo(token);
-    }
+	/**
+	 * a successful user token will generate http code 200, other than that will create an
+	 * exception
+	 * @param token
+	 * @return
+	 * @throws Exception
+	 */
+	public String checkValidity(String token) throws Exception {
+		return getUserInfo(token);
+	}
 
-    /**
-     *  logging out and disabling active token from keycloak
-     *
-     * @param refreshToken
-     */
-    public void logout(String refreshToken) throws Exception {
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        map.add("client_id",clientId);
-        map.add("client_secret",clientSecret);
-        map.add("refresh_token",refreshToken);
+	/**
+	 * logging out and disabling active token from keycloak
+	 * @param refreshToken
+	 */
+	public void logout(String refreshToken) throws Exception {
+		MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+		map.add("client_id", clientId);
+		map.add("client_secret", clientSecret);
+		map.add("refresh_token", refreshToken);
 
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, null);
-        restTemplate.postForObject(keycloakLogout, request, String.class);
-    }
+		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, null);
+		restTemplate.postForObject(keycloakLogout, request, String.class);
+	}
 
-    public List<String> getRoles(String token) throws Exception {
-        String response = getUserInfo(token);
+	public List<String> getRoles(String token) throws Exception {
+		String response = getUserInfo(token);
 
-        // get roles
-        Map map = new ObjectMapper().readValue(response, HashMap.class);
-        return (List<String>) map.get("roles");
-    }
+		// get roles
+		Map map = new ObjectMapper().readValue(response, HashMap.class);
+		return (List<String>) map.get("roles");
+	}
 
-    private String getUserInfo(String token) {
-        MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
-        headers.add("Authorization", token);
+	private String getUserInfo(String token) {
+		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+		headers.add("Authorization", token);
 
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(null, headers);
-        return restTemplate.postForObject(keycloakUserInfo, request, String.class);
-    }
+		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(null, headers);
+		return restTemplate.postForObject(keycloakUserInfo, request, String.class);
+	}
 
 }

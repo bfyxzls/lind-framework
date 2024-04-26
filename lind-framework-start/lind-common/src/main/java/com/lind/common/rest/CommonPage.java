@@ -36,8 +36,7 @@ public class CommonPage<T> {
 	private List<T> list;
 
 	/**
-	 * 将PageHelper分页后的list转为分页信息
-     * 例如从mybatis组件返回的分页数据
+	 * 将PageHelper分页后的list转为分页信息 例如从mybatis组件返回的分页数据
 	 */
 	public static <T> CommonPage<T> restPage(List<T> list) {
 		CommonPage<T> result = new CommonPage<T>();
@@ -51,8 +50,7 @@ public class CommonPage<T> {
 	}
 
 	/**
-	 * 将SpringData分页后的list转为分页信息
-     * 例如从mongodb,elasticsearch返回的分页数据
+	 * 将SpringData分页后的list转为分页信息 例如从mongodb,elasticsearch返回的分页数据
 	 */
 	public static <T> CommonPage<T> restPage(Page<T> pageInfo) {
 		CommonPage<T> result = new CommonPage<T>();

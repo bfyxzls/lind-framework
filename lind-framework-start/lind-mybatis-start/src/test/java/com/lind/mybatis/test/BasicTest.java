@@ -49,6 +49,13 @@ public class BasicTest {
 	public void insert() {
 		TUser user = new TUser();
 		user.setUsername("lind");
+		user.setExtensionInfo(new HashMap() {
+			{
+				put("city", "beijing");
+				put("area", "shijingshan");
+			}
+		});
+		user.setLikeList(java.util.Arrays.asList("basketball", "football"));
 		userDao.insert(user);
 	}
 
@@ -65,7 +72,7 @@ public class BasicTest {
 	@Test
 	public void read() {
 		QueryWrapper<TUser> wrapper = new QueryWrapper<>();
-		wrapper.lambda().eq(TUser::getCreateBy, 2);
+		wrapper.lambda().eq(TUser::getCreateBy, 1);
 		log.info("user1:{}", userDao.selectList(wrapper));
 	}
 
@@ -88,9 +95,7 @@ public class BasicTest {
 		pageVo.setPageSize(5);
 		Page page = new Page(1, 5);
 
-		log.info("1 page:{}", userDao.selectPage(page, null).getRecords());
-		page = new Page(2, 5);
-		log.info("2 page:{}", userDao.selectPage(page, null).getRecords());
+		log.info("1 page:{}", userDao.selectPage(page, new QueryWrapper<>()).getRecords());
 
 	}
 

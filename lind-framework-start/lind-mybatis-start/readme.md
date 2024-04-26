@@ -56,7 +56,7 @@
     private String createDepartmentId;
 ```
 
-# 对第三方应用开启审讯注解
+对第三方应用开启审讯注解
 ```
 @EnableMybatisAuditing
 public class BasicTest {}
@@ -77,14 +77,26 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 
 # 字段加解密处理
 通过BaseTypeHandler对mybatis进行处理，写入与读取都会走rsa加密方法
+* 实体类上添加@TableName(autoResultMap = true)
+* 字段上添加@TableField(typeHandler = RsaTypeHandler.class)
 ```
 @TableField(typeHandler = RsaTypeHandler.class)
 private String realName;
 ```
 
 # 字段的Map对象处理
+* 实体类上添加@TableName(autoResultMap = true)
+* 字段上添加@TableField(typeHandler = MapTypeHandler.class)
 ```
 @TableField(typeHandler = MapTypeHandler.class)
+private String extensionInfo;
+```
+
+# 字段的List集合处理
+* 实体类上添加@TableName(autoResultMap = true)
+* 字段上添加@TableField(typeHandler = ListTypeHandler.class)
+```
+@TableField(typeHandler = ListTypeHandler.class)
 private String extensionInfo;
 ```
 

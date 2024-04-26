@@ -16,20 +16,20 @@ import java.util.concurrent.TimeUnit;
  *     com.edw.service.JwtService
  * </pre>
  *
- * @author Muhammad Edwin < edwin at redhat dot com >
- * 20 Agt 2020 15:17
+ * @author Muhammad Edwin < edwin at redhat dot com > 20 Agt 2020 15:17
  */
 @Service
 public class JwtService {
 
-    @Value("${kc.jwk-set-uri}")
-    private String jwksUrl;
+	@Value("${kc.jwk-set-uri}")
+	private String jwksUrl;
 
-    @Value("${kc.certs-id}")
-    private String certsId;
+	@Value("${kc.certs-id}")
+	private String certsId;
 
-    @Cacheable(value = "jwkCache")
-    public Jwk getJwk() throws Exception {
-        return new UrlJwkProvider(new URL(jwksUrl)).get(certsId);
-    }
+	@Cacheable(value = "jwkCache")
+	public Jwk getJwk() throws Exception {
+		return new UrlJwkProvider(new URL(jwksUrl)).get(certsId);
+	}
+
 }

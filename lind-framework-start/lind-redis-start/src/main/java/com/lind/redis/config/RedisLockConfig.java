@@ -41,13 +41,13 @@ public class RedisLockConfig {
 	}
 
 	@Bean
-	@ConditionalOnBean(name = "redisTemplateString")
+	@ConditionalOnBean(name = "redisTemplate")
 	public RepeatSubmitAspect repeatSubmitAspect(RedisTemplate redisTemplate) {
 		return new RepeatSubmitAspect(redisTemplate);
 	}
 
 	@Bean
-	@ConditionalOnBean(name = "redisTemplateString")
+	@ConditionalOnBean(name = "redisTemplate")
 	public RedisLockTemplate redisLockTemplate(RedisLockRegistry redisLockRegistry,
 			RedisLockProperty redisLockProperty) {
 		return new RedisLockTemplate(redisLockRegistry, redisLockProperty);

@@ -29,7 +29,8 @@ public class generateDbDoc {
 	 */
 	@Test
 	public void genereateLawyerMgr() {
-		documentGeneration("jdbc:mysql://192.168.60.138:3306/user-permission-mgr", "user-permission-mgr", "root", "123456");
+		documentGeneration("jdbc:mysql://192.168.60.138:3306/user-permission-mgr", "user-permission-mgr", "root",
+				"123456");
 	}
 
 	/**

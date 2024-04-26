@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
@@ -22,7 +23,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  **/
 public class LettuceRedisAutoConfigure {
 
-	@Bean
+	@Bean("redisTemplate")
 	public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory,
 			RedisSerializer<Object> redisSerializer) {
 		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
@@ -31,6 +32,16 @@ public class LettuceRedisAutoConfigure {
 		redisTemplate.setValueSerializer(redisSerializer);
 		redisTemplate.setHashKeySerializer(new StringRedisSerializer());
 		redisTemplate.setHashValueSerializer(redisSerializer);
+		redisTemplate.afterPropertiesSet();
+		return redisTemplate;
+	}
+
+	@Bean("stringRedisTemplate")
+	public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
+		StringRedisTemplate redisTemplate = new StringRedisTemplate();
+		redisTemplate.setConnectionFactory(redisConnectionFactory);
+		redisTemplate.setKeySerializer(new StringRedisSerializer());
+		redisTemplate.setValueSerializer(new StringRedisSerializer());
 		redisTemplate.afterPropertiesSet();
 		return redisTemplate;
 	}

@@ -1,15 +1,7 @@
 package com.lind.common.pattern;
 
-import com.lind.common.pattern.decorate.Coffee;
-import com.lind.common.pattern.decorate.AbstractDrinkDecorate;
-import com.lind.common.pattern.decorate.Drink;
-import com.lind.common.pattern.decorate.MilkAbstractDrinkDecorate;
-import com.lind.common.pattern.decorate.SugarAbstractDrinkDecorate;
-import com.lind.common.pattern.decorate.Tea;
-import com.lind.common.pattern.decorate2.FlyDecorator;
-import com.lind.common.pattern.decorate2.Human;
-import com.lind.common.pattern.decorate2.SuperMan;
-import com.lind.common.pattern.decorate2.SuperManFlyDecorator;
+import com.lind.common.pattern.decorate.*;
+import com.lind.common.pattern.decorate2.*;
 import org.junit.Test;
 
 public class DecorateTest {
@@ -32,7 +24,9 @@ public class DecorateTest {
 	public void human() {
 		Human human = new SuperMan("牛肉", "工人");
 		FlyDecorator flyDecorator = new SuperManFlyDecorator(human);
-		flyDecorator.run();
+		SwimHumanDecorator swimHumanDecorator = new SwimHumanDecorator(flyDecorator);
+		flyDecorator.run(); // 人类跑起来 超人会飞
+		swimHumanDecorator.run();// 人类跑起来 超人会飞 会游泳
 	}
 
 }

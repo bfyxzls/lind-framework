@@ -1,5 +1,6 @@
-package com.lind.redis.limit;
+package com.lind.redis.util;
 
+import com.lind.redis.limit.execption.RedisLimitException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RRateLimiter;
@@ -13,7 +14,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @Slf4j
-public class RedisRateLimiter {
+public class RedisRateLimiterPolice {
 
 	/**
 	 * redis客户端
@@ -54,19 +55,17 @@ public class RedisRateLimiter {
 	 */
 	public void slidingWindow(String key, int unitSecond, int windowSize, Runnable runnable) {
 		Long currentTime = System.currentTimeMillis();
-		System.out.println(currentTime);
 		if (redisTemplate.hasKey(key)) {
 			// intervalTime是限流的时间
 			Long intervalTime = unitSecond * 1000L;
-			Integer count = redisTemplate.opsForZSet().rangeByScore(key, currentTime - intervalTime, currentTime)
-					.size();
-			System.out.println(count);
-			if (count != null && count > windowSize) {
-				throw new IllegalArgumentException("每" + unitSecond + "秒最多只能访问" + windowSize + "次.");
+			Long from = currentTime - intervalTime;
+			Integer count = redisTemplate.opsForZSet().rangeByScore(key, from, currentTime).size();
+			log.info("from:{}~{},count:{}", from, currentTime, count);
+			if (count != null && count >= windowSize) {
+				throw new RedisLimitException("每" + unitSecond + "秒最多只能访问" + windowSize + "次.");
 			}
 		}
 		redisTemplate.opsForZSet().add(key, UUID.randomUUID().toString(), currentTime);
-		log.info("访问成功");
 		Optional.ofNullable(runnable).ifPresent(o -> o.run());
 	}
 

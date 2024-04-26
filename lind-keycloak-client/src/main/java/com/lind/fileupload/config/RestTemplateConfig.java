@@ -9,13 +9,14 @@ import org.springframework.web.client.RestTemplate;
  *     com.edw.config.RestTemplateConfig
  * </pre>
  *
- * @author Muhammad Edwin < edwin at redhat dot com >
- * 18 Agt 2020 21:46
+ * @author Muhammad Edwin < edwin at redhat dot com > 18 Agt 2020 21:46
  */
 @Configuration
 public class RestTemplateConfig {
-    @Bean
-    public RestTemplate getRestTemplate() {
-        return new RestTemplate();
-    }
+
+	@Bean
+	public RestTemplate getRestTemplate() {
+		return new RestTemplate();
+	}
+
 }

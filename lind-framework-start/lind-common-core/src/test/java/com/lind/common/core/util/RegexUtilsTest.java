@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 public class RegexUtilsTest {
 
 	private static final Pattern DATA_FILE_RE = Pattern.compile("data\\.([0-9]+)"); // data.1
+
 	private static final String passwordRegex = "^(?:(?=.*[A-Za-z])(?=.*\\d)|(?=.*[A-Za-z])(?=.*[!#$%^&*])|(?=.*\\d)(?=.*[!#$%^&*]))[A-Za-z\\d!#$%^&*]{8,20}$";
 	static List<String> roots = Arrays.asList("cat", "bat", "rat");
 	static String sentence = "the cattle was rattled by the battery";

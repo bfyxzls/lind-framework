@@ -1,7 +1,8 @@
 package com.lind.redis;
 
 import com.lind.redis.config.LettuceRedisAutoConfigure;
-import com.lind.redis.limit.RedisRateLimiter;
+import com.lind.redis.limit.execption.RedisLimitException;
+import com.lind.redis.util.RedisRateLimiterPolice;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.After;
 import org.junit.Before;
@@ -104,10 +105,16 @@ public class LimitTest {
 	 */
 	@Test
 	public void zSetSlidingWindowTest() throws InterruptedException {
-		RedisRateLimiter redisRateLimiter = new RedisRateLimiter(redisTemplate, redisson);
-		for (int i = 0; i < 20; i++) {
-			redisRateLimiter.slidingWindow(WINDOW_KEY, 10, 5, null);
-			Thread.sleep(1000);
+		RedisRateLimiterPolice redisRateLimiter = new RedisRateLimiterPolice(redisTemplate, redisson);
+		for (int i = 0; i < 200; i++) {
+			try {
+				redisRateLimiter.slidingWindow(WINDOW_KEY, 10, 5, null);
+				Thread.sleep(1000);
+			}
+			catch (RedisLimitException ex) {
+				log.error(ex.toString());
+				Thread.sleep(2000);
+			}
 
 		}
 	}
@@ -119,7 +126,7 @@ public class LimitTest {
 
 	@Test
 	public void tokenBucketTest() throws InterruptedException {
-		RedisRateLimiter redisRateLimiter = new RedisRateLimiter(redisTemplate, redisson);
+		RedisRateLimiterPolice redisRateLimiter = new RedisRateLimiterPolice(redisTemplate, redisson);
 
 		for (int i = 0; i < 20; i++) {
 			redisRateLimiter.tokenBucket("bucket", 10, 5, null);

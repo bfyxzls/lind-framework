@@ -51,10 +51,13 @@ public class ReplaceStarUtils {
 
 		if (input.matches(phonePattern)) {
 			return input.replaceAll(phonePattern, "$1****$2"); // 对手机号中间四位加*
-		} else if (input.matches(emailPattern)) {
+		}
+		else if (input.matches(emailPattern)) {
 			return input.replaceAll(emailPattern, "$1****$3"); // 对邮箱账号中间部分加*
-		} else {
+		}
+		else {
 			return input; // 如果不是手机号或邮箱，则直接返回原始输入
 		}
 	}
+
 }

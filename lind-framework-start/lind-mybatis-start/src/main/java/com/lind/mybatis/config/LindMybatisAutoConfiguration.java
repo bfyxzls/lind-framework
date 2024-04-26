@@ -43,7 +43,7 @@ public class LindMybatisAutoConfiguration implements ApplicationContextAware {
 		lindPaginationInnerInterceptor.setMaxLimit(500L);
 		lindPaginationInnerInterceptor.setDbType(DbType.MYSQL);
 		// 开启 count 的 join 优化,只针对部分 left join
-		lindPaginationInnerInterceptor.setOptimizeJoin(true);
+		// lindPaginationInnerInterceptor.setOptimizeJoin(true);
 		// 注册分页插件
 		interceptor.addInnerInterceptor(lindPaginationInnerInterceptor);
 		// 防止全表更新与删除

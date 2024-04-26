@@ -33,7 +33,7 @@ public class IdModTableNameParser implements TableNameHandler {
 		}
 		else {
 			String suffix = String.valueOf(idValue % mod);
-			// 这里清除ThreadLocal的值，防止线程复用出现问题
+			// 这里清除ThreadLocal的值，防止线程复用出现内存泄漏问题
 			id.set(null);
 			return String.format("%s_%s", tableName, suffix);
 		}

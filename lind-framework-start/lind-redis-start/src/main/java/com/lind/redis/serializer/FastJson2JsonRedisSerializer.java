@@ -14,43 +14,40 @@ import java.nio.charset.Charset;
  *
  * @author ruoyi
  */
-public class FastJson2JsonRedisSerializer<T> implements RedisSerializer<T>
-{
-    public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
-    /**
-     * 自动识别json对象白名单配置（仅允许解析的包名，范围越小越安全）
-     */
-    public static final String[] JSON_WHITELIST_STR = { "org.springframework", "com.ruoyi" };
+public class FastJson2JsonRedisSerializer<T> implements RedisSerializer<T> {
 
-    static final Filter AUTO_TYPE_FILTER = JSONReader.autoTypeFilter(JSON_WHITELIST_STR);
+	public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
 
-    private Class<T> clazz;
+	/**
+	 * 自动识别json对象白名单配置（仅允许解析的包名，范围越小越安全）
+	 */
+	public static final String[] JSON_WHITELIST_STR = { "org.springframework", "com.ruoyi" };
 
-    public FastJson2JsonRedisSerializer(Class<T> clazz)
-    {
-        super();
-        this.clazz = clazz;
-    }
+	static final Filter AUTO_TYPE_FILTER = JSONReader.autoTypeFilter(JSON_WHITELIST_STR);
 
-    @Override
-    public byte[] serialize(T t) throws SerializationException
-    {
-        if (t == null)
-        {
-            return new byte[0];
-        }
-        return JSON.toJSONString(t, JSONWriter.Feature.WriteClassName).getBytes(DEFAULT_CHARSET);
-    }
+	private Class<T> clazz;
 
-    @Override
-    public T deserialize(byte[] bytes) throws SerializationException
-    {
-        if (bytes == null || bytes.length <= 0)
-        {
-            return null;
-        }
-        String str = new String(bytes, DEFAULT_CHARSET);
+	public FastJson2JsonRedisSerializer(Class<T> clazz) {
+		super();
+		this.clazz = clazz;
+	}
 
-        return JSON.parseObject(str, clazz, AUTO_TYPE_FILTER);
-    }
+	@Override
+	public byte[] serialize(T t) throws SerializationException {
+		if (t == null) {
+			return new byte[0];
+		}
+		return JSON.toJSONString(t, JSONWriter.Feature.WriteClassName).getBytes(DEFAULT_CHARSET);
+	}
+
+	@Override
+	public T deserialize(byte[] bytes) throws SerializationException {
+		if (bytes == null || bytes.length <= 0) {
+			return null;
+		}
+		String str = new String(bytes, DEFAULT_CHARSET);
+
+		return JSON.parseObject(str, clazz, AUTO_TYPE_FILTER);
+	}
+
 }
