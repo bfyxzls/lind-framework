@@ -8,12 +8,15 @@ import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
+import com.lind.redis.listener.KeyExpiredEventMessageListener;
 import com.lind.redis.service.RedisService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.listener.PatternTopic;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
@@ -68,4 +71,17 @@ public class LettuceRedisAutoConfigure {
 		return new RedisService(redisTemplate);
 	}
 
+	@Bean
+	public RedisMessageListenerContainer redisMessageListenerContainer(RedisConnectionFactory connectionFactory,
+																	   KeyExpiredEventMessageListener keyExpiredEventMessageListener) {
+		RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+		container.setConnectionFactory(connectionFactory);
+		container.addMessageListener(keyExpiredEventMessageListener, new PatternTopic("__keyevent@*__:expired"));//__keyevent@0__:expired  #0代表redis中的db索引
+		return container;
+	}
+
+	@Bean
+	public KeyExpiredEventMessageListener keyExpiredEventMessageListener(RedisTemplate redisTemplate) {
+		return new KeyExpiredEventMessageListener(redisTemplate);
+	}
 }

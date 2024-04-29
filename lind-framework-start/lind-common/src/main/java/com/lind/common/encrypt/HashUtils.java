@@ -4,9 +4,6 @@ import com.lind.common.encrypt.hash.Base16;
 import com.lind.common.encrypt.hash.Base62;
 import lombok.SneakyThrows;
 
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
@@ -84,7 +81,7 @@ public class HashUtils {
 	}
 
 	/**
-	 * 长度为32位的MD5散列加密算法.
+	 * 长度为128位，32个16进制数组成的MD5散列加密算法.
 	 * @param inputStr 明文
 	 * @return .
 	 */
@@ -94,7 +91,7 @@ public class HashUtils {
 	}
 
 	/**
-	 * 加盐md5.
+	 * 加盐md5，长度为128位，32个16进制数组成的MD5散列加密算法.
 	 * @param passwordToHash
 	 * @param salt
 	 * @return
@@ -126,23 +123,31 @@ public class HashUtils {
 	}
 
 	/**
-	 * SHA1的散列加密算法.
+	 * SHA256的散列加密算法,256位，32个字节，64个16进制数.
 	 * @param inputStr 明文
 	 * @return .
 	 */
-	public static String sha(String inputStr) throws UnsupportedEncodingException {
+	public static String sha(String inputStr) {
 		notNull(inputStr);
-		BigInteger sha = null;
-		byte[] inputData = inputStr.getBytes(StandardCharsets.UTF_8);
 		try {
-			MessageDigest messageDigest = MessageDigest.getInstance("SHA");
-			messageDigest.update(inputData);
-			sha = new BigInteger(messageDigest.digest());
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] hash = digest.digest(inputStr.getBytes());
+
+			// 将字节数组转换为十六进制字符串
+			StringBuilder hexString = new StringBuilder();
+			for (byte b : hash) {
+				String hex = Integer.toHexString(0xff & b);
+				if (hex.length() == 1) {
+					hexString.append('0');
+				}
+				hexString.append(hex);
+			}
+			return hexString.toString();
 		}
-		catch (Exception e) {
-			e.printStackTrace();
+		catch (NoSuchAlgorithmException ex) {
+			System.err.println("不支持sha-256算法");
 		}
-		return sha == null ? null : sha.toString(32);
+		return null;
 	}
 
 }

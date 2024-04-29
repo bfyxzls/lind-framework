@@ -108,19 +108,20 @@ public class LimitTest {
 		RedisRateLimiterPolice redisRateLimiter = new RedisRateLimiterPolice(redisTemplate, redisson);
 		for (int i = 0; i < 200; i++) {
 			try {
+				// 每10秒钟，最大可使用5个令牌
 				redisRateLimiter.slidingWindow(WINDOW_KEY, 10, 5, null);
 				Thread.sleep(1000);
 			}
 			catch (RedisLimitException ex) {
 				log.error(ex.toString());
-				Thread.sleep(2000);
+				Thread.sleep(10000);
 			}
 
 		}
 	}
 
 	/**
-	 * Zset实现的滑动窗口
+	 * Zset实现的滑动窗口，需要处理set列表过大的情况.
 	 * @return
 	 */
 

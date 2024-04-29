@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.util.function.Function;
 
-enum Calculate {
+enum Calculate implements NameValueEnum{
 
 	SQUARE(1, Cal::square), CUBE(2, Cal::cube);
 
@@ -35,6 +35,15 @@ enum Calculate {
 		return this.function.apply(val);
 	}
 
+	@Override
+	public String getName() {
+		return code.toString();
+	}
+
+	@Override
+	public Integer getValue() {
+		return code;
+	}
 }
 
 public class EnumUtilsTest {
@@ -51,6 +60,10 @@ public class EnumUtilsTest {
 		Assert.assertEquals(1000, (int) cube.cal(10));
 	}
 
+	@Test
+	public void enumIterator() {
+		EnumUtils.getEnumNameValues(Calculate.class).forEach(System.out::println);
+	}
 }
 
 class Cal {
