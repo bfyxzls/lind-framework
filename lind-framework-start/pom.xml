@@ -53,6 +53,7 @@
         <module>lind-sharding-jdbc-start</module>
         <module>lind-codegen</module>
         <module>lind-schedule-web</module>
+        <module>lind-uaa-simple-start</module>
 
     </modules>
     <dependencyManagement>

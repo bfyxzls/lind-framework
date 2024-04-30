@@ -86,6 +86,8 @@
         <fastdfs.version>1.27.2</fastdfs.version>
         <fastjson2.version>2.0.43</fastjson2.version>
         <pagehelper.version>5.3.2</pagehelper.version>
+        <jjwt.version>0.9.1</jjwt.version>
+        <kaptcha.version>2.3.3</kaptcha.version>
     </properties>
     <!-- maven依赖版本统一，子工程不需要声明包版本 -->
     <dependencyManagement>
@@ -511,6 +513,19 @@
                 <artifactId>pagehelper</artifactId>
                 <version>${pagehelper.version}</version>
             </dependency>
+            <!-- jwt解析 -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <!-- 验证码-->
+            <dependency>
+                <groupId>com.github.penggle</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${kaptcha.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 </project>
