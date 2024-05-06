@@ -10,5 +10,6 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.lind.common.core.jackson.JacksonConfiguration,\
   com.lind.common.config.WebMvcConfiguration,\
   com.lind.common.config.TaskExecutorConfiguration,\
-  com.lind.common.pattern.pipeline.HandlerFactory
+  com.lind.common.pattern.pipeline.HandlerFactory,\
+  com.lind.common.websecurity.FilterConfig
 

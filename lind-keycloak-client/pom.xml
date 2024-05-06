@@ -66,6 +66,11 @@
 
         <dependency>
             <groupId>com.lind</groupId>
+            <artifactId>lind-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lind</groupId>
             <artifactId>lind-redis-start</artifactId>
         </dependency>
 

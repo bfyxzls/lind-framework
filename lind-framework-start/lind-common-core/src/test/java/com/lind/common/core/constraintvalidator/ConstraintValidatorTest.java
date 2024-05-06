@@ -1,6 +1,6 @@
 package com.lind.common.core.constraintvalidator;
 
-import com.lind.common.core.validate.BeanValidatorUtils;
+import com.lind.common.core.util.VerifyCodeUtils;
 import org.junit.Test;
 
 import javax.validation.ConstraintViolationException;
@@ -20,10 +20,10 @@ public class ConstraintValidatorTest {
 		user.setEmail("123@sina.com");
 		user.setSex(0);
 		// 创建一个验证器工厂
-		BeanValidatorUtils.validateWithException(user);
+		VerifyCodeUtils.BeanValidatorUtils.validateWithException(user);
 		user.setEmail("123@sinacom");
 		user.setSex(2);
-		BeanValidatorUtils.validateWithException(user);
+		VerifyCodeUtils.BeanValidatorUtils.validateWithException(user);
 		System.out.println(user.getEmail());
 	}
 
@@ -39,7 +39,7 @@ public class ConstraintValidatorTest {
 		user.setSex(1);
 		user.setEmail("bfyxzls@sina.com");
 		user.setPermission(Arrays.asList(1, 2, 4));
-		BeanValidatorUtils.validateWithException(user);
+		VerifyCodeUtils.BeanValidatorUtils.validateWithException(user);
 	}
 
 }

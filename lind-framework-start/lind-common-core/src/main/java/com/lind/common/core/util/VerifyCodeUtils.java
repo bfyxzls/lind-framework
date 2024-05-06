@@ -1,11 +1,16 @@
 package com.lind.common.core.util;
 
 import javax.imageio.ImageIO;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Validation;
+import javax.validation.ValidatorFactory;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * 随机字符验证码生成工具类.

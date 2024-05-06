@@ -1,4 +1,4 @@
-package com.lind.common.core.validate;
+package com.lind.common.core.util;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -15,6 +15,12 @@ public class BeanValidatorUtils {
 
 	private static final ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
 
+	/**
+	 * 校验实体中字段的合法性
+	 * @param object
+	 * @param groups
+	 * @throws ConstraintViolationException
+	 */
 	public static void validateWithException(Object object, Class<?>... groups) throws ConstraintViolationException {
 		Set<ConstraintViolation<Object>> constraintViolations = validatorFactory.getValidator().validate(object,
 				groups);
