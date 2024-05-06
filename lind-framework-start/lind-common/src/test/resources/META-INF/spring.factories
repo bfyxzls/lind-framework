@@ -2,5 +2,6 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.lind.common.bean.family.Father,\
   com.lind.common.bean.family.GrandFather,\
   com.lind.common.bean.family.Son
-org.springframework.boot.env.EnvironmentPostProcessor=\
+
+  org.springframework.boot.env.EnvironmentPostProcessor=\
   com.lind.common.bean.environmentpostprocessor.ApplicationLoggerInitializer 

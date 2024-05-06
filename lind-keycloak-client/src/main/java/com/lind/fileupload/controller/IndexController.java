@@ -32,9 +32,12 @@ public class IndexController {
 
 	@Autowired
 	RedisRateLimiterPolice redisRateLimiter;
+
 	private Logger logger = LoggerFactory.getLogger(IndexController.class);
+
 	@Autowired
 	private KeycloakRestService restService;
+
 	@Autowired
 	private JwtService jwtService;
 
@@ -157,5 +160,6 @@ public class IndexController {
 			}
 		};
 	}
+
 
 }

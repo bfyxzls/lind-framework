@@ -1,5 +1,8 @@
 totpSeconds: 60 # 30秒
-spring.application.name: lind-start-common
+spring:
+  application.name: lind-start-common
+  main:
+    allow-bean-definition-overriding: true
 jasypt:
   encryptor:
     password: xboot
@@ -24,3 +27,4 @@ author:
 logging:
   level:
     com.lind.common.wheel.SimpleTimeWheel: debug
+

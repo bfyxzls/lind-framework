@@ -6,10 +6,11 @@
 <body>
 <!-- 主域相同，可以执行iframe里关于cookie的代码 -->
 <span id="username"></span>
-<a href="https://testcas.pkulaw.com:18081/auth/realms/fabao/protocol/openid-connect/auth?client_id=democlient&response_type=code&scope=openid&redirect_uri=http://lind.pkulaw.com:8811">登录</a>
-<iframe src="https://testcas.pkulaw.com:18081/auth/realms/fabao/protocol/openid-connect/login-status-iframe.html"
+<a href="https://testcas.pkulaw.com/auth/realms/fabao/protocol/openid-connect/auth?client_id=democlient&response_type=code&scope=openid&redirect_uri=http://lind.pkulaw.com:8811">登录</a>
+<iframe src="https://testcas.pkulaw.com/auth/realms/fabao/protocol/openid-connect/login-status-iframe.html"
         id="keycloak-status-iframe" style="display:none"></iframe>
 
+</iframe>
 <script>
     function getCookieByName(name) {
         name = name + '=';

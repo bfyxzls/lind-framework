@@ -1,17 +1,20 @@
 package com.lind.common.bean.family;
 
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author lind
  * @date 2022/8/18 11:07
  * @since 1.0.0
  */
-@Component
+@Configuration
 public class Father {
 
-	public Father() {
-		System.out.println("配置類FatherConfig構造器被執行...");
+	@Bean
+	public String fatherTest() {
+		System.out.println("配置類FatherConfig構造器被執行");
+		return "配置類FatherConfig構造器被執行...";
 	}
 
 }

@@ -59,4 +59,9 @@ public class HomeController {
 		return "ok";
 	}
 
+	@GetMapping("login-page")
+	public String loginPage() {
+		return "login";
+	}
+
 }
