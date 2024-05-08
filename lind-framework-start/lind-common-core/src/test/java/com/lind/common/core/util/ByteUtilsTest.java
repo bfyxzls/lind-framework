@@ -1,10 +1,11 @@
 package com.lind.common.core.util;
 
 import lombok.SneakyThrows;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * byteUtils方法测试.
@@ -29,7 +30,7 @@ public class ByteUtilsTest {
 		byte[] aByte = ByteUtils.toBytes(a);
 		int b = ByteUtils.toInt(aByte);
 		int c = ByteUtils.toInt(aByte);
-		Assert.assertTrue(a == b && a == c);
+		assertTrue(a == b && a == c);
 	}
 
 	@Test
@@ -38,7 +39,7 @@ public class ByteUtilsTest {
 		// 每个byte有符号字符由8bit组成，取值为-128~127
 		byte[] aByte = ByteUtils.toBytes(a);
 		long b = ByteUtils.toLong(aByte);
-		Assert.assertTrue(a == b);
+		assertTrue(a == b);
 	}
 
 	@SneakyThrows

@@ -1,11 +1,11 @@
 package com.lind.common.enums;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.testng.Assert;
 
 import java.util.function.Function;
 
-enum Calculate implements NameValueEnum{
+enum Calculate implements NameValueEnum {
 
 	SQUARE(1, Cal::square), CUBE(2, Cal::cube);
 
@@ -44,6 +44,7 @@ enum Calculate implements NameValueEnum{
 	public Integer getValue() {
 		return code;
 	}
+
 }
 
 public class EnumUtilsTest {
@@ -64,6 +65,7 @@ public class EnumUtilsTest {
 	public void enumIterator() {
 		EnumUtils.getEnumNameValues(Calculate.class).forEach(System.out::println);
 	}
+
 }
 
 class Cal {

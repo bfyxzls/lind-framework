@@ -2,8 +2,7 @@ package com.lind.redis;
 
 import com.lind.redis.config.LettuceRedisAutoConfigure;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
@@ -19,7 +18,6 @@ import java.time.Instant;
  * @since 1.0.0
  */
 @Slf4j
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = { LettuceConnectionFactory.class, LettuceRedisAutoConfigure.class })
 public class HashAndZSet {
 

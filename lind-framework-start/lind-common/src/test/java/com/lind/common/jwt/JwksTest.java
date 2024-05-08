@@ -5,8 +5,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -22,7 +22,6 @@ import java.util.Date;
  * @date 2024/4/23 10:04
  * @since 1.0.0
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @Slf4j
 public class JwksTest {

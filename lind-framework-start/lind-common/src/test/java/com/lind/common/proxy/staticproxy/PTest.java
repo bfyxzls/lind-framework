@@ -1,13 +1,14 @@
 package com.lind.common.proxy.staticproxy;
 
 import com.lind.common.proxy.User;
+import org.junit.jupiter.api.Test;
 
 /**
  * 静态代理测试
  */
-public class Test {
+public class PTest {
 
-	@org.junit.Test
+	@Test
 	public void staticProxyTest() {
 		UserService userServiceImpl = new UserServiceImpl();
 		UserService proxy = new UserServiceProxy(userServiceImpl);

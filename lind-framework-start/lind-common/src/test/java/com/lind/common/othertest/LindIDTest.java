@@ -1,7 +1,7 @@
 package com.lind.common.othertest;
 
 import com.lind.common.core.id.LindIdGenerator;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * byte[]到字符的手工的转换，根据转的参数，toString()方法生成一个格式化的字符串.

@@ -2,7 +2,7 @@ package com.lind.common.core.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.lind.common.core.util.CRC16Utils.*;
 

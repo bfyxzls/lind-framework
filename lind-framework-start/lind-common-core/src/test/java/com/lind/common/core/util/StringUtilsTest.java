@@ -1,6 +1,6 @@
 package com.lind.common.core.util;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.lind.common.core.util.StringUtils.isBlank;
 import static com.lind.common.core.util.StringUtils.isNotBlank;

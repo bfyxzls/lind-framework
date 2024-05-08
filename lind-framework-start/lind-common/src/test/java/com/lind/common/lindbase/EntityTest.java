@@ -3,7 +3,7 @@ package com.lind.common.lindbase;
 import cn.hutool.core.lang.Assert;
 import com.lind.common.minibase.Bytes;
 import lombok.SneakyThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentSkipListMap;

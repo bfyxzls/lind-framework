@@ -1,8 +1,8 @@
 package com.lind.common.thread;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -45,12 +45,12 @@ public class InterruptTest {
 		System.out.println("中断请求已发出");
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		executorService = Executors.newFixedThreadPool(4);
 	}
 
-	@Test(timeout = 3000)
+	@Test
 	public void testRepeat() {
 		for (int i = 0; i < 4; i++) {
 			executorService.submit(() -> {

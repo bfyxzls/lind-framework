@@ -1,7 +1,7 @@
 package com.lind.common.lb;
 
 import com.lind.common.lb.impl.RpcLoadBalanceConsistentHashStrategy;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.TreeSet;

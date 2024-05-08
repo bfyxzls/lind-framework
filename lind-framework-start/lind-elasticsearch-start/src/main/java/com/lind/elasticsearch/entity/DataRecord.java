@@ -6,12 +6,7 @@ import lombok.ToString;
 import org.springframework.util.Assert;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static java.lang.String.format;
 
@@ -38,10 +33,13 @@ public class DataRecord implements Map<String, Object>, Serializable {
 
 	public DataRecord(final Map<String, Object> document) {
 		this.document = new LinkedHashMap<>(document);
+		if (document.containsKey("id")) {
+			this.id = document.get("id").toString();
+		}
 	}
 
 	public DataRecord() {
-		document = new LinkedHashMap<String, Object>();
+		document = new LinkedHashMap<>();
 	}
 
 	public DataRecord(String rowKey) {

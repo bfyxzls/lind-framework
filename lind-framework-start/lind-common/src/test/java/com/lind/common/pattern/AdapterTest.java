@@ -4,7 +4,7 @@ import com.lind.common.pattern.adapter.ConcreteTarget;
 import com.lind.common.pattern.adapter.NewProjectAdapter;
 import com.lind.common.pattern.adapter.Service;
 import com.lind.common.pattern.adapter.Target;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class AdapterTest {
 

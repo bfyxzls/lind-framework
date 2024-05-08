@@ -7,7 +7,7 @@ import com.lind.common.zip.RLEUtils;
 import com.lind.common.zip.ZLibUtils;
 import com.lind.common.zip.ZipUtils;
 import lombok.SneakyThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

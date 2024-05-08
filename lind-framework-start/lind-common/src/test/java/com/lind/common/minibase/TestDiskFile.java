@@ -5,8 +5,8 @@ import com.lind.common.minibase.DiskFile.BlockReader;
 import com.lind.common.minibase.DiskFile.BlockWriter;
 import com.lind.common.minibase.DiskFile.DiskFileWriter;
 import com.lind.common.minibase.MiniBase.Iter;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.testng.Assert;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,7 +35,7 @@ public class TestDiskFile {
 			bytes[i] = br.getKeyValues().get(i).getKey();
 		}
 		BloomFilter bloom = new BloomFilter(DiskFile.BLOOM_FILTER_HASH_COUNT, DiskFile.BLOOM_FILTER_BITS_PER_KEY);
-		Assert.assertArrayEquals(bloom.generate(bytes), bw.getBloomFilter());
+		Assert.assertEquals(bloom.generate(bytes), bw.getBloomFilter());
 	}
 
 	@Test
@@ -52,7 +52,7 @@ public class TestDiskFile {
 		Assert.assertEquals(lastKV, meta2.getLastKV());
 		Assert.assertEquals(offset, meta2.getBlockOffset());
 		Assert.assertEquals(size, meta2.getBlockSize());
-		Assert.assertArrayEquals(bloomFilter, meta2.getBloomFilter());
+		Assert.assertEquals(bloomFilter, meta2.getBloomFilter());
 	}
 
 	private byte[] generateRandomBytes() {

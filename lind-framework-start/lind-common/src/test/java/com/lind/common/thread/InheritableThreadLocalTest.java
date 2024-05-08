@@ -1,6 +1,6 @@
 package com.lind.common.thread;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * 子线程中访问主线程的对象.

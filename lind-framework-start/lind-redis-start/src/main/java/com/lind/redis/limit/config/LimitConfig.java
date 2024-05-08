@@ -46,7 +46,7 @@ public class LimitConfig implements WebMvcConfigurer {
 
 	@Bean
 	public RedisRateLimiterPolice redisRateLimiterPolice(RedisTemplate redisTemplate, RedissonClient redisson) {
-		return new RedisRateLimiterPolice(redisTemplate,redisson);
+		return new RedisRateLimiterPolice(redisTemplate, redisson);
 	}
 
 }

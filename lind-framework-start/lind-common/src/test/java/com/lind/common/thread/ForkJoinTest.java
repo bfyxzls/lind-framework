@@ -1,6 +1,6 @@
 package com.lind.common.thread;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;

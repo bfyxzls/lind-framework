@@ -1,13 +1,14 @@
 package com.lind.common.core.util;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PhoneFormatCheckUtilsTest {
 
 	@Test
 	public void validPhone() {
-		Assert.assertTrue(PhoneFormatCheckUtils.isPhoneLegal("18600546316"));
+		assertTrue(PhoneFormatCheckUtils.isPhoneLegal("18600546316"));
 	}
 
 }

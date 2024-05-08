@@ -1,7 +1,7 @@
 package com.lind.common.classloader;
 
 import lombok.SneakyThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author lind

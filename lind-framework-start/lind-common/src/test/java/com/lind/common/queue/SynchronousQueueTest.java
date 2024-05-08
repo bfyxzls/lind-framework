@@ -1,6 +1,6 @@
 package com.lind.common.queue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
 import java.util.concurrent.ConcurrentLinkedDeque;

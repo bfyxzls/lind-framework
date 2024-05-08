@@ -3,13 +3,14 @@ package com.lind.common.proxy.dynamicproxy;
 import com.lind.common.proxy.User;
 import com.lind.common.proxy.staticproxy.UserService;
 import com.lind.common.proxy.staticproxy.UserServiceImpl;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 
-public class Test {
+public class DTest {
 
-	@org.junit.Test
+	@Test
 	public void dynamicProxyTest() {
 		// 设置变量可以保存动态代理类，默认名称以 $Proxy0 格式命名
 		// System.getProperties().setProperty("sun.misc.ProxyGenerator.saveGeneratedFiles",

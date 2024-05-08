@@ -1,6 +1,6 @@
 package com.lind.common.ai;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * 余弦相似度.

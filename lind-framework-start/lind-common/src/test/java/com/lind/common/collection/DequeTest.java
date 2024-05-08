@@ -2,7 +2,7 @@ package com.lind.common.collection;
 
 import lombok.Builder;
 import lombok.Data;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.Serializable;
 import java.util.ArrayList;

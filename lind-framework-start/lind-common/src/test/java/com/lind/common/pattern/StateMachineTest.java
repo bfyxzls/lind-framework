@@ -1,6 +1,6 @@
 package com.lind.common.pattern;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * 状态机.

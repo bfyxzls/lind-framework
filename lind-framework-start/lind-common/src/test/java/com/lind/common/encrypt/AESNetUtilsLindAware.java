@@ -1,7 +1,7 @@
 package com.lind.common.encrypt;
 
 import com.lind.common.zip.LZString;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class AESNetUtilsLindAware {
 

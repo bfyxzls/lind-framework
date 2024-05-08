@@ -4,7 +4,7 @@ import com.lind.common.pattern.builder.Builder;
 import com.lind.common.pattern.builder.ConcreteBuilder;
 import com.lind.common.pattern.builder.Director;
 import com.lind.common.pattern.builder.Product;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author lind

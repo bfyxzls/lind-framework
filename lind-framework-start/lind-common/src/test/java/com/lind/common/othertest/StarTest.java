@@ -1,9 +1,9 @@
 package com.lind.common.othertest;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.util.StringUtils;
+import org.testng.Assert;
 
 /**
  * @author lind

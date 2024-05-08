@@ -1,8 +1,7 @@
 package com.lind.common.core.util;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.util.PatternMatchUtils;
 
 import java.util.Arrays;
@@ -11,6 +10,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
 @SuppressWarnings("unchecked")
@@ -94,14 +95,14 @@ public class RegexUtilsTest {
 
 	@Test
 	public void containUpper() {
-		Assert.assertTrue(RegexUtils.isContainUpper("abcDefg"));
+		assertTrue(RegexUtils.isContainUpper("abcDefg"));
 	}
 
 	@Test
 	public void fileName() {
 		Matcher matcher = DATA_FILE_RE.matcher("data.123");
-		Assert.assertTrue(matcher.matches());
-		Assert.assertTrue(DATA_FILE_RE.matcher("data.42").matches());
+		assertTrue(matcher.matches());
+		assertTrue(DATA_FILE_RE.matcher("data.42").matches());
 	}
 
 	@Test

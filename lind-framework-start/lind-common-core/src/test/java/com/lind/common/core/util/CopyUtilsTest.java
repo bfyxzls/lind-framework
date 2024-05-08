@@ -2,11 +2,13 @@ package com.lind.common.core.util;
 
 import com.lind.common.core.dto.A;
 import com.lind.common.core.dto.B;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class CopyUtilsTest {
 
@@ -16,7 +18,7 @@ public class CopyUtilsTest {
 		a.setAge(10);
 		B b = new B();
 		CopyUtils.copyProperties(a, b);
-		Assert.assertNotEquals("10", b.getAge());
+		assertNotEquals("10", b.getAge());
 	}
 
 	@Test
@@ -27,7 +29,7 @@ public class CopyUtilsTest {
 		aList.add(a);
 		List<B> bList = CopyUtils.copyListProperties(aList, B.class);
 		bList.forEach(o -> {
-			Assert.assertEquals("zzl", o.getName());
+			assertEquals("zzl", o.getName());
 		});
 
 	}

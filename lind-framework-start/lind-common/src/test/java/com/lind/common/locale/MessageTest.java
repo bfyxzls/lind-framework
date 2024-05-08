@@ -1,7 +1,7 @@
 package com.lind.common.locale;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @since 1.0.0
  */
 @SpringBootTest
-@RunWith(SpringRunner.class)
 public class MessageTest {
 
 	static final Logger logger = LoggerFactory.getLogger(MessageTest.class);

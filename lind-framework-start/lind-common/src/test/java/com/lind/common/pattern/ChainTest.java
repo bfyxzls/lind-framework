@@ -4,7 +4,7 @@ import com.lind.common.pattern.chain.HandlerParameters;
 import com.lind.common.pattern.chain.WorkFlow;
 import com.lind.common.pattern.chain.bll.WorkFlow1;
 import com.lind.common.pattern.chain.bll.WorkFlow2;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * 在责任链模式里：很多对象由每一个对象对其下家的引用而连接起来形成一条链.

@@ -3,8 +3,8 @@ package com.lind.common.othertest;
 import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnels;
 import com.lind.common.minibase.Bytes;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.testng.Assert;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;

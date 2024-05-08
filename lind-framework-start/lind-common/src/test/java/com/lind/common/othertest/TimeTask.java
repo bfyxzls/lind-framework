@@ -1,7 +1,7 @@
 package com.lind.common.othertest;
 
 import org.jboss.logging.Logger;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;

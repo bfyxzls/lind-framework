@@ -6,10 +6,10 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.Is;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,12 +28,12 @@ public class TimerTest {
 
 	HashedWheelTimer timer;
 
-	@Before
+	@BeforeEach
 	public void before() {
 		timer = new HashedWheelTimer(TimeUnit.MILLISECONDS.toMillis(1000), 8, new WaitStrategy.SleepWait());
 	}
 
-	@After
+	@AfterEach
 	public void after() throws InterruptedException {
 		timer.shutdownNow();
 		Assert.assertTrue(timer.awaitTermination(10, TimeUnit.SECONDS));
@@ -124,8 +124,8 @@ public class TimerTest {
 
 		for (int i = 0; i < scheduledTasks; i++) {
 			long delay = delays[i];
-			Assert.assertTrue(String.format("Timeout %s delay must be %s < %s < %s", i, minTimeout, delay, maxTimeout),
-					delay >= minTimeout && delay < maxTimeout);
+			Assert.assertTrue(delay >= minTimeout && delay < maxTimeout,
+					String.format("Timeout %s delay must be %s < %s < %s", i, minTimeout, delay, maxTimeout));
 		}
 	}
 

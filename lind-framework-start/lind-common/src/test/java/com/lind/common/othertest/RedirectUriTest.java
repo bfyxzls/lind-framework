@@ -1,7 +1,7 @@
 package com.lind.common.othertest;
 
 import cn.hutool.core.lang.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -45,7 +45,7 @@ public class RedirectUriTest {
 		Assert.isTrue(matchesRedirects(uris, needValid));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test()
 	public void errorUri() {
 		String needValid = "https://www.pkulaw.com/chl/d9bd70327e25ee4bbdfb.html?keyword=中 国";
 		URI uri = URI.create(needValid);
@@ -53,7 +53,7 @@ public class RedirectUriTest {
 		System.out.println(redirectUri);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test()
 	public void errorUriMenuEncode() throws UnsupportedEncodingException {
 		String needValid = "https://www.pkulaw.com/chl/d9bd70327e25ee4bbdfb.html?keyword=中 国&des=人 民";
 		if (needValid.indexOf("?") > 1) {

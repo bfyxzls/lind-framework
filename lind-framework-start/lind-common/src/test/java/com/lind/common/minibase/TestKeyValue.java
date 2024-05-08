@@ -1,7 +1,7 @@
 package com.lind.common.minibase;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.testng.Assert;
 
 public class TestKeyValue {
 

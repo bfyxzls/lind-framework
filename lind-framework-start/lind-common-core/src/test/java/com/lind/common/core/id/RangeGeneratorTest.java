@@ -1,7 +1,8 @@
 package com.lind.common.core.id;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author lind
@@ -14,7 +15,7 @@ public class RangeGeneratorTest {
 	public void testF0() {
 		RangeGenerator rangeGenerator = new RangeGenerator(0xf0L);
 		System.out.println(rangeGenerator.getRangeId(5L));
-		Assert.assertEquals(0xf5L, rangeGenerator.getRangeId(5L).longValue());
+		assertEquals(0xf5L, rangeGenerator.getRangeId(5L).longValue());
 	}
 
 	@Test

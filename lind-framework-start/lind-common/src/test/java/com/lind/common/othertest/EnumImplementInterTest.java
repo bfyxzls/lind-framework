@@ -1,6 +1,6 @@
 package com.lind.common.othertest;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * 使用枚举使用的多态.

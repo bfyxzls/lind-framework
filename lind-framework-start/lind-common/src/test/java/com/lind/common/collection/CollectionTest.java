@@ -7,8 +7,9 @@ import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.bag.HashBag;
-import org.junit.Before;
-import org.junit.Test;
+import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -109,7 +110,7 @@ public class CollectionTest {
 
 	}
 
-	@Before
+	@BeforeEach
 	public void init() {
 		students.add(new Student(10, "zzl", 90));
 		students.add(new Student(30, "lr", 98));

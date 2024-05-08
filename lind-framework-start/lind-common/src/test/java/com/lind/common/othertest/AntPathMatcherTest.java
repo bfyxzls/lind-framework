@@ -1,6 +1,6 @@
 package com.lind.common.othertest;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.util.AntPathMatcher;
 
 public class AntPathMatcherTest {

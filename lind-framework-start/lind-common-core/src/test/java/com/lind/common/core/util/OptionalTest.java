@@ -1,7 +1,7 @@
 package com.lind.common.core.util;
 
 import lombok.Data;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
 
 import java.util.Optional;

@@ -1,7 +1,7 @@
 package com.lind.common.othertest;
 
 import com.lind.common.tree.DictionarySearch;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 

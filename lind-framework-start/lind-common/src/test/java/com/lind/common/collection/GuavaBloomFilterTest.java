@@ -2,7 +2,7 @@ package com.lind.common.collection;
 
 import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnels;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.nio.charset.Charset;
 

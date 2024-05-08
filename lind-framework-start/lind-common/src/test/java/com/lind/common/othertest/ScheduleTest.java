@@ -3,8 +3,7 @@ package com.lind.common.othertest;
 import cn.hutool.cron.CronUtil;
 import cn.hutool.cron.task.Task;
 import lombok.SneakyThrows;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -12,7 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Date;
 
 @EnableScheduling
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ScheduleTest {
 

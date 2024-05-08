@@ -4,7 +4,7 @@ import com.lind.common.pattern.factorymethod.Factory;
 import com.lind.common.pattern.factorymethod.H2Factory;
 import com.lind.common.pattern.factorymethod.UserRepository;
 import com.lind.common.pattern.factorymethod.Userinfo;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class FactoryTest {
 

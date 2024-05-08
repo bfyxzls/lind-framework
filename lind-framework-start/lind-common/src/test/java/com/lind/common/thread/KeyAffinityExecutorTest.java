@@ -2,7 +2,7 @@ package com.lind.common.thread;
 
 import com.alibaba.fastjson.JSON;
 import com.github.phantomthief.pool.KeyAffinityExecutor;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;

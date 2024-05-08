@@ -1,7 +1,7 @@
 package com.lind.common.shallowdeep;
 
 import lombok.SneakyThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * 浅拷贝和深拷贝.

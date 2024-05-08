@@ -5,9 +5,9 @@ import com.lind.redis.config.RedisLockConfig;
 import com.lind.redis.lock.template.Callback;
 import com.lind.redis.lock.template.DistributedLockTemplate;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
@@ -28,7 +28,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @since 1.0.0
  */
 @Slf4j
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = { LettuceConnectionFactory.class, LettuceRedisAutoConfigure.class, RedisLockConfig.class,
 		RepeatSubmitController.class, CurrentUser.class })
 public class LockTest {
@@ -75,7 +74,7 @@ public class LockTest {
 		TimeUnit.SECONDS.sleep(120L);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}

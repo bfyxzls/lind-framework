@@ -1,12 +1,13 @@
 package com.lind.common.core.util;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
 public class BinFlagUtilsTest {
@@ -31,18 +32,18 @@ public class BinFlagUtilsTest {
 
 	@Test
 	public void isTowPowerTest() {
-		Assert.assertTrue(BinFlagUtils.isTowPower(4));
-		Assert.assertFalse(BinFlagUtils.isTowPower(5));
+		assertTrue(BinFlagUtils.isTowPower(4));
+		assertFalse(BinFlagUtils.isTowPower(5));
 	}
 
 	@Test
 	public void hasValueTest() {
-		Assert.assertTrue(BinFlagUtils.hasValue(15, 8));
+		assertTrue(BinFlagUtils.hasValue(15, 8));
 	}
 
 	@Test
 	public void addValueListTest() {
-		Assert.assertEquals(7, (int) BinFlagUtils.increaseValueList(Arrays.asList(1, 2, 4, 4, 4)));
+		assertEquals(7, (int) BinFlagUtils.increaseValueList(Arrays.asList(1, 2, 4, 4, 4)));
 	}
 
 	@Test
@@ -102,7 +103,7 @@ public class BinFlagUtilsTest {
 	@Test
 	public void bitMove() {
 		Long result = 4096L << 1;
-		Assert.assertEquals(8192, result.longValue());
+		assertEquals(8192, result.longValue());
 	}
 
 }

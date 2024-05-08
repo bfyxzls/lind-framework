@@ -3,7 +3,7 @@ package com.lind.common.thread.forkjointask;
 import cn.hutool.core.collection.ListUtil;
 import com.google.common.collect.Lists;
 import lombok.SneakyThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StopWatch;

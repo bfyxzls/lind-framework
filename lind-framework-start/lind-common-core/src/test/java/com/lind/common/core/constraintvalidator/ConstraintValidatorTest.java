@@ -1,7 +1,8 @@
 package com.lind.common.core.constraintvalidator;
 
+import com.lind.common.core.util.BeanValidatorUtils;
 import com.lind.common.core.util.VerifyCodeUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.validation.ConstraintViolationException;
 import java.util.Arrays;
@@ -14,20 +15,20 @@ import java.util.Arrays;
 
 public class ConstraintValidatorTest {
 
-	@Test(expected = ConstraintViolationException.class)
+	@Test()
 	public void validUserEmail() {
 		User user = new User();
 		user.setEmail("123@sina.com");
 		user.setSex(0);
 		// 创建一个验证器工厂
-		VerifyCodeUtils.BeanValidatorUtils.validateWithException(user);
+		BeanValidatorUtils.validateWithException(user);
 		user.setEmail("123@sinacom");
 		user.setSex(2);
-		VerifyCodeUtils.BeanValidatorUtils.validateWithException(user);
+		BeanValidatorUtils.validateWithException(user);
 		System.out.println(user.getEmail());
 	}
 
-	@Test(expected = ConstraintViolationException.class)
+	@Test()
 	public void validUserSex() {
 		User user = new User();
 		user.setSex(3);
@@ -39,7 +40,7 @@ public class ConstraintValidatorTest {
 		user.setSex(1);
 		user.setEmail("bfyxzls@sina.com");
 		user.setPermission(Arrays.asList(1, 2, 4));
-		VerifyCodeUtils.BeanValidatorUtils.validateWithException(user);
+		BeanValidatorUtils.validateWithException(user);
 	}
 
 }

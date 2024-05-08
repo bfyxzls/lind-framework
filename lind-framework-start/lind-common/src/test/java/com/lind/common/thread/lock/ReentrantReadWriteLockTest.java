@@ -2,7 +2,7 @@ package com.lind.common.thread.lock;
 
 import cn.hutool.core.map.MapUtil;
 import lombok.SneakyThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Date;

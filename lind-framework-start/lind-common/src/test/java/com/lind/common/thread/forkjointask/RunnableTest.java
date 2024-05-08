@@ -2,7 +2,7 @@ package com.lind.common.thread.forkjointask;
 
 import com.lind.common.core.util.CollectionUtils;
 import lombok.SneakyThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.util.StopWatch;
 
 import java.util.ArrayList;

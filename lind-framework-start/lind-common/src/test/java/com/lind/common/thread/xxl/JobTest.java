@@ -1,6 +1,6 @@
 package com.lind.common.thread.xxl;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author lind

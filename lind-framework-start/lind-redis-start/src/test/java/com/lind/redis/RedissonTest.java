@@ -1,8 +1,8 @@
 package com.lind.redis;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.redisson.Redisson;
 import org.redisson.api.RFuture;
 import org.redisson.api.RRateLimiter;
@@ -28,7 +28,7 @@ public class RedissonTest {
 
 	RedissonClient redisson;
 
-	@Before
+	@BeforeEach
 	public void init() {
 		config = new Config();
 		config.useSingleServer().setAddress("redis://localhost:6379");

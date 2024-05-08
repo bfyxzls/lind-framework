@@ -15,11 +15,8 @@ import java.io.Serializable;
  * 注意：在test项目里，当没有添加@RunWith(SpringRunner.class)时，通过insert插入实体时建立的索引是有问题的（解决方法是手动运行createIndex和putMapping），
  */
 @Data
-@ToString(callSuper = true)
-@AllArgsConstructor
-@NoArgsConstructor
 @Document(indexName = "esdto")
-@Setting(settingPath = "mapping/es-setting.json") // @Setting里的配置会覆盖@Document里的配置
+@Setting(shards = 1, replicas = 0) // @Setting里的配置会覆盖@Document里的配置
 public class EsDto extends EsBaseEntity implements Serializable {
 
 	/**

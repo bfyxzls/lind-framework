@@ -77,8 +77,8 @@ public class EventRecord implements Serializable {
 # 依赖引用
 ```
 <dependency>
- <groupId>com.pkulaw</groupId>
- <artifactId>pkulaw-elasticsearch-start</artifactId>
+ <groupId>com.lind</groupId>
+ <artifactId>lind-elasticsearch-start</artifactId>
  <version>1.0.0</version>
 </dependency>
 ```
@@ -105,8 +105,13 @@ public class UserAuditorAware implements EsAuditorAware<String> {
     }
 }
 ```
+# 几个核心类
+* ElasticsearchRepository(org.springframework.data:spring.data.elasticsearch:4.4.7)
+* ElasticsearchRestTemplate(org.springframework.data:spring.data.elasticsearch:4.4.7)
+* RestHighLevelClient(org.elasticsearch.client:rest-high-level:7.6.2)
+* 
 # es使用注意点
-1. text类型里的keyword属性，对于它的`ignore_abore`的升序应该做好限制，避免长文本的索引
+1. text类型里的keyword属性，对于它的`ignore_abore`的大小应该做好限制，避免长文本的索引
 1. 对于text分词检索的高亮功能，可以使用`"term_vector": "with_positions_offsets"`来实现
 1. es中存储的数据分为两种，原始文档和索引文档（倒排索引），这两个内容都可以分别配置的
 1. es中默认的设置_source是enable的配置决定了字段是否被存储，它默认是`true`的，即存储整个文档

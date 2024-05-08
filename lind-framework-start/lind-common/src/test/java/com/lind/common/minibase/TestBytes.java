@@ -1,13 +1,13 @@
 package com.lind.common.minibase;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.testng.Assert;
 
 public class TestBytes {
 
 	@Test
 	public void testByte() {
-		Assert.assertArrayEquals(new byte[] { 'a' }, Bytes.toBytes((byte) 'a'));
+		Assert.assertEquals(new byte[] { 'a' }, Bytes.toBytes((byte) 'a'));
 	}
 
 	@Test

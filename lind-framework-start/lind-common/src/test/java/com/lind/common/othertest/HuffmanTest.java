@@ -4,7 +4,7 @@ import com.lind.common.encrypt.HashUtils;
 import com.lind.common.zip.BetterHuffman;
 import com.lind.common.zip.HumanByte;
 import lombok.SneakyThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.nio.charset.StandardCharsets;
 

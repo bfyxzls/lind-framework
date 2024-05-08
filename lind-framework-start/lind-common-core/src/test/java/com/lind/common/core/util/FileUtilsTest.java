@@ -3,9 +3,8 @@ package com.lind.common.core.util;
 import com.lind.common.core.util.file.FileUtils;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.time.StopWatch;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +17,8 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FileUtilsTest {
 
@@ -185,7 +186,7 @@ public class FileUtilsTest {
 		logger.info(bos.toString());
 	}
 
-	@Before
+	@BeforeEach
 	public void init() {
 		FileUtils.writeFileContent(new File("d:\\test-del"), "hello".getBytes());
 		FileUtils.writeFileContent(new File("d:\\append.txt"), "hello".getBytes());
@@ -202,7 +203,7 @@ public class FileUtilsTest {
 		File file = new File("d:\\append.txt");
 		FileUtils.writeFileContent(file, "hello".getBytes());
 		FileUtils.writeFileContent(file, "world".getBytes());
-		Assert.assertEquals("world", new String(FileUtils.readFileContent(file)));
+		assertEquals("world", new String(FileUtils.readFileContent(file)));
 	}
 
 	@Test

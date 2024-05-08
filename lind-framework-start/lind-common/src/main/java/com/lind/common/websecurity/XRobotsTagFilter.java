@@ -15,16 +15,16 @@ import java.io.IOException;
  */
 public class XRobotsTagFilter extends OncePerRequestFilter {
 
-    private static final String SECURITY_POLICY_HEADER = "X-Robots-Tag";
+	private static final String SECURITY_POLICY_HEADER = "X-Robots-Tag";
 
-    private static final String SECURITY_POLICY = "none";
+	private static final String SECURITY_POLICY = "none";
 
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+			throws ServletException, IOException {
 
-        response.setHeader(SECURITY_POLICY_HEADER, SECURITY_POLICY);
-        filterChain.doFilter(request, response);
-    }
+		response.setHeader(SECURITY_POLICY_HEADER, SECURITY_POLICY);
+		filterChain.doFilter(request, response);
+	}
 
 }

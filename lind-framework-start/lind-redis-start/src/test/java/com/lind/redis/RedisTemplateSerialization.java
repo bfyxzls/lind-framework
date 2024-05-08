@@ -11,8 +11,7 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -27,7 +26,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 @Slf4j
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = { LettuceConnectionFactory.class })
 public class RedisTemplateSerialization {
 

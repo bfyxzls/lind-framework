@@ -2,8 +2,8 @@ package com.lind.common.othertest;
 
 import com.lind.common.core.util.BinHexSwitchUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.testng.Assert;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

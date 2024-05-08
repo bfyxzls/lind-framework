@@ -15,11 +15,13 @@ import javax.annotation.PostConstruct;
  */
 @Configuration
 @AutoConfigureAfter(SecondAutoConfiguration.class)
-//@DependsOn("secondAutoConfiguration")//决定了注册的顺序，它在secondAutoConfiguration之后注册
+// @DependsOn("secondAutoConfiguration")//决定了注册的顺序，它在secondAutoConfiguration之后注册
 public class FirstMidSecondAutoConfiguration {
-    @Bean
-    public String firstMidSecondDemo() {
-        System.out.println("FirstMidSecondAutoConfiguration loaded.");
-        return "FirstMidSecondAutoConfiguration";
-    }
+
+	@Bean
+	public String firstMidSecondDemo() {
+		System.out.println("FirstMidSecondAutoConfiguration loaded.");
+		return "FirstMidSecondAutoConfiguration";
+	}
+
 }

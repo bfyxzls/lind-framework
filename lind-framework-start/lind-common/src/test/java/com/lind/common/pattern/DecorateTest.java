@@ -2,7 +2,7 @@ package com.lind.common.pattern;
 
 import com.lind.common.pattern.decorate.*;
 import com.lind.common.pattern.decorate2.*;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DecorateTest {
 

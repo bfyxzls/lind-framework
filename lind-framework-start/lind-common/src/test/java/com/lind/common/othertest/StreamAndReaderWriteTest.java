@@ -1,7 +1,7 @@
 package com.lind.common.othertest;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.testng.Assert;
 
 import java.io.*;
 

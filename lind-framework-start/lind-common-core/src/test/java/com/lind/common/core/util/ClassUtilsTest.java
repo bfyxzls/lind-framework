@@ -3,8 +3,9 @@ package com.lind.common.core.util;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author lind
@@ -16,7 +17,7 @@ public class ClassUtilsTest {
 
 	@Test
 	public void getFiledDescByType() {
-		Assert.assertEquals("zzl", ClassUtils.getFieldValueByName("name", new DateRangeDTO("zzl")));
+		assertEquals("zzl", ClassUtils.getFieldValueByName("name", new DateRangeDTO("zzl")));
 	}
 
 	@Data

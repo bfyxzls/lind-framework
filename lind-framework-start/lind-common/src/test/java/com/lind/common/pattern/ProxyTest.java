@@ -4,7 +4,7 @@ import com.lind.common.pattern.proxy.IProject;
 import com.lind.common.pattern.proxy.Project;
 import com.lind.common.pattern.proxy.SubjectProxyHandler;
 import java.lang.reflect.Proxy;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ProxyTest {
 

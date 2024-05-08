@@ -1,7 +1,7 @@
 package com.lind.common.othertest;
 
 import cn.hutool.core.lang.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author lind

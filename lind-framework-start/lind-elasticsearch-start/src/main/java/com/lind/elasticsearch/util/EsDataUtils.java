@@ -25,7 +25,7 @@ import java.util.Objects;
  */
 public class EsDataUtils {
 
-	private static final String DEFAULT_TYPE = "info";
+	private static final String DEFAULT_TYPE = "_doc";
 
 	private static final ObjectMapper objectMapper = createObjectMapper();
 
@@ -81,6 +81,7 @@ public class EsDataUtils {
 		String documentId = client.index(indexRequest, RequestOptions.DEFAULT).getId();
 
 		return documentId;
+
 	}
 
 }

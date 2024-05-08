@@ -2,7 +2,7 @@ package com.lind.common.queue;
 
 import lombok.Data;
 import lombok.SneakyThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;

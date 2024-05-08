@@ -2,7 +2,7 @@ package com.lind.common.othertest;
 
 import com.lind.common.core.util.StopWatchUtils;
 import lombok.SneakyThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.util.StopWatch;
 
 public class StopwatchTest {

@@ -73,10 +73,11 @@ public class LettuceRedisAutoConfigure {
 
 	@Bean
 	public RedisMessageListenerContainer redisMessageListenerContainer(RedisConnectionFactory connectionFactory,
-																	   KeyExpiredEventMessageListener keyExpiredEventMessageListener) {
+			KeyExpiredEventMessageListener keyExpiredEventMessageListener) {
 		RedisMessageListenerContainer container = new RedisMessageListenerContainer();
 		container.setConnectionFactory(connectionFactory);
-		container.addMessageListener(keyExpiredEventMessageListener, new PatternTopic("__keyevent@*__:expired"));//__keyevent@0__:expired  #0代表redis中的db索引
+		container.addMessageListener(keyExpiredEventMessageListener, new PatternTopic("__keyevent@*__:expired"));// __keyevent@0__:expired
+																													// #0代表redis中的db索引
 		return container;
 	}
 
@@ -84,4 +85,5 @@ public class LettuceRedisAutoConfigure {
 	public KeyExpiredEventMessageListener keyExpiredEventMessageListener(RedisTemplate redisTemplate) {
 		return new KeyExpiredEventMessageListener(redisTemplate);
 	}
+
 }

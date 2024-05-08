@@ -1,15 +1,10 @@
 package com.lind.common.collection;
 
-import com.google.common.collect.ImmutableMap;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 主要体现了有序性，hashmap是无序性，即写和读的顺序不能保持一致. LinkHashMap保持迭代的顺序等于插入时的顺序

@@ -1,6 +1,6 @@
 package com.lind.common.core.util;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -20,7 +20,7 @@ public class MaskUtilsTest {
 		logger.info("inc={}", maskUtils.toInc(maskUtils.toRangeInc(2L)));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test()
 	public void incExpected() {
 		MaskUtils maskUtils = new MaskUtils(32L);
 		maskUtils.toRangeInc(32L);

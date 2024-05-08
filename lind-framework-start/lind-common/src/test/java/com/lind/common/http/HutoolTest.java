@@ -2,7 +2,7 @@ package com.lind.common.http;
 
 import cn.hutool.http.HttpUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.HashMap;

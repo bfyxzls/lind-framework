@@ -2,7 +2,7 @@ package com.lind.common.otp;
 
 import com.lind.common.encrypt.DESCbcUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.provider.Arguments;
 
 import java.security.NoSuchAlgorithmException;

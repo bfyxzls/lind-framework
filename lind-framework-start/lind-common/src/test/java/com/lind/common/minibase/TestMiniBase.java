@@ -4,10 +4,10 @@ import com.lind.common.minibase.KeyValue.Op;
 import com.lind.common.minibase.MStore.ScanIter;
 import com.lind.common.minibase.MStore.SeekIter;
 import com.lind.common.minibase.MiniBase.Iter;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.testng.Assert;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,14 +18,14 @@ public class TestMiniBase {
 
 	private String dataDir;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		dataDir = "target/minihbase-" + System.currentTimeMillis();
 		File f = new File(dataDir);
 		Assert.assertTrue(f.mkdirs());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 	}
 
@@ -54,12 +54,12 @@ public class TestMiniBase {
 		while (kv.hasNext()) {
 			KeyValue expected = kv.next();
 			KeyValue currentKV = KeyValue.createPut(Bytes.toBytes(current), Bytes.toBytes(current), 0L);
-			Assert.assertArrayEquals(expected.getKey(), currentKV.getKey());
-			Assert.assertArrayEquals(expected.getValue(), currentKV.getValue());
+			Assert.assertEquals(expected.getKey(), currentKV.getKey());
+			Assert.assertEquals(expected.getValue(), currentKV.getValue());
 			Assert.assertEquals(expected.getOp(), Op.Put);
 
 			long sequenceId = expected.getSequenceId();
-			Assert.assertTrue("SequenceId: " + sequenceId, sequenceId > 0);
+			Assert.assertTrue(sequenceId > 0, "SequenceId: " + sequenceId);
 			current++;
 		}
 		Assert.assertEquals(current, totalKVSize);
@@ -76,22 +76,22 @@ public class TestMiniBase {
 		byte[] C = Bytes.toBytes("C");
 
 		db.put(A, A);
-		Assert.assertArrayEquals(db.get(A).getValue(), A);
+		Assert.assertEquals(db.get(A).getValue(), A);
 
 		db.delete(A);
 		Assert.assertNull(db.get(A));
 
 		db.put(A, B);
-		Assert.assertArrayEquals(db.get(A).getValue(), B);
+		Assert.assertEquals(db.get(A).getValue(), B);
 
 		db.put(B, A);
-		Assert.assertArrayEquals(db.get(B).getValue(), A);
+		Assert.assertEquals(db.get(B).getValue(), A);
 
 		db.put(B, B);
-		Assert.assertArrayEquals(db.get(B).getValue(), B);
+		Assert.assertEquals(db.get(B).getValue(), B);
 
 		db.put(C, C);
-		Assert.assertArrayEquals(db.get(C).getValue(), C);
+		Assert.assertEquals(db.get(C).getValue(), C);
 
 		db.delete(B);
 		Assert.assertNull(db.get(B));

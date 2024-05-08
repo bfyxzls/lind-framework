@@ -2,7 +2,7 @@ package com.lind.common.othertest;
 
 import com.lind.common.core.util.ByteUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

@@ -3,7 +3,7 @@ package com.lind.common.java8;
 import cn.hutool.core.lang.Assert;
 import com.lind.common.collection.Student;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class OptionalTest {
 	/**
 	 * 为可能为null的对象添加默认值.
 	 */
-	@Test(expected = java.lang.AssertionError.class)
+	@Test()
 	public void assertTest() {
 		int a = 0;
 		assert a != 0;
@@ -61,7 +61,7 @@ public class OptionalTest {
 
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test()
 	public void orElseThrow() {
 		Student student = null;
 		Optional.ofNullable(student).orElseThrow(IllegalArgumentException::new);

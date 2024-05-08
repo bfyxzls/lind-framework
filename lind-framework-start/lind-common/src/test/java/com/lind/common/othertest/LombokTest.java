@@ -3,7 +3,7 @@ package com.lind.common.othertest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 @Slf4j
 public class LombokTest {

@@ -7,7 +7,7 @@ import com.lind.common.core.parser.FieldTypeParserFactory;
 import com.lind.common.core.parser.impl.DateTypeParser;
 import lombok.SneakyThrows;
 import org.assertj.core.util.Lists;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 

@@ -1,7 +1,13 @@
 {
-  "index": {
-    "max_result_window": 1000000,
-    "number_of_shards": 1,
-    "number_of_replicas": 1
+  "properties": {
+    "name": {
+      "type": "keyword"
+    },
+    "age": {
+      "type": "Integer"
+    },
+    "sex": {
+      "type": "Integer"
+    }
   }
 }

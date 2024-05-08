@@ -2,11 +2,8 @@ package com.lind.common.pattern;
 
 import com.lind.common.pattern.state.demo.Context;
 import com.lind.common.pattern.state.demo.StartState;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.junit.jupiter.api.Test;
 
-@RunWith(SpringJUnit4ClassRunner.class)
 public class StateTest {
 
 	@Test

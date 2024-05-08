@@ -1,7 +1,7 @@
 package com.lind.common.proxy.cglib;
 
 import com.lind.common.proxy.staticproxy.UserServiceImpl;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author lind

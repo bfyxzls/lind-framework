@@ -1,6 +1,6 @@
 package com.lind.common.core.id;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author lind

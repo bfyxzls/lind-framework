@@ -4,7 +4,7 @@ import com.lind.common.core.util.ByteUtils;
 import com.lind.common.core.util.DateUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.stream.IntStream;
 

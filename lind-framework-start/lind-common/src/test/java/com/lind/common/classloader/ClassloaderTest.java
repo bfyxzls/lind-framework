@@ -2,7 +2,8 @@ package com.lind.common.classloader;
 
 import cn.hutool.core.lang.Assert;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 

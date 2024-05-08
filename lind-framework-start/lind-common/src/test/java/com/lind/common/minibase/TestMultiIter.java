@@ -4,8 +4,8 @@ import com.lind.common.minibase.DiskFile.DiskFileWriter;
 import com.lind.common.minibase.DiskStore.MultiIter;
 import com.lind.common.minibase.MStore.SeekIter;
 import com.lind.common.minibase.MiniBase.Iter;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.testng.Assert;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,8 +67,8 @@ public class TestMultiIter {
 		while (multiIter.hasNext()) {
 			KeyValue kv = multiIter.next();
 			Assert.assertTrue(index < results.length);
-			Assert.assertArrayEquals(kv.getKey(), Bytes.toBytes(results[index]));
-			Assert.assertArrayEquals(kv.getValue(), Bytes.toBytes(results[index]));
+			Assert.assertEquals(kv.getKey(), Bytes.toBytes(results[index]));
+			Assert.assertEquals(kv.getValue(), Bytes.toBytes(results[index]));
 			index++;
 		}
 

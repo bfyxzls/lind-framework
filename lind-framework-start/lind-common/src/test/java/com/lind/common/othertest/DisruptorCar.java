@@ -7,7 +7,7 @@ import com.lmax.disruptor.YieldingWaitStrategy;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.EventHandlerGroup;
 import com.lmax.disruptor.dsl.ProducerType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.util.StopWatch;
 
 import java.util.concurrent.CountDownLatch;

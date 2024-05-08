@@ -13,9 +13,10 @@ import javax.annotation.PostConstruct;
 @Configuration
 public class FirstAutoConfiguration {
 
-    @Bean("firstBean")
-    public String firstBean() {
-        System.out.println("FirstAutoConfiguration loaded.");
-        return "FirstBean";
-    }
+	@Bean("firstBean")
+	public String firstBean() {
+		System.out.println("FirstAutoConfiguration loaded.");
+		return "FirstBean";
+	}
+
 }

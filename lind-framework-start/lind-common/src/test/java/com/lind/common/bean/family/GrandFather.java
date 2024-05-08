@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class GrandFather {
 
 	@Bean
-	public String  grandFatherBean() {
+	public String grandFatherBean() {
 		System.out.println("配置類GrandFatherConfig構造器被執行...");
 		return null;
 	}

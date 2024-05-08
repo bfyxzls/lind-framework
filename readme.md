@@ -10,7 +10,7 @@
 
 # 升级
 
-* 命令行执行 mvn versions:set -DnewVersion=1.1.3-SNAPSHOT //更新整个项目版本,SNAPSHOT的同一个版本可以多次发到仓库里
+* 命令行执行 mvn versions:set -DnewVersion=2.0.1-SNAPSHOT //更新整个项目版本,SNAPSHOT的同一个版本可以多次发到仓库里
 * 提交 mvn versions:commit //提交，删除多余的pom.xml.versionsBackup
 * mvn deploy 根项目
 * 先deploy lind-framework-bom项目，再deploy lind-framework项目

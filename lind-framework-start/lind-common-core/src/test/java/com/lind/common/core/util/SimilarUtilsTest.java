@@ -1,7 +1,6 @@
 package com.lind.common.core.util;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.Iterator;
@@ -9,6 +8,7 @@ import java.util.LinkedList;
 
 import static com.lind.common.core.util.SimilarUtils.calculateSimilarity;
 import static com.lind.common.core.util.SimilarUtils.degree;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SimilarUtilsTest {
 
@@ -30,7 +30,7 @@ public class SimilarUtilsTest {
 
 	@Test
 	public void demo1() {
-		Assert.assertEquals(Double.parseDouble("1.0"), degree("hello", "hello"), 0);
+		assertEquals(Double.parseDouble("1.0"), degree("hello", "hello"), 0);
 		System.out.println(degree("hello", "hellos")); // 0.8333333333333334
 		System.out.println(degree("hello", "hello1")); // 0.8333333333333334
 		System.out.println(degree("hello", "hello world")); // 0.5

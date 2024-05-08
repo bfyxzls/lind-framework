@@ -1,8 +1,8 @@
 package com.lind.common.othertest;
 
 import com.lind.common.minibase.Bytes;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.testng.Assert;
 
 /**
  * byte[]与int和long的转换

@@ -21,4 +21,5 @@ public class SecondAutoConfiguration {
 		System.out.println("SecondAutoConfiguration loaded.");
 		return "SecondAutoConfiguration";
 	}
+
 }

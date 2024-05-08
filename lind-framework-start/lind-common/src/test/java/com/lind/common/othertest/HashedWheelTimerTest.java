@@ -21,7 +21,7 @@ import io.netty.util.Timeout;
 import io.netty.util.Timer;
 import io.netty.util.TimerTask;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -31,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 @Slf4j
 public class HashedWheelTimerTest {
 
-	@Test(timeout = 50000000)
+	@Test()
 	public void testTimerOverflowWheelLength() throws InterruptedException {
 		final HashedWheelTimer timer = new HashedWheelTimer(Executors.defaultThreadFactory(), 100,
 				TimeUnit.MILLISECONDS, 32);

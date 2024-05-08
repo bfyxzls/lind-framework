@@ -4,7 +4,7 @@ import com.lind.common.core.dto.Theme;
 import com.lind.common.core.dto.ThemeRepresentation;
 import com.lind.common.core.jackson.serialization.JsonSerialization;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;

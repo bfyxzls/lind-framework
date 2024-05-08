@@ -5,7 +5,7 @@ import com.lind.common.pattern.strategy.Bird;
 import com.lind.common.pattern.strategy.Dog;
 import com.lind.common.pattern.strategy.Eagle;
 import com.lind.common.pattern.strategy.StrategyContext;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class StrategyTest {
 

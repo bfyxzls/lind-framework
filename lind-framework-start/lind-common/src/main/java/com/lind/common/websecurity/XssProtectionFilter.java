@@ -14,15 +14,17 @@ import java.io.IOException;
  * @since 1.0.0
  */
 public class XssProtectionFilter extends OncePerRequestFilter {
-    private static final String SECURITY_POLICY_HEADER = "X-XSS-Protection";
 
-    private static final String SECURITY_POLICY = "1; mode=block";
+	private static final String SECURITY_POLICY_HEADER = "X-XSS-Protection";
 
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
+	private static final String SECURITY_POLICY = "1; mode=block";
 
-        response.setHeader(SECURITY_POLICY_HEADER, SECURITY_POLICY);
-        filterChain.doFilter(request, response);
-    }
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+			throws ServletException, IOException {
+
+		response.setHeader(SECURITY_POLICY_HEADER, SECURITY_POLICY);
+		filterChain.doFilter(request, response);
+	}
+
 }

@@ -1,7 +1,8 @@
 package com.lind.elasticsearch.entity;
 
-import com.lind.common.core.id.SnowFlakeGenerator;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.*;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -22,40 +23,41 @@ public class EsBaseEntity {
 	 * 主键.
 	 */
 	@Id
-	private final String id = String.valueOf(SnowFlakeGenerator.getFlowIdInstance().nextId());
+	@Field(type = FieldType.Keyword)
+	public String id;// String.valueOf(SnowFlakeGenerator.getFlowIdInstance().nextId());
 
 	/**
 	 * 创建时间.
 	 */
 	@Field(type = FieldType.Date, format = DateFormat.custom, pattern = dateTimeFormat)
 	@CreatedDate
-	protected String createTime;
+	public String createTime;
 
 	/**
 	 * 创建人.
 	 */
 	@Field(type = FieldType.Keyword)
 	@CreatedBy
-	protected String createUser;
+	public String createUser;
 
 	/**
 	 * 更新时间.
 	 */
 	@Field(type = FieldType.Date, format = DateFormat.custom, pattern = dateTimeFormat)
 	@LastModifiedDate
-	protected String updateTime;
+	public String updateTime;
 
 	/**
 	 * 更新人.
 	 */
 	@Field(type = FieldType.Keyword)
 	@LastModifiedBy
-	protected String updateUser;
+	public String updateUser;
 
 	/**
 	 * 删除标记.
 	 */
 	@Field(type = FieldType.Boolean)
-	protected boolean delFlag;
+	public boolean delFlag;
 
 }

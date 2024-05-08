@@ -4,10 +4,10 @@ import com.lind.redis.config.LettuceRedisAutoConfigure;
 import com.lind.redis.limit.execption.RedisLimitException;
 import com.lind.redis.util.RedisRateLimiterPolice;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.redisson.Redisson;
 import org.redisson.api.RCountDownLatch;
 import org.redisson.api.RedissonClient;
@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = { LettuceConnectionFactory.class, LettuceRedisAutoConfigure.class })
 /**
  * @author lind
@@ -135,7 +134,7 @@ public class LimitTest {
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void init() {
 		// 初始化Redisson客户端
 		Config config = new Config();
@@ -145,7 +144,7 @@ public class LimitTest {
 		redisson = Redisson.create(config);
 	}
 
-	@After
+	@AfterEach
 	public void close() {
 		redisson.shutdown();
 	}

@@ -1,15 +1,15 @@
 package com.lind.common.othertest;
 
 import com.lind.common.classloader.CustomClassLoader;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
 public class TestCustomClassLoader {
 
 	private CustomClassLoader customClassLoader;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		customClassLoader = new CustomClassLoader();
 	}

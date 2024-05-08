@@ -2,12 +2,13 @@ package com.lind.common.othertest;
 
 import com.lind.common.minibase.*;
 import lombok.SneakyThrows;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StopWatch;
+import org.testng.Assert;
 
 import java.io.File;
 import java.io.IOException;
@@ -116,7 +117,7 @@ public class MinibaseTest {
 
 	}
 
-	@Before
+	@BeforeEach
 	public void init() {
 		kvMap = new ConcurrentSkipListMap<>();
 		kvHashMap = new ConcurrentHashMap<>();

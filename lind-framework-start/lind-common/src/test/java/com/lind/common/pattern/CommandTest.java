@@ -4,7 +4,7 @@ import com.lind.common.pattern.command.*;
 import com.lind.common.pattern.command.bll.BuyStock;
 import com.lind.common.pattern.command.bll.ClearStock;
 import com.lind.common.pattern.command.bll.SellStock;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class CommandTest {
 
