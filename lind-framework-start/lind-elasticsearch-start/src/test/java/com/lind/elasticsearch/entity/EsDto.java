@@ -56,4 +56,6 @@ public class EsDto extends EsBaseEntity implements Serializable {
 
 	}
 
+	@Field(type = FieldType.Keyword)
+	private String email;
 }

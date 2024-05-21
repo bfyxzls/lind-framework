@@ -5,6 +5,10 @@
 docker run --restart=always -p 9200:9200 -p 9300:9300 -e discovery.type=single-node -e ES_JAVA_OPTS="-Xms512m -Xmx512m" --name=docker-elasticsearch -d  elasticsearch:7.6.2
 
 ```
+# springboot与es兼容性
+* springboot2.7与spring-boot-starter-data-elasticsearch2.7对于es2.17.6有冲突，导致`ElasticsearchRepository`不可用
+* springboot2.6对于es2.17.6,对于`ElasticsearchRepository`没有出现上面问题
+
 # 客户端版本问题
 * es依赖包我们通常指两个org.elasticsearch:elasticsearch和org.elasticsearch.client:elasticsearch-rest-high-level-client，这两个包的版本需要对应上，你的索引初始化才能生效，否则你在实体上添加的@Setting,@Mapping是不会生效的。
 ```

@@ -2,7 +2,7 @@ package com.lind.elasticsearch;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lind.elasticsearch.entity.DataRecord;
-import com.lind.elasticsearch.entity.LogDto;
+import com.lind.elasticsearch.entity.EsDto;
 import com.lind.elasticsearch.util.EsDataUtils;
 import com.lind.elasticsearch.util.ObjectToMapUtils;
 import org.elasticsearch.action.delete.DeleteRequest;
@@ -46,12 +46,14 @@ public class RestHighLevelClientTest {
 	@Autowired
 	private RestHighLevelClient client;
 
+	// 这种保存数据时，如果没有索引，它建立的索引的mapping是不符合预期的，不要自动生成；或者使用
+	// ElasticsearchRestTemplate提供的putMapping()方法，根据实体的注解来准确生成mapping
 	@Test
 	public void save() throws IOException {
-		LogDto esDto = new LogDto();
-		esDto.setApplication("test");
+		EsDto esDto = new EsDto();
+		esDto.setName("lind");
 		esDto.setId(UUID.randomUUID().toString());
-		IndexRequest request = new IndexRequest(INDEX).id(String.valueOf(esDto.getId()))
+		IndexRequest request = new IndexRequest("edit-backend-prod").id(String.valueOf(esDto.getId()))
 				.source(ObjectToMapUtils.beanToMap(esDto));
 		IndexResponse response = client.index(request, RequestOptions.DEFAULT);
 		System.out.println(JSONObject.toJSON(response));
@@ -59,8 +61,8 @@ public class RestHighLevelClientTest {
 
 	@Test
 	public void update() throws IOException {
-		LogDto esDto = new LogDto();
-		esDto.setApplication("test2");
+		EsDto esDto = new EsDto();
+		esDto.setName("test2");
 		esDto.setId(UUID.randomUUID().toString());
 		UpdateRequest request = new UpdateRequest(INDEX, "d2106425-17f1-431d-9908-e1e03af3c8d8")
 				.doc(ObjectToMapUtils.beanToMap(esDto));
@@ -69,8 +71,8 @@ public class RestHighLevelClientTest {
 
 	@Test
 	public void dataRecordUpdate() throws IOException {
-		LogDto logDto = new LogDto();
-		logDto.setApplication("test2-1-2-3");
+		EsDto logDto = new EsDto();
+		logDto.setName("test2-1-2-3");
 		logDto.setId("79c7fc29-7292-46b4-b4fd-ee33caa948a3");//映射到es的_id才有效
 		EsDataUtils.saveOrUpdate(client, "edit-backend-prod", new DataRecord(ObjectToMapUtils.beanToMap(logDto)));
 	}

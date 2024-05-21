@@ -8,8 +8,9 @@
 <span id="username"></span>
 <a href="https://testcas.pkulaw.com/auth/realms/fabao/protocol/openid-connect/auth?client_id=democlient&response_type=code&scope=openid&redirect_uri=http://lind.pkulaw.com:8811">登录</a>
 <iframe src="https://testcas.pkulaw.com/auth/realms/fabao/protocol/openid-connect/login-status-iframe.html"
-        id="keycloak-status-iframe" style="display:none"></iframe>
-
+        id="keycloak-status-iframe" style="display: none;"></iframe>
+<iframe style="border:none;width:1000px;height:800px"
+        src="https://testcas.pkulaw.com/auth/realms/fabao/protocol/openid-connect/auth?client_id=democlient&response_type=code&scope=openid&redirect_uri=http://lind.pkulaw.com:8811">
 </iframe>
 <script>
     function getCookieByName(name) {

@@ -1,6 +1,7 @@
 package com.lind.common.otp;
 
 import com.google.common.collect.ImmutableMap;
+import com.lind.common.encrypt.HashUtils;
 import lombok.Builder;
 import lombok.Data;
 import lombok.SneakyThrows;
@@ -49,6 +50,27 @@ public class TimeBlockTest {
 			}
 			log.info("counts:{}", counters);
 			TimeUnit.SECONDS.sleep(1);
+		}
+
+	}
+
+	@Test
+	public void timestampMinute() throws InterruptedException {
+		String userId = "ax001";
+		String passKey = "edu.com";
+		for (int i = 1; i < 120; i++) {
+			long currentTime = System.currentTimeMillis();
+			// 向下取整到当前分钟的起始时间戳
+			// (60 * 1000)) * 60 * 1000=1716275940000
+			// (60 * 1000))=28604626
+			long timestamp = (System.currentTimeMillis() / (60 * 1000)) * 60 * 1000;
+			long timestamp_before = timestamp - 60 * 1000;
+
+			String sign = HashUtils.md5(userId + passKey + timestamp).toUpperCase();
+			String signBefore = HashUtils.md5(userId + passKey + timestamp_before).toUpperCase();
+
+			log.info("{},{},{},{}", timestamp, timestamp_before, sign, signBefore);
+			Thread.sleep(1000);
 		}
 
 	}
