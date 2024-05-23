@@ -1,4 +1,4 @@
-package com.lind.common.xss;
+package com.lind.common.core.validate.xss;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

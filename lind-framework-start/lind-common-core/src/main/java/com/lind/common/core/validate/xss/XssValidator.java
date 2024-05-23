@@ -1,4 +1,4 @@
-package com.lind.common.xss;
+package com.lind.common.core.validate.xss;
 
 import com.lind.common.core.util.StringUtils;
 

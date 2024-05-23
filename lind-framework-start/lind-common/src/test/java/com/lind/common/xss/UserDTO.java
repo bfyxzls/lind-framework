@@ -1,5 +1,6 @@
 package com.lind.common.xss;
 
+import com.lind.common.core.validate.xss.Xss;
 import lombok.Data;
 
 /**
