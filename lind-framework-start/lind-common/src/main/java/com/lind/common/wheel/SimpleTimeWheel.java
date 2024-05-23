@@ -119,6 +119,8 @@ public class SimpleTimeWheel {
 			// 计算需要跨越的时间轮针数和所在槽索引，例如槽数是8，我需要10秒后启动任务，就需要这个算法了
 			int totalTicks = (int) ((delayMs - tickMs) / tickMs); // 例如延时100秒，相当于指针要走99个，(100_000-1000)/1000=99
 			int currentIndex = (int) (((currentMs + delayMs) / tickMs + totalTicks) % wheelSize); // ((0+100_000)/1000+99)%8=39%8=7
+			logger.info("delayMs:{},currentMs:{},totalTicks:{},currentIndex:{}", delayMs, currentMs, totalTicks,
+					currentIndex);
 			WorkTask workTask = new WorkTask() {
 				@Override
 				public boolean isRunning() {
