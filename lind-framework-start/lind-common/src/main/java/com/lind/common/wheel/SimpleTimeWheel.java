@@ -24,7 +24,7 @@ public class SimpleTimeWheel {
 
 	private final int tickMs; // 时间轮槽的时间间隔
 
-	private final int wheelSize; // 时间轮槽的数量
+	private final int wheelSize; // 时间轮槽的数量,2的N次方
 
 	private final long startMs; // 时间轮启动时间
 
@@ -37,9 +37,10 @@ public class SimpleTimeWheel {
 	private int currentTickIndex; // 当前时间轮指针指向的槽索引
 
 	public SimpleTimeWheel(int tickMs, int wheelSize) throws InterruptedException {
+		logger.info("SimpleTimeWheel start...");
+
 		this.tickMs = tickMs;
 		this.wheelSize = wheelSize;
-		this.startMs = System.currentTimeMillis();
 		this.timerTaskSlots = new ArrayList<>(wheelSize);
 		for (int i = 0; i < wheelSize; i++) {
 			timerTaskSlots.add(Collections.synchronizedList(new LinkedList<>()));
@@ -50,6 +51,8 @@ public class SimpleTimeWheel {
 			lockArray[i] = new Object();
 		}
 		initialize();
+		// 初始化后开始记录当前的时间
+		this.startMs = System.currentTimeMillis();
 	}
 
 	/**
@@ -142,13 +145,13 @@ public class SimpleTimeWheel {
 		}
 		for (WorkTask task : tasksToExecute) {
 			if (!task.isRunning()) {
-				logger.info("repeat join time-wheel {}", nextTickIndex);
 				timerTaskSlots.get(nextTickIndex).add(task);
+				continue;
 			}
 			executorService.execute(task);
 		}
-
 		currentTickIndex = nextTickIndex;
+
 	}
 
 	public void stop() {
