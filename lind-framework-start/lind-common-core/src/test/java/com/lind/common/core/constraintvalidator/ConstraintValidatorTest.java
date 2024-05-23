@@ -22,6 +22,7 @@ public class ConstraintValidatorTest {
 		user.setSex(0);
 		// 创建一个验证器工厂
 		BeanValidatorUtils.validateWithException(user);
+
 		user.setEmail("123@sinacom");
 		user.setSex(2);
 		BeanValidatorUtils.validateWithException(user);
