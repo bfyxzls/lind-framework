@@ -24,7 +24,7 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
-public class TimerTest {
+public class HashedWheelTimerTest {
 
 	HashedWheelTimer timer;
 

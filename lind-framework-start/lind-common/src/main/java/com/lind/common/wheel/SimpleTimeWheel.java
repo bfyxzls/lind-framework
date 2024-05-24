@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Lind时间轮. 增加了WorkTask，当延时任务大于当前时间轮时，需要重新放回时间轮.
+ * Lind时间轮，可做测试，它会有误差，不建议在生产上使用. 增加了WorkTask，当延时任务大于当前时间轮时，需要重新放回时间轮.
  *
  * @author lind
  * @date 2023/6/8 17:27
@@ -98,10 +98,10 @@ public class SimpleTimeWheel {
 		// 加上跨越的时间轮圈数（totalTicks）并取模时间轮的大小（wheelSize）来完成。这告诉我们任务应该添加到哪个时间轮槽。
 		long expireMs = startMs + delayMs;
 		long currentMs = System.currentTimeMillis();
-
 		if (expireMs < currentMs + tickMs) {
 			// 将任务添加到当前时间轮槽中
-			int currentIndex = (int) (((currentMs + delayMs) / tickMs) % wheelSize);
+			int currentIndex = (int) ((delayMs / tickMs) % wheelSize);
+			logger.info("if currentIndex:{}", currentIndex);
 			WorkTask workTask = new WorkTask() {
 				@Override
 				public boolean isRunning() {
@@ -117,10 +117,9 @@ public class SimpleTimeWheel {
 		}
 		else {
 			// 计算需要跨越的时间轮针数和所在槽索引，例如槽数是8，我需要10秒后启动任务，就需要这个算法了
-			int totalTicks = (int) ((delayMs - tickMs) / tickMs); // 例如延时100秒，相当于指针要走99个，(100_000-1000)/1000=99
-			int currentIndex = (int) (((currentMs + delayMs) / tickMs + totalTicks) % wheelSize); // ((0+100_000)/1000+99)%8=39%8=7
-			logger.info("delayMs:{},currentMs:{},totalTicks:{},currentIndex:{}", delayMs, currentMs, totalTicks,
-					currentIndex);
+			int currentIndex = (int) ((delayMs / tickMs) % wheelSize); // 2%8=2，它会在第2圈的第2的位置
+			logger.info("else currentIndex:{}", currentIndex);
+
 			WorkTask workTask = new WorkTask() {
 				@Override
 				public boolean isRunning() {
@@ -163,7 +162,7 @@ public class SimpleTimeWheel {
 	public interface WorkTask extends Runnable {
 
 		/**
-		 * 是否已经运行.
+		 * 是否需要运行，当开始时间>=当前时间，任务就要开始执行了
 		 * @return
 		 */
 		boolean isRunning();
