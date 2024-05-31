@@ -5,7 +5,7 @@ import com.lind.uaa.jwt.utils.JwtUtils;
 import com.lind.uaa.jwt.utils.RSA256Key;
 import com.lind.uaa.jwt.utils.SecretKeyUtils;
 import lombok.SneakyThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

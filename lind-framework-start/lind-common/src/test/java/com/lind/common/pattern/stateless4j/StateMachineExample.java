@@ -8,6 +8,7 @@ package com.lind.common.pattern.stateless4j;
 
 import com.github.oxo42.stateless4j.StateMachine;
 import com.github.oxo42.stateless4j.StateMachineConfig;
+import org.junit.jupiter.api.Test;
 
 public class StateMachineExample {
 
@@ -43,6 +44,22 @@ public class StateMachineExample {
 		State currentState = stateMachine.getState();
 		// 执行数据库操作，将最新的状态 newState 存储到数据库中
 		System.out.println("需要把状态更新到数据库——State: " + currentState);
+	}
+
+	@Test
+	public void testStateless4j() {
+		StateMachineConfig<String, String> stateMachineConfig = new StateMachineConfig<>();
+		stateMachineConfig.configure("待付款").permit("用户付款", "待发货");
+		stateMachineConfig.configure("待发货").permit("卖家发货", "待收货");
+		stateMachineConfig.configure("待收货").permit("买家签收", "待评价");
+		stateMachineConfig.configure("待评价").permit("买家点评", "订单关闭");
+
+		// 创建状态机实例
+		StateMachine<String, String> stateMachine = new StateMachine<>("待发货", stateMachineConfig);
+		// stateMachine.fire("买家签收");//java.lang.IllegalStateException: No valid leaving
+		// transitions are permitted from state
+		stateMachine.fire("卖家发货");
+		System.out.println("当前状态：" + stateMachine.getState());
 	}
 
 	enum State {

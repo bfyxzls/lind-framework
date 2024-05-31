@@ -1,6 +1,5 @@
 package com.lind.uaa.simple.execption;
 
-
 import org.springframework.http.HttpStatus;
 
 /**

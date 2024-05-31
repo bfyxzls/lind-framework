@@ -40,7 +40,8 @@ public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler {
 			tokenService.delLoginUser(loginUser.getToken());
 		}
 		ServletUtils.renderString(response, JSON.toJSONString(new HashMap<String, Object>() {
-			{	put("code", 200);
+			{
+				put("code", 200);
 				put("msg", "user.logout.success");
 			}
 		}));

@@ -3,6 +3,7 @@ package com.lind.common.core.constraintvalidator;
 import com.lind.common.core.validate.dic.ValidDic;
 import com.lind.common.core.validate.email.ValidEmail;
 import com.lind.common.core.validate.flag.ValidFlag;
+import com.lind.common.core.validate.phone.ValidPhone;
 import lombok.Data;
 
 import java.util.List;
@@ -23,5 +24,8 @@ public class User {
 
 	@ValidFlag(message = "权限不正确")
 	private List<Integer> permission;
+
+	@ValidPhone
+	private String phone;
 
 }

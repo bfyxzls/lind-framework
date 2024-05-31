@@ -35,6 +35,12 @@ public class RegexUtils {
 	public static String email = "[a-zA-Z_]{1,}[0-9]{0,}@(([a-zA-z0-9]-*){1,}\\.){1,3}[a-zA-z\\-]{1,}";
 
 	/**
+	 * 手机号规则 ^：表示匹配字符串的开始位置。 1：表示手机号码的第一位为数字1。 [3-9]：表示第二位数字可以是3到9之间的任意一个数字。
+	 * \\d{9}：表示后面跟着9个数字。 $：表示匹配字符串的结束位置。
+	 */
+	public static String phone = "^1[3-9]\\d{9}$";
+
+	/**
 	 * 隐藏出生日期、职位、年龄、工作、民族等信息.
 	 */
 	public static String hideOtherText(String myText) {

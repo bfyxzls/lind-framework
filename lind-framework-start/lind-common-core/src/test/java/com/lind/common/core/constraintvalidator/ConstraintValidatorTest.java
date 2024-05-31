@@ -44,4 +44,13 @@ public class ConstraintValidatorTest {
 		BeanValidatorUtils.validateWithException(user);
 	}
 
+	@Test
+	public void validPhone() {
+		User user = new User();
+		user.setSex(1);
+		user.setEmail("bfyxzls@sina.com");
+		user.setPhone("1352");
+		BeanValidatorUtils.validateWithException(user);
+	}
+
 }

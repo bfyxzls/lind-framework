@@ -14,4 +14,17 @@ public class ConvertUtilsTest {
 		System.out.println(ConvertUtils.parseString16ToLong("FF"));
 	}
 
+	@Test
+	public void parseIntToByte() {
+		int i = 128;
+		byte b = (byte) i; // 显式类型转换 -128
+		System.out.println(b);
+		byte c = (byte) 129; // 显式类型转换 -127
+		System.out.println(c);
+		byte d = (byte) 255; // 显式类型转换 -1
+		System.out.println(d);
+		byte f = (byte) (255 + 128); // 显式类型转换 127
+		System.out.println(f);
+	}
+
 }

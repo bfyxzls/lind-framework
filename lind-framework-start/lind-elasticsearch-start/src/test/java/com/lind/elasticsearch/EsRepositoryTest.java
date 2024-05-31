@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 /**
  * springboot2.6.0+spring-boot-starter-data-elasticsearch2.6.0+spring-data-elasticsearch4.3.0
  * 增，删，改和主键查询
+ *
  * @author lind
  * @date 2024/5/21 17:17
  * @since 1.0.0

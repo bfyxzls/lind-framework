@@ -144,7 +144,7 @@ public class ServletUtils {
 	 */
 	public static String urlDecode(String str) {
 		try {
-			return URLDecoder.decode(str,"UTF-8");
+			return URLDecoder.decode(str, "UTF-8");
 		}
 		catch (UnsupportedEncodingException e) {
 			return "";

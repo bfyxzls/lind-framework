@@ -4,13 +4,11 @@ import lombok.SneakyThrows;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.header.internals.RecordHeader;
 import org.apache.kafka.common.header.internals.RecordHeaders;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.nio.ByteBuffer;
 
@@ -23,7 +21,6 @@ import static com.lind.kafka.util.ConvertUtils.toBytes;
  * @date 2023/3/20 16:22
  * @since 1.0.0
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("dev")
 public class TTLTopic {

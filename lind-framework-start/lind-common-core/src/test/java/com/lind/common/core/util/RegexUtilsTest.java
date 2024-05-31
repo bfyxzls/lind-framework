@@ -18,10 +18,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class RegexUtilsTest {
 
 	private static final Pattern DATA_FILE_RE = Pattern.compile("data\\.([0-9]+)"); // data.1
-
-	private static final String passwordRegex = "^(?:(?=.*[A-Za-z])(?=.*\\d)|(?=.*[A-Za-z])(?=.*[!#$%^&*])|(?=.*\\d)(?=.*[!#$%^&*]))[A-Za-z\\d!#$%^&*]{8,20}$";
 	static List<String> roots = Arrays.asList("cat", "bat", "rat");
 	static String sentence = "the cattle was rattled by the battery";
+
+	// 密码规范
+	private static String passwordRegex = "^(?!.*[\uFF00-\uFFFF\\s])((?=.*[a-zA-Z])(?=.*[\\d])[a-zA-Z\\d!@#$%^&*()_+{}\\[\\]:;<>,.?/~`-]{8,20}|(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+{}\\[\\]:;<>,.?/~`-])[a-zA-Z\\d!@#$%^&*()_+{}\\[\\]:;<>,.?/~`-]{8,20}|(?=.*[\\d])(?=.*[!@#$%^&*()_+{}\\[\\]:;<>,.?/~`-])[a-zA-Z\\d!@#$%^&*()_+{}\\[\\]:;<>,.?/~`-]{8,20})$";
 
 	@Test
 	public void test() {
@@ -254,10 +255,23 @@ public class RegexUtilsTest {
 
 	@Test
 	public void testSimplePassword() {
+		// passwordRegex=String.join("",regexPattern);
+		// log.info(passwordRegex);
 		System.out.println("123456".matches(passwordRegex));
 		System.out.println("123456AB#".matches(passwordRegex));
 		System.out.println("a1234567".matches(passwordRegex));
 		System.out.println("aBc#1234".matches(passwordRegex));
+		System.out.println("bdyh@2024".matches(passwordRegex));
+		System.out.println("bdyh123456".matches(passwordRegex));
+		System.out.println("123456789a".matches(passwordRegex));
+		System.out.println(")_+{}[]:;<>,.?/~`-1".matches(passwordRegex));
+	}
+
+	@Test
+	public void testPhone() {
+		System.out.println("13521972991".matches(RegexUtils.phone));
+		System.out.println("12521972991".matches(RegexUtils.phone));
+
 	}
 
 	class TrieNode {

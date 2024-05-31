@@ -73,7 +73,7 @@ public class RestHighLevelClientTest {
 	public void dataRecordUpdate() throws IOException {
 		EsDto logDto = new EsDto();
 		logDto.setName("test2-1-2-3");
-		logDto.setId("79c7fc29-7292-46b4-b4fd-ee33caa948a3");//映射到es的_id才有效
+		logDto.setId("79c7fc29-7292-46b4-b4fd-ee33caa948a3");// 映射到es的_id才有效
 		EsDataUtils.saveOrUpdate(client, "edit-backend-prod", new DataRecord(ObjectToMapUtils.beanToMap(logDto)));
 	}
 
@@ -85,7 +85,7 @@ public class RestHighLevelClientTest {
 
 	@Test
 	public void deleteByIds() throws IOException {
-		String[] ids = new String[] { "7--mVY8BkR5rSzx0wiR3","7u-jVY8BkR5rSzx0UCQl","8O-oVY8BkR5rSzx0_SQs" };
+		String[] ids = new String[] { "7--mVY8BkR5rSzx0wiR3", "7u-jVY8BkR5rSzx0UCQl", "8O-oVY8BkR5rSzx0_SQs" };
 		DeleteByQueryRequest deleteByQueryRequest = new DeleteByQueryRequest(INDEX);
 		BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
 		boolQueryBuilder.must(QueryBuilders.idsQuery().addIds(ids));

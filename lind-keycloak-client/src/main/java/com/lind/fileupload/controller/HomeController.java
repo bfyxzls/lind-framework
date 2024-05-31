@@ -1,16 +1,15 @@
 package com.lind.fileupload.controller;
 
 import com.lind.common.core.upload.FileUploadUtils;
+import com.lind.fileupload.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 
 /**
@@ -62,6 +61,12 @@ public class HomeController {
 	@GetMapping("login-page")
 	public String loginPage() {
 		return "login";
+	}
+
+	@PostMapping("create-user")
+	@ResponseBody
+	public String createUser(@Valid @RequestBody User user) {
+		return "create user success";
 	}
 
 }

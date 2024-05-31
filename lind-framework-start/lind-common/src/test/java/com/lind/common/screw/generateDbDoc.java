@@ -29,8 +29,7 @@ public class generateDbDoc {
 	 */
 	@Test
 	public void genereateLawyerMgr() {
-		documentGeneration("jdbc:mysql://192.168.4.26:3306/keycloak", "keycloak", "root",
-				"123456");
+		documentGeneration("jdbc:mysql://192.168.4.26:3306/keycloak", "keycloak", "root", "123456");
 	}
 
 	/**

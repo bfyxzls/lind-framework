@@ -1,6 +1,6 @@
 import com.pkulaw.schedule.dynamic.DynamicJob;
 import com.pkulaw.schedule.dynamic.DynamicSchedulerFactory;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.quartz.SchedulerException;
 import org.quartz.impl.RemoteScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;

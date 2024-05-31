@@ -29,9 +29,10 @@ public class PBKDF2SHAUtils {
 	 * @param salt
 	 * @return
 	 */
-	public static String encodedCredential(String rawPassword,byte[] salt){
-		return encodedCredential(rawPassword, ITERATIONS,salt, DERIVED_KEY_SIZE);
+	public static String encodedCredential(String rawPassword, byte[] salt) {
+		return encodedCredential(rawPassword, ITERATIONS, salt, DERIVED_KEY_SIZE);
 	}
+
 	// 加密
 	public static String encodedCredential(String rawPassword, int iterations, byte[] salt, int derivedKeySize) {
 		KeySpec spec = new PBEKeySpec(rawPassword.toCharArray(), salt, iterations, derivedKeySize);

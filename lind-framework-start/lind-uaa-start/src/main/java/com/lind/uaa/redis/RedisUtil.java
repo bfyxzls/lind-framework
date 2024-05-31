@@ -3,7 +3,6 @@ package com.lind.uaa.redis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -61,22 +60,6 @@ public final class RedisUtil {
 		catch (Exception e) {
 			e.printStackTrace();
 			return false;
-		}
-	}
-
-	/**
-	 * 删除缓存
-	 * @param key 可以传一个值 或多个
-	 */
-	@SuppressWarnings("unchecked")
-	public void del(String... key) {
-		if (key != null && key.length > 0) {
-			if (key.length == 1) {
-				redisTemplate.delete(key[0]);
-			}
-			else {
-				redisTemplate.delete(CollectionUtils.arrayToList(key));
-			}
 		}
 	}
 

@@ -1,0 +1,8 @@
+package $package;
+
+import $entityPackage.$entityName;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface $className extends JpaRepository<$entityName, String>, JpaSpecificationExecutor<$entityName>  {
+
+}

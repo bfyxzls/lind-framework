@@ -1,9 +1,12 @@
 # 说明
+> 在 Spring Cloud 2020 年之后的版本中，Hystrix 已经被标记为过时（deprecated），并且在 Spring Cloud 2023 年后的版本中已经移除了 Hystrix 相关的类和功能。因此，HystrixConcurrencyStrategy 类也已经不再可用。
+
 1. 主要对feign的请求进行拦截，在请求头添加token信息
 2. 自定义feign的隔离策略，实现了feign请求头的转发token,否则你的隔离级别只能是信号量SEMAPHORE
 
 # Sentinel与hystrix的对比
 Sentinel 是阿里巴巴开源的一款轻量级、高可用性的流量控制组件，可以用于服务容错保护和实时监控。相比于 Hystrix，Sentinel 在性能和功能上有一些优势。
+
 ### Sentinel 的实现原理
 Sentinel 主要通过两个核心组件来实现流量控制：**流量控制规则管理器**和**实时监控统计**。
 1. **流量控制规则管理器**：负责管理应用中定义的流量控制规则，包括限流规则、降级规则、热点参数限流规则等。

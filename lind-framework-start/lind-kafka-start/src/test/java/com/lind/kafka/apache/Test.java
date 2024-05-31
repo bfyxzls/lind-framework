@@ -17,7 +17,7 @@ public class Test {
 
 	private final static String GROUP = "group1";
 
-	@org.junit.Test
+	@org.junit.jupiter.api.Test
 	public void publish() {
 		// 没有配置key，消息都分发到多个partition
 		Producer.publishEvent("lind_demo", "hello1");
@@ -25,7 +25,7 @@ public class Test {
 		Producer.publishEvent("lind_demo", "hello3");
 	}
 
-	@org.junit.Test
+	@org.junit.jupiter.api.Test
 	public void publishKey() {
 		// 配置key之后，消息发到同一个partition，从而保证了消息的有序性
 		Producer.publishEvent("topic001", "2", "hello4");
@@ -34,7 +34,7 @@ public class Test {
 
 	}
 
-	@org.junit.Test
+	@org.junit.jupiter.api.Test
 	public void consumer() {
 		Properties properties = new Properties();
 		properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.60.146:9092");

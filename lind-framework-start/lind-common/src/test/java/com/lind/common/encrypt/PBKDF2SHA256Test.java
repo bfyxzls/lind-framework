@@ -18,16 +18,14 @@ import java.util.Base64;
  */
 public class PBKDF2SHA256Test {
 
-
-
 	@Test
 	public void generatePassword() {
-		String rawPassword = "123456";//原密码
+		String rawPassword = "123456";// 原密码
 		byte[] salt = PBKDF2SHAUtils.getSalt();// 随机盐，需要存储
-		String encodePass = PBKDF2SHAUtils.encodedCredential(rawPassword,  salt);// 秘文，需要存储
+		String encodePass = PBKDF2SHAUtils.encodedCredential(rawPassword, salt);// 秘文，需要存储
 		System.out.println("encodePass:" + encodePass);
 		String formData = "123456"; // 表单数据
-		Assert.equals(encodePass, PBKDF2SHAUtils.encodedCredential(formData,  salt));// 与库里密码对比
+		Assert.equals(encodePass, PBKDF2SHAUtils.encodedCredential(formData, salt));// 与库里密码对比
 
 	}
 
