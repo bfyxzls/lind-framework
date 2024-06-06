@@ -1,0 +1,13 @@
+server:
+  port: 9091
+spring:
+  application:
+    name: kc-server
+  cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8718
+      eager: true
+feign:
+  sentinel:
+    enabled: true

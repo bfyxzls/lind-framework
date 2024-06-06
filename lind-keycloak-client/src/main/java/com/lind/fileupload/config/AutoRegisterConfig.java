@@ -5,14 +5,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * <pre>
- *     com.edw.config.RestTemplateConfig
- * </pre>
- *
- * @author Muhammad Edwin < edwin at redhat dot com > 18 Agt 2020 21:46
+ * @author lind
+ * @date 2024/5/31 16:48
+ * @since 1.0.0
  */
 @Configuration
-public class RestTemplateConfig {
+public class AutoRegisterConfig {
 
 	@Bean
 	public RestTemplate getRestTemplate() {

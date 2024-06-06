@@ -28,7 +28,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * sentinel统一降级限流策略
+ * sentinel统一降级限流策略.
+ * 触发限流之后的降级回调.
  * <p>
  * {@link com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.DefaultBlockExceptionHandler}
  *

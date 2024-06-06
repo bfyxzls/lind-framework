@@ -38,6 +38,7 @@ import java.util.Map;
 
 /**
  * 支持自动降级注入 重写 {@link com.alibaba.cloud.sentinel.feign.SentinelFeign}
+ * 程序启动时执行.
  *
  * @author lengleng
  * @date 2020/6/9

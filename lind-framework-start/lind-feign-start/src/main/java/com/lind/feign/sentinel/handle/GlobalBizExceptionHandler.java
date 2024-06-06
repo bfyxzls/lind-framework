@@ -20,6 +20,7 @@ import com.alibaba.csp.sentinel.Tracer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.core.annotation.Order;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
@@ -102,6 +103,13 @@ public class GlobalBizExceptionHandler {
 		List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
 		log.warn("参数绑定异常,ex = {}", fieldErrors.get(0).getDefaultMessage());
 		return ResponseEntity.ok(fieldErrors.get(0).getDefaultMessage());
+	}
+
+	@ExceptionHandler({ DataIntegrityViolationException.class })
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ResponseEntity dbExceptionHandler(DataIntegrityViolationException exception) {
+		log.warn("数据库约束引起的异常,ex = {}", exception.getMessage());
+		return ResponseEntity.ok(exception.getMessage());
 	}
 
 }

@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: kc-client
   freemarker:
     cache: false
     charset: UTF-8
@@ -76,8 +78,14 @@ spring:
         wall:
           config:
             multi-statement-allow: true
+  cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8718
+        port: 8722 #该端口是自定义的，作用是与Sentinel控制台做交互
+      eager: true
 server:
-  port: 8011
+  port: 8012
 
 keycloak:
     realm: fabao
@@ -92,3 +100,6 @@ kc:
     logout: http://192.168.4.26:8080/auth/realms/fabao/protocol/openid-connect/logout
     jwk-set-uri: http://192.168.4.26:8080/auth/realms/fabao/protocol/openid-connect/certs
     certs-id: E_6ih35yTLJMieI0vqg9MmTQrJ6RcUSxiXeNdcMaoYk
+feign:
+  sentinel:
+    enabled: true

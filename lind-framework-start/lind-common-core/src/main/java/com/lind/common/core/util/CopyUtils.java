@@ -14,6 +14,11 @@ import java.util.Set;
  */
 public class CopyUtils {
 
+	/**
+	 * 获取为空的属性列表.
+	 * @param source
+	 * @return
+	 */
 	public static String[] getNullPropertyNames(Object source) {
 		final BeanWrapper src = new BeanWrapperImpl(source);
 		java.beans.PropertyDescriptor[] pds = src.getPropertyDescriptors();

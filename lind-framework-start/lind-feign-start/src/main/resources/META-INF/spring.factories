@@ -1,4 +1,5 @@
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.lind.feign.HystrixCircuitBreakerConfiguration,\
-com.lind.feign.FeignTraceIdInterceptor
+com.lind.feign.FeignTraceIdInterceptor,\
+com.lind.feign.sentinel.SentinelAutoConfiguration,\
+com.lind.feign.FeignAutoConfiguration

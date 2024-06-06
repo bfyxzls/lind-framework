@@ -42,6 +42,7 @@ import static feign.Util.checkNotNull;
 
 /**
  * 支持自动降级注入 重写 {@link SentinelInvocationHandler}
+ * 有feign调用时执行.
  *
  * @author lengleng
  * @date 2020/6/9

@@ -108,3 +108,13 @@ Ribbon的超时时间小于Hystrix的超时时间，否则会出现以下错误�
 2019-10-12 21:56:20,208   111231 [http-nio-8084-exec-2] WARN    o.s.c.n.z.f.r.s.AbstractRibbonCommand - The Hystrix 
 timeout of 10000ms   for the command operation is set lower than the combination of the Ribbon   read and connect timeout, 24000ms. 
 ```
+# sentinel配置
+```
+spring:
+  cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:9988
+        port: 8719 #该端口是自定义的，作用是与Sentinel控制台做交互
+      eager: true
+```
