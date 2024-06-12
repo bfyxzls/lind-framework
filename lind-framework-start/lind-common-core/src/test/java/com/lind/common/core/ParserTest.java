@@ -16,9 +16,18 @@ public class ParserTest {
 	static final FieldTypeParserFactory fieldTypeParserFactory = new DefaultFieldTypeParserFactory();
 	static final FieldTypeParser fieldTypeParser = fieldTypeParserFactory.getParser(DateTypeParser.class);
 
+	void print1(ParserTest parserTest){
+		System.out.println("hello1");
+		parserTest.print2();
+	}
+	void print2(){
+		System.out.println("hello2");
+	}
 	@Test
 	public void parse() {
 		fieldTypeParser.parser("2012-01-01");
+		ParserTest parserTest=this;
+		print1(parserTest);
 		System.out.println(fieldTypeParser.parser("2012-01-01"));
 	}
 
