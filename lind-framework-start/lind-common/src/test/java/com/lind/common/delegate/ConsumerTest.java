@@ -10,10 +10,12 @@ import java.util.function.Consumer;
  * @since 1.0.0
  */
 public class ConsumerTest {
-    @Test
-    public void test1(){
-        Consumer<String> consumer = (str) -> System.out.println("Hello, " + str);
-        consumer.accept("World");
 
-    }
+	@Test
+	public void test1() {
+		Consumer<String> consumer = (str) -> System.out.println("Hello, " + str);
+		consumer.accept("World");
+
+	}
+
 }

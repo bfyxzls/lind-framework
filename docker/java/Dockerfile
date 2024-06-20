@@ -1,4 +1,8 @@
 FROM fabric8/java-jboss-openjdk8-jdk:1.4
+# metersphere/alpine-openjdk11-jre
+# metersphere/alpine-openjdk17-jre
+# metersphere/alpine-openjdk21-jre
+
 USER root
 # 中文支持
 # local time

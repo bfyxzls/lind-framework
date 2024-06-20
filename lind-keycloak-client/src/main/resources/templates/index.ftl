@@ -2,6 +2,7 @@
 <html>
 <head>
     <h1>测试keycloak-check-session-status</h1>
+    <script src="../static/jq.js"></script>
 </head>
 <body>
 <!-- 主域相同，可以执行iframe里关于cookie的代码 -->
@@ -12,7 +13,15 @@
 <iframe style="border:none;width:1000px;height:800px"
         src="https://testcas.pkulaw.com/auth/realms/fabao/protocol/openid-connect/auth?client_id=democlient&response_type=code&scope=openid&redirect_uri=http://lind.pkulaw.com:8811">
 </iframe>
+
 <script>
+    $(function (){
+        $.get("https://test-apisix.pkulaw.com/api/index", function (data) {
+            alert(data);
+        })
+    })
+
+
     function getCookieByName(name) {
         name = name + '=';
         var ca = document.cookie.split(';');

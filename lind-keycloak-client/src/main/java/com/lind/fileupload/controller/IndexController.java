@@ -55,4 +55,5 @@ public class IndexController {
 	public ResponseEntity server() {
 		return ResponseEntity.ok(serverClient.index());
 	}
+
 }
