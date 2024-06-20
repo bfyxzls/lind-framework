@@ -21,3 +21,6 @@ http://localhost:8082/student
 http://localhost:8082/teacher
 http://localhost:8082/valid
 ```
+
+# 功能演练
+* resteasy-jaxrs清单DEMO
