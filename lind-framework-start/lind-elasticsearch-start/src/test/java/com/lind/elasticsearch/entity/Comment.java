@@ -20,7 +20,7 @@ import java.util.List;
  * 评论
  */
 @Data
-@Document(indexName = "pkulaw_comment")
+@Document(indexName = "demo_comment")
 @ToString(callSuper = true)
 @Builder(toBuilder = true)
 @AllArgsConstructor

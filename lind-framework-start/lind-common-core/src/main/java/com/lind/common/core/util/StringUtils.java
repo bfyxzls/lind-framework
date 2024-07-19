@@ -3,16 +3,19 @@ package com.lind.common.core.util;
 import com.lind.common.core.util.text.StrFormatter;
 import org.springframework.util.AntPathMatcher;
 
-import java.util.*;
-
-import static org.apache.commons.lang3.StringUtils.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * string tool
  *
  * @author xuxueli 2019-04-27 17:01:11
  */
-public class StringUtils {
+public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
 	public static final String EMPTY = "";
 

@@ -19,7 +19,7 @@ public class ClassloaderTest {
 	 */
 	@Test
 	public void readOuter() throws IOException {
-		Assert.notNull(JarClassLoader.getSourceInputStream("/d:/pkulaw-upgrade-programt.jar", "resource.json"));
+		Assert.notNull(JarClassLoader.getSourceInputStream("/d:/demo-upgrade-programt.jar", "resource.json"));
 	}
 
 }

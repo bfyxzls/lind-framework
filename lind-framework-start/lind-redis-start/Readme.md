@@ -27,17 +27,17 @@ Lettuce 和 Jedis 的定位都是Redis的client，所以他们当然可以直接
 # 依赖引用
 ```
 <dependency>
- <groupId>com.pkulaw</groupId>
- <artifactId>pkulaw-lock-start</artifactId>
+ <groupId>com.lind</groupId>
+ <artifactId>lind-lock-start</artifactId>
  <version>1.0.0</version>
 </dependency>
 ```
 # 配置
 ```
-pkulaw.redis.lock.enable: true #开启
-pkulaw.redis.lock.registryKey: system-lock #锁前缀
-pkulaw.redis.lock.interrupt: false #没有获到锁是否立即中断,true表示中断,false表示阻塞可重入锁
-pkulaw.redis.lock.manualLockKey：user-lock #手动锁键
+lind.redis.lock.enable: true #开启
+lind.redis.lock.registryKey: system-lock #锁前缀
+lind.redis.lock.interrupt: false #没有获到锁是否立即中断,true表示中断,false表示阻塞可重入锁
+lind.redis.lock.manualLockKey：user-lock #手动锁键
 ```
 # 使用
 ```
@@ -68,16 +68,16 @@ private void lock5Second() {
 # 依赖引用
 ```
 <dependency>
- <groupId>com.pkulaw</groupId>
- <artifactId>pkulaw-limit-start</artifactId>
+ <groupId>com.lind</groupId>
+ <artifactId>lind-limit-start</artifactId>
  <version>1.0.0</version>
 </dependency>
 ```
 # 配置
 ```
-pkulaw.ratelimit.enable: true #开启
-pkulaw.ratelimit.limit: 100 #限制个数
-pkulaw.ratelimit.timeout: 1000 #超时毫秒
+lind.ratelimit.enable: true #开启
+lind.ratelimit.limit: 100 #限制个数
+lind.ratelimit.timeout: 1000 #超时毫秒
 ```
 # 使用
 ```

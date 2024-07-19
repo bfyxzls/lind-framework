@@ -30,8 +30,8 @@
 
 ```
 <dependency>
-    <groupId>com.pkulaw</groupId>
-    <artifactId>pkulaw-kafka-start</artifactId>
+    <groupId>com.lind</groupId>
+    <artifactId>lind-kafka-start</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```

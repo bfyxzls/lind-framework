@@ -67,6 +67,14 @@ mybatis-plus:
   configuration:
     mapUnderscoreToCamelCase: true
 
+# PageHelper分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+
 logging:
   level:
     root: info

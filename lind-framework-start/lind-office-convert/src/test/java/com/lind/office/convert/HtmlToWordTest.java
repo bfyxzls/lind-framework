@@ -28,7 +28,7 @@ public class HtmlToWordTest {
 	@SneakyThrows
 	@Test
 	public void remoteHtmlToWord() {
-		new RemoteHtmlToWord().excute(" https://www.pkulaw.com/qikan/3fb3d1086a5a3708d6e81133085c4eecbdfb.html");
+		new RemoteHtmlToWord().excute(" https://www.demo.com/qikan/3fb3d1086a5a3708d6e81133085c4eecbdfb.html");
 	}
 
 	@SneakyThrows

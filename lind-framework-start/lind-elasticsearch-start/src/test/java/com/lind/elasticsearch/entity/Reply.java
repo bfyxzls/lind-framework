@@ -18,7 +18,7 @@ import java.util.Date;
  * 回复
  */
 @Data
-@Document(indexName = "pkulaw_reply")
+@Document(indexName = "demo_reply")
 @ToString(callSuper = true)
 @Builder(toBuilder = true)
 @AllArgsConstructor

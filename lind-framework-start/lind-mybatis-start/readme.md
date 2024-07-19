@@ -4,8 +4,8 @@
 # 依赖引用
 ```
 <dependency>
-    <groupId>com.pkulaw</groupId>
-    <artifactId>pkulaw-mybatis-start</artifactId>
+    <groupId>com.lind</groupId>
+    <artifactId>lind-mybatis-start</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```

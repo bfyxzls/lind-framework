@@ -1,6 +1,6 @@
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.pkulaw.schedule.config.QuartzConfig,\
-  com.pkulaw.schedule.controller.QuartzController,\
-  com.pkulaw.schedule.controller.ViewController,\
-  com.pkulaw.schedule.service.QuartzServiceImpl 
+  com.lind.schedule.config.QuartzConfig,\
+  com.lind.schedule.controller.QuartzController,\
+  com.lind.schedule.controller.ViewController,\
+  com.lind.schedule.service.QuartzServiceImpl 

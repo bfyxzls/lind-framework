@@ -49,7 +49,7 @@ public class HOTPTest {
 	public void totpGenerator() throws Exception {
 		System.out.format("format用0补全结果: %06d", 9696);
 		final Instant now = Instant.now();
-		String passKey = String.valueOf(timeBasedOneTimePasswordGenerator.generateOneTimePassword("pkulaw", now));
+		String passKey = String.valueOf(timeBasedOneTimePasswordGenerator.generateOneTimePassword("demo", now));
 		System.out.printf("Current password: %s\n", passKey);
 	}
 
@@ -57,7 +57,7 @@ public class HOTPTest {
 	public void hotp() throws Exception {
 		HmacOneTimePasswordGenerator hmacOneTimePasswordGenerator = new HmacOneTimePasswordGenerator();
 		for (int i = 0; i < 10; i++)
-			System.out.format("hmac:%06d\n", hmacOneTimePasswordGenerator.generateOneTimePassword("pkulaw", i));
+			System.out.format("hmac:%06d\n", hmacOneTimePasswordGenerator.generateOneTimePassword("demo", i));
 	}
 
 	/**

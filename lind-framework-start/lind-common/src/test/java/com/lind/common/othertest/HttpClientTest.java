@@ -21,7 +21,7 @@ public class HttpClientTest {
 	@Test
 	public void options() {
 		try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-			HttpOptions httpOptions = new HttpOptions("https://cas.pkulaw.com/auth");
+			HttpOptions httpOptions = new HttpOptions("https://cas.demo.com/auth");
 			HttpResponse response = httpClient.execute(httpOptions);
 
 			// 处理OPTIONS请求的响应

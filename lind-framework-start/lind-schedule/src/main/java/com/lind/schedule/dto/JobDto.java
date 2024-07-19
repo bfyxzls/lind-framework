@@ -1,4 +1,4 @@
-package com.pkulaw.schedule.dto;
+package com.lind.schedule.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

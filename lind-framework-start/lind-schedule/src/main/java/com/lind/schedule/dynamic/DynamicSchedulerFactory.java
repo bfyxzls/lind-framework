@@ -1,4 +1,4 @@
-package com.pkulaw.schedule.dynamic;
+package com.lind.schedule.dynamic;
 
 import org.quartz.*;
 import org.slf4j.Logger;

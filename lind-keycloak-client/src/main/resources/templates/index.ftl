@@ -7,11 +7,11 @@
 <body>
 <!-- 主域相同，可以执行iframe里关于cookie的代码 -->
 <span id="username"></span>
-<a href="https://testcas.pkulaw.com/auth/realms/fabao/protocol/openid-connect/auth?client_id=democlient&response_type=code&scope=openid&redirect_uri=http://lind.pkulaw.com:8811">登录</a>
-<iframe src="https://testcas.pkulaw.com/auth/realms/fabao/protocol/openid-connect/login-status-iframe.html"
+<a href="https://testcas.lind.com/auth/realms/fabao/protocol/openid-connect/auth?client_id=democlient&response_type=code&scope=openid&redirect_uri=http://lind.pkulaw.com:8811">登录</a>
+<iframe src="https://testcas.lind.com/auth/realms/fabao/protocol/openid-connect/login-status-iframe.html"
         id="keycloak-status-iframe" style="display: none;"></iframe>
 <iframe style="border:none;width:1000px;height:800px"
-        src="https://testcas.pkulaw.com/auth/realms/fabao/protocol/openid-connect/auth?client_id=democlient&response_type=code&scope=openid&redirect_uri=http://lind.pkulaw.com:8811">
+        src="https://testcas.lind.com/auth/realms/fabao/protocol/openid-connect/auth?client_id=democlient&response_type=code&scope=openid&redirect_uri=http://lind.pkulaw.com:8811">
 </iframe>
 
 <script>
@@ -45,9 +45,9 @@
 
         val = "democlient " + cookie;//这里向iframe传的参数是"client_id session_state"
 
-        iframe.contentWindow.postMessage(val, 'https://testcas.pkulaw.com:18081');
+        iframe.contentWindow.postMessage(val, 'https://testcas.lind.com:18081');
         window.addEventListener('message', function (event) {
-            if (event.origin !== 'https://testcas.pkulaw.com:18081') {
+            if (event.origin !== 'https://testcas.lind.com:18081') {
                 return;
             }
             if (event.data === 'unchanged') {
@@ -59,7 +59,7 @@
 
                 document.getElementById("username").innerHTML = "未登录";
                 console.log("session_state=" + getCookieByName('session_state'));
-                // location.href="https://testcas.pkulaw.com:18081/auth/realms/fabao/protocol/openid-connect/auth?client_id=democlient&response_type=code&scope=openid&redirect_uri=http://lind.pkulaw.com:8811"
+                // location.href="https://testcas.lind.com:18081/auth/realms/fabao/protocol/openid-connect/auth?client_id=democlient&response_type=code&scope=openid&redirect_uri=http://lind.pkulaw.com:8811"
             }
         }, false);
 

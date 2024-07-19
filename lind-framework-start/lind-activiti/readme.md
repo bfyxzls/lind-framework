@@ -5,8 +5,8 @@
 # 依赖引用
 ```
 <dependency>
-    <groupId>com.pkulaw</groupId>
-    <artifactId>pkulaw-activiti</artifactId>
+    <groupId>com.lind</groupId>
+    <artifactId>lind-activiti</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```
@@ -32,7 +32,7 @@ public class Application {
 }
 ```
 # 事件监听
-* com.pkulaw.activiti.event包
+* com.lind.activiti.event包
 * ActivitiEventListener 工作流级别的事件监听
 * TaskListener 某个节点产生的事件监听
 

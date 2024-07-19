@@ -13,7 +13,7 @@ public class UrlUtilsTest {
 
 	@Test
 	public void testValid() {
-		String url = "https://www.pkulaw.com/chl/f338b61bc48f9187bdfb.html?keyword=最高人民检察院、公安部关于印发<最高人民检察院、公安部关于公安机关管辖的刑事案件立案追诉标准的规定%20(二)>的通知";
+		String url = "https://www.demo.com/chl/f338b61bc48f9187bdfb.html?keyword=最高人民检察院、公安部关于印发<最高人民检察院、公安部关于公安机关管辖的刑事案件立案追诉标准的规定%20(二)>的通知";
 		url = removeUrlSpaceParams(url);
 		java.net.URI.create(url);
 	}

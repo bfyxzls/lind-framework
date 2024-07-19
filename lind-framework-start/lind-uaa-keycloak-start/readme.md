@@ -52,8 +52,8 @@ logging:
     </dependencies>
 </dependencyManagement>
 <dependency>
-    <groupId>com.pkulaw</groupId>
-    <artifactId>pkulaw-uaa-keycloak-start</artifactId>
+    <groupId>com.lind</groupId>
+    <artifactId>lind-uaa-keycloak-start</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```
@@ -61,7 +61,7 @@ logging:
 ```$xslt
 
 keycloak:
-  auth-server-url: http://devcas.pkulaw.com:18081/auth # kc服务器地址
+  auth-server-url: http://devcas.lind.com:18081/auth # kc服务器地址
   realm: demo # 域名称
   resource: demoproduct # 客户端（接入方）名称
   client-key-password: ec0fd1c6-68b0-4c39-a9fa-c3be25c8ef01 # 客户端密钥，非远程授权时，可以只使用这个
@@ -169,7 +169,7 @@ keycloak:
 ## bearer-only配置
 bearer-only: true表示当没有权限时，会直接返回401，而不会跳到KC去，这一般用到前后分离的项目中
 ## 多端登录的共享状态接口
-* https://devcas.pkulaw.com:18081/auth/realms/fabao/sms/kc-sessions?client={clientName}&redirect_uri=http://192.168.3.181:9090/token/authorizationCodeRedirect&refer_uri=http://192.168.3.181:9090/about
+* https://devcas.lind.com:18081/auth/realms/fabao/sms/kc-sessions?client={clientName}&redirect_uri=http://192.168.3.181:9090/token/authorizationCodeRedirect&refer_uri=http://192.168.3.181:9090/about
 上面接口将实现同一浏览器，多个客户端应用的共享登录，下面介绍一下相关参数
 * client:客户端名称
 * redirect_uri: kc回调客户端的统一地址，是一个固定的地址

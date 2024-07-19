@@ -89,7 +89,7 @@ server:
 
 keycloak:
     realm: fabao
-    resource: pkulaw
+    resource: demo
     client-key-password: c0b7ab8e-485b-4a10-bff8-7c7d3f472096
     auth-server-url: http://192.168.4.26:8080/auth/realms/fabao/protocol/openid-connect/auth
 kc:

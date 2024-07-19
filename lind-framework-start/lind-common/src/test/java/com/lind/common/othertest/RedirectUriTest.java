@@ -39,7 +39,7 @@ public class RedirectUriTest {
 
 	@Test
 	public void valid() {
-		String needValid = "https://www.pkulaw.com/chl/d9bd70327e25ee4bbdfb.html?keyword=中国";
+		String needValid = "https://www.demo.com/chl/d9bd70327e25ee4bbdfb.html?keyword=中国";
 		Set<String> uris = new HashSet<>();
 		uris.add("*");
 		Assert.isTrue(matchesRedirects(uris, needValid));
@@ -47,7 +47,7 @@ public class RedirectUriTest {
 
 	@Test()
 	public void errorUri() {
-		String needValid = "https://www.pkulaw.com/chl/d9bd70327e25ee4bbdfb.html?keyword=中 国";
+		String needValid = "https://www.demo.com/chl/d9bd70327e25ee4bbdfb.html?keyword=中 国";
 		URI uri = URI.create(needValid);
 		String redirectUri = uri.normalize().toString();
 		System.out.println(redirectUri);
@@ -55,7 +55,7 @@ public class RedirectUriTest {
 
 	@Test()
 	public void errorUriMenuEncode() throws UnsupportedEncodingException {
-		String needValid = "https://www.pkulaw.com/chl/d9bd70327e25ee4bbdfb.html?keyword=中 国&des=人 民";
+		String needValid = "https://www.demo.com/chl/d9bd70327e25ee4bbdfb.html?keyword=中 国&des=人 民";
 		if (needValid.indexOf("?") > 1) {
 			String url = needValid.substring(0, needValid.indexOf("?"));
 			String param = needValid.substring(needValid.indexOf("?"));
@@ -76,7 +76,7 @@ public class RedirectUriTest {
 
 	@Test()
 	public void errorUriEncode() {
-		String needValid = "https://www.pkulaw.com/chl/d9bd70327e25ee4bbdfb.html?keyword=中%20国";
+		String needValid = "https://www.demo.com/chl/d9bd70327e25ee4bbdfb.html?keyword=中%20国";
 		URI uri = URI.create(needValid);
 		String redirectUri = uri.normalize().toString();
 		System.out.println(redirectUri);

@@ -1,6 +1,6 @@
-package com.pkulaw.schedule.service;
+package com.lind.schedule.service;
 
-import com.pkulaw.schedule.dto.JobDto;
+import com.lind.schedule.dto.JobDto;
 import org.quartz.Trigger;
 import org.springframework.stereotype.Service;
 

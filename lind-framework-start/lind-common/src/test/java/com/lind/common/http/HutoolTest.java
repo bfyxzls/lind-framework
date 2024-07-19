@@ -48,7 +48,7 @@ public class HutoolTest {
 	@Test
 	public void testKcLogin() throws InterruptedException {
 		Map<String, Object> params = new HashMap<>();
-		params.put("client_id", "pkulaw");
+		params.put("client_id", "demo");
 		params.put("client_secret", "c0b7ab8e-485b-4a10-bff8-7c7d3f472096");
 		params.put("grant_type", "password");
 		params.put("username", "test");

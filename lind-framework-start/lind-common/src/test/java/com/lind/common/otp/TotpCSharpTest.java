@@ -135,7 +135,7 @@ public class TotpCSharpTest {
 		String eptid = "tEgCVjfCJv8OQJx/PB+GLng1X7Y=";
 		String sign = md5(affiliation + eptid + totp).toUpperCase();
 		String url = String.format(
-				"https://login.pkulaw.com/register/CarsiRegister?sign=%s&affiliation=staff@shufe.edu.cn&eptid=tEgCVjfCJv8OQJx/PB+GLng1X7Y=",
+				"https://login.demo.com/register/CarsiRegister?sign=%s&affiliation=staff@shufe.edu.cn&eptid=tEgCVjfCJv8OQJx/PB+GLng1X7Y=",
 				sign);
 		log.info("{}", url);
 	}

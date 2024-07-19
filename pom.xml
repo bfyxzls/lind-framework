@@ -21,6 +21,8 @@
         <module>lind-framework-start/lind-hibernate-shard</module>
         <module>lind-dubbo-pom</module>
         <module>lind-keycloak-server</module>
+        <module>lind-keycloak-client</module>
+
     </modules>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

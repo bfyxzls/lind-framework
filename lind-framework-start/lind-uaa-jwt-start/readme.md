@@ -50,8 +50,8 @@ jwt payload中包括的内容太多，对网络传输是需要考虑的，比如
 ## 依赖引用
 ```
 <dependency>
-    <groupId>com.pkulaw</groupId>
-    <artifactId>pkulaw-uaa-jwt-start</artifactId>
+    <groupId>com.lind</groupId>
+    <artifactId>lind-uaa-jwt-start</artifactId>
     <version>1.0.1</version>
 </dependency>
 ```

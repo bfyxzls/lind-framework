@@ -1,8 +1,8 @@
-package com.pkulaw.schedule.config;
+package com.lind.schedule.config;
 
-import com.pkulaw.schedule.dynamic.DynamicSchedulerFactory;
-import com.pkulaw.schedule.service.QuartzService;
-import com.pkulaw.schedule.service.QuartzServiceImpl;
+import com.lind.schedule.dynamic.DynamicSchedulerFactory;
+import com.lind.schedule.service.QuartzService;
+import com.lind.schedule.service.QuartzServiceImpl;
 import org.quartz.Scheduler;
 import org.quartz.ee.servlet.QuartzInitializerListener;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;

@@ -1,7 +1,7 @@
-package com.pkulaw.schedule.controller;
+package com.lind.schedule.controller;
 
-import com.pkulaw.schedule.dto.JobDto;
-import com.pkulaw.schedule.service.QuartzService;
+import com.lind.schedule.dto.JobDto;
+import com.lind.schedule.service.QuartzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

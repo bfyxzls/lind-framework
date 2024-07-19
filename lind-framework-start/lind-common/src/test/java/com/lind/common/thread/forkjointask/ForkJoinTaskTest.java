@@ -86,7 +86,7 @@ public class ForkJoinTaskTest {
 	}
 
 	@Test
-	public void pkulaw() {
+	public void demo() {
 		List<Integer> maps = Lists.newArrayList();
 		int count = 100;
 		for (int i = 0; i < count; i++) {

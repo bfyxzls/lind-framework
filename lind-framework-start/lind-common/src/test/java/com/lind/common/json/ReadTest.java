@@ -49,7 +49,7 @@ public class ReadTest {
 		// 使用JsonParser解析JSON字符串
 		JSONArray jsonObject = JSONUtil.parseArray(content);
 		jsonObject.forEach(o -> {
-			String url = "https://lawyer-mgr.pkulaw.com/prod-api/lawyer/lawyerInfo";
+			String url = "https://lawyer-mgr.demo.com/prod-api/lawyer/lawyerInfo";
 			Map<String, Object> map = new HashMap<>();
 			map.put("gid", JSONUtil.parseObj(o).getStr("gid"));
 			map.put("phone", JSONUtil.parseObj(o).getStr("phone"));

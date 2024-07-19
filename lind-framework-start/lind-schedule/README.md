@@ -4,8 +4,8 @@
 # 依赖引用
 ```
 <dependency>
-    <groupId>com.pkulaw</groupId>
-    <artifactId>pkulaw-schedule</artifactId>
+    <groupId>com.lind</groupId>
+    <artifactId>lind-schedule</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```

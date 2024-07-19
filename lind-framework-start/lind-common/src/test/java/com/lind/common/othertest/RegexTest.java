@@ -143,7 +143,7 @@ public class RegexTest {
 
 	@Test
 	public void urlEncode() {
-		String redirect_uri = "https://pkulaw.com/chl/4d5b6c562483fccebdfb.html?keyword=最高人民法院 最高人民检察院关于常见犯罪的量刑指导意见(试行）";
+		String redirect_uri = "https://demo.com/chl/4d5b6c562483fccebdfb.html?keyword=最高人民法院 最高人民检察院关于常见犯罪的量刑指导意见(试行）";
 		redirect_uri = redirect_uri.replaceAll("\\xa0", "");
 		URI uri = URI.create(redirect_uri);
 	}
@@ -169,7 +169,7 @@ public class RegexTest {
 		// 中的点号，将其转义为四个反斜杠加点号的形式。
 
 		String protocolClaim = "resource_access.${client_id}.roles";
-		String clientId = "pkulaw.com";
+		String clientId = "demo.com";
 		// 使用 DOT_PATTERN.matcher(clientId) 创建了一个 Matcher 对象，
 		// 用于对字符串 clientId 进行匹配操作。然后，调用 replaceAll(DOT_REPLACEMENT) 方法，
 		// 将匹配到的点号替换为四个反斜杠加点号的形式,最终解析为2个反斜杠。最终，将处理后的结果赋值给 clientId 变量。
@@ -180,7 +180,7 @@ public class RegexTest {
 		Map<String, String> map = new HashMap<>();
 		map.put(protocolClaim, "test");
 		log.info("map={}", JsonSerialization.writeValueAsString(map));
-		assertEquals("resource_access.pkulaw\\.com.roles", protocolClaim);
+		assertEquals("resource_access.demo\\.com.roles", protocolClaim);
 
 	}
 

@@ -18,7 +18,7 @@ import java.sql.SQLException;
 
 /**
  * 添加@Component之后，可以获取到springboot配置信息.
- * 加载pkulaw-mybatis-start包下的资源文件，因为使用的RsaTypeHandler的类加载器. jvm的类加载机制,自上而下加载,自下而上检查。
+ * 加载lind-mybatis-start包下的资源文件，因为使用的RsaTypeHandler的类加载器. jvm的类加载机制,自上而下加载,自下而上检查。
  * 最开始是由BootStrap ClassLoader加载rt.jar下的文件，也就是java最最核心的部分；然后由Extension
  * ClassLoader加载ext下的文件；再有App ClassLoader加载用户自己的文件。
  */

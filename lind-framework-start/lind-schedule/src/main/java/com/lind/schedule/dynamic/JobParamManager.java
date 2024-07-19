@@ -1,4 +1,4 @@
-package com.pkulaw.schedule.dynamic;
+package com.lind.schedule.dynamic;
 
 /**
  * @author Shengzhao Li
