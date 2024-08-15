@@ -26,4 +26,11 @@ public class DateUtilsTest {
 		System.out.println(formattedDateTime);
 	}
 
+	@Test
+	public void format2() {
+		LocalDateTime now = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+		System.out.println(now.format(formatter));
+	}
+
 }

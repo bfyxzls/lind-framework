@@ -167,6 +167,8 @@ public class CollectionTest {
 		Assert.isTrue(role.stream().filter(StrUtil::isNotBlank).noneMatch(o -> o.equals("write")));
 	}
 
+	// 键不存在，就添加；存在就直接返回结果
+	// 将除5后的余数相同的放到一个key下
 	@Test
 	public void computeIfAbsent() {
 		Map<Integer, List<Integer>> map = new HashMap<>();
@@ -202,6 +204,7 @@ public class CollectionTest {
 		messages.putIfAbsent(USER, new ConcurrentHashMap<Locale, String>());
 		messages.get(USER).putIfAbsent(Locale.CHINA, "中文");
 		messages.get(USER).putIfAbsent(Locale.ENGLISH, "英文");
+		messages.get(USER).putIfAbsent(Locale.ENGLISH, "英文语言");
 		System.out.println(messages.get(USER));
 	}
 
@@ -216,10 +219,13 @@ public class CollectionTest {
 			System.out.println(itr.previous());
 		}
 	}
-
+	// peek它用于对流中的元素进行操作而不消耗这些元素，或者用于查看 Optional 中的值，主要起到调试，打印原信息的作用
 	@Test
 	public void peekAndMap1() {
-		Stream.of("one", "two", "three", "four").peek(u -> u.toUpperCase()).forEach(System.out::println);
+		Stream.of("one", "two", "three", "four")
+				.peek(name -> System.out.println("Filtered name: " + name)) // 调试信息
+				.map(String::toUpperCase) // 转换为大写
+				.forEach(System.out::println);
 	}
 
 	@Test

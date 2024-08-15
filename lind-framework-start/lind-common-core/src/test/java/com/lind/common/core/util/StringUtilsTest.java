@@ -14,14 +14,14 @@ import static com.lind.common.core.util.StringUtils.split;
  */
 public class StringUtilsTest {
 
-    @Test
-    public void main() {
-        System.out.println(isBlank("  "));
-        System.out.println(isNotBlank("qwe"));
-        System.out.println(split("a,b,cc,", ","));
-        System.out.println(join(new String[] {"a", "b", "c"}, ","));
-        String email = "abc@sina.com";
-        System.out.println(email.substring(email.indexOf("@") + 1));
-    }
+	@Test
+	public void main() {
+		System.out.println(isBlank("  "));
+		System.out.println(isNotBlank("qwe"));
+		System.out.println(split("a,b,cc,", ","));
+		System.out.println(join(new String[] { "a", "b", "c" }, ","));
+		String email = "abc@sina.com";
+		System.out.println(email.substring(email.indexOf("@") + 1));
+	}
 
 }
