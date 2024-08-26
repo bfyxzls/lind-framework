@@ -1,5 +1,6 @@
 package com.lind.office.convert.excel;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -59,9 +60,7 @@ public class ExcelUtils {
 
 		// 创建Excel工作薄
 		Workbook work = getWorkbook(in, fileName);
-		if (null == work) {
-			throw new Exception("创建Excel工作薄为空！");
-		}
+		Assert.notNull(work, "创建Excel工作薄为空！");
 		Sheet sheet = null;
 		Row row = null;
 		Cell cell = null;

@@ -12,6 +12,7 @@ import java.util.concurrent.ConcurrentMap;
 
 /**
  * lru最近最少使用(Least Recently Used)
+ * 如果该页面不在缓存中且缓存已满，则将链表尾部的页面淘汰，并将新页面添加到链表头部。这样就保证了最近访问的页面总是位于链表头部，而最久未被访问的页面总是位于链表尾部
  *
  */
 public class RpcLoadBalanceLRUStrategy extends RpcLoadBalance {

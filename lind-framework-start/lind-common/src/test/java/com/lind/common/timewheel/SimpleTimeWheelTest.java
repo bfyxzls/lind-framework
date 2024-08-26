@@ -27,8 +27,9 @@ public class SimpleTimeWheelTest {
 	public static void main(String[] args) throws InterruptedException {
 		// 每秒一个槽，总共10个槽,槽太少相当于时间延时支持的就小【最大支持10S的延时】,如果延时时间太大，这些任务并不会被执行
 		SimpleTimeWheel timeWheel = new SimpleTimeWheel(1000, 8);
-		timeWheel.addTask(() -> log.info("Task 2 executed"), 5000); // 10秒后执行任务2
-		timeWheel.addTask(() -> log.info("Task 3 executed"), 10000); // 20秒后执行任务3
+		timeWheel.addTask(() -> log.info("Task 1 executed"), 5000); // 10秒后执行任务2
+		timeWheel.addTask(() -> log.info("Task 2 executed"), 10000); // 20秒后执行任务3
+		timeWheel.addTask(() -> log.info("Task 3 executed"), 20000); // 20秒后执行任务3
 
 		TimeUnit.MINUTES.sleep(1);
 		log.info("任务结束");

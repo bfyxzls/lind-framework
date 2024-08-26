@@ -11,6 +11,7 @@ import java.util.TreeSet;
 
 /**
  * consistent hash
+ * 一致性哈希（Consistent Hashing）算法是一种用于分布式系统中数据分片和负载均衡的算法。它的主要目的是在动态增减节点的情况下，尽可能地减少数据重新分布的影响
  *
  * @author xuxueli 2018-12-04
  */

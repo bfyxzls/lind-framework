@@ -101,7 +101,6 @@ public class SimpleTimeWheel {
 		if (expireMs < currentMs + tickMs) {
 			// 将任务添加到当前时间轮槽中
 			int currentIndex = (int) ((delayMs / tickMs) % wheelSize);
-			logger.info("if currentIndex:{}", currentIndex);
 			WorkTask workTask = new WorkTask() {
 				@Override
 				public boolean isRunning() {
@@ -118,8 +117,6 @@ public class SimpleTimeWheel {
 		else {
 			// 计算需要跨越的时间轮针数和所在槽索引，例如槽数是8，我需要10秒后启动任务，就需要这个算法了
 			int currentIndex = (int) ((delayMs / tickMs) % wheelSize); // 2%8=2，它会在第2圈的第2的位置
-			logger.info("else currentIndex:{}", currentIndex);
-
 			WorkTask workTask = new WorkTask() {
 				@Override
 				public boolean isRunning() {

@@ -14,6 +14,7 @@ import java.util.concurrent.ConcurrentMap;
 
 /**
  * lfu最不常使用(Least Frequently Used)
+ * 当缓存已满，需要替换某个缓存项时，选择访问频率最低的那个项进行替换
  *
  */
 public class RpcLoadBalanceLFUStrategy extends RpcLoadBalance {
