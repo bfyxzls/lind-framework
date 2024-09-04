@@ -23,4 +23,17 @@ public class OptionalTest {
 
 	}
 
+	@Test
+	public void mapOr() {
+		Optional<String> optionalString = Optional.of("AAE");
+		String result = optionalString.filter(s -> s.startsWith("A")).map(String::toLowerCase).orElse("default");
+		System.out.println("result1:" + result);// aae
+		result = optionalString.filter(s -> s.startsWith("B")).map(String::toLowerCase).orElse("default");
+		System.out.println("result2:" + result);// default
+		result = optionalString.filter(s -> s.startsWith("B")).map(String::toLowerCase)
+				.orElse(optionalString.orElse(""));
+		System.out.println("result3:" + result);// AAE
+
+	}
+
 }

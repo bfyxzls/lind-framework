@@ -1,6 +1,6 @@
 package com.lind.common.xss;
 
-import com.lind.common.core.util.BeanValidatorUtils;
+import com.lind.common.core.validate.BeanValidatorUtils;
 import org.junit.jupiter.api.Test;
 
 /**

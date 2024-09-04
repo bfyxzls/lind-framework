@@ -1,10 +1,8 @@
 package com.lind.common.core.constraintvalidator;
 
-import com.lind.common.core.util.BeanValidatorUtils;
-import com.lind.common.core.util.VerifyCodeUtils;
+import com.lind.common.core.validate.BeanValidatorUtils;
 import org.junit.jupiter.api.Test;
 
-import javax.validation.ConstraintViolationException;
 import java.util.Arrays;
 
 /**

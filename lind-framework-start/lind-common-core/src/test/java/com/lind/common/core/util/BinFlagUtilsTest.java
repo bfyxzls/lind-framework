@@ -7,7 +7,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
 public class BinFlagUtilsTest {
@@ -33,12 +35,16 @@ public class BinFlagUtilsTest {
 	@Test
 	public void isTowPowerTest() {
 		assertTrue(BinFlagUtils.isTowPower(4));
+		assertTrue(BinFlagUtils.isTowPower(16));
+		assertTrue(BinFlagUtils.isTowPower(2 << 10));
 		assertFalse(BinFlagUtils.isTowPower(5));
 	}
 
 	@Test
 	public void hasValueTest() {
 		assertTrue(BinFlagUtils.hasValue(15, 8));
+		assertFalse(BinFlagUtils.hasValue(15, 32));
+		assertTrue(BinFlagUtils.hasValue(33, 32));
 	}
 
 	@Test

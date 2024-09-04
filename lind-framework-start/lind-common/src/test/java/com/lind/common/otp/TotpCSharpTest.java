@@ -6,6 +6,8 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.IntStream;
 
 import static com.lind.common.encrypt.HashUtils.md5;
@@ -138,6 +140,20 @@ public class TotpCSharpTest {
 				"https://login.demo.com/register/CarsiRegister?sign=%s&affiliation=staff@shufe.edu.cn&eptid=tEgCVjfCJv8OQJx/PB+GLng1X7Y=",
 				sign);
 		log.info("{}", url);
+	}
+
+	@SneakyThrows
+	@Test
+	public void bulkTotp() {
+		String base32Key = "ABCDEFHGIJKLMNOPQRST234UVWXYZ567";
+		long currentTime = System.currentTimeMillis();
+		long prevTime = currentTime - 30 * 1000;
+		long nextTime = currentTime + 30 * 1000;
+		List<String> result = new ArrayList<>();
+		result.add(generateTOTP(prevTime, base32Key, 300, 8));
+		result.add(generateTOTP(currentTime, base32Key, 300, 8));
+		result.add(generateTOTP(nextTime, base32Key, 300, 8));
+		result.forEach(System.out::println);
 	}
 
 }
