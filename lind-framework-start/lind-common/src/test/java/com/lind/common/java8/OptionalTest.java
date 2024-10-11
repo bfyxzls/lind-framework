@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Stream;
 
 /**
@@ -15,6 +16,20 @@ import java.util.stream.Stream;
  */
 @Slf4j
 public class OptionalTest {
+
+	/**
+	 * 定义一个Stream的返回值
+	 * @return
+	 */
+	static Stream<String> getRequiredActionsStream() {
+		Set<String> value = null;
+		return value != null ? value.stream() : Stream.empty();
+	}
+
+	@Test
+	public void testStream() {
+		log.info("flag:" + getRequiredActionsStream().findAny().isPresent());
+	}
 
 	/**
 	 * 为可能为null的对象添加默认值.

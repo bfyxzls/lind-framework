@@ -5,7 +5,24 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.ResourceUtils;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.Closeable;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
+import java.io.RandomAccessFile;
+import java.io.Reader;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
@@ -608,6 +625,33 @@ public class FileUtils {
 		}
 
 		return filePath.substring(begin, len);
+	}
+
+	/**
+	 * 读读资源
+	 * @param name
+	 * @return
+	 */
+	public static String[] readFile(String name) {
+		// 定义文件路径
+		InputStream resource = FileUtils.class.getResourceAsStream("classpath:" + name); // 请根据实际情况修改文件名
+
+		// 创建一个数组来存储每一行内容
+		String[] lines = new String[10]; // 假设最多有10行
+		int lineCount = 0;
+
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(resource))) {
+			String line;
+			while ((line = br.readLine()) != null && lineCount < lines.length) {
+				lines[lineCount] = line;
+				lineCount++;
+			}
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return lines;
 	}
 
 }

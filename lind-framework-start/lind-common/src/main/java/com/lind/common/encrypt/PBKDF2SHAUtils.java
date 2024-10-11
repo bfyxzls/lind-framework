@@ -19,9 +19,9 @@ public class PBKDF2SHAUtils {
 
 	private static final String PBKDF_2_WITH_HMAC_SHA_512 = "PBKDF2WithHmacSHA512";
 
-	private static final int ITERATIONS = 30000;
+	private static final int ITERATIONS = 27500;
 
-	private static final int DERIVED_KEY_SIZE = 256;
+	private static final int DERIVED_KEY_SIZE = 512;
 
 	/**
 	 * PB KDF2 SHA256加密

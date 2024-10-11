@@ -3,14 +3,6 @@ package com.lind.common.encrypt;
 import cn.hutool.core.lang.Assert;
 import org.junit.jupiter.api.Test;
 
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
-import java.util.Base64;
-
 /**
  * @author lind
  * @date 2024/5/7 17:37
@@ -27,6 +19,15 @@ public class PBKDF2SHA256Test {
 		String formData = "123456"; // 表单数据
 		Assert.equals(encodePass, PBKDF2SHAUtils.encodedCredential(formData, salt));// 与库里密码对比
 
+	}
+
+	@Test
+	public void generateDbPassword() {
+		String db = "grmrRyYqSELUyTq8XMd39eu50qi8TvwsHmyekMOd7i7vYq8rblHZbMwzno4Zv5oYpma0PpeIaVlmzBthZVKSyQ==";
+		byte[] salt = "u7TEM5yNN28WYn7oZCRdqQ==".getBytes();
+		String password = "123456".toLowerCase();
+		String encodePass = PBKDF2SHAUtils.encodedCredential(password, salt);// 秘文，需要存储
+		Assert.equals(db, encodePass);
 	}
 
 }
