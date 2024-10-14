@@ -8,10 +8,10 @@ import javax.validation.ConstraintValidatorContext;
  * @date 2023/7/20 16:36
  * @since 1.0.0
  */
-public class CustomEmailValidator implements ConstraintValidator<ValidEmail, String> {
+public class CustomEmailMatchesValidator implements ConstraintValidator<CustomEmailMatches, String> {
 
 	@Override
-	public void initialize(ValidEmail constraintAnnotation) {
+	public void initialize(CustomEmailMatches constraintAnnotation) {
 		// 可以在此方法中获取约束注解中的信息并进行初始化设置
 	}
 

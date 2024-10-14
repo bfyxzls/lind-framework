@@ -13,7 +13,7 @@ import java.util.List;
  * @date 2024/2/20 9:15
  * @since 1.0.0
  */
-public class FlagValidator implements ConstraintValidator<ValidFlag, List<? extends Number>> {
+public class FlagMatchesValidator implements ConstraintValidator<FlagMatches, List<? extends Number>> {
 
 	@Override
 	public boolean isValid(List<? extends Number> values, ConstraintValidatorContext context) {

@@ -14,8 +14,8 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = { ElementType.METHOD, ElementType.FIELD, ElementType.CONSTRUCTOR, ElementType.PARAMETER })
-@Constraint(validatedBy = { XssValidator.class })
-public @interface Xss {
+@Constraint(validatedBy = { XssMatchesValidator.class })
+public @interface XssMatches {
 
 	String message()
 

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.lind</groupId>
-        <artifactId>lind-framework-start</artifactId>
+        <artifactId>lind-framework</artifactId>
         <version>2.0.1-SNAPSHOT</version>
     </parent>
 
@@ -17,6 +17,9 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-boot-dependencies.version>2.7.8</spring-boot-dependencies.version>
+        <spring-boot-dependencies.version>2.7.8</spring-boot-dependencies.version>
+        <spring-cloud-alibaba-dependencies.version>2021.0.1.0</spring-cloud-alibaba-dependencies.version>
+        <spring-cloud.version>2021.0.3</spring-cloud.version>
     </properties>
 
     <dependencyManagement>
@@ -31,7 +34,28 @@
             <dependency>
                 <groupId>com.lind</groupId>
                 <artifactId>lind-framework-bom</artifactId>
+                <version>2.0.1-SNAPSHOT</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.lind</groupId>
+                <artifactId>lind-framework-bom</artifactId>
                 <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -58,7 +82,10 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jersey</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.lind</groupId>
             <artifactId>lind-common-core</artifactId>
@@ -80,11 +107,6 @@
             <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
 
-        <!-- keycloak -->
-        <dependency>
-            <groupId>org.keycloak</groupId>
-            <artifactId>keycloak-spring-boot-starter</artifactId>
-        </dependency>
         <!-- jwt -->
         <dependency>
             <groupId>com.auth0</groupId>

@@ -5,7 +5,7 @@
 
 # 泛型通配符
 ## extend
-> 使用方法可查看实例：com.lind.common.core.validate.flag.FlagValidator
+> 使用方法可查看实例：com.lind.common.core.validate.flag.FlagMatchesValidator
 
 List<? extends Number> 和 List<Number> 都是用来表示包含 Number 或 Number 的子类的列表，但它们在使用时有一些不同的场景。
 

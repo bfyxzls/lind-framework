@@ -1,7 +1,5 @@
 package com.lind.common.core.validate.flag;
 
-import com.lind.common.core.validate.dic.DicValidator;
-
 import javax.validation.Constraint;
 import java.lang.annotation.*;
 
@@ -14,8 +12,8 @@ import java.lang.annotation.*;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
-@Constraint(validatedBy = FlagValidator.class)
-public @interface ValidFlag {
+@Constraint(validatedBy = FlagMatchesValidator.class)
+public @interface FlagMatches {
 
 	String message() default "Invalid number,this value must 2^N";
 

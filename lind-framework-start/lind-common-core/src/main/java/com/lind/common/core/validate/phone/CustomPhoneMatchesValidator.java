@@ -8,10 +8,10 @@ import javax.validation.ConstraintValidatorContext;
  * @date 2023/7/20 16:36
  * @since 1.0.0
  */
-public class CustomPhoneValidator implements ConstraintValidator<ValidPhone, String> {
+public class CustomPhoneMatchesValidator implements ConstraintValidator<CustomPhoneMatches, String> {
 
 	@Override
-	public void initialize(ValidPhone constraintAnnotation) {
+	public void initialize(CustomPhoneMatches constraintAnnotation) {
 		// 可以在此方法中获取约束注解中的信息并进行初始化设置
 	}
 

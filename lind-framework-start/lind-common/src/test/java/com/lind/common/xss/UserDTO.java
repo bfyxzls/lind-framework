@@ -1,6 +1,6 @@
 package com.lind.common.xss;
 
-import com.lind.common.core.validate.xss.Xss;
+import com.lind.common.core.validate.xss.XssMatches;
 import lombok.Data;
 
 /**
@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class UserDTO {
 
-	@Xss
+	@XssMatches
 	private String email;
 
 }

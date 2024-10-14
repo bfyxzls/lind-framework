@@ -10,8 +10,8 @@ import java.lang.annotation.*;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
-@Constraint(validatedBy = DicValidator.class)
-public @interface ValidDic {
+@Constraint(validatedBy = DictionaryMatchesValidator.class)
+public @interface DictionaryMatches {
 
 	String[] value() default {};
 
