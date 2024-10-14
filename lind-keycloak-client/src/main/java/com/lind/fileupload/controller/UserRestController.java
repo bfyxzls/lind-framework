@@ -1,8 +1,10 @@
 package com.lind.fileupload.controller;
 
-import com.lind.fileupload.dto.UserModifyPasswordDTO;
+import com.lind.fileupload.dto.UpdateUserInfoDTO;
+import com.lind.fileupload.dto.UpdateUserModifyPasswordDTO;
+import com.lind.fileupload.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +23,28 @@ import javax.validation.Valid;
 @RequestMapping("user")
 public class UserRestController {
 
+	@Autowired
+	UserService userService;
+
+	/**
+	 * 更新密码
+	 * @param userModifyPasswordDTO
+	 * @return
+	 */
 	@PutMapping("/update-password")
-	public ResponseEntity updatePassword(@Valid @RequestBody UserModifyPasswordDTO userModifyPasswordDTO) {
+	public ResponseEntity updatePassword(@Valid @RequestBody UpdateUserModifyPasswordDTO userModifyPasswordDTO) {
+		userService.updateUserInfo(userModifyPasswordDTO);
+		return ResponseEntity.ok("hello");
+	}
+
+	/**
+	 * 更新基本信息
+	 * @param updateUserInfoDTO
+	 * @return
+	 */
+	@PutMapping
+	public ResponseEntity updateInfo(@Valid @RequestBody UpdateUserInfoDTO updateUserInfoDTO) {
+		userService.updateUserInfo(updateUserInfoDTO);
 		return ResponseEntity.ok("hello");
 	}
 

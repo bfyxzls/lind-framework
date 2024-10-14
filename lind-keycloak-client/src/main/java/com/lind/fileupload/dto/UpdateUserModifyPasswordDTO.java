@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 @SameContentMatches(sourceField = "confirmPassword", destinationField = "newPassword")
-public class UserModifyPasswordDTO implements UserDTO {
+public class UpdateUserModifyPasswordDTO implements UpdateUser {
 
 	@NotNull
 	private String userName;

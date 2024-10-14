@@ -5,7 +5,7 @@ package com.lind.fileupload.dto;
  * @date 2024/10/14 10:53
  * @since 1.0.0
  */
-public class UserInfoDTO implements UserDTO {
+public class UpdateUserInfoDTO implements UpdateUser {
 
 	private String userName;
 

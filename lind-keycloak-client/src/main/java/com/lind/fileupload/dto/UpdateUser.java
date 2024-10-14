@@ -7,5 +7,5 @@ import java.io.Serializable;
  * @date 2024/10/14 10:52
  * @since 1.0.0
  */
-public interface UserDTO extends Serializable {
+public interface UpdateUser extends Serializable {
 }
