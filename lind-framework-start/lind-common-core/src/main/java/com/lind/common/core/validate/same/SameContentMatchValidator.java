@@ -11,14 +11,14 @@ import cn.hutool.core.bean.BeanUtil;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class SameContentMatchesValidator implements ConstraintValidator<SameContentMatches, Object> {
+public class SameContentMatchValidator implements ConstraintValidator<SameContentMatch, Object> {
 
 	private String sourceField;
 
 	private String destinationField;
 
 	@Override
-	public void initialize(SameContentMatches constraintAnnotation) {
+	public void initialize(SameContentMatch constraintAnnotation) {
 		this.sourceField = constraintAnnotation.sourceField();
 		this.destinationField = constraintAnnotation.destinationField();
 	}

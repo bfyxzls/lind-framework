@@ -1,9 +1,9 @@
 package com.lind.common.core.constraintvalidator;
 
-import com.lind.common.core.validate.dic.DictionaryMatches;
-import com.lind.common.core.validate.email.CustomEmailMatches;
-import com.lind.common.core.validate.flag.FlagMatches;
-import com.lind.common.core.validate.phone.CustomPhoneMatches;
+import com.lind.common.core.validate.dic.DictionaryMatch;
+import com.lind.common.core.validate.email.CustomEmailMatch;
+import com.lind.common.core.validate.flag.FlagMatch;
+import com.lind.common.core.validate.phone.CustomPhoneMatch;
 import lombok.Data;
 
 import java.util.List;
@@ -16,16 +16,16 @@ import java.util.List;
 @Data
 public class User {
 
-	@CustomEmailMatches
+	@CustomEmailMatch
 	private String email;
 
-	@DictionaryMatches(value = { "0", "1" }, message = "性别不正确")
+	@DictionaryMatch(value = { "0", "1" }, message = "性别不正确")
 	private Integer sex;
 
-	@FlagMatches(message = "权限不正确")
+	@FlagMatch(message = "权限不正确")
 	private List<Integer> permission;
 
-	@CustomPhoneMatches
+	@CustomPhoneMatch
 	private String phone;
 
 }

@@ -10,9 +10,9 @@ import java.lang.annotation.*;
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = CustomPhoneMatchesValidator.class)
+@Constraint(validatedBy = CustomPhoneMatchValidator.class)
 @Documented
-public @interface CustomPhoneMatches {
+public @interface CustomPhoneMatch {
 
 	String message() default "Invalid phone number";
 

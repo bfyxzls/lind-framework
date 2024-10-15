@@ -1,6 +1,6 @@
 package com.lind.fileupload.dto;
 
-import com.lind.common.core.validate.same.SameContentMatches;
+import com.lind.common.core.validate.same.SameContentMatch;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
  * @since 1.0.0
  */
 @Data
-@SameContentMatches(sourceField = "confirmPassword", destinationField = "newPassword")
+@SameContentMatch(sourceField = "confirmPassword", destinationField = "newPassword")
 public class UpdateUserModifyPasswordDTO implements UpdateUser {
 
 	@NotNull

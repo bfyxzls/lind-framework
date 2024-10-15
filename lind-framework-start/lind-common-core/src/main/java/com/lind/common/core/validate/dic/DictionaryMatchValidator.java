@@ -6,13 +6,13 @@ import javax.validation.ConstraintValidatorContext;
 /**
  * 字典值约束校验器.
  */
-public class DictionaryMatchesValidator implements ConstraintValidator<DictionaryMatches, Integer> {
+public class DictionaryMatchValidator implements ConstraintValidator<DictionaryMatch, Integer> {
 
 	private String[] values;
 
 	@Override
-	public void initialize(DictionaryMatches dictionaryMatches) {
-		this.values = dictionaryMatches.value();
+	public void initialize(DictionaryMatch dictionaryMatch) {
+		this.values = dictionaryMatch.value();
 	}
 
 	@Override

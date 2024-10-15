@@ -14,9 +14,9 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = CustomEmailMatchesValidator.class)
+@Constraint(validatedBy = CustomEmailMatchValidator.class)
 @Documented
-public @interface CustomEmailMatches {
+public @interface CustomEmailMatch {
 
 	String message() default "Invalid email address";
 

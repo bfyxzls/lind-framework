@@ -12,8 +12,8 @@ import java.lang.annotation.*;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
-@Constraint(validatedBy = FlagMatchesValidator.class)
-public @interface FlagMatches {
+@Constraint(validatedBy = FlagMatchValidator.class)
+public @interface FlagMatch {
 
 	String message() default "Invalid number,this value must 2^N";
 
