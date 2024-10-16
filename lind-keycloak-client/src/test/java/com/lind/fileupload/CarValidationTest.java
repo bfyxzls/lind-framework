@@ -22,17 +22,31 @@ public class CarValidationTest {
 		validator = factory.getValidator();
 	}
 
+	// 验证失败
 	@Test
-	public void testRegistrationRequiredFields() {
+	public void failValidate() {
 
 		UpdateUserModifyPasswordDTO userModifyPasswordDTO = new UpdateUserModifyPasswordDTO();
 		userModifyPasswordDTO.setUserName("lind");
 		userModifyPasswordDTO.setPassword("123456");
+		userModifyPasswordDTO.setRole("管理员");
+		userModifyPasswordDTO.setRoleEng("admin");
 		Set<ConstraintViolation<UpdateUserModifyPasswordDTO>> constraintViolations = validator
 				.validate(userModifyPasswordDTO);
-
 		assertEquals(1, constraintViolations.size());
+	}
 
+	// 验证成功
+	@Test
+	public void successValidate() {
+		UpdateUserModifyPasswordDTO userModifyPasswordDTO = new UpdateUserModifyPasswordDTO();
+		userModifyPasswordDTO.setUserName("lind");
+		userModifyPasswordDTO.setPassword("123456");
+		userModifyPasswordDTO.setRole("管理员");
+		userModifyPasswordDTO.setRoleEng("admin_ROLE");
+		Set<ConstraintViolation<UpdateUserModifyPasswordDTO>> constraintViolations = validator
+				.validate(userModifyPasswordDTO);
+		assertEquals(0, constraintViolations.size());
 	}
 
 }
