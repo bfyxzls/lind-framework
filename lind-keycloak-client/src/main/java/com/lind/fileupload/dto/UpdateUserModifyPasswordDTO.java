@@ -1,7 +1,9 @@
 package com.lind.fileupload.dto;
 
-import com.lind.common.core.validate.same.SameContentMatch;
+import com.lind.fileupload.validator.PrefixRoleMatch;
+import com.lind.fileupload.validator.UserGroupSequenceProvider;
 import lombok.Data;
+import org.hibernate.validator.group.GroupSequenceProvider;
 
 import javax.validation.constraints.NotNull;
 
@@ -11,11 +13,19 @@ import javax.validation.constraints.NotNull;
  * @since 1.0.0
  */
 @Data
-@SameContentMatch(sourceField = "confirmPassword", destinationField = "newPassword")
+@GroupSequenceProvider(UserGroupSequenceProvider.class)
+// @FieldContentEqualMatch(sourceField = "newPassword", destinationField =
+// "confirmPassword")
 public class UpdateUserModifyPasswordDTO implements UpdateUser {
 
 	@NotNull
 	private String userName;
+
+	@PrefixRoleMatch(groups = First.class)
+	private String role;
+
+	@NotNull
+	private String confirmUserName;
 
 	@NotNull
 	private String password;
@@ -23,5 +33,13 @@ public class UpdateUserModifyPasswordDTO implements UpdateUser {
 	private String newPassword;
 
 	private String confirmPassword;
+
+	public interface First {
+
+	}
+
+	public interface Second {
+
+	}
 
 }
