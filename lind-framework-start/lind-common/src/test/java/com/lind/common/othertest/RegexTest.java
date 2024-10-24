@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -60,6 +61,31 @@ public class RegexTest {
 		return needValid;
 	}
 
+	public static boolean isPhoneNotVirtualPhone(String phoneNumber) throws PatternSyntaxException {
+		// 手机号正则表达式
+		String reg = "^1[3-9]\\d{9}$";
+
+		// 虚拟号码段正则表达式
+		// String virtualReg = "^(1703|1705|1706|165|1704|1707|1708|1709|171|167|1700|1701|1702|162|1349)\\d{7}$";
+		String virtualReg = "^(1703|1705|1706|1704|1707|1708|1709|1700|1701|1702|1349)\\d{7}$|^(171|167|165|162)\\d{8}$";
+		Pattern pattern = Pattern.compile(reg);
+		Matcher matcher = pattern.matcher(phoneNumber);
+
+		Pattern virtualPattern = Pattern.compile(virtualReg);
+		Matcher virtualMatcher = virtualPattern.matcher(phoneNumber);
+
+		return (matcher.find() && !virtualMatcher.find());
+	}
+
+	@Test
+	public void validatePhone() {
+		Assert.isTrue(!isPhoneNotVirtualPhone("16211234666"));
+		Assert.isTrue(!isPhoneNotVirtualPhone("16711234666"));
+		Assert.isTrue(!isPhoneNotVirtualPhone("17031123666"));
+		Assert.isTrue(isPhoneNotVirtualPhone("13521972991"));
+
+	}
+
 	@Test
 	public void basic() {
 		Matcher matcher = Pattern.compile("(?<content>[a-z]+)$").matcher("abc");
@@ -68,8 +94,11 @@ public class RegexTest {
 
 	@Test
 	public void authCode() {
-		String[] parsed = DOT.split("abc.123.400.aa", 3);// 限制3位，这个数组被分为abc,123,400.aa，最后一位.就不进行拆分了
-		logger.info("{}", parsed);
+		String[] parsed = DOT.split("abc.123.400", 4);// 限制3位，这个数组被分为abc,123,400.aa，最后一位.就不进行拆分了
+		logger.info("{}", parsed.length);
+
+		String[] parsed2 = DOT.split("abc.123.400.3", 4);// 限制3位，这个数组被分为abc,123,400.aa，最后一位.就不进行拆分了
+		logger.info("{}", parsed2.length);
 	}
 
 	@Test
